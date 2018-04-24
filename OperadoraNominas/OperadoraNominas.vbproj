@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E0046EE3-C5D1-481A-B8CA-A84E5FADF2E3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>OperadoraNominas.My.MyApplication</StartupObject>
+    <RootNamespace>OperadoraNominas</RootNamespace>
+    <AssemblyName>OperadoraNominas</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>OperadoraNominas.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>OperadoraNominas.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML">
+      <HintPath>..\..\..\XurtepNominas\XurtepNominas\XurtepNominas\bin\Debug\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmBuscarEmpleado.designer.vb">
+      <DependentUpon>frmBuscarEmpleado.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscarEmpleado.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDocumentos.designer.vb">
+      <DependentUpon>frmDocumentos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDocumentos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmpleados.designer.vb">
+      <DependentUpon>frmEmpleados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmpleados.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExcel.designer.vb">
+      <DependentUpon>frmExcel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmExcel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExcelO.designer.vb">
+      <DependentUpon>frmExcelO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmExcelO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFamilia.designer.vb">
+      <DependentUpon>frmFamilia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFamilia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHojasNomina.designer.vb">
+      <DependentUpon>frmHojasNomina.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHojasNomina.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportarEmpleadosAlta.designer.vb">
+      <DependentUpon>frmImportarEmpleadosAlta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportarEmpleadosAlta.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmIncapacidad.designer.vb">
+      <DependentUpon>frmIncapacidad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmIncapacidad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmJuridico.designer.vb">
+      <DependentUpon>frmJuridico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmJuridico.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmnominasmarinos.designer.vb">
+      <DependentUpon>frmnominasmarinos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmnominasmarinos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.designer.vb">
+      <DependentUpon>frmPrincipal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="General\frmAcceso.designer.vb">
+      <DependentUpon>frmAcceso.vb</DependentUpon>
+    </Compile>
+    <Compile Include="General\frmAcceso.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="General\frmUsuarios.designer.vb">
+      <DependentUpon>frmUsuarios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="General\frmUsuarios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modulos\GenPass.vb" />
+    <Compile Include="Modulos\mdoFunciones.vb" />
+    <Compile Include="Modulos\mdoInicio.vb" />
+    <Compile Include="Modulos\mdoMail.vb" />
+    <Compile Include="Modulos\mdoNumAPal.vb" />
+    <Compile Include="Modulos\mdoObjetos.vb" />
+    <Compile Include="Modulos\mdoObjetos2.vb" />
+    <Compile Include="Modulos\mdoObjetos3.vb" />
+    <Compile Include="Modulos\mdoOLEDB.vb" />
+    <Compile Include="Modulos\mdoRemoto.vb" />
+    <Compile Include="Modulos\WinApi.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmBuscarEmpleado.resx">
+      <DependentUpon>frmBuscarEmpleado.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDocumentos.resx">
+      <DependentUpon>frmDocumentos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmpleados.resx">
+      <DependentUpon>frmEmpleados.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExcel.resx">
+      <DependentUpon>frmExcel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExcelO.resx">
+      <DependentUpon>frmExcelO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFamilia.resx">
+      <DependentUpon>frmFamilia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHojasNomina.resx">
+      <DependentUpon>frmHojasNomina.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportarEmpleadosAlta.resx">
+      <DependentUpon>frmImportarEmpleadosAlta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmIncapacidad.resx">
+      <DependentUpon>frmIncapacidad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmJuridico.resx">
+      <DependentUpon>frmJuridico.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmnominasmarinos.resx">
+      <DependentUpon>frmnominasmarinos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="General\frmAcceso.resx">
+      <DependentUpon>frmAcceso.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="General\frmUsuarios.resx">
+      <DependentUpon>frmUsuarios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\1361008137_export_excel.png" />
+    <Content Include="Resources\bloggif_5a90660e3aaa9.png" />
+    <Content Include="Resources\bloggif_5aa1be4bd8d66.png" />
+    <Content Include="Resources\bloggif_5aa2e2fc58d9a.png" />
+    <Content Include="Resources\bloggif_5aac5ea61bc88.png" />
+    <Content Include="Resources\cerrar.png" />
+    <Content Include="Resources\disquete.png" />
+    <Content Include="Resources\escala-de-la-justicia.png" />
+    <Content Include="Resources\familia %282%29.png" />
+    <Content Include="Resources\familia.png" />
+    <Content Include="Resources\pasaporte.png" />
+    <Content Include="Resources\sobresalir %281%29.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
