@@ -436,6 +436,14 @@ Public Class frmImportarEmpleadosAlta
                             clabe = Trim(empleadofull.SubItems(30).Text)
                         End If
 
+                        'CHECK INFO
+                        Dim permanente As Integer
+                        If (Trim(empleadofull.SubItems(44).Text) <> 0) Then
+                            permanente = 1
+                        Else
+                            permanente = 0
+                        End If
+
 
 
                         Dim dFechaNac, dFechaCap, dFechaPlanta As String ''--, dFechaPatrona, dFechaTerminoContrato, dFechaSindicato, dFechaAntiguedad As String
@@ -443,7 +451,7 @@ Public Class frmImportarEmpleadosAlta
                         dFechaNac = Date.Parse(Trim(empleadofull.SubItems(13).Text).ToString) ''Format(Trim(empleadofull.SubItems(18).Text), "yyyy/dd/MM"))
                         dFechaCap = Date.Parse((Trim(empleadofull.SubItems(14).Text)).ToString)
                         dFechaPlanta = Date.Parse(Trim(empleadofull.SubItems(40).Text).ToString)
-                        'dFechaPatrona = Date.Parse((Trim(empleadofull.SubItems(14).Text))
+                        '' dFechaPatrona = Date.Parse((Trim(empleadofull.SubItems(14).Text))
                         'dFechaTerminoContrato = ((Trim(empleadofull.SubItems(44).Text))) ''No asignado
                         'dFechaSindicato = (Trim(empleadofull.SubItems(14).Text))
                         'dFechaAntiguedad = Trim(empleadofull.SubItems(14).Text)
@@ -462,8 +470,8 @@ Public Class frmImportarEmpleadosAlta
                         SQL &= "',1," & IIf((empleadofull.SubItems(23).Text) = "", 0, (empleadofull.SubItems(23).Text)) & ",0" & ",-1" & "," & 1 & "," & idbanco
                         SQL &= ",'" & cuenta & "',1,'" & Trim(empleadofull.SubItems(26).Text)
                         SQL &= "','" & Trim(empleadofull.SubItems(27).Text) & "'," & Trim(empleadofull.SubItems(28).Text) & ",'" & Trim(empleadofull.SubItems(29).Text)
-                        SQL &= "','" & dFechaCap & "','" & dFechaCap & "','" & dFechaCap
-                        SQL &= "'," & 0 & ",'" & clabe & "','" & " "
+                        SQL &= "','" & dFechaPlanta & "','" & dFechaPlanta & "','" & dFechaPlanta
+                        SQL &= "'," & permanente & ",'" & clabe & "','" & " "
                         SQL &= "'," & 1 & ",'" & Trim(empleadofull.SubItems(31).Text) & "','" & factor ''factor
                         SQL &= "'," & Trim(empleadofull.SubItems(44).Text) & ",'" & Trim(empleadofull.SubItems(33).Text) & "','" & Trim(empleadofull.SubItems(34).Text)
                         SQL &= "','" & Trim(empleadofull.SubItems(35).Text) & "','" & Trim(empleadofull.SubItems(36).Text) & "','" & Trim(empleadofull.SubItems(37).Text) & "'," & -1 ''cliente 
