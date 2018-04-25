@@ -420,18 +420,21 @@ Public Class frmImportarEmpleadosAlta
                         Dim clabe As String
 
                         If Len(Trim(empleadofull.SubItems(25).Text)) = 18 Then
-                            cuenta = Trim(empleadofull.SubItems(25).Text)
-                            clabe = 0
+                            cuenta = 0
+                           
+                            clabe = Trim(empleadofull.SubItems(25).Text)
 
                         ElseIf Len(Trim(empleadofull.SubItems(25).Text) < 12) Then
-                            clabe = Trim(empleadofull.SubItems(25).Text)
-                            cuenta = 0
+                            clabe = 0
+                            cuenta = Trim(empleadofull.SubItems(25).Text)
                         Else
                             clabe = 0
                             cuenta = 0
 
                         End If
-
+                        If Trim(empleadofull.SubItems(30).Text) = 18 Then 'clabe
+                            clabe = Trim(empleadofull.SubItems(30).Text)
+                        End If
 
 
 
@@ -457,16 +460,16 @@ Public Class frmImportarEmpleadosAlta
                         SQL &= "'," & IIf(Trim(empleadofull.SubItems(17).Text) = "", 0, Trim(empleadofull.SubItems(17).Text)) & "," & IIf(Trim(empleadofull.SubItems(18).Text) = "", 0, Trim(empleadofull.SubItems(18).Text))
                         SQL &= ",'" & cLugar & "','" & Trim(empleadofull.SubItems(20).Text) & "','','','" & Trim(empleadofull.SubItems(21).Text) & "','" & Trim(empleadofull.SubItems(22).Text)
                         SQL &= "',1," & IIf((empleadofull.SubItems(23).Text) = "", 0, (empleadofull.SubItems(23).Text)) & ",0" & ",-1" & "," & 1 & "," & idbanco
-                        SQL &= ",'" & Trim(empleadofull.SubItems(25).Text) & "',1,'" & Trim(empleadofull.SubItems(26).Text)
+                        SQL &= ",'" & cuenta & "',1,'" & Trim(empleadofull.SubItems(26).Text)
                         SQL &= "','" & Trim(empleadofull.SubItems(27).Text) & "'," & Trim(empleadofull.SubItems(28).Text) & ",'" & Trim(empleadofull.SubItems(29).Text)
                         SQL &= "','" & dFechaCap & "','" & dFechaCap & "','" & dFechaCap
-                        SQL &= "'," & 0 & ",'" & Trim(empleadofull.SubItems(30).Text) & "','" & " "
+                        SQL &= "'," & 0 & ",'" & clabe & "','" & " "
                         SQL &= "'," & 1 & ",'" & Trim(empleadofull.SubItems(31).Text) & "','" & factor ''factor
                         SQL &= "'," & Trim(empleadofull.SubItems(44).Text) & ",'" & Trim(empleadofull.SubItems(33).Text) & "','" & Trim(empleadofull.SubItems(34).Text)
                         SQL &= "','" & Trim(empleadofull.SubItems(35).Text) & "','" & Trim(empleadofull.SubItems(36).Text) & "','" & Trim(empleadofull.SubItems(37).Text) & "'," & -1 ''cliente 
                         SQL &= "," & p & "," & iIdDpto
                         SQL &= "," & IIf(Trim(empleadofull.SubItems(39).Text) = "SOLTERO", 0, 1)
-                        SQL &= "," & 1
+                        SQL &= "," & 36 ''BANCO 2
                         SQL &= ",'" & " "
                         SQL &= "','" & "" & "'"
                         SQL &= "," & 0 & ",'" & dFechaPlanta & "','" & Trim(empleadofull.SubItems(41).Text) & "','" & Trim(empleadofull.SubItems(42).Text) & "'"
