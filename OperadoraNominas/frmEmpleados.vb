@@ -528,7 +528,7 @@ Public Class frmEmpleados
         If gIdTipoPuesto = 0 Then
             SQL = "Select * from departamentos"
         Else
-            SQL = "Select * from departamentos where iIdDepartamento=" & gIdTipoPuesto
+            SQL = "Select * from departamentos where iEstatus=1" '' & gIdTipoPuesto
         End If
 
         SQL &= " order by cnombre"
