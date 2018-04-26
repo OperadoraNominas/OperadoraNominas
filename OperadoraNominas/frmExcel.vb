@@ -114,7 +114,7 @@ Public Class frmExcel
 
                     Next
 
-                    
+
                     lsvLista.Columns(1).Width = 100
 
                     lsvLista.Columns(2).Width = 250
@@ -312,14 +312,18 @@ Public Class frmExcel
             Dim filaExcel As Integer = 2
             Dim dialogo As New SaveFileDialog()
 
+            Dim vacios As Boolean = False
+            Dim men As String = ""
+
             If lsvLista.CheckedItems.Count > 0 Then
                 'Abrimos el machote
                 Dim ruta As String
                 ruta = My.Application.Info.DirectoryPath() & "\Archivos\nominas1.xlsx"
 
+
+
+
                 Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
-
-
                 Dim libro As New ClosedXML.Excel.XLWorkbook
 
 
@@ -334,15 +338,21 @@ Public Class frmExcel
                 Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
                 Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
 
-             
+
 
                 '' filaExcel = 6
                 For Each dato As ListViewItem In lsvLista.CheckedItems
+
+                    Dim colum As String = dato.SubItems(45).Text
+                    If (colum = "") Then
+                        dato.BackColor = Color.Red
+                        vacios = True
+                    End If
+
                     hoja.Range(2, 1, filaExcel, 1).Style.NumberFormat.Format = "@"
                     hoja.Range(2, 5, filaExcel, 5).Style.NumberFormat.Format = "@"
                     hoja.Range(2, 6, filaExcel, 6).Style.NumberFormat.Format = "@"
                     hoja.Range(2, 26, filaExcel, 26).Style.NumberFormat.Format = "@"
-
 
 
                     ''Generales
@@ -474,7 +484,7 @@ Public Class frmExcel
 
 
 
-       
+
     End Sub
 
 
@@ -504,7 +514,7 @@ Public Class frmExcel
         tsbNuevo.Enabled = True
     End Sub
 
-  
+
 
     Private Sub abiriEmpresasC()
         'Declaramos la variable nombre
@@ -519,10 +529,10 @@ Public Class frmExcel
                         MessageBoxIcon.Information)
     End Sub
 
-    
-    
+
+
     Private Sub cmdVerificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdVerificar.Click
-        
+
         recorrerLista()
         ''recorrerLista()
 
@@ -562,20 +572,20 @@ Public Class frmExcel
     Public Sub recorrerLista2()
         Try
 
-       
+
             Dim lsvDate As New ListView
             Dim lsvDate2 As ListViewItem '' = lsvDate.SelectedItems(0)
 
-        If lsvLista.CheckedItems.Count > 0 Then
-            For Each dato As ListViewItem In lsvLista.CheckedItems
+            If lsvLista.CheckedItems.Count > 0 Then
+                For Each dato As ListViewItem In lsvLista.CheckedItems
                     lsvDate.Items.Add(dato.SubItems(1).Text)
                     '' MsgBox(dato.SubItems(1).Text)
-            Next
-        End If
+                Next
+            End If
 
 
             Dim filas, filas2 As Integer
-        Dim contador As Integer = 0
+            Dim contador As Integer = 0
 
             For filas = 1 To lsvDate.Items.Count - 1
                 For filas2 = 1 + filas To lsvDate.Items.Count - 1
@@ -601,24 +611,24 @@ Public Class frmExcel
                 End If
             Next
 
-        MsgBox(contador.ToString & " Datos repetidos")
+            MsgBox(contador.ToString & " Datos repetidos")
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
 
     End Sub
 
-  
-    
 
-    
 
-  
+
+
+
+
     Private Sub tsbGuardar2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbGuardar2.Click
-       
+
 
         Try
-         
+
 
 
             Dim tipo As String
@@ -632,7 +642,9 @@ Public Class frmExcel
                     tipo = "NA"
             End Select
 
-           
+            Dim vacios As Boolean = False
+            Dim men As String = ""
+
             Dim filaExcel As Integer = 2
             Dim dialogo As New SaveFileDialog()
 
@@ -658,6 +670,12 @@ Public Class frmExcel
                 Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
                 Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
                 For Each dato As ListViewItem In lsvLista.CheckedItems
+
+                    Dim colum As String = dato.SubItems(45).Text
+                    If (colum = "") Then
+                        dato.BackColor = Color.Red
+                        vacios = True
+                    End If
 
                     hoja.Range(2, 1, filaExcel, 1).Style.NumberFormat.Format = "@"
                     hoja.Range(2, 5, filaExcel, 5).Style.NumberFormat.Format = "@"
@@ -763,6 +781,9 @@ Public Class frmExcel
 
                     libro.SaveAs(dialogo.FileName)
                     libro = Nothing
+
+
+                    ''IIf(vacios = True, men = "", men = " NOTA: Los datos rojos no tienen Fecha de ingreso, vuelva a revisar")
                     MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Else
                     MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -775,14 +796,14 @@ Public Class frmExcel
             End If
 
         Catch ex As Exception
-      
+
             MessageBox.Show(ex.ToString(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         End Try
 
     End Sub
 
-   
+
     Private Sub tsbLayout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbLayout.Click
 
         Try
@@ -802,11 +823,11 @@ Public Class frmExcel
 
 
                 book.Worksheet(1).CopyTo(libro, "Empleados")
-              
+
 
 
                 Dim hoja As IXLWorksheet = libro.Worksheets(0)
-              
+
                 For Each dato As ListViewItem In lsvLista.CheckedItems
 
                     hoja.Range(2, 1, filaExcel, 1).Style.NumberFormat.Format = "@"
@@ -877,7 +898,7 @@ Public Class frmExcel
                 Next
                 pgbProgreso.Value = 0
 
-               
+
                 Dim moment As Date = Date.Now()
                 Dim month As Integer = moment.Month
                 Dim year As Integer = moment.Year
@@ -910,7 +931,7 @@ Public Class frmExcel
 
     End Sub
 
-    
+
     Private Sub tsbProcesos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbProcesos.Click
 
         Try
@@ -928,6 +949,10 @@ Public Class frmExcel
 
             Dim filaExcel As Integer = 2
             Dim dialogo As New SaveFileDialog()
+
+            Dim vacios As Boolean = False
+            Dim men As String = ""
+
 
             If lsvLista.CheckedItems.Count > 0 Then
 
@@ -951,6 +976,12 @@ Public Class frmExcel
                 Dim hoja3 As IXLWorksheet = libro.Worksheets(2)
                 Dim hoja4 As IXLWorksheet = libro.Worksheets(3)
                 For Each dato As ListViewItem In lsvLista.CheckedItems
+
+                    Dim colum As String = dato.SubItems(45).Text
+                    If (colum = "") Then
+                        dato.BackColor = Color.Red
+                        vacios = True
+                    End If
 
                     hoja.Range(2, 1, filaExcel, 1).Style.NumberFormat.Format = "@"
                     hoja.Range(2, 5, filaExcel, 5).Style.NumberFormat.Format = "@"
@@ -1062,9 +1093,6 @@ Public Class frmExcel
                     MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 End If
-
-
-
 
             Else
 
