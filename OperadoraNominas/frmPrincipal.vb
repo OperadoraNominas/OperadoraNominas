@@ -104,7 +104,7 @@ Public Class frmPrincipal
                     End Try
                 Case "Importar Excel"
                     Try
-                        Dim Forma As New frmExcelO
+                        Dim Forma As New frmExcel
                         Forma.ShowDialog()
 
                     Catch ex As Exception

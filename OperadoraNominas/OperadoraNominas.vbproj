@@ -99,7 +99,7 @@
     <Compile Include="frmEmpleados.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmExcel.designer.vb">
+    <Compile Include="frmExcel.Designer.vb">
       <DependentUpon>frmExcel.vb</DependentUpon>
     </Compile>
     <Compile Include="frmExcel.vb">
