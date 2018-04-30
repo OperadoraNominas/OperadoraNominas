@@ -1050,7 +1050,7 @@ Public Class frmExcel
                     hoja2.Cell(filaExcel, 18).Value = " "
 
                     ''Deducciones
-                    hoja3.Cell(filaExcel, 1).Value = dato.SubItems(27).Text
+                    hoja3.Cell(filaExcel, 1).Value = dato.SubItems(4).Text
                     hoja3.Cell(filaExcel, 2).Value = dato.SubItems(2).Text
                     hoja3.Cell(filaExcel, 3).Value = dato.SubItems(34).Text
                     hoja3.Cell(filaExcel, 4).Value = dato.SubItems(33).Text
