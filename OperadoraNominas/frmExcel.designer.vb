@@ -29,11 +29,14 @@ Partial Class frmExcel
         Me.Label2 = New System.Windows.Forms.Label()
         Me.pgbProgreso = New System.Windows.Forms.ProgressBar()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.tsbNuevo = New System.Windows.Forms.ToolStripButton()
+        Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
         Me.tsbGuardar = New System.Windows.Forms.ToolStripButton()
         Me.tsbGuardar2 = New System.Windows.Forms.ToolStripButton()
         Me.tsbProcesos = New System.Windows.Forms.ToolStripButton()
-        Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
+        Me.tsbMaecco = New System.Windows.Forms.ToolStripButton()
         Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbProcesar = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
         Me.chkAll = New System.Windows.Forms.CheckBox()
         Me.lsvLista = New System.Windows.Forms.ListView()
@@ -42,9 +45,6 @@ Partial Class frmExcel
         Me.cboMes = New System.Windows.Forms.ComboBox()
         Me.cboTipoR = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.tsbNuevo = New System.Windows.Forms.ToolStripButton()
-        Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbProcesar = New System.Windows.Forms.ToolStripButton()
         Me.pnlProgreso.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
@@ -103,12 +103,31 @@ Partial Class frmExcel
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbImportar, Me.tsbGuardar, Me.tsbGuardar2, Me.tsbProcesos, Me.tsbLayout, Me.tsbCancelar, Me.tsbProcesar})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbImportar, Me.tsbGuardar, Me.tsbGuardar2, Me.tsbProcesos, Me.tsbMaecco, Me.tsbCancelar, Me.tsbProcesar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1056, 54)
         Me.ToolStrip1.TabIndex = 30
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'tsbNuevo
+        '
+        Me.tsbNuevo.Image = Global.OperadoraNominas.My.Resources.Resources.sobresalir__1_
+        Me.tsbNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbNuevo.Name = "tsbNuevo"
+        Me.tsbNuevo.Size = New System.Drawing.Size(82, 51)
+        Me.tsbNuevo.Text = "Agregar Excel"
+        Me.tsbNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbImportar
+        '
+        Me.tsbImportar.Enabled = False
+        Me.tsbImportar.Image = Global.OperadoraNominas.My.Resources.Resources._1361008137_export_excel
+        Me.tsbImportar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbImportar.Name = "tsbImportar"
+        Me.tsbImportar.Size = New System.Drawing.Size(99, 51)
+        Me.tsbImportar.Text = "Importar archivo"
+        Me.tsbImportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'tsbGuardar
         '
@@ -143,17 +162,16 @@ Partial Class frmExcel
         Me.tsbProcesos.Text = "Procesos"
         Me.tsbProcesos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
-        'tsbLayout
+        'tsbMaecco
         '
-        Me.tsbLayout.AutoSize = False
-        Me.tsbLayout.Enabled = False
-        Me.tsbLayout.Image = CType(resources.GetObject("tsbLayout.Image"), System.Drawing.Image)
-        Me.tsbLayout.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbLayout.Name = "tsbLayout"
-        Me.tsbLayout.Size = New System.Drawing.Size(90, 51)
-        Me.tsbLayout.Text = "LAYOUT "
-        Me.tsbLayout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsbLayout.Visible = False
+        Me.tsbMaecco.AutoSize = False
+        Me.tsbMaecco.Enabled = False
+        Me.tsbMaecco.Image = Global.OperadoraNominas.My.Resources.Resources.disquete
+        Me.tsbMaecco.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbMaecco.Name = "tsbMaecco"
+        Me.tsbMaecco.Size = New System.Drawing.Size(90, 51)
+        Me.tsbMaecco.Text = "Maecco"
+        Me.tsbMaecco.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'tsbCancelar
         '
@@ -165,6 +183,17 @@ Partial Class frmExcel
         Me.tsbCancelar.Size = New System.Drawing.Size(90, 51)
         Me.tsbCancelar.Text = "Cancelar"
         Me.tsbCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbProcesar
+        '
+        Me.tsbProcesar.Enabled = False
+        Me.tsbProcesar.Image = CType(resources.GetObject("tsbProcesar.Image"), System.Drawing.Image)
+        Me.tsbProcesar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbProcesar.Name = "tsbProcesar"
+        Me.tsbProcesar.Size = New System.Drawing.Size(98, 51)
+        Me.tsbProcesar.Text = "Procesar archivo"
+        Me.tsbProcesar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbProcesar.Visible = False
         '
         'pnlCatalogo
         '
@@ -260,36 +289,6 @@ Partial Class frmExcel
         Me.Label3.TabIndex = 41
         Me.Label3.Text = "Recibo"
         '
-        'tsbNuevo
-        '
-        Me.tsbNuevo.Image = Global.OperadoraNominas.My.Resources.Resources.sobresalir__1_
-        Me.tsbNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbNuevo.Name = "tsbNuevo"
-        Me.tsbNuevo.Size = New System.Drawing.Size(82, 51)
-        Me.tsbNuevo.Text = "Agregar Excel"
-        Me.tsbNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbImportar
-        '
-        Me.tsbImportar.Enabled = False
-        Me.tsbImportar.Image = Global.OperadoraNominas.My.Resources.Resources._1361008137_export_excel
-        Me.tsbImportar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbImportar.Name = "tsbImportar"
-        Me.tsbImportar.Size = New System.Drawing.Size(99, 51)
-        Me.tsbImportar.Text = "Importar archivo"
-        Me.tsbImportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbProcesar
-        '
-        Me.tsbProcesar.Enabled = False
-        Me.tsbProcesar.Image = CType(resources.GetObject("tsbProcesar.Image"), System.Drawing.Image)
-        Me.tsbProcesar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbProcesar.Name = "tsbProcesar"
-        Me.tsbProcesar.Size = New System.Drawing.Size(98, 51)
-        Me.tsbProcesar.Text = "Procesar archivo"
-        Me.tsbProcesar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsbProcesar.Visible = False
-        '
         'frmExcel
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -340,6 +339,6 @@ Partial Class frmExcel
     Friend WithEvents cboMes As System.Windows.Forms.ComboBox
     Friend WithEvents cboTipoR As System.Windows.Forms.ComboBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents tsbLayout As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbMaecco As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbProcesos As System.Windows.Forms.ToolStripButton
 End Class
