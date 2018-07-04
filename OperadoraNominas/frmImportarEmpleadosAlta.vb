@@ -103,21 +103,49 @@ Public Class frmImportarEmpleadosAlta
                     'lsvLista.Columns.Add("conciliacion")
                     'lsvLista.Columns.Add("color")
 
-                    lsvLista.Columns(1).Width = 90
+                    lsvLista.Columns(1).Width = 120
+                    lsvLista.Columns(2).Width = 120
+                    lsvLista.Columns(3).Width = 120
+                    lsvLista.Columns(4).Width = 120
+                    lsvLista.Columns(5).Width = 120
+                    lsvLista.Columns(6).Width = 120
+                    lsvLista.Columns(7).Width = 120
+                    lsvLista.Columns(8).Width = 120
+                    lsvLista.Columns(9).Width = 120
+                    lsvLista.Columns(10).Width = 120
+                    lsvLista.Columns(11).Width = 120
+                    lsvLista.Columns(12).Width = 120
+                    lsvLista.Columns(13).Width = 120
+                    lsvLista.Columns(14).Width = 120
+                    lsvLista.Columns(15).Width = 120
+                    lsvLista.Columns(16).Width = 120
+                    lsvLista.Columns(17).Width = 120
+                    lsvLista.Columns(18).Width = 120
+                    lsvLista.Columns(19).Width = 120
+                    lsvLista.Columns(20).Width = 120
+                    lsvLista.Columns(21).Width = 120
+                    lsvLista.Columns(22).Width = 120
+                    lsvLista.Columns(23).Width = 120
+                    lsvLista.Columns(24).Width = 120
+                    lsvLista.Columns(25).Width = 120
+                    lsvLista.Columns(26).Width = 120
+                    lsvLista.Columns(27).Width = 120
+                    lsvLista.Columns(28).Width = 120
+                    lsvLista.Columns(29).Width = 120
+                    lsvLista.Columns(30).Width = 120
+                    lsvLista.Columns(31).Width = 120
+                    lsvLista.Columns(32).Width = 120
+                    lsvLista.Columns(33).Width = 120
+                    lsvLista.Columns(34).Width = 120
+                    lsvLista.Columns(35).Width = 120
+                    lsvLista.Columns(36).Width = 120
+                    lsvLista.Columns(37).Width = 120
+                    lsvLista.Columns(38).Width = 120
+                    lsvLista.Columns(39).Width = 120
+                    lsvLista.Columns(40).Width = 120
+                    lsvLista.Columns(41).Width = 120
+                    lsvLista.Columns(42).Width = 120
 
-                    lsvLista.Columns(2).Width = 200
-                    lsvLista.Columns(3).Width = 100
-                    lsvLista.Columns(4).Width = 200
-                    lsvLista.Columns(5).Width = 50
-                    lsvLista.Columns(6).Width = 200
-                    lsvLista.Columns(7).Width = 150
-                    lsvLista.Columns(7).TextAlign = 1
-                    lsvLista.Columns(8).Width = 150
-                    lsvLista.Columns(8).TextAlign = 1
-                    lsvLista.Columns(9).Width = 150
-                    lsvLista.Columns(9).TextAlign = 1
-                    lsvLista.Columns(10).Width = 100
-                    lsvLista.Columns(11).Width = 400
 
 
 
@@ -308,33 +336,68 @@ Public Class frmImportarEmpleadosAlta
                         Else
                             b = 0
                         End If
-                        Dim p As String = Trim(empleadofull.SubItems(15).Text) ''idPuesto
+                        Dim p As String = Trim(empleadofull.SubItems(15).Text) ''CPuesto
                         Dim cPuesto As String
                         If p <> "" Then
-                            Dim puesto As DataRow() = nConsulta("SELECT * FROM Puestos where iIdPuesto =" & p)
+                            Dim puesto As DataRow() = nConsulta("select * FROM Puestos where cNombre like '" & p & "'")
                             If puesto Is Nothing Then
                                 cPuesto = ""
-                                mensa = "Revise el tipo de banco"
+                                mensa = "Revise el tipo de Puesto"
                                 bandera = False
                             Else
                                 cPuesto = puesto(0).Item("cNombre")
+                                p = puesto(0).Item("iIdPuesto")
                             End If
 
                         Else
                             p = 0
                         End If
 
-                        Dim factor As Integer
+                        
+
+                        Dim d As String = Trim(empleadofull.SubItems(38).Text) ''Depto
+                        Dim iIdDpto As String
+                        If d <> "" Then
+                            Dim dpto As DataRow() = nConsulta("SELECT * FROM Departamentos where cNombre LIKE '" & d & "'")
+                            If dpto Is Nothing Then
+                                iIdDpto = ""
+                                mensa = "Revise el tipo de dapartamento"
+                                bandera = False
+                            Else
+                                iIdDpto = dpto(0).Item("iIdDepartamento")
+                            End If
+
+                        Else
+                            d = 0
+                        End If
+
+                        Dim l As String = Trim(empleadofull.SubItems(19).Text) ''Code
+                        Dim cLugar As String
+                        If l <> "" Then
+                            Dim lugar As DataRow() = nConsulta("SELECT * FROM Cat_Estados WHERE cClave LIKE'" & l & "'")
+                            If lugar Is Nothing Then
+                                cLugar = ""
+                                mensa = "Revise el tipo de Puesto"
+                                bandera = False
+                            Else
+                                cLugar = lugar(0).Item("cEstado")
+                            End If
+
+                        Else
+                            l = 0
+                        End If
+
+                        Dim factor As String
                         Select Case Trim(empleadofull.SubItems(32).Text)
                             Case "VSM"
-                                factor = 0
+                                factor = Trim(empleadofull.SubItems(32).Text)
                                 ' The following is the only Case clause that evaluates to True.
                             Case "PORCENTAJE"
-                                factor = 1
+                                factor = Trim(empleadofull.SubItems(32).Text)
                             Case "CUOTA FIJA"
-                                factor = 2
+                                factor = Trim(empleadofull.SubItems(32).Text)
                             Case Else
-                                factor = 0
+                                factor = "(No asignado)"
                         End Select
 
                         Dim number As Integer
@@ -347,17 +410,48 @@ Public Class frmImportarEmpleadosAlta
                             Case "SEMANAL"
                                 number = 2
                             Case Else
-                                number = 10
+                                ' number = 10
+                                number = 5
                         End Select
+
+                        'Cuenta o clabe
+
+                        Dim cuenta As String
+                        Dim clabe As String
+
+                        If Len(Trim(empleadofull.SubItems(25).Text)) = 18 Then
+                            cuenta = 0
+                           
+                            clabe = Trim(empleadofull.SubItems(25).Text)
+
+                        ElseIf Len(Trim(empleadofull.SubItems(25).Text) < 12) Then
+                            clabe = 0
+                            cuenta = Trim(empleadofull.SubItems(25).Text)
+                        Else
+                            clabe = 0
+                            cuenta = 0
+
+                        End If
+                        If Trim(empleadofull.SubItems(30).Text) = 18 Then 'clabe
+                            clabe = Trim(empleadofull.SubItems(30).Text)
+                        End If
+
+                        'CHECK INFO
+                        Dim permanente As Integer
+                        If (Trim(empleadofull.SubItems(44).Text) <> 0) Then
+                            permanente = 1
+                        Else
+                            permanente = 0
+                        End If
 
 
 
                         Dim dFechaNac, dFechaCap, dFechaPlanta As String ''--, dFechaPatrona, dFechaTerminoContrato, dFechaSindicato, dFechaAntiguedad As String
 
-                        dFechaNac = Trim(empleadofull.SubItems(13).Text) ''Format(Trim(empleadofull.SubItems(18).Text), "yyyy/dd/MM")
-                        dFechaCap = (Trim(empleadofull.SubItems(14).Text))
-                        dFechaPlanta = Trim(empleadofull.SubItems(40).Text)
-                        'dFechaPatrona = (Trim(empleadofull.SubItems(14).Text))
+                        dFechaNac = Date.Parse(Trim(empleadofull.SubItems(13).Text).ToString) ''Format(Trim(empleadofull.SubItems(18).Text), "yyyy/dd/MM"))
+                        dFechaCap = Date.Parse((Trim(empleadofull.SubItems(14).Text)).ToString)
+                        dFechaPlanta = Date.Parse(Trim(empleadofull.SubItems(40).Text).ToString)
+                        '' dFechaPatrona = Date.Parse((Trim(empleadofull.SubItems(14).Text))
                         'dFechaTerminoContrato = ((Trim(empleadofull.SubItems(44).Text))) ''No asignado
                         'dFechaSindicato = (Trim(empleadofull.SubItems(14).Text))
                         'dFechaAntiguedad = Trim(empleadofull.SubItems(14).Text)
@@ -370,28 +464,29 @@ Public Class frmImportarEmpleadosAlta
                         SQL &= "','" & Trim(empleadofull.SubItems(8).Text)
                         SQL &= "','" & Trim(empleadofull.SubItems(9).Text) & "'," & Trim(empleadofull.SubItems(10).Text) & ",'" & Trim(empleadofull.SubItems(11).Text)
                         SQL &= "'," & IIf(Trim(empleadofull.SubItems(12).Text) = "FEMENINO", 0, 1) & ",'" & dFechaNac & "','" & dFechaCap
-                        SQL &= "','" & cPuesto & "','" & Trim(empleadofull.SubItems(16).Text)
+                        SQL &= "','" & cPuesto & "','" & d
                         SQL &= "'," & IIf(Trim(empleadofull.SubItems(17).Text) = "", 0, Trim(empleadofull.SubItems(17).Text)) & "," & IIf(Trim(empleadofull.SubItems(18).Text) = "", 0, Trim(empleadofull.SubItems(18).Text))
-                        SQL &= ",'" & Trim(empleadofull.SubItems(19).Text) & "','" & Trim(empleadofull.SubItems(20).Text) & "','','','" & Trim(empleadofull.SubItems(21).Text) & "','" & Trim(empleadofull.SubItems(22).Text)
+                        SQL &= ",'" & cLugar & "','" & Trim(empleadofull.SubItems(20).Text) & "','','','" & Trim(empleadofull.SubItems(21).Text) & "','" & Trim(empleadofull.SubItems(22).Text)
                         SQL &= "',1," & IIf((empleadofull.SubItems(23).Text) = "", 0, (empleadofull.SubItems(23).Text)) & ",0" & ",-1" & "," & 1 & "," & idbanco
-                        SQL &= ",'" & Trim(empleadofull.SubItems(25).Text) & "',1,'" & Trim(empleadofull.SubItems(26).Text)
+                        SQL &= ",'" & cuenta & "',1,'" & Trim(empleadofull.SubItems(26).Text)
                         SQL &= "','" & Trim(empleadofull.SubItems(27).Text) & "'," & Trim(empleadofull.SubItems(28).Text) & ",'" & Trim(empleadofull.SubItems(29).Text)
-                        SQL &= "','" & dFechaCap & "','" & dFechaCap & "','" & dFechaCap
-                        SQL &= "'," & 0 & ",'" & Trim(empleadofull.SubItems(30).Text) & "','" & " "
-                        SQL &= "'," & 1 & ",'" & Trim(empleadofull.SubItems(31).Text) & "','" & Trim(empleadofull.SubItems(32).Text) ''factor
-                        SQL &= "'," & 0 & ",'" & Trim(empleadofull.SubItems(33).Text) & "','" & Trim(empleadofull.SubItems(34).Text)
-                        SQL &= "','" & Trim(empleadofull.SubItems(35).Text) & "','" & Trim(empleadofull.SubItems(36).Text) & "','" & Trim(empleadofull.SubItems(37).Text) & "'," & -1 ''estatus 
-                        SQL &= "," & Trim(empleadofull.SubItems(15).Text) & "," & Trim(empleadofull.SubItems(38).Text)
+                        SQL &= "','" & dFechaPlanta & "','" & dFechaPlanta & "','" & dFechaPlanta
+                        SQL &= "'," & permanente & ",'" & clabe & "','" & " "
+                        SQL &= "'," & 1 & ",'" & Trim(empleadofull.SubItems(31).Text) & "','" & factor ''factor
+                        SQL &= "'," & Trim(empleadofull.SubItems(44).Text) & ",'" & Trim(empleadofull.SubItems(33).Text) & "','" & Trim(empleadofull.SubItems(34).Text)
+                        SQL &= "','" & Trim(empleadofull.SubItems(35).Text) & "','" & Trim(empleadofull.SubItems(36).Text) & "','" & Trim(empleadofull.SubItems(37).Text) & "'," & -1 ''cliente 
+                        SQL &= "," & p & "," & iIdDpto
                         SQL &= "," & IIf(Trim(empleadofull.SubItems(39).Text) = "SOLTERO", 0, 1)
-                        SQL &= "," & 1
+                        SQL &= "," & 36 ''BANCO 2
                         SQL &= ",'" & " "
                         SQL &= "','" & "" & "'"
                         SQL &= "," & 0 & ",'" & dFechaPlanta & "','" & Trim(empleadofull.SubItems(41).Text) & "','" & Trim(empleadofull.SubItems(42).Text) & "'"
                         SQL &= ",'" & Trim(empleadofull.SubItems(43).Text) & "','" & " " & "'"
 
                         If nExecute(SQL) = False Then
-                            MessageBox.Show("Error en el registro con los siguiente datos:   Empleado:  " & Trim(empleado.SubItems(3).Text), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-
+                            MessageBox.Show("Error en el registro con los siguiente datos:   Empleado:  " & Trim(empleado.SubItems(2).Text), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            tsbCancelar_Click(sender, e)
+                            pnlProgreso.Visible = False
                             Exit Sub
                         End If
                         pgbProgreso.Value += 1
@@ -402,6 +497,7 @@ Public Class frmImportarEmpleadosAlta
                         tsbCancelar_Click(sender, e)
                         pnlProgreso.Visible = False
                     End If
+
 
 
 
