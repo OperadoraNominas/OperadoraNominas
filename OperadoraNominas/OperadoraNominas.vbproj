@@ -50,7 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML">
-      <HintPath>..\..\..\XurtepNominas\XurtepNominas\XurtepNominas\bin\Debug\ClosedXML.dll</HintPath>
+      <HintPath>..\..\..\recibosgrupo2\recibos\recibos\bin\Debug\ClosedXML.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

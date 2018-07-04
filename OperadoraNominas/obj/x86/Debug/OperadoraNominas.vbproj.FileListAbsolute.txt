@@ -48,5 +48,4 @@ C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\bin\De
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\bin\Debug\ClosedXML.dll
-C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\bin\Debug\ClosedXML.xml
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
