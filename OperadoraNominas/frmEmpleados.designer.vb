@@ -161,15 +161,15 @@ Partial Class frmEmpleados
         Me.Label48.AutoSize = True
         Me.Label48.Location = New System.Drawing.Point(8, 633)
         Me.Label48.Name = "Label48"
-<<<<<<< HEAD
+
         Me.Label48.Size = New System.Drawing.Size(42, 18)
         Me.Label48.TabIndex = 195
         Me.Label48.Text = "Barco"
-=======
+
         Me.Label48.Size = New System.Drawing.Size(48, 18)
         Me.Label48.TabIndex = 195
         Me.Label48.Text = "Buque"
->>>>>>> mayito
+
         '
         'cbodepartamento
         '
