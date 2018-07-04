@@ -1528,6 +1528,8 @@ Public Class frmnominasmarinos
         Dim pension As Double
         Dim prestamo As Double
         Dim fonacot As Double
+        Dim subsidiogenerado As Double
+        Dim subsidioaplicado As Double
         Dim sql As String
         Dim ValorUMA As Double
         Dim primavacacionesgravada As Double
@@ -1609,6 +1611,8 @@ Public Class frmnominasmarinos
                     'PENSION
                     'PRESTAMO
                     'FONACOT
+                    'SUBSIDIO GENERADO
+                    'SUBSIDIO APLICADO
                     'NETO
 
 
@@ -1622,8 +1626,9 @@ Public Class frmnominasmarinos
                     pension = Double.Parse(IIf(dtgDatos.Rows(x).Cells(41).Value = "", "0", dtgDatos.Rows(x).Cells(41).Value))
                     prestamo = Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value))
                     fonacot = Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", "0", dtgDatos.Rows(x).Cells(43).Value))
-
-                    dtgDatos.Rows(x).Cells(44).Value = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot, 2)
+                    subsidiogenerado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(44).Value = "", "0", dtgDatos.Rows(x).Cells(44).Value))
+                    subsidioaplicado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(45).Value = "", "0", dtgDatos.Rows(x).Cells(45).Value))
+                    dtgDatos.Rows(x).Cells(46).Value = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
 
 
 
@@ -1705,6 +1710,8 @@ Public Class frmnominasmarinos
                     'PENSION
                     'PRESTAMO
                     'FONACOT
+                    'SUBSIDIO GENERADO
+                    'SUBSIDIO APLICADO
                     'NETO
 
 
@@ -1718,8 +1725,9 @@ Public Class frmnominasmarinos
                     pension = Double.Parse(IIf(dtgDatos.Rows(x).Cells(41).Value = "", "0", dtgDatos.Rows(x).Cells(41).Value))
                     prestamo = Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value))
                     fonacot = Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", "0", dtgDatos.Rows(x).Cells(43).Value))
-
-                    dtgDatos.Rows(x).Cells(44).Value = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot, 2)
+                    subsidiogenerado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(44).Value = "", "0", dtgDatos.Rows(x).Cells(44).Value))
+                    subsidioaplicado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(45).Value = "", "0", dtgDatos.Rows(x).Cells(45).Value))
+                    dtgDatos.Rows(x).Cells(46).Value = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
 
 
 
@@ -1740,31 +1748,31 @@ Public Class frmnominasmarinos
                     If rwCostoSocial Is Nothing = False Then
                         If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
                             If dtgDatos.Rows(x).Cells(5).Value = "PLANTA" Then
-                                dtgDatos.Rows(x).Cells(47).Value = rwCostoSocial(0)("imsstopado")
-                                dtgDatos.Rows(x).Cells(48).Value = rwCostoSocial(0)("RCVtopado")
-                                dtgDatos.Rows(x).Cells(49).Value = rwCostoSocial(0)("infonavittopado")
-                                dtgDatos.Rows(x).Cells(50).Value = rwCostoSocial(0)("ISNtopado")
+                                dtgDatos.Rows(x).Cells(49).Value = rwCostoSocial(0)("imsstopado")
+                                dtgDatos.Rows(x).Cells(50).Value = rwCostoSocial(0)("RCVtopado")
+                                dtgDatos.Rows(x).Cells(51).Value = rwCostoSocial(0)("infonavittopado")
+                                dtgDatos.Rows(x).Cells(52).Value = rwCostoSocial(0)("ISNtopado")
 
                             Else
-                                dtgDatos.Rows(x).Cells(47).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                dtgDatos.Rows(x).Cells(48).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                dtgDatos.Rows(x).Cells(49).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                dtgDatos.Rows(x).Cells(50).Value = Math.Round(Double.Parse(rwCostoSocial(0)("ISNtopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                dtgDatos.Rows(x).Cells(49).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                dtgDatos.Rows(x).Cells(50).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                dtgDatos.Rows(x).Cells(51).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                dtgDatos.Rows(x).Cells(52).Value = Math.Round(Double.Parse(rwCostoSocial(0)("ISNtopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
 
                             End If
 
                         Else
                             If dtgDatos.Rows(x).Cells(5).Value = "PLANTA" Then
-                                dtgDatos.Rows(x).Cells(47).Value = rwCostoSocial(0)("imss")
-                                dtgDatos.Rows(x).Cells(48).Value = rwCostoSocial(0)("RCV")
-                                dtgDatos.Rows(x).Cells(49).Value = rwCostoSocial(0)("Infonavit")
-                                dtgDatos.Rows(x).Cells(50).Value = rwCostoSocial(0)("ISN")
+                                dtgDatos.Rows(x).Cells(49).Value = rwCostoSocial(0)("imss")
+                                dtgDatos.Rows(x).Cells(50).Value = rwCostoSocial(0)("RCV")
+                                dtgDatos.Rows(x).Cells(51).Value = rwCostoSocial(0)("Infonavit")
+                                dtgDatos.Rows(x).Cells(52).Value = rwCostoSocial(0)("ISN")
 
                             Else
-                                dtgDatos.Rows(x).Cells(47).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                dtgDatos.Rows(x).Cells(48).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                dtgDatos.Rows(x).Cells(49).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                dtgDatos.Rows(x).Cells(50).Value = Math.Round(Double.Parse(rwCostoSocial(0)("ISN")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                dtgDatos.Rows(x).Cells(49).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                dtgDatos.Rows(x).Cells(50).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                dtgDatos.Rows(x).Cells(51).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                dtgDatos.Rows(x).Cells(52).Value = Math.Round(Double.Parse(rwCostoSocial(0)("ISN")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
 
                             End If
                         End If
