@@ -150,6 +150,7 @@ Partial Class frmEmpleados
         Me.txtTelefono = New System.Windows.Forms.TextBox()
         Me.Label56 = New System.Windows.Forms.Label()
         Me.dtpFinContrato = New System.Windows.Forms.DateTimePicker()
+        Me.cmdimss = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.gpb1.SuspendLayout()
         Me.gpb2.SuspendLayout()
@@ -160,9 +161,9 @@ Partial Class frmEmpleados
         Me.Label48.AutoSize = True
         Me.Label48.Location = New System.Drawing.Point(8, 633)
         Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(98, 18)
+        Me.Label48.Size = New System.Drawing.Size(42, 18)
         Me.Label48.TabIndex = 195
-        Me.Label48.Text = "Departamento"
+        Me.Label48.Text = "Barco"
         '
         'cbodepartamento
         '
@@ -231,6 +232,7 @@ Partial Class frmEmpleados
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.cmdimss)
         Me.Panel1.Controls.Add(Me.cmdPension)
         Me.Panel1.Controls.Add(Me.cmdDocumentos)
         Me.Panel1.Controls.Add(Me.cmdFamiliar)
@@ -1276,6 +1278,18 @@ Partial Class frmEmpleados
         Me.dtpFinContrato.Size = New System.Drawing.Size(154, 26)
         Me.dtpFinContrato.TabIndex = 216
         '
+        'cmdimss
+        '
+        Me.cmdimss.Image = CType(resources.GetObject("cmdimss.Image"), System.Drawing.Image)
+        Me.cmdimss.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmdimss.Location = New System.Drawing.Point(107, 306)
+        Me.cmdimss.Name = "cmdimss"
+        Me.cmdimss.Size = New System.Drawing.Size(87, 72)
+        Me.cmdimss.TabIndex = 47
+        Me.cmdimss.Text = "Imss"
+        Me.cmdimss.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdimss.UseVisualStyleBackColor = True
+        '
         'frmEmpleados
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1523,5 +1537,6 @@ Partial Class frmEmpleados
     Friend WithEvents cmdDocumentos As System.Windows.Forms.Button
     Friend WithEvents Label56 As System.Windows.Forms.Label
     Friend WithEvents dtpFinContrato As System.Windows.Forms.DateTimePicker
+    Friend WithEvents cmdimss As System.Windows.Forms.Button
 
 End Class

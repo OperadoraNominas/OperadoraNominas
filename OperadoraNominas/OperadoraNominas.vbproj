@@ -52,11 +52,10 @@
     <Reference Include="ClosedXML">
       <HintPath>..\..\..\XurtepNominas\XurtepNominas\XurtepNominas\bin\Debug\ClosedXML.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Intel\Microsoft.Office.Interop.Word.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -81,6 +80,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAgregarEmpleado.Designer.vb">
+      <DependentUpon>frmAgregarEmpleado.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAgregarEmpleado.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmBuscarEmpleado.designer.vb">
       <DependentUpon>frmBuscarEmpleado.vb</DependentUpon>
     </Compile>
@@ -193,6 +198,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAgregarEmpleado.resx">
+      <DependentUpon>frmAgregarEmpleado.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBuscarEmpleado.resx">
       <DependentUpon>frmBuscarEmpleado.vb</DependentUpon>
     </EmbeddedResource>
