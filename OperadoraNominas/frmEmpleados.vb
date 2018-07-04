@@ -291,11 +291,11 @@ Public Class frmEmpleados
                 'item.SubItems.Add("" & IIf(Fila.Item("iPermanente") = "0", "No", "Si"))
                 txtcredito.Text = Fila.Item("cInfonavit")
                 'item.SubItems.Add("" & Fila.Item("cInfonavit"))
-                If Fila.Item("cInfonavit") <> Nothing Then
-                    chkInfonavit.Checked = True
-                Else
-                    chkInfonavit.Checked = False
-                End If
+                'If Fila.Item("cInfonavit") <> Nothing Then
+                '    chkInfonavit.Checked = True
+                'Else
+                '    chkInfonavit.Checked = False
+                'End If
                 cbotipofactor.Text = Fila.Item("cTipoFactor")
                 'item.SubItems.Add("" & Fila.Item("cTipoFactor"))
                 txtfactor.Text = Fila.Item("fFactor")
@@ -525,12 +525,20 @@ Public Class frmEmpleados
     End Sub
 
     Private Sub MostrarDepartamentos()
+
         'If gIdTipoPuesto = 0 Then
         '    SQL = "Select * from departamentos"
         'Else
         '    SQL = "Select * from departamentos where iIdDepartamento=" & gIdTipoPuesto
         'End If
         SQL = "Select * from departamentos"
+
+        If gIdTipoPuesto = 0 Then
+            SQL = "Select * from departamentos"
+        Else
+            SQL = "Select * from departamentos where iEstatus=1" '' & gIdTipoPuesto
+        End If
+
         SQL &= " order by cnombre"
         nCargaCBO(cbodepartamento, SQL, "cnombre", "iIdDepartamento")
         cbodepartamento.SelectedIndex = 0
