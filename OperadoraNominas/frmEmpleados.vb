@@ -525,21 +525,20 @@ Public Class frmEmpleados
     End Sub
 
     Private Sub MostrarDepartamentos()
-<<<<<<< HEAD
+
         'If gIdTipoPuesto = 0 Then
         '    SQL = "Select * from departamentos"
         'Else
         '    SQL = "Select * from departamentos where iIdDepartamento=" & gIdTipoPuesto
         'End If
         SQL = "Select * from departamentos"
-=======
+
         If gIdTipoPuesto = 0 Then
             SQL = "Select * from departamentos"
         Else
             SQL = "Select * from departamentos where iEstatus=1" '' & gIdTipoPuesto
         End If
 
->>>>>>> mayito
         SQL &= " order by cnombre"
         nCargaCBO(cbodepartamento, SQL, "cnombre", "iIdDepartamento")
         cbodepartamento.SelectedIndex = 0
