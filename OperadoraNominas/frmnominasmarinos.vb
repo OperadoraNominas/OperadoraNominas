@@ -134,9 +134,20 @@ Public Class frmnominasmarinos
             '    cargado = True
             '    llenargrid()
             'End If
+            If dtgDatos.RowCount > 0 Then
+                Dim resultado As Integer = MessageBox.Show("ya se tienen empleados cargados en la lista, si continua estos se borraran,¿Desea continuar?", "Pregunta", MessageBoxButtons.YesNo)
+                If resultado = DialogResult.Yes Then
 
-            dtgDatos.Columns.Clear()
-            llenargrid()
+                    dtgDatos.Columns.Clear()
+                    llenargrid()
+
+                End If
+            Else
+                dtgDatos.Columns.Clear()
+                llenargrid()
+
+            End If
+            
 
 
 
@@ -582,11 +593,11 @@ Public Class frmnominasmarinos
                 dtgDatos.Columns(38).Width = 150
                 'Infonavit_bim_anterior
                 dtgDatos.Columns(39).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(39).ReadOnly = True
+                'dtgDatos.Columns(39).ReadOnly = True
                 dtgDatos.Columns(39).Width = 150
                 'Ajuste_infonavit
                 dtgDatos.Columns(40).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(40).ReadOnly = True
+                'dtgDatos.Columns(40).ReadOnly = True
                 dtgDatos.Columns(40).Width = 150
                 'Pension_Alimenticia
                 dtgDatos.Columns(41).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -1005,11 +1016,11 @@ Public Class frmnominasmarinos
                     dtgDatos.Columns(38).Width = 150
                     'Infonavit_bim_anterior
                     dtgDatos.Columns(39).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(39).ReadOnly = True
+                    'dtgDatos.Columns(39).ReadOnly = True
                     dtgDatos.Columns(39).Width = 150
                     'Ajuste_infonavit
                     dtgDatos.Columns(40).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(40).ReadOnly = True
+                    'dtgDatos.Columns(40).ReadOnly = True
                     dtgDatos.Columns(40).Width = 150
                     'Pension_Alimenticia
                     dtgDatos.Columns(41).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -1017,11 +1028,11 @@ Public Class frmnominasmarinos
                     dtgDatos.Columns(41).Width = 150
                     'Prestamo
                     dtgDatos.Columns(42).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(42).ReadOnly = True
+                    'dtgDatos.Columns(42).ReadOnly = True
                     dtgDatos.Columns(42).Width = 150
                     'Fonacot
                     dtgDatos.Columns(43).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(43).ReadOnly = True
+                    'dtgDatos.Columns(43).ReadOnly = True
                     dtgDatos.Columns(43).Width = 150
                     'Subsidio_Generado
                     dtgDatos.Columns(44).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -1064,15 +1075,15 @@ Public Class frmnominasmarinos
                     dtgDatos.Columns(52).Width = 150
                     'Prestamo_Personal
                     dtgDatos.Columns(53).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(53).ReadOnly = True
+                    'dtgDatos.Columns(53).ReadOnly = True
                     dtgDatos.Columns(53).Width = 150
                     'Adeudo_Infonavit
                     dtgDatos.Columns(54).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(54).ReadOnly = True
+                    'dtgDatos.Columns(54).ReadOnly = True
                     dtgDatos.Columns(54).Width = 150
                     'Diferencia_Infonavit
                     dtgDatos.Columns(55).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(55).ReadOnly = True
+                    'dtgDatos.Columns(55).ReadOnly = True
                     dtgDatos.Columns(55).Width = 150
 
                     'Complemento_Asimilados
@@ -1612,7 +1623,9 @@ Public Class frmnominasmarinos
                     'PRESTAMO
                     'FONACOT
                     'SUBSIDIO GENERADO
+                    dtgDatos.Rows(x).Cells(44).Value = Math.Round(baseSubsidio(dtgDatos.Rows(x).Cells(11).FormattedValue, Double.Parse(dtgDatos.Rows(x).Cells(18).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), ValorIncapacidad)).ToString("###,##0.00")
                     'SUBSIDIO APLICADO
+                    dtgDatos.Rows(x).Cells(45).Value = Math.Round(baseSubsidiototal(dtgDatos.Rows(x).Cells(11).FormattedValue, Double.Parse(dtgDatos.Rows(x).Cells(18).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), ValorIncapacidad)).ToString("###,##0.00")
                     'NETO
 
 
@@ -1651,24 +1664,27 @@ Public Class frmnominasmarinos
                     SueldoBase = Sueldobruto + TEFG + TEFE + TEO + DSO
 
 
-                    'Aguinaldo 
+                    'Aguinaldo gravado 
 
-                    If SueldoBase > 0 Then
+                    If ((SueldoBase / diastrabajados) * 15 / 12 * (diastrabajados / 30)) > ((ValorUMA * 30 / 12) * (diastrabajados / 30)) Then
                         'Aguinaldo gravado
                         dtgDatos.Rows(x).Cells(27).Value = Math.Round(((SueldoBase / diastrabajados) * 15 / 12 * (diastrabajados / 30)) - ((ValorUMA * 30 / 12) * (diastrabajados / 30)), 2)
                         'Aguinaldo exento
                         dtgDatos.Rows(x).Cells(28).Value = Math.Round(((ValorUMA * 30 / 12) * (diastrabajados / 30)), 2)
-                        'Aguinaldo total
-                        dtgDatos.Rows(x).Cells(29).Value = Math.Round(((SueldoBase / diastrabajados) * 15 / 12 * (diastrabajados / 30)), 2)
+
 
                     Else
                         'Aguinaldo gravado
+
                         dtgDatos.Rows(x).Cells(27).Value = "0.00"
                         'Aguinaldo exento
-                        dtgDatos.Rows(x).Cells(28).Value = "0.00"
-                        'Aguinaldo total
-                        dtgDatos.Rows(x).Cells(29).Value = "0.00"
+                        dtgDatos.Rows(x).Cells(28).Value = Math.Round(((SueldoBase / diastrabajados) * 15 / 12 * (diastrabajados / 30)), 2)
+
                     End If
+
+
+                    'Aguinaldo total
+                    dtgDatos.Rows(x).Cells(29).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(27).Value) + Double.Parse(dtgDatos.Rows(x).Cells(28).Value), 2)
 
                     'Prima de vacaciones
 
@@ -1681,6 +1697,7 @@ Public Class frmnominasmarinos
                         dtgDatos.Rows(x).Cells(30).Value = Math.Round(primavacacionesgravada, 2)
                         dtgDatos.Rows(x).Cells(31).Value = Math.Round(primavacacionesexenta, 2)
                     Else
+                        primavacacionesexenta = (SueldoBase * 0.25 / 12 * (diastrabajados / 30))
                         dtgDatos.Rows(x).Cells(30).Value = "0.00"
                         dtgDatos.Rows(x).Cells(31).Value = Math.Round(primavacacionesexenta, 2)
                     End If
@@ -1700,7 +1717,7 @@ Public Class frmnominasmarinos
                     End If
                     dtgDatos.Rows(x).Cells(35).Value = Math.Round(ValorIncapacidad, 2).ToString("###,##0.00")
                     'ISR
-                    dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse((baseisrtotal(dtgDatos.Rows(x).Cells(11).Value, 30, dtgDatos.Rows(x).Cells(17).Value, ValorIncapacidad)) / 30 * dtgDatos.Rows(x).Cells(18).Value), 2).ToString("###,##0.00")
+                    dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse((baseisrtotal(dtgDatos.Rows(x).Cells(11).FormattedValue, 30, dtgDatos.Rows(x).Cells(17).Value, ValorIncapacidad)) / 30 * dtgDatos.Rows(x).Cells(18).Value), 2).ToString("###,##0.00")
                     'IMSS
                     dtgDatos.Rows(x).Cells(37).Value = "0.00"
                     'INFONAVIT
@@ -1711,7 +1728,9 @@ Public Class frmnominasmarinos
                     'PRESTAMO
                     'FONACOT
                     'SUBSIDIO GENERADO
+                    dtgDatos.Rows(x).Cells(44).Value = Math.Round((baseSubsidio(dtgDatos.Rows(x).Cells(11).FormattedValue, 30, Double.Parse(dtgDatos.Rows(x).Cells(17).Value), ValorIncapacidad)), 2).ToString("###,##0.00")
                     'SUBSIDIO APLICADO
+                    dtgDatos.Rows(x).Cells(45).Value = Math.Round((baseSubsidiototal(dtgDatos.Rows(x).Cells(11).FormattedValue, 30, Double.Parse(dtgDatos.Rows(x).Cells(17).Value), ValorIncapacidad)) / 30 * Double.Parse(dtgDatos.Rows(x).Cells(18).Value), 2).ToString("###,##0.00")
                     'NETO
 
 
@@ -1843,15 +1862,17 @@ Public Class frmnominasmarinos
                             If rwDatosEmbarque Is Nothing = False Then
                                 FechaInicioPeriodo1 = rwDatosEmbarque(0)("FechaEmbarque")
                                 FechaFinPeriodo2 = FechaInicioPeriodo1.AddDays(diastrabajados)
+                                FechaFinPeriodo2 = FechaFinPeriodo2.AddDays(-1)
 
                                 If FechaInicioPeriodo1.Month = FechaFinPeriodo2.Month Then
-                                    FechaFinPeriodo1 = FechaInicioPeriodo1.AddDays(diastrabajados)
+                                    FechaFinPeriodo1 = FechaInicioPeriodo1.AddDays(diastrabajados - 1)
                                     FechaInicioPeriodo2 = Date.Parse("01/01/1900")
                                     FechaFinPeriodo2 = Date.Parse("01/01/1900")
 
                                 Else
+
                                     FechaFinPeriodo1 = Date.Parse("01/" & FechaFinPeriodo1.Month & "/" & FechaInicioPeriodo1.Year).AddMonths(1).AddDays(-1)
-                                    FechaFinPeriodo1 = Date.Parse("01/" & FechaFinPeriodo2.Month & "/" & FechaFinPeriodo2.Year)
+                                    FechaInicioPeriodo2 = Date.Parse("01/" & FechaFinPeriodo2.Month & "/" & FechaFinPeriodo2.Year)
                                 End If
 
 
@@ -1860,15 +1881,15 @@ Public Class frmnominasmarinos
                                 'Verificamos si esta dentro del mismo mes
                                 FechaInicioPeriodo1 = Date.Parse(rwPeriodo(0)("dFechaInicio"))
                                 FechaFinPeriodo2 = FechaInicioPeriodo1.AddDays(diastrabajados)
-
+                                FechaFinPeriodo2 = FechaFinPeriodo2.AddDays(-1)
                                 If FechaInicioPeriodo1.Month = FechaFinPeriodo2.Month Then
-                                    FechaFinPeriodo1 = FechaInicioPeriodo1.AddDays(diastrabajados)
+                                    FechaFinPeriodo1 = FechaInicioPeriodo1.AddDays(diastrabajados - 1)
                                     FechaInicioPeriodo2 = Date.Parse("01/01/1900")
                                     FechaFinPeriodo2 = Date.Parse("01/01/1900")
 
                                 Else
                                     FechaFinPeriodo1 = Date.Parse("01/" & FechaFinPeriodo1.Month & "/" & FechaInicioPeriodo1.Year).AddMonths(1).AddDays(-1)
-                                    FechaFinPeriodo1 = Date.Parse("01/" & FechaFinPeriodo2.Month & "/" & FechaFinPeriodo2.Year)
+                                    FechaInicioPeriodo2 = Date.Parse("01/" & FechaFinPeriodo2.Month & "/" & FechaFinPeriodo2.Year)
                                 End If
                             End If
                         End If
@@ -2082,11 +2103,39 @@ Public Class frmnominasmarinos
                 sueldo = sdi * dias
                 sueldobase = (sueldo * (26.19568006 / 100)) + ((sueldo * (8.5070471 / 100)) / 2) + ((sueldo * (8.5070471 / 100)) / 2) + (sueldo * (42.89215164 / 100)) + (sueldo * (9.677848468 / 100))
 
-                'Aguinaldo gravado
-                aguinaldog = Math.Round(((sueldobase / dias) * 15 / 12 * (dias / 30)) - ((ValorUMA * 30 / 12) * (dias / 30)), 2)
+                ''Aguinaldo gravado
+                'aguinaldog = Math.Round(((sueldobase / dias) * 15 / 12 * (dias / 30)) - ((ValorUMA * 30 / 12) * (dias / 30)), 2)
 
 
-                primag = (sueldobase * 0.25 / 12 * (dias / 30)) - ((ValorUMA * 15 / 12) * (dias / 30))
+                'primag = (sueldobase * 0.25 / 12 * (dias / 30)) - ((ValorUMA * 15 / 12) * (dias / 30))
+
+
+                'Aguinaldo gravado 
+
+                If ((sueldobase / dias) * 15 / 12 * (dias / 30)) > ((ValorUMA * 30 / 12) * (dias / 30)) Then
+                    'Aguinaldo gravado
+                    aguinaldog = Math.Round(((sueldobase / dias) * 15 / 12 * (dias / 30)) - ((ValorUMA * 30 / 12) * (dias / 30)), 2)
+                Else
+                    'Aguinaldo gravado
+                    aguinaldog = "0.00"
+                End If
+
+                'Prima de vacaciones
+
+                'Calculos prima
+                Dim primavacacionesgravada As Double
+                Dim primavacacionesexenta As Double
+
+                primavacacionesgravada = (sueldobase * 0.25 / 12 * (dias / 30)) - ((ValorUMA * 15 / 12) * (dias / 30))
+                primavacacionesexenta = ((ValorUMA * 15 / 12) * (dias / 30))
+
+                If primavacacionesgravada > 0 Then
+                    primag = primavacacionesgravada
+
+                Else
+                    primag = 0
+                End If
+
 
                 baseisr = (sueldobase - ((sueldo * (8.5070471 / 100)) / 2)) + (sueldo * (7.272727273 / 100)) + aguinaldog + primag - incapacidad
                 isrcalculado = isrmensual(baseisr)
@@ -2138,14 +2187,271 @@ Public Class frmnominasmarinos
                 subsidio = Double.Parse(rwSubsidio(0)("credito").ToString)
 
             End If
+            If isr > subsidio Then
+                Return isr - subsidio
+            Else
+                Return 0
+            End If
 
-            Return isr - subsidio
 
         Catch ex As Exception
 
         End Try
     End Function
 
+    Function subsidiomensual(monto As Double) As Double
+        Dim excendente As Double
+        Dim isr As Double
+        Dim subsidio As Double
+
+
+
+        Dim SQL As String
+
+        Try
+
+
+            'calculos
+
+            'Calculamos isr
+
+            '1.- buscamos datos para el calculo
+            isr = 0
+            SQL = "select * from isr where ((" & monto & ">=isr.limiteinf and " & monto & "<=isr.limitesup)"
+            SQL &= " or (" & monto & ">=isr.limiteinf and isr.limitesup=0)) and fkiIdTipoPeriodo2=1"
+
+
+            Dim rwISRCALCULO As DataRow() = nConsulta(SQL)
+            If rwISRCALCULO Is Nothing = False Then
+                excendente = monto - Double.Parse(rwISRCALCULO(0)("limiteinf").ToString)
+                isr = (excendente * (Double.Parse(rwISRCALCULO(0)("porcentaje").ToString) / 100)) + Double.Parse(rwISRCALCULO(0)("cuotafija").ToString)
+
+            End If
+            subsidio = 0
+            SQL = "select * from subsidio where ((" & monto & ">=subsidio.limiteinf and " & monto & "<=subsidio.limitesup)"
+            SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=1"
+
+
+            Dim rwSubsidio As DataRow() = nConsulta(SQL)
+            If rwSubsidio Is Nothing = False Then
+                subsidio = Double.Parse(rwSubsidio(0)("credito").ToString)
+
+            End If
+
+            If isr >= subsidio Then
+                subsidiomensual = 0
+            Else
+                subsidiomensual = subsidio - isr
+            End If
+
+
+        Catch ex As Exception
+
+        End Try
+
+
+
+    End Function
+
+    Private Function baseSubsidiototal(puesto As String, dias As Double, sdi As Double, incapacidad As Double) As Double
+
+
+
+        Dim sueldo As Double
+        Dim sueldobase As Double
+        Dim baseisr As Double
+        Dim isrcalculado As Double
+        Dim aguinaldog As Double
+        Dim primag As Double
+        Dim sql As String
+        Dim ValorUMA As Double
+        Try
+
+            sql = "select * from Salario "
+            sql &= " where Anio=" & aniocostosocial
+            sql &= " and iEstatus=1"
+            Dim rwValorUMA As DataRow() = nConsulta(sql)
+            If rwValorUMA Is Nothing = False Then
+                ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
+            Else
+                ValorUMA = 0
+                MessageBox.Show("No se encontro valor para UMA en el año: " & aniocostosocial)
+            End If
+
+            If puesto = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Then
+                sueldo = sdi * dias
+                sueldobase = sueldo
+                baseisr = sueldobase - incapacidad
+                baseSubsidiototal = subsidiomensual(baseisr)
+            Else
+                sueldo = sdi * dias
+                sueldobase = (sueldo * (26.19568006 / 100)) + ((sueldo * (8.5070471 / 100)) / 2) + ((sueldo * (8.5070471 / 100)) / 2) + (sueldo * (42.89215164 / 100)) + (sueldo * (9.677848468 / 100))
+
+                'Aguinaldo gravado 
+
+                If ((sueldobase / dias) * 15 / 12 * (dias / 30)) > ((ValorUMA * 30 / 12) * (dias / 30)) Then
+                    'Aguinaldo gravado
+                    aguinaldog = Math.Round(((sueldobase / dias) * 15 / 12 * (dias / 30)) - ((ValorUMA * 30 / 12) * (dias / 30)), 2)
+                Else
+                    'Aguinaldo gravado
+                    aguinaldog = "0.00"
+                End If
+
+                'Prima de vacaciones
+
+                'Calculos prima
+                Dim primavacacionesgravada As Double
+                Dim primavacacionesexenta As Double
+
+                primavacacionesgravada = (sueldobase * 0.25 / 12 * (dias / 30)) - ((ValorUMA * 15 / 12) * (dias / 30))
+                primavacacionesexenta = ((ValorUMA * 15 / 12) * (dias / 30))
+
+                If primavacacionesgravada > 0 Then
+                    primag = primavacacionesgravada
+
+                Else
+                    primag = 0
+                End If
+
+
+                baseisr = (sueldobase - ((sueldo * (8.5070471 / 100)) / 2)) + (sueldo * (7.272727273 / 100)) + aguinaldog + primag - incapacidad
+                baseSubsidiototal = subsidiomensual(baseisr)
+
+            End If
+            Return baseSubsidiototal
+        Catch ex As Exception
+
+        End Try
+
+
+
+    End Function
+
+
+    Function subsidiomensualCausado(monto As Double) As Double
+        Dim excendente As Double
+        Dim isr As Double
+        Dim subsidio As Double
+
+
+
+        Dim SQL As String
+
+        Try
+
+
+            'calculos
+
+            'Calculamos isr
+
+            '1.- buscamos datos para el calculo
+            isr = 0
+            SQL = "select * from isr where ((" & monto & ">=isr.limiteinf and " & monto & "<=isr.limitesup)"
+            SQL &= " or (" & monto & ">=isr.limiteinf and isr.limitesup=0)) and fkiIdTipoPeriodo2=1"
+
+
+            Dim rwISRCALCULO As DataRow() = nConsulta(SQL)
+            If rwISRCALCULO Is Nothing = False Then
+                excendente = monto - Double.Parse(rwISRCALCULO(0)("limiteinf").ToString)
+                isr = (excendente * (Double.Parse(rwISRCALCULO(0)("porcentaje").ToString) / 100)) + Double.Parse(rwISRCALCULO(0)("cuotafija").ToString)
+
+            End If
+            subsidio = 0
+            SQL = "select * from subsidio where ((" & monto & ">=subsidio.limiteinf and " & monto & "<=subsidio.limitesup)"
+            SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=1"
+
+
+            Dim rwSubsidio As DataRow() = nConsulta(SQL)
+            If rwSubsidio Is Nothing = False Then
+                subsidio = Double.Parse(rwSubsidio(0)("credito").ToString)
+
+            End If
+
+            If isr >= subsidio Then
+                subsidiomensualCausado = 0
+            Else
+                subsidiomensualCausado = subsidio
+            End If
+
+
+        Catch ex As Exception
+
+        End Try
+
+
+
+    End Function
+
+
+    Function baseSubsidio(puesto As String, dias As Double, sdi As Double, incapacidad As Double) As Double
+        Dim sueldo As Double
+        Dim sueldobase As Double
+        Dim baseisr As Double
+        Dim isrcalculado As Double
+        Dim aguinaldog As Double
+        Dim primag As Double
+        Dim sql As String
+        Dim ValorUMA As Double
+        Try
+
+            sql = "select * from Salario "
+            sql &= " where Anio=" & aniocostosocial
+            sql &= " and iEstatus=1"
+            Dim rwValorUMA As DataRow() = nConsulta(sql)
+            If rwValorUMA Is Nothing = False Then
+                ValorUMA = Double.Parse(rwValorUMA(0)("uma").ToString)
+            Else
+                ValorUMA = 0
+                MessageBox.Show("No se encontro valor para UMA en el año: " & aniocostosocial)
+            End If
+
+            If puesto = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Then
+                sueldo = sdi * dias
+                sueldobase = sueldo
+                baseisr = sueldobase - incapacidad
+                baseSubsidio = subsidiomensualCausado(baseisr)
+            Else
+                sueldo = sdi * dias
+                sueldobase = (sueldo * (26.19568006 / 100)) + ((sueldo * (8.5070471 / 100)) / 2) + ((sueldo * (8.5070471 / 100)) / 2) + (sueldo * (42.89215164 / 100)) + (sueldo * (9.677848468 / 100))
+
+                'Aguinaldo gravado 
+
+                If ((sueldobase / dias) * 15 / 12 * (dias / 30)) > ((ValorUMA * 30 / 12) * (dias / 30)) Then
+                    'Aguinaldo gravado
+                    aguinaldog = Math.Round(((sueldobase / dias) * 15 / 12 * (dias / 30)) - ((ValorUMA * 30 / 12) * (dias / 30)), 2)
+                Else
+                    'Aguinaldo gravado
+                    aguinaldog = "0.00"
+                End If
+
+                'Prima de vacaciones
+
+                'Calculos prima
+                Dim primavacacionesgravada As Double
+                Dim primavacacionesexenta As Double
+
+                primavacacionesgravada = (sueldobase * 0.25 / 12 * (dias / 30)) - ((ValorUMA * 15 / 12) * (dias / 30))
+                primavacacionesexenta = ((ValorUMA * 15 / 12) * (dias / 30))
+
+                If primavacacionesgravada > 0 Then
+                    primag = primavacacionesgravada
+
+                Else
+                    primag = 0
+                End If
+
+                baseisr = (sueldobase - ((sueldo * (8.5070471 / 100)) / 2)) + (sueldo * (7.272727273 / 100)) + aguinaldog + primag - incapacidad
+                baseSubsidio = subsidiomensualCausado(baseisr)
+
+            End If
+            Return baseSubsidio
+        Catch ex As Exception
+
+        End Try
+
+
+
+    End Function
 
 
     Private Function Incapacidades(tipo As String, valor As Double, sd As Double) As Double
@@ -2714,7 +3020,7 @@ Public Class frmnominasmarinos
             Dim columna As Integer
             m_currentControl = Nothing
             columna = CInt(DirectCast(sender, System.Windows.Forms.DataGridView).CurrentCell.ColumnIndex)
-            If columna = 15 Or columna = 18 Or columna = 41 Or columna = 10 Then
+            If columna = 15 Or columna = 18 Or columna = 39 Or columna = 40 Or columna = 41 Or columna = 42 Or columna = 43 Or columna = 10 Then
                 AddHandler e.Control.KeyPress, AddressOf TextboxNumeric_KeyPress
                 m_currentControl = e.Control
             End If
