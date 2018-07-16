@@ -328,7 +328,7 @@ Public Class frmImportarEmpleadosAlta
                             If banco Is Nothing Then
                                 idbanco = 1
                                 mensa = "Revise el tipo de banco"
-                                bandera = False
+                                ' bandera = False
                             Else
                                 idbanco = banco(0).Item("iIdBanco")
                             End If
@@ -343,7 +343,7 @@ Public Class frmImportarEmpleadosAlta
                             If puesto Is Nothing Then
                                 cPuesto = ""
                                 mensa = "Revise el tipo de Puesto"
-                                bandera = False
+                                ' bandera = False
                             Else
                                 cPuesto = puesto(0).Item("cNombre")
                                 p = puesto(0).Item("iIdPuesto")
@@ -360,9 +360,9 @@ Public Class frmImportarEmpleadosAlta
                         If d <> "" Then
                             Dim dpto As DataRow() = nConsulta("SELECT * FROM Departamentos where cNombre LIKE '" & d & "'")
                             If dpto Is Nothing Then
-                                iIdDpto = ""
+                                iIdDpto = " "
                                 mensa = "Revise el tipo de dapartamento"
-                                bandera = False
+                                'bandera = False
                             Else
                                 iIdDpto = dpto(0).Item("iIdDepartamento")
                             End If
@@ -378,7 +378,7 @@ Public Class frmImportarEmpleadosAlta
                             If lugar Is Nothing Then
                                 cLugar = ""
                                 mensa = "Revise el tipo de Puesto"
-                                bandera = False
+                                'bandera = False
                             Else
                                 cLugar = lugar(0).Item("cEstado")
                             End If
@@ -475,8 +475,8 @@ Public Class frmImportarEmpleadosAlta
                         SQL &= "'," & 1 & ",'" & Trim(empleadofull.SubItems(31).Text) & "','" & factor ''factor
                         SQL &= "'," & Trim(empleadofull.SubItems(44).Text) & ",'" & Trim(empleadofull.SubItems(33).Text) & "','" & Trim(empleadofull.SubItems(34).Text)
                         SQL &= "','" & Trim(empleadofull.SubItems(35).Text) & "','" & Trim(empleadofull.SubItems(36).Text) & "','" & Trim(empleadofull.SubItems(37).Text) & "'," & -1 ''cliente 
-                        SQL &= "," & p & "," & iIdDpto
-                        SQL &= "," & IIf(Trim(empleadofull.SubItems(39).Text) = "SOLTERO", 0, 1)
+                        SQL &= "," & p & ",'" & iIdDpto
+                        SQL &= "'," & IIf(Trim(empleadofull.SubItems(39).Text) = "SOLTERO", 0, 1)
                         SQL &= "," & 36 ''BANCO 2
                         SQL &= ",'" & " "
                         SQL &= "','" & "" & "'"
