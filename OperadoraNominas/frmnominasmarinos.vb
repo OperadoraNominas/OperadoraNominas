@@ -2412,160 +2412,107 @@ Public Class frmnominasmarinos
     End Sub
 
     Private Sub cmdexcel_Click(sender As Object, e As EventArgs) Handles cmdexcel.Click
-        'Enviar datos a excel
-        Dim SQL As String, Alter As Boolean = False
-
-        Dim promotor As String = ""
-        Dim filaExcel As Integer = 5
-        Dim dialogo As New SaveFileDialog()
-        Dim contadorfacturas As Integer
-
-
-        Alter = True
         Try
 
-            'SQL = "Select iIdFactura,fecha,facturas.numfactura,facturas.importe,facturas.iva,facturas.total,"
-            'SQL &= " pagoabono, comentario, comentario2, empresa.nombrefiscal, clientes.nombre "
-            'SQL &= " from((Facturas left join pagos on Facturas.iIdFactura=pagos.fkiIdFactura)"
-            'SQL &= " inner Join empresa on facturas.fkiIdEmpresa=empresa.iIdEmpresa) "
-            'SQL &= " inner Join clientes on facturas.fkiIdCliente= clientes.iIdCliente"
-            'SQL &= " where fecha between '" & inicio.ToShortDateString & "' and '" & fin.ToShortDateString() & "' and facturas.iEstatus=1 "
-            'SQL &= "  And facturas.cancelada=1  And pagos.iIdPago Is NULL and facturas.tipofactura=0"
-            'SQL &= " order by empresa.nombrefiscal, fecha"
-
-
-
-
-
-            'Dim rwFilas As DataRow() = nConsulta(SQL)
+            Dim filaExcel As Integer = 9
+            Dim dialogo As New SaveFileDialog()
 
             If dtgDatos.Rows.Count > 0 Then
+                Dim ruta As String
+                ruta = My.Application.Info.DirectoryPath() & "\Archivos\TMM.xlsx"
+
+
+                Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+
+
                 Dim libro As New ClosedXML.Excel.XLWorkbook
-                Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
 
-                hoja.Column("B").Width = 13
-                hoja.Column("C").Width = 30
-                hoja.Column("D").Width = 30
-                hoja.Column("E").Width = 30
-                hoja.Column("F").Width = 13
-                hoja.Column("G").Width = 13
-                hoja.Column("H").Width = 13
-                hoja.Column("I").Width = 13
-                hoja.Column("J").Width = 13
-                hoja.Column("K").Width = 13
-                hoja.Column("L").Width = 13
-                hoja.Column("M").Width = 13
-                hoja.Column("N").Width = 13
-                hoja.Column("O").Width = 13
-                hoja.Column("P").Width = 13
-                hoja.Column("Q").Width = 35
-                hoja.Column("R").Width = 35
-                hoja.Column("S").Width = 13
-                hoja.Column("T").Width = 40
-                hoja.Column("U").Width = 15
+                book.Worksheet(1).CopyTo(libro, "NOMINA TOTAL")
+                book.Worksheet(2).CopyTo(libro, "OPERADORA ABORDO")
 
-                hoja.Cell(2, 2).Value = "Fecha:" & Date.Now.ToShortDateString & " " & Date.Now.ToShortTimeString
-                hoja.Cell(3, 2).Value = "Resumen de nomina"
+                Dim hoja As IXLWorksheet = libro.Worksheets(0)
+                Dim hoja2 As IXLWorksheet = libro.Worksheets(1)
 
-                'hoja.Cell(3, 2).Value = ":"
-                'hoja.Cell(3, 3).Value = ""
+                'Operadora Abordo
 
-                hoja.Range(4, 2, 4, 14).Style.Font.FontSize = 10
-                hoja.Range(4, 2, 4, 14).Style.Font.SetBold(True)
-                hoja.Range(4, 2, 4, 14).Style.Alignment.WrapText = True
-                hoja.Range(4, 2, 4, 14).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-                hoja.Range(4, 1, 4, 14).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
-                'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
-                hoja.Range(4, 2, 4, 14).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-                hoja.Range(4, 2, 4, 14).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+                Dim rwPeriodo As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+                If rwPeriodo Is Nothing = False Then
+                    hoja2.Cell(4, 2).Value = "Periodo Mensual del " & rwPeriodo(0).Item("dFechaInicio")
+                End If
 
-                'hoja.Cell(4, 1).Value = "Num"
-                hoja.Cell(4, 2).Value = "Consecutivo"
-                hoja.Cell(4, 3).Value = "Departamento"
-                hoja.Cell(4, 4).Value = "Nombre"
-                hoja.Cell(4, 5).Value = "Sueldo"
-                hoja.Cell(4, 6).Value = "Neto_SA"
-                hoja.Cell(4, 7).Value = "Prima_SA"
-                hoja.Cell(4, 8).Value = "(-)Imss"
-                hoja.Cell(4, 9).Value = "(-)Infonavit"
-                hoja.Cell(4, 10).Value = "(-)Descuento"
-                hoja.Cell(4, 11).Value = "(-)Prestamo"
-                hoja.Cell(4, 12).Value = "Sindicato"
-                hoja.Cell(4, 13).Value = "Prima_Sin"
-                hoja.Cell(4, 14).Value = "Neto a pagar"
-
-                filaExcel = 5
-                contadorfacturas = 1
 
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
-                    'Consecutivo
-                    hoja.Cell(filaExcel + x, 2).Value = x + 1
-                    'Departamento
-                    hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(4).Value
-                    'Nombre
-                    hoja.Cell(filaExcel + x, 4).Value = dtgDatos.Rows(x).Cells(5).Value
-                    'Sueldo
-                    hoja.Cell(filaExcel + x, 5).Value = dtgDatos.Rows(x).Cells(6).Value
-                    'Neto SA
-                    hoja.Cell(filaExcel + x, 6).Value = dtgDatos.Rows(x).Cells(7).Value
-                    'Prima_SA
-                    hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(9).Value
-                    'Imss
-                    'Obtener el imss de los movimientos con el idperiodo del combo
 
-                    SQL = "select * from movimientos where fkiIdPeriodo=" & cboperiodo.SelectedValue
-                    SQL &= " and fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value
-                    SQL &= " and fkiIdConceptoPago=36"
+                    ' dtgDatos.Rows(x).Cells(11).FormattedValue
 
-                    Dim rwImss As DataRow() = nConsulta(SQL)
-
-                    If rwImss Is Nothing = False Then
-
-                        hoja.Cell(filaExcel + x, 8).Value = rwImss(0)("fImporteTotal").ToString
-
-
-                    End If
-
-
-
-                    'Infonavit
-                    hoja.Cell(filaExcel + x, 9).Value = dtgDatos.Rows(x).Cells(8).Value
-                    'Descuento
-                    hoja.Cell(filaExcel + x, 10).Value = dtgDatos.Rows(x).Cells(10).Value
-                    'Prestamo
-                    hoja.Cell(filaExcel + x, 11).Value = dtgDatos.Rows(x).Cells(11).Value
-                    'Sindicato
-                    hoja.Cell(filaExcel + x, 12).Value = dtgDatos.Rows(x).Cells(14).Value
-                    'Prima_Sin
-                    hoja.Cell(filaExcel + x, 13).Value = dtgDatos.Rows(x).Cells(13).Value
-                    'Neto a pagar
-                    hoja.Cell(filaExcel + x, 14).Value = dtgDatos.Rows(x).Cells(15).Value
-
-                Next
+                    hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value
+                    hoja2.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(4).Value
+                    hoja2.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(5).Value
+                    hoja2.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(6).Value
+                    hoja2.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(7).Value
+                    hoja2.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(8).Value
+                    hoja2.Cell(filaExcel, 7).Value = dtgDatos.Rows(x).Cells(9).Value
+                    hoja2.Cell(filaExcel, 8).Value = dtgDatos.Rows(x).Cells(10).Value
+                    hoja2.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(11).FormattedValue
+                    hoja2.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(12).FormattedValue
+                    hoja2.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(13).Value
+                    hoja2.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(14).Value
+                    hoja2.Cell(filaExcel, 13).Value = dtgDatos.Rows(x).Cells(15).Value
+                    hoja2.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(16).Value
+                    hoja2.Cell(filaExcel, 15).Value = dtgDatos.Rows(x).Cells(18).Value
+                    hoja2.Cell(filaExcel, 16).Value = dtgDatos.Rows(x).Cells(19).Value
+                    hoja2.Cell(filaExcel, 17).Value = dtgDatos.Rows(x).Cells(20).Value
+                    hoja2.Cell(filaExcel, 18).Value = dtgDatos.Rows(x).Cells(21).Value
+                    hoja2.Cell(filaExcel, 19).Value = dtgDatos.Rows(x).Cells(22).Value
+                    hoja2.Cell(filaExcel, 20).Value = dtgDatos.Rows(x).Cells(23).Value
+                    hoja2.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(24).Value
+                    hoja2.Cell(filaExcel, 22).Value = dtgDatos.Rows(x).Cells(25).Value
+                    hoja2.Cell(filaExcel, 23).Value = dtgDatos.Rows(x).Cells(26).Value
+                    hoja2.Cell(filaExcel, 24).Value = dtgDatos.Rows(x).Cells(27).Value
+                    hoja2.Cell(filaExcel, 25).Value = dtgDatos.Rows(x).Cells(28).Value
+                    hoja2.Cell(filaExcel, 26).Value = dtgDatos.Rows(x).Cells(29).Value
+                    hoja2.Cell(filaExcel, 27).Value = dtgDatos.Rows(x).Cells(30).Value
+                    hoja2.Cell(filaExcel, 28).Value = dtgDatos.Rows(x).Cells(31).Value
+                    hoja2.Cell(filaExcel, 29).Value = dtgDatos.Rows(x).Cells(32).Value
+                    hoja2.Cell(filaExcel, 30).Value = dtgDatos.Rows(x).Cells(33).Value
+                    hoja2.Cell(filaExcel, 31).Value = dtgDatos.Rows(x).Cells(34).Value
+                    hoja2.Cell(filaExcel, 32).Value = dtgDatos.Rows(x).Cells(35).Value
+                    hoja2.Cell(filaExcel, 33).Value = dtgDatos.Rows(x).Cells(36).Value
+                    hoja2.Cell(filaExcel, 34).Value = dtgDatos.Rows(x).Cells(37).Value
+                    hoja2.Cell(filaExcel, 35).Value = dtgDatos.Rows(x).Cells(38).Value
+                    hoja2.Cell(filaExcel, 36).Value = dtgDatos.Rows(x).Cells(41).Value
+                    hoja2.Cell(filaExcel, 37).Value = dtgDatos.Rows(x).Cells(45).Value
+                    hoja2.Cell(filaExcel, 38).Value = dtgDatos.Rows(x).Cells(46).Value
 
 
+                    filaExcel = filaExcel + 1
+
+                Next x
+
+                Dim moment As Date = Date.Now()
+                Dim month As Integer = moment.Month
+                Dim year As Integer = moment.Year
 
 
-                dialogo.DefaultExt = "*.xlsx"
-                dialogo.FileName = "Resumen Nomina"
+                dialogo.FileName = "TMM " + MonthString(month).ToUpper + " " + year.ToString
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-                dialogo.ShowDialog()
-                libro.SaveAs(dialogo.FileName)
-                'libro.SaveAs("c:\temp\control.xlsx")
-                'libro.SaveAs(dialogo.FileName)
-                'apExcel.Quit()
-                libro = Nothing
+                ''  dialogo.ShowDialog()
 
-                MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                    ' OK button pressed
+                    libro.SaveAs(dialogo.FileName)
+                    libro = Nothing
+                    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            Else
-                MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End If
             End If
 
         Catch ex As Exception
+            MessageBox.Show(ex.Message.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         End Try
-
 
     End Sub
 
@@ -4061,4 +4008,27 @@ Public Class frmnominasmarinos
         End Try
         
     End Sub
+
+
+
+    Function MonthString(ByRef month As Integer) As String
+
+        Select Case month
+            Case 1 : Return "Enero"
+            Case 2 : Return "Febrero"
+            Case 3 : Return "Marzo"
+            Case 4 : Return "Abril"
+            Case 5 : Return "Mayo"
+            Case 6 : Return "Junio"
+            Case 7 : Return "Julio"
+            Case 8 : Return "Agosto"
+            Case 9 : Return "Septiembre"
+            Case 10 : Return "Octubre"
+            Case 11 : Return "Noviembre"
+            Case 12 : Return "Diciembre"
+
+        End Select
+
+    End Function
+
 End Class
