@@ -2522,7 +2522,6 @@ Public Class frmnominasmarinos
                 hoja2.Cell(8, 44).Clear()
                 hoja2.Cell(8, 45).Clear()
 
-
                 Dim moment As Date = Date.Now()
                 Dim month As Integer = moment.Month
                 Dim year As Integer = moment.Year
