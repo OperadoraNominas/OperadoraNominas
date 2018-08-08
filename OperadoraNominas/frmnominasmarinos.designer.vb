@@ -33,6 +33,9 @@ Partial Class frmnominasmarinos
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.btnReporte = New System.Windows.Forms.Button()
+        Me.cboTipoNomina = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.cboserie = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.chkgrupo = New System.Windows.Forms.CheckBox()
@@ -54,13 +57,11 @@ Partial Class frmnominasmarinos
         Me.cboperiodo = New System.Windows.Forms.ComboBox()
         Me.pnlProgreso = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.pgbProgreso = New System.Windows.Forms.ProgressBar()
         Me.cMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EliminarDeLaListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AgregarTrabajadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditarEmpleadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.pgbProgreso = New System.Windows.Forms.ProgressBar()
-        Me.cboTipoNomina = New System.Windows.Forms.ComboBox()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -148,9 +149,10 @@ Partial Class frmnominasmarinos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.btnReporte)
         Me.pnlCatalogo.Controls.Add(Me.cboTipoNomina)
         Me.pnlCatalogo.Controls.Add(Me.Label4)
         Me.pnlCatalogo.Controls.Add(Me.cboserie)
@@ -176,6 +178,34 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 431)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'btnReporte
+        '
+        Me.btnReporte.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReporte.Location = New System.Drawing.Point(1002, 34)
+        Me.btnReporte.Name = "btnReporte"
+        Me.btnReporte.Size = New System.Drawing.Size(103, 28)
+        Me.btnReporte.TabIndex = 24
+        Me.btnReporte.Text = "Reporte a Excel"
+        Me.btnReporte.UseVisualStyleBackColor = True
+        '
+        'cboTipoNomina
+        '
+        Me.cboTipoNomina.FormattingEnabled = True
+        Me.cboTipoNomina.Items.AddRange(New Object() {"Abordo", "Descanso"})
+        Me.cboTipoNomina.Location = New System.Drawing.Point(433, 3)
+        Me.cboTipoNomina.Name = "cboTipoNomina"
+        Me.cboTipoNomina.Size = New System.Drawing.Size(134, 27)
+        Me.cboTipoNomina.TabIndex = 23
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(391, 8)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(41, 19)
+        Me.Label4.TabIndex = 22
+        Me.Label4.Text = "Tipo:"
         '
         'cboserie
         '
@@ -337,8 +367,8 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.AllowUserToDeleteRows = False
         Me.dtgDatos.AllowUserToOrderColumns = True
         Me.dtgDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 65)
         Me.dtgDatos.Name = "dtgDatos"
@@ -392,39 +422,6 @@ Partial Class frmnominasmarinos
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Procesando..."
         '
-        'cMenu
-        '
-        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem})
-        Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(188, 92)
-        '
-        'EliminarDeLaListaToolStripMenuItem
-        '
-        Me.EliminarDeLaListaToolStripMenuItem.Name = "EliminarDeLaListaToolStripMenuItem"
-        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
-        Me.EliminarDeLaListaToolStripMenuItem.Text = "Eliminar de la Lista"
-        '
-        'AgregarTrabajadoresToolStripMenuItem
-        '
-        Me.AgregarTrabajadoresToolStripMenuItem.Name = "AgregarTrabajadoresToolStripMenuItem"
-        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
-        Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
-        '
-        'EditarEmpleadoToolStripMenuItem
-        '
-        Me.EditarEmpleadoToolStripMenuItem.Name = "EditarEmpleadoToolStripMenuItem"
-        Me.EditarEmpleadoToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
-        Me.EditarEmpleadoToolStripMenuItem.Text = "Editar Empleado"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(391, 8)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(41, 19)
-        Me.Label4.TabIndex = 22
-        Me.Label4.Text = "Tipo:"
-        '
         'pgbProgreso
         '
         Me.pgbProgreso.Location = New System.Drawing.Point(17, 12)
@@ -432,14 +429,29 @@ Partial Class frmnominasmarinos
         Me.pgbProgreso.Size = New System.Drawing.Size(413, 30)
         Me.pgbProgreso.TabIndex = 0
         '
-        'cboTipoNomina
+        'cMenu
         '
-        Me.cboTipoNomina.FormattingEnabled = True
-        Me.cboTipoNomina.Items.AddRange(New Object() {"Abordo", "Descanso"})
-        Me.cboTipoNomina.Location = New System.Drawing.Point(433, 3)
-        Me.cboTipoNomina.Name = "cboTipoNomina"
-        Me.cboTipoNomina.Size = New System.Drawing.Size(134, 27)
-        Me.cboTipoNomina.TabIndex = 23
+        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem})
+        Me.cMenu.Name = "cMenu"
+        Me.cMenu.Size = New System.Drawing.Size(187, 70)
+        '
+        'EliminarDeLaListaToolStripMenuItem
+        '
+        Me.EliminarDeLaListaToolStripMenuItem.Name = "EliminarDeLaListaToolStripMenuItem"
+        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.EliminarDeLaListaToolStripMenuItem.Text = "Eliminar de la Lista"
+        '
+        'AgregarTrabajadoresToolStripMenuItem
+        '
+        Me.AgregarTrabajadoresToolStripMenuItem.Name = "AgregarTrabajadoresToolStripMenuItem"
+        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
+        '
+        'EditarEmpleadoToolStripMenuItem
+        '
+        Me.EditarEmpleadoToolStripMenuItem.Name = "EditarEmpleadoToolStripMenuItem"
+        Me.EditarEmpleadoToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.EditarEmpleadoToolStripMenuItem.Text = "Editar Empleado"
         '
         'frmnominasmarinos
         '
@@ -503,4 +515,5 @@ Partial Class frmnominasmarinos
     Friend WithEvents cboTipoNomina As System.Windows.Forms.ComboBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents pgbProgreso As System.Windows.Forms.ProgressBar
+    Friend WithEvents btnReporte As System.Windows.Forms.Button
 End Class

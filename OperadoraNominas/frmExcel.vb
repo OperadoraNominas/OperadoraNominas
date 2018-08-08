@@ -939,8 +939,8 @@ Public Class frmExcel
                 Dim month As Integer = moment.Month
                 Dim year As Integer = moment.Year
                 dialogo.DefaultExt = "*.xlsx"
-
-                dialogo.FileName = Format(moment.Date, "MMMM yyyy ").ToUpper & " " & "Procesos " & tipo & " "
+                Dim fechita() As String = Date.Parse(fechadepago).ToLongDateString().Split(",")
+                dialogo.FileName = fechita(1).ToUpper & " " & "Procesos " & tipo & " "
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
 
@@ -977,17 +977,6 @@ Public Class frmExcel
         Try
             Dim tipo As String = "NOMINA"
 
-            '' Format(Date.Now, "MMMM yyyy") & " " & cboTipoR.SelectedItem.ToString()
-            'Select Case cboTipoR.SelectedItem.ToString()
-            '    Case "NN"
-            '        tipo = "ABORDO"
-            '    Case "ND"
-            '        tipo = "DESCANSO"
-            '    Case Else
-            '        tipo = "NOMINA"
-
-            'End Select
-
 
 
             Dim filaExcel As Integer = 2
@@ -1005,9 +994,8 @@ Public Class frmExcel
 
 
                 book.Worksheet(1).CopyTo(libro, "Generales")
-                book.Worksheet(3).CopyTo(libro, "Deducciones")
                 book.Worksheet(2).CopyTo(libro, "Percepciones")
-
+                book.Worksheet(3).CopyTo(libro, "Deducciones")
                 book.Worksheet(4).CopyTo(libro, "Otros Pagos")
 
 
@@ -1132,8 +1120,6 @@ Public Class frmExcel
                 End If
 
 
-
-
             Else
 
                 MessageBox.Show("Por favor seleccione al menos una registro para importar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -1159,7 +1145,7 @@ Public Class frmExcel
             ' Return infonavitcalculado.ToString()
         Else
             'Return infonavit.ToString
-            infonavitcalculado = infonavit
+            infonavitcalculado = CDbl(infonavit) + CDbl(diferencia)
         End If
 
         Return infonavitcalculado.ToString()

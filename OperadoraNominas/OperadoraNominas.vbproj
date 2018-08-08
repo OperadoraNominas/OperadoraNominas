@@ -49,8 +49,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClosedXML">
-      <HintPath>..\..\..\recibosgrupo2\recibos\recibos\bin\Debug\ClosedXML.dll</HintPath>
+    <Reference Include="ClosedXML, Version=0.93.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Update System\Operadora\Original Libreria\ClosedXML.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -274,6 +275,9 @@
     <Content Include="Resources\familia.png" />
     <Content Include="Resources\pasaporte.png" />
     <Content Include="Resources\sobresalir %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
