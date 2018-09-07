@@ -1854,7 +1854,13 @@ Public Class frmnominasmarinos
                             FechaFinPeriodo1 = Date.Parse("01/" & FechaInicioPeriodo1.Month & "/" & FechaInicioPeriodo1.Year).AddMonths(1).AddDays(-1)
                             FechaFinPeriodo2 = Date.Parse(rwPeriodo(0)("dFechaFin"))
                             FechaInicioPeriodo2 = Date.Parse("01/" & FechaFinPeriodo2.Month & "/" & FechaFinPeriodo2.Year)
+                            If (FechaInicioPeriodo1 = FechaInicioPeriodo2) Then
+                                FechaInicioPeriodo2 = Date.Parse("01/01/1900")
+                            End If
 
+                            If (FechaFinPeriodo1 = FechaFinPeriodo2) Then
+                                FechaFinPeriodo2 = Date.Parse("01/01/1900")
+                            End If
                         Else
                             'Verificamos si tiene un embarque dentro de periodo
                             sql = "select * from DatosEmbarque where FechaEmbarque Between '" & Date.Parse(rwPeriodo(0)("dFechaInicio")).ToShortDateString & "' and '" & Date.Parse(rwPeriodo(0)("dFechaFin")).ToShortDateString & "'"
