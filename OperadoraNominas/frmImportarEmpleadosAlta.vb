@@ -324,7 +324,7 @@ Public Class frmImportarEmpleadosAlta
                         Dim b As String = Trim(empleadofull.SubItems(24).Text)
                         Dim idbanco As Integer
                         If b <> "" Then
-                            Dim banco As DataRow() = nConsulta("select * from bancos where clave =" & b)
+                            Dim banco As DataRow() = nConsulta("select * from bancos where cBanco like '%" & b & "%'") ' clave =" & b)
                             If banco Is Nothing Then
                                 idbanco = 1
                                 mensa = "Revise el tipo de banco"
@@ -446,16 +446,45 @@ Public Class frmImportarEmpleadosAlta
 
 
 
-                        Dim dFechaNac, dFechaCap, dFechaPlanta As String ''--, dFechaPatrona, dFechaTerminoContrato, dFechaSindicato, dFechaAntiguedad As String
+                        Dim dFechaNac, dFechaCap, dFechaPlanta As String, dFechaPatrona ''--, dFechaTerminoContrato, dFechaSindicato, dFechaAntiguedad As String
 
                         dFechaNac = Date.Parse(Trim(empleadofull.SubItems(13).Text).ToString) ''Format(Trim(empleadofull.SubItems(18).Text), "yyyy/dd/MM"))
                         dFechaCap = Date.Parse((Trim(empleadofull.SubItems(14).Text)).ToString)
                         dFechaPlanta = Date.Parse(Trim(empleadofull.SubItems(40).Text).ToString)
-                        '' dFechaPatrona = Date.Parse((Trim(empleadofull.SubItems(14).Text))
+                        dFechaPatrona = Date.Parse((Trim(empleadofull.SubItems(14).Text).ToString))
                         'dFechaTerminoContrato = ((Trim(empleadofull.SubItems(44).Text))) ''No asignado
                         'dFechaSindicato = (Trim(empleadofull.SubItems(14).Text))
                         'dFechaAntiguedad = Trim(empleadofull.SubItems(14).Text)
 
+
+
+
+                        '***********************************'
+                        SQL = "select max(iIdEmpleadoC) as id from empleadosC"
+
+                        Dim salario As String = "0"  '= Trim(empleadofull.SubItems(17).Text)
+                        Dim sdi As String = Trim(empleadofull.SubItems(18).Text)
+                        Dim sd As String = Trim(empleadofull.SubItems(17).Text)
+                        Dim status As String = Trim(empleadofull.SubItems(12).Text)
+
+                        'CUANDO SE AGREGA EL SUELDO ORDINARIO
+                        Dim rwFilas2 As DataRow() = nConsulta(SQL)
+
+                        If rwFilas2 Is Nothing = False Then
+                            Dim Fila As DataRow = rwFilas2(0)
+                            SQL = "EXEC setSueldoAltaInsertar  0," & IIf(salario = "", 0, salario) & ",'" & dFechaPatrona ' Format(dtppatrona.Value.Date, "yyyy/dd/MM")
+                            SQL += "',0,''," & IIf(sd = "", 0, sd) & "," & IIf(sdi = "", 0, sdi) & "," & Fila.Item("id")
+                            SQL += ",'01/01/1900',''"
+
+                        End If
+
+                        If SQL <> "" Then
+                            If nExecute(SQL) = False Then
+                                Exit Sub
+                            End If
+                        End If
+
+                        '***********************************'
 
                         SQL = "EXEC setempleadosCInsertar 0,'" & Trim(empleadofull.SubItems(1).Text) & "','" & Trim(empleadofull.SubItems(2).Text)
                         SQL &= "','" & Trim(empleadofull.SubItems(3).Text)
@@ -489,6 +518,33 @@ Public Class frmImportarEmpleadosAlta
                             pnlProgreso.Visible = False
                             Exit Sub
                         End If
+
+                        '*********************
+                        'Agregar alta/baja
+                        'If blnNuevo Then
+                        'Obtener id
+
+                        SQL = "select max(iIdEmpleadoC) as id from empleadosC"
+                        Dim rwFilas3 As DataRow() = nConsulta(SQL)
+
+                        If rwFilas3 Is Nothing = False Then
+                            Dim Fila As DataRow = rwFilas3(0)
+                            SQL = "EXEC setIngresoBajaAltaInsertar  0," & Fila.Item("id") & ",'" & "A" & "','" & dFechaPatrona & "','01/01/1900','',''"
+                            'Enviar correo
+
+                            'Enviar_Mail(GenerarCorreo2(epat, ec, Trim(empleadofull.SubItems(1).Text), List), correo, "Empleado Alta")
+                            'Enviar_Mail(GenerarCorreo(gIdEmpresa, cboclientefiscal.SelectedValue, Fila.Item("id")), "p.isidro@mbcgroup.mx;l.aquino@mbcgroup.mx;r.garcia@mbcgroup.mx", "Alta de empleado")
+                        End If
+
+
+
+                        If SQL <> "" Then
+                            If nExecute(SQL) = False Then
+                                Exit Sub
+                            End If
+                        End If
+                        '**********************************************
+
                         pgbProgreso.Value += 1
                         ''Application.DoEvents()
                         t = t + 1
@@ -625,5 +681,58 @@ Public Class frmImportarEmpleadosAlta
             MessageBox.Show(ex.ToString(), Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         End Try
+    End Sub
+
+    Private Sub tsbVerificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbVerificar.Click
+        'Public Sub recorrerLista()
+
+
+        Dim contador As Integer = 0
+
+        For filitas = 0 To lsvLista.Items.Count - 1
+
+            SQL = "SELECT * FROM empleadosC WHERE cCodigoEmpleado= " & lsvLista.Items(filitas).SubItems(1).Text
+            Dim rwFilas As DataRow() = nConsulta(SQL)
+            If rwFilas Is Nothing = False Then
+                For Each f In rwFilas
+                    ' If lsvLista.Items(filitas).SubItems(1).Text = f.Item("cCodigoEmpleado") Then
+                    lsvLista.Items(filitas).BackColor = Color.GreenYellow
+
+                    contador = contador + 1
+                    'End If
+                Next
+            End If
+
+        Next
+        MsgBox(contador.ToString & " Datos repetidos")
+
+        'Dim filas, filas2 As Integer
+        'Dim contador As Integer = 0
+
+        'For filas = 0 To lsvLista.Items.Count - 1
+        '    For filas2 = 1 + filas To lsvLista.Items.Count - 1
+        '        ''MsgBox(lsvLista.Items.Item(filas).SubItems(1).Text)
+
+        '        If lsvLista.Items(filas).SubItems(1).Text = lsvLista.Items(filas2).SubItems(1).Text Then
+        '            lsvLista.Items(filas2).BackColor = Color.GreenYellow
+
+        '            contador = contador + 1
+        '        End If
+
+        '        If filas2 = lsvLista.Items.Count Then
+        '            Exit For
+        '        End If
+
+        '    Next
+        '    If filas = lsvLista.Items.Count Then
+
+        '        Exit Sub
+
+        '    End If
+        'Next
+        'MsgBox(contador.ToString & " Datos repetidos")
+
+
+        'End Sub
     End Sub
 End Class

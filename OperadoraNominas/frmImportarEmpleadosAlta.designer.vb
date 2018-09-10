@@ -29,14 +29,15 @@ Partial Class frmImportarEmpleadosAlta
         Me.Label2 = New System.Windows.Forms.Label()
         Me.pgbProgreso = New System.Windows.Forms.ProgressBar()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.tsbNuevo = New System.Windows.Forms.ToolStripButton()
-        Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbGuardar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
         Me.tsbProcesar = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
         Me.chkAll = New System.Windows.Forms.CheckBox()
         Me.lsvLista = New System.Windows.Forms.ListView()
+        Me.tsbNuevo = New System.Windows.Forms.ToolStripButton()
+        Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbGuardar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbVerificar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
         Me.pnlProgreso.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
@@ -95,12 +96,66 @@ Partial Class frmImportarEmpleadosAlta
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbImportar, Me.tsbGuardar, Me.tsbCancelar, Me.tsbProcesar})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbImportar, Me.tsbGuardar, Me.tsbVerificar, Me.tsbCancelar, Me.tsbProcesar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1056, 54)
         Me.ToolStrip1.TabIndex = 30
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'tsbProcesar
+        '
+        Me.tsbProcesar.Enabled = False
+        Me.tsbProcesar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbProcesar.Name = "tsbProcesar"
+        Me.tsbProcesar.Size = New System.Drawing.Size(98, 51)
+        Me.tsbProcesar.Text = "Procesar archivo"
+        Me.tsbProcesar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbProcesar.Visible = False
+        '
+        'pnlCatalogo
+        '
+        Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.chkAll)
+        Me.pnlCatalogo.Controls.Add(Me.lsvLista)
+        Me.pnlCatalogo.Enabled = False
+        Me.pnlCatalogo.Location = New System.Drawing.Point(0, 56)
+        Me.pnlCatalogo.Name = "pnlCatalogo"
+        Me.pnlCatalogo.Size = New System.Drawing.Size(1056, 426)
+        Me.pnlCatalogo.TabIndex = 29
+        '
+        'chkAll
+        '
+        Me.chkAll.AutoSize = True
+        Me.chkAll.BackColor = System.Drawing.Color.Transparent
+        Me.chkAll.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkAll.Location = New System.Drawing.Point(3, 3)
+        Me.chkAll.Name = "chkAll"
+        Me.chkAll.Size = New System.Drawing.Size(107, 22)
+        Me.chkAll.TabIndex = 4
+        Me.chkAll.Text = "Marcar todos"
+        Me.chkAll.UseVisualStyleBackColor = False
+        '
+        'lsvLista
+        '
+        Me.lsvLista.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lsvLista.CheckBoxes = True
+        Me.lsvLista.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lsvLista.FullRowSelect = True
+        Me.lsvLista.GridLines = True
+        Me.lsvLista.HideSelection = False
+        Me.lsvLista.Location = New System.Drawing.Point(1, 31)
+        Me.lsvLista.MultiSelect = False
+        Me.lsvLista.Name = "lsvLista"
+        Me.lsvLista.Size = New System.Drawing.Size(1048, 388)
+        Me.lsvLista.TabIndex = 2
+        Me.lsvLista.UseCompatibleStateImageBehavior = False
+        Me.lsvLista.View = System.Windows.Forms.View.Details
         '
         'tsbNuevo
         '
@@ -132,6 +187,16 @@ Partial Class frmImportarEmpleadosAlta
         Me.tsbGuardar.Text = "Importar flujo"
         Me.tsbGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
+        'tsbVerificar
+        '
+        Me.tsbVerificar.AutoSize = False
+        Me.tsbVerificar.Image = Global.OperadoraNominas.My.Resources.Resources.material_escolar
+        Me.tsbVerificar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbVerificar.Name = "tsbVerificar"
+        Me.tsbVerificar.Size = New System.Drawing.Size(90, 51)
+        Me.tsbVerificar.Text = "Verificar Repetidos"
+        Me.tsbVerificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
         'tsbCancelar
         '
         Me.tsbCancelar.AutoSize = False
@@ -142,60 +207,6 @@ Partial Class frmImportarEmpleadosAlta
         Me.tsbCancelar.Size = New System.Drawing.Size(90, 51)
         Me.tsbCancelar.Text = "Cancelar"
         Me.tsbCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbProcesar
-        '
-        Me.tsbProcesar.Enabled = False
-        Me.tsbProcesar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbProcesar.Name = "tsbProcesar"
-        Me.tsbProcesar.Size = New System.Drawing.Size(98, 51)
-        Me.tsbProcesar.Text = "Procesar archivo"
-        Me.tsbProcesar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsbProcesar.Visible = False
-        '
-        'pnlCatalogo
-        '
-        Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.pnlCatalogo.Controls.Add(Me.chkAll)
-        Me.pnlCatalogo.Controls.Add(Me.lsvLista)
-        Me.pnlCatalogo.Enabled = False
-        Me.pnlCatalogo.Location = New System.Drawing.Point(0, 56)
-        Me.pnlCatalogo.Name = "pnlCatalogo"
-        Me.pnlCatalogo.Size = New System.Drawing.Size(1056, 426)
-        Me.pnlCatalogo.TabIndex = 29
-        '
-        'chkAll
-        '
-        Me.chkAll.AutoSize = True
-        Me.chkAll.BackColor = System.Drawing.Color.Transparent
-        Me.chkAll.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkAll.Location = New System.Drawing.Point(3, 3)
-        Me.chkAll.Name = "chkAll"
-        Me.chkAll.Size = New System.Drawing.Size(107, 22)
-        Me.chkAll.TabIndex = 4
-        Me.chkAll.Text = "Marcar todos"
-        Me.chkAll.UseVisualStyleBackColor = False
-        '
-        'lsvLista
-        '
-        Me.lsvLista.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lsvLista.CheckBoxes = True
-        Me.lsvLista.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lsvLista.FullRowSelect = True
-        Me.lsvLista.GridLines = True
-        Me.lsvLista.HideSelection = False
-        Me.lsvLista.Location = New System.Drawing.Point(1, 31)
-        Me.lsvLista.MultiSelect = False
-        Me.lsvLista.Name = "lsvLista"
-        Me.lsvLista.Size = New System.Drawing.Size(1048, 388)
-        Me.lsvLista.TabIndex = 2
-        Me.lsvLista.UseCompatibleStateImageBehavior = False
-        Me.lsvLista.View = System.Windows.Forms.View.Details
         '
         'frmImportarEmpleadosAlta
         '
@@ -236,4 +247,5 @@ Partial Class frmImportarEmpleadosAlta
     Friend WithEvents pnlCatalogo As Panel
     Friend WithEvents chkAll As CheckBox
     Friend WithEvents lsvLista As ListView
+    Friend WithEvents tsbVerificar As System.Windows.Forms.ToolStripButton
 End Class
