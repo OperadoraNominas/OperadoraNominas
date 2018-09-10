@@ -33,6 +33,7 @@ Partial Class frmEmpleados
         Me.txtsalario = New System.Windows.Forms.TextBox()
         Me.cbojornada = New System.Windows.Forms.ComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cmdimss = New System.Windows.Forms.Button()
         Me.cmdPension = New System.Windows.Forms.Button()
         Me.cmdDocumentos = New System.Windows.Forms.Button()
         Me.cmdFamiliar = New System.Windows.Forms.Button()
@@ -150,7 +151,6 @@ Partial Class frmEmpleados
         Me.txtTelefono = New System.Windows.Forms.TextBox()
         Me.Label56 = New System.Windows.Forms.Label()
         Me.dtpFinContrato = New System.Windows.Forms.DateTimePicker()
-        Me.cmdimss = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.gpb1.SuspendLayout()
         Me.gpb2.SuspendLayout()
@@ -161,15 +161,9 @@ Partial Class frmEmpleados
         Me.Label48.AutoSize = True
         Me.Label48.Location = New System.Drawing.Point(8, 633)
         Me.Label48.Name = "Label48"
-
-        Me.Label48.Size = New System.Drawing.Size(42, 18)
-        Me.Label48.TabIndex = 195
-        Me.Label48.Text = "Barco"
-
         Me.Label48.Size = New System.Drawing.Size(48, 18)
         Me.Label48.TabIndex = 195
         Me.Label48.Text = "Buque"
-
         '
         'cbodepartamento
         '
@@ -254,6 +248,18 @@ Partial Class frmEmpleados
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(205, 689)
         Me.Panel1.TabIndex = 184
+        '
+        'cmdimss
+        '
+        Me.cmdimss.Image = CType(resources.GetObject("cmdimss.Image"), System.Drawing.Image)
+        Me.cmdimss.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmdimss.Location = New System.Drawing.Point(107, 306)
+        Me.cmdimss.Name = "cmdimss"
+        Me.cmdimss.Size = New System.Drawing.Size(87, 72)
+        Me.cmdimss.TabIndex = 47
+        Me.cmdimss.Text = "Imss"
+        Me.cmdimss.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdimss.UseVisualStyleBackColor = True
         '
         'cmdPension
         '
@@ -1283,18 +1289,6 @@ Partial Class frmEmpleados
         Me.dtpFinContrato.Name = "dtpFinContrato"
         Me.dtpFinContrato.Size = New System.Drawing.Size(154, 26)
         Me.dtpFinContrato.TabIndex = 216
-        '
-        'cmdimss
-        '
-        Me.cmdimss.Image = CType(resources.GetObject("cmdimss.Image"), System.Drawing.Image)
-        Me.cmdimss.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdimss.Location = New System.Drawing.Point(107, 306)
-        Me.cmdimss.Name = "cmdimss"
-        Me.cmdimss.Size = New System.Drawing.Size(87, 72)
-        Me.cmdimss.TabIndex = 47
-        Me.cmdimss.Text = "Imss"
-        Me.cmdimss.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.cmdimss.UseVisualStyleBackColor = True
         '
         'frmEmpleados
         '
