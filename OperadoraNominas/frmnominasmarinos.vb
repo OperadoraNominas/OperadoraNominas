@@ -1579,7 +1579,7 @@ Public Class frmnominasmarinos
                     'Retenciones_Operadora
                     sql &= "," & IIf(dtgDatos.Rows(x).Cells(51).Value = "", "0", dtgDatos.Rows(x).Cells(51).Value.ToString.Replace(",", ""))
                     '% Comision
-                    sql &= "," & IIf(dtgDatos.Rows(x).Cells(52).Value = "", "0", dtgDatos.Rows(x).Cells(52).Value.ToString.Replace(",", ""))
+                    sql &= ",0.02" '& IIf(dtgDatos.Rows(x).Cells(52).Value = "", "0", dtgDatos.Rows(x).Cells(52).Value.ToString.Replace(",", ""))
                     'Comision_Operadora
                     sql &= "," & IIf(dtgDatos.Rows(x).Cells(53).Value = "", "0", dtgDatos.Rows(x).Cells(53).Value.ToString.Replace(",", ""))
                     'Comision asimilados
@@ -1798,6 +1798,24 @@ Public Class frmnominasmarinos
         Dim fonacot As Double
         Dim subsidiogenerado As Double
         Dim subsidioaplicado As Double
+        Dim RetencionOperadora As Double
+
+        Dim PrestamoPersonalAsimilados As Double
+        Dim AdeudoINfonavitAsimilados As Double
+        Dim DiferenciaInfonavitAsimilados As Double
+
+        Dim Operadora As Double
+        Dim ComplementoAsimilados As Double
+
+        Dim SueldoBaseTMM As Double
+        Dim CostoSocialTotal As Double
+        Dim ComisionOperadora As Double
+        Dim ComisionAsimilados As Double
+        Dim subtotal As Double
+        Dim iva As Double
+
+
+
         Dim sql As String
         Dim ValorUMA As Double
         Dim primavacacionesgravada As Double
@@ -1997,17 +2015,11 @@ Public Class frmnominasmarinos
                     fonacot = Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", "0", dtgDatos.Rows(x).Cells(43).Value))
                     subsidiogenerado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(44).Value = "", "0", dtgDatos.Rows(x).Cells(44).Value))
                     subsidioaplicado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(45).Value = "", "0", dtgDatos.Rows(x).Cells(45).Value))
-                    dtgDatos.Rows(x).Cells(46).Value = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
+                    Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
+                    dtgDatos.Rows(x).Cells(46).Value = Operadora
 
 
-                    'Prestamo Personal Asimilado
-                    'Adeudo_Infonavit_Asimilado
-                    'Difencia infonavit Asimilado
-                    'Complemento Asimilado
-                    'Retenciones_Operadora
-                    '% Comision
-                    'Comision_Operadora
-                    'Comision asimilados
+                    
 
 
                 Else
@@ -2210,21 +2222,39 @@ Public Class frmnominasmarinos
                     fonacot = Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", "0", dtgDatos.Rows(x).Cells(43).Value))
                     subsidiogenerado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(44).Value = "", "0", dtgDatos.Rows(x).Cells(44).Value))
                     subsidioaplicado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(45).Value = "", "0", dtgDatos.Rows(x).Cells(45).Value))
-                    dtgDatos.Rows(x).Cells(46).Value = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
+                    Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
+                    dtgDatos.Rows(x).Cells(46).Value = Operadora
 
 
-                    'Prestamo Personal Asimilado
-                    'Adeudo_Infonavit_Asimilado
-                    'Difencia infonavit Asimilado
-                    'Complemento Asimilado
-                    'Retenciones_Operadora
-                    '% Comision
-                    'Comision_Operadora
-                    'Comision asimilados
-
-
+                    
 
                 End If
+
+                'Sueldo Base TMM
+                SueldoBaseTMM = (Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value))) / 2
+
+                'Prestamo Personal Asimilado
+                PrestamoPersonalAsimilados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(47).Value = "", "0", dtgDatos.Rows(x).Cells(47).Value))
+                'Adeudo_Infonavit_Asimilado
+                AdeudoINfonavitAsimilados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(48).Value = "", "0", dtgDatos.Rows(x).Cells(48).Value))
+                'Difencia infonavit Asimilado
+                DiferenciaInfonavitAsimilados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(49).Value = "", "0", dtgDatos.Rows(x).Cells(49).Value))
+                'Complemento Asimilado
+                ComplementoAsimilados = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot - PrestamoPersonalAsimilados - AdeudoINfonavitAsimilados - DiferenciaInfonavitAsimilados - Operadora, 2)
+                dtgDatos.Rows(x).Cells(50).Value = ComplementoAsimilados
+                'Retenciones_Operadora
+                RetencionOperadora = Math.Round(Incapacidad + isr + imss + infonavitvalor + infonavitanterior + ajusteinfonavit + pension + prestamo + fonacot)
+                dtgDatos.Rows(x).Cells(51).Value = RetencionOperadora
+
+                '%Comision
+                dtgDatos.Rows(x).Cells(52).Value = "2%"
+                'Comision Maecco
+                ComisionOperadora = Math.Round((Operadora + RetencionOperadora) * 0.02, 2)
+                dtgDatos.Rows(x).Cells(53).Value = ComisionOperadora
+
+                'Comision Complemento
+                ComisionAsimilados = Math.Round((ComplementoAsimilados + PrestamoPersonalAsimilados + AdeudoINfonavitAsimilados + DiferenciaInfonavitAsimilados) * 0.02, 2)
+                dtgDatos.Rows(x).Cells(54).Value = ComisionAsimilados
 
 
                 'Calcular el costo social
@@ -2275,9 +2305,20 @@ Public Class frmnominasmarinos
 
                 End If
 
-                'Subtotal
+                'TOTAL COSTO SOCIAL
+                CostoSocialTotal = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
+                dtgDatos.Rows(x).Cells(59).Value = CostoSocialTotal
+
+                'SUBTOTAL
+                subtotal = Math.Round(ComplementoAsimilados + PrestamoPersonalAsimilados + AdeudoINfonavitAsimilados + DiferenciaInfonavitAsimilados + Operadora + RetencionOperadora + ComisionOperadora + ComisionAsimilados + CostoSocialTotal, 2)
+                dtgDatos.Rows(x).Cells(60).Value = subtotal
+
                 'IVA
+                iva = Math.Round(subtotal * 0.16)
+                dtgDatos.Rows(x).Cells(61).Value = iva
                 'TOTAL DEPOSITO
+                dtgDatos.Rows(x).Cells(62).Value = subtotal + iva
+
 
 
 
@@ -3427,7 +3468,7 @@ Public Class frmnominasmarinos
                     'Retenciones_Operadora
                     sql &= "," & IIf(dtgDatos.Rows(x).Cells(51).Value = "", "0", dtgDatos.Rows(x).Cells(51).Value.ToString.Replace(",", ""))
                     '% Comision
-                    sql &= "," & IIf(dtgDatos.Rows(x).Cells(52).Value = "", "0", dtgDatos.Rows(x).Cells(52).Value.ToString.Replace(",", ""))
+                    sql &= ",0.02" '& IIf(dtgDatos.Rows(x).Cells(52).Value = "", "0", dtgDatos.Rows(x).Cells(52).Value.ToString.Replace(",", ""))
                     'Comision_Operadora
                     sql &= "," & IIf(dtgDatos.Rows(x).Cells(53).Value = "", "0", dtgDatos.Rows(x).Cells(53).Value.ToString.Replace(",", ""))
                     'Comision asimilados
