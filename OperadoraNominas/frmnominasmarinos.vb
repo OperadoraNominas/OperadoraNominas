@@ -3645,19 +3645,22 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 9).Value = dtgDatos.Rows(x).Cells(18).Value ' DIAS DESCANSO
                         hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L49/" & filaExcel + x 'ABORDO 
                         hoja.Cell(filaExcel + x, 11).FormulaA1 = "=L49/" & filaExcel + x  'DESCANSO
-                        hoja.Cell(filaExcel + x, 12).FormulaA1 = dtgDatos.Rows(x).Cells(15).Value  '"=J" & filaExcel + x & "+ K" & filaExcel + x ' SUELDO ORDINARIO
-                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO.'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x ' CREDITO INFONAVIT
-                        hoja.Cell(filaExcel + x, 14).FormulaA1 = "=L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x & "-P" & filaExcel + x ' sueldo ordinario real
-                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "='OPERADORA ABORDO.'!AM" & filatmp + x & "+'OPERADORA DESCANSO'!AM" & filatmp + x
-                        hoja.Cell(filaExcel + x, 16).FormulaA1 = "=Q" & filaExcel + x & "-R" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "='OPERADORA ABORDO.'!AG" & filatmp + x & "+'OPERADORA ABORDO.'!AI" & filatmp + x & "+'OPERADORA ABORDO.'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AG" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x
-                        hoja.Cell(filaExcel + x, 18).FormulaA1 = ""
-                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "=(R" & filaExcel + x & "+T" & filaExcel + x & ")*2%"
-                        hoja.Cell(filaExcel + x, 20).FormulaA1 = "=S" & filaExcel + x & "*2%"
-                        hoja.Cell(filaExcel + x, 21).FormulaA1 = "='OPERADORA ABORDO.'!AS" & filatmp + x
-                        hoja.Cell(filaExcel + x, 22).FormulaA1 = "=R" & filaExcel + x & "+S" & filaExcel + x & "+T" & filaExcel + x & "+V" & filaExcel + x & "+W" & filaExcel + x & "+X" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=Y" & filaExcel + x & "*16%"
-                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "=Y" & filaExcel + x & "+Z" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 12).FormulaA1 = dtgDatos.Rows(x).Cells(15).Value  ' SUELDO ORDINARIO
+                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x ' CREDITO INFONAVIT
+                        hoja.Cell(filaExcel + x, 14).Value = "0.0"
+                        hoja.Cell(filaExcel + x, 15).Value = "0.0"
+                        hoja.Cell(filaExcel + x, 16).FormulaA1 = "='OPERADORA ABORDO.'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x
+                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "=L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x & "-P" & filaExcel + x ' sueldo ordinario real
+                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "='OPERADORA ABORDO'!AM" & filatmp + x & "+'OPERADORA DESCANSO'!AM" & filatmp + x 'Operadora mx
+                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "=Q" & filaExcel + x & "-R" & filaExcel + x ' asimilados
+                        hoja.Cell(filaExcel + x, 20).FormulaA1 = "='OPERADORA ABORDO'!AG" & filatmp + x & "+'OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AG" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x ' retenciones
+                        hoja.Cell(filaExcel + x, 21).FormulaA1 = ""
+                        hoja.Cell(filaExcel + x, 22).FormulaA1 = "=(R" & filaExcel + x & "+T" & filaExcel + x & ")*2%"
+                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=S" & filaExcel + x & "*2%"
+                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "='OPERADORA ABORDO'!AS" & filatmp + x
+                        hoja.Cell(filaExcel + x, 25).FormulaA1 = "=R" & filaExcel + x & "+S" & filaExcel + x & "+T" & filaExcel + x & "+V" & filaExcel + x & "+W" & filaExcel + x & "+X" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=Y" & filaExcel + x & "*16%"
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=Y" & filaExcel + x & "+Z" & filaExcel + x
 
 
                         '    hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x
@@ -3695,9 +3698,10 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 24).FormulaA1 = "=SUM(X" & contadorexcelbuqueinicial & ":X" & contadorexcelbuquefinal & ")"
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = "=SUM(Y" & contadorexcelbuqueinicial & ":Y" & contadorexcelbuquefinal & ")"
                         hoja.Cell(filaExcel + x, 26).FormulaA1 = "=SUM(Z" & contadorexcelbuqueinicial & ":Z" & contadorexcelbuquefinal & ")"
+                        hoja.Cell(filaExcel + total, 26).FormulaA1 = "=SUM(AA" & contadorexcelbuqueinicial & ":AA" & contadorexcelbuquefinal & ")"
 
-                            hoja.Range(filaExcel + x, 12, filaExcel + x, 26).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                        hoja.Range(filaExcel + x, 12, filaExcel + x, 26).Style.Font.SetBold(True)
+                        hoja.Range(filaExcel + x, 12, filaExcel + x, 28).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                        hoja.Range(filaExcel + x, 12, filaExcel + x, 28).Style.Font.SetBold(True)
 
                        
                         J += " +" & "J" & filaExcel + x + 1
@@ -3736,23 +3740,24 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(10).Value
                             hoja.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(18).Value
                             hoja.Cell(filaExcel + x, 9).Value = dtgDatos.Rows(x).Cells(18).Value
-
                         hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L49/" & filaExcel + x 'ABORDO 
                         hoja.Cell(filaExcel + x, 11).FormulaA1 = "=L49/" & filaExcel + x  'DESCANSO
-
-                        hoja.Cell(filaExcel + x, 12).FormulaA1 = dtgDatos.Rows(x).Cells(15).Value  '"=J" & filaExcel + x & "+ K" & filaExcel + x ' SUELDO ORDINARIO
-                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO.'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x ' CREDITO INFONAVIT
-                        hoja.Cell(filaExcel + x, 14).FormulaA1 = "=L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x & "-P" & filaExcel + x ' sueldo ordinario real
-                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "='OPERADORA ABORDO.'!AM" & filatmp + x & "+'OPERADORA DESCANSO'!AM" & filatmp + x
-                        hoja.Cell(filaExcel + x, 16).FormulaA1 = "=Q" & filaExcel + x & "-R" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "='OPERADORA ABORDO.'!AG" & filatmp + x & "+'OPERADORA ABORDO.'!AI" & filatmp + x & "+'OPERADORA ABORDO.'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AG" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x
-                        hoja.Cell(filaExcel + x, 18).FormulaA1 = ""
-                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "=(R" & filaExcel + x & "+T" & filaExcel + x & ")*2%"
-                        hoja.Cell(filaExcel + x, 20).FormulaA1 = "=S" & filaExcel + x & "*2%"
-                        hoja.Cell(filaExcel + x, 21).FormulaA1 = "='OPERADORA ABORDO.'!AS" & filatmp + x
-                        hoja.Cell(filaExcel + x, 22).FormulaA1 = "=R" & filaExcel + x & "+S" & filaExcel + x & "+T" & filaExcel + x & "+V" & filaExcel + x & "+W" & filaExcel + x & "+X" & filaExcel + x
-                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=Y" & filaExcel + x & "*16%"
-                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "=Y" & filaExcel + x & "+Z" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 12).FormulaA1 = dtgDatos.Rows(x).Cells(15).Value  ' SUELDO ORDINARIO
+                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x ' CREDITO INFONAVIT
+                        hoja.Cell(filaExcel + x, 14).Value = "0.0"
+                        hoja.Cell(filaExcel + x, 15).Value = "0.0"
+                        hoja.Cell(filaExcel + x, 16).FormulaA1 = "='OPERADORA ABORDO.'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x
+                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "=L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x & "-P" & filaExcel + x ' sueldo ordinario real
+                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "='OPERADORA ABORDO'!AM" & filatmp + x & "+'OPERADORA DESCANSO'!AM" & filatmp + x 'Operadora mx
+                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "=Q" & filaExcel + x & "-R" & filaExcel + x ' asimilados
+                        hoja.Cell(filaExcel + x, 20).FormulaA1 = "='OPERADORA ABORDO'!AG" & filatmp + x & "+'OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AG" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x ' retenciones
+                        hoja.Cell(filaExcel + x, 21).FormulaA1 = ""
+                        hoja.Cell(filaExcel + x, 22).FormulaA1 = "=(R" & filaExcel + x & "+T" & filaExcel + x & ")*2%"
+                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=S" & filaExcel + x & "*2%"
+                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "='OPERADORA ABORDO'!AS" & filatmp + x
+                        hoja.Cell(filaExcel + x, 25).FormulaA1 = "=R" & filaExcel + x & "+S" & filaExcel + x & "+T" & filaExcel + x & "+V" & filaExcel + x & "+W" & filaExcel + x & "+X" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=Y" & filaExcel + x & "*16%"
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=Y" & filaExcel + x & "+Z" & filaExcel + x
 
                         'hoja.Cell(filaExcel + x, 12).FormulaA1 = "=J" & filaExcel + x & "+ K" & filaExcel + x
                         '    hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x
@@ -3774,7 +3779,8 @@ Public Class frmnominasmarinos
                         End If
                     Next x
                     filaExcel = filaExcel + 2
-                    contadorexcelbuquefinal = filaExcel + total - 1
+                contadorexcelbuquefinal = filaExcel + total - 1
+
                 hoja.Cell(filaExcel + total, 12).FormulaA1 = "=SUM(L" & contadorexcelbuqueinicial & ":L" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total, 13).FormulaA1 = "=SUM(M" & contadorexcelbuqueinicial & ":M" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total, 14).FormulaA1 = "=SUM(N" & contadorexcelbuqueinicial & ":N" & contadorexcelbuquefinal & ")"
@@ -3789,9 +3795,10 @@ Public Class frmnominasmarinos
                 hoja.Cell(filaExcel + total, 24).FormulaA1 = "=SUM(X" & contadorexcelbuqueinicial & ":X" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total, 25).FormulaA1 = "=SUM(Y" & contadorexcelbuqueinicial & ":Y" & contadorexcelbuquefinal & ")"
                 hoja.Cell(filaExcel + total, 26).FormulaA1 = "=SUM(Z" & contadorexcelbuqueinicial & ":Z" & contadorexcelbuquefinal & ")"
+                hoja.Cell(filaExcel + total, 26).FormulaA1 = "=SUM(AA" & contadorexcelbuqueinicial & ":AA" & contadorexcelbuquefinal & ")"
 
-                    hoja.Range(filaExcel + total, 12, filaExcel + total, 26).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                    hoja.Range(filaExcel + total, 12, filaExcel + total, 26).Style.Font.SetBold(True)
+                hoja.Range(filaExcel + total, 12, filaExcel + total, 28).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                hoja.Range(filaExcel + total, 12, filaExcel + total, 28).Style.Font.SetBold(True)
 
                 H += " +" & "H" & filaExcel + total + 1
                 I += " +" & "I" & filaExcel + total + 1
@@ -3907,7 +3914,14 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 38).Value = dtgDatos.Rows(x).Cells(42).Value ' PRESTAMO
                     hoja2.Cell(filaExcel, 39).Value = dtgDatos.Rows(x).Cells(46).Value ' NETO A PAGAR
 
-                        filaExcel = filaExcel + 1
+                    hoja2.Cell(filaExcel, 40).Value = dtgDatos.Rows(x).Cells(55).Value
+                    hoja2.Cell(filaExcel, 41).Value = dtgDatos.Rows(x).Cells(56).Value
+                    hoja2.Cell(filaExcel, 42).Value = dtgDatos.Rows(x).Cells(57).Value
+                    hoja2.Cell(filaExcel, 43).Value = dtgDatos.Rows(x).Cells(58).Value
+                    hoja2.Cell(filaExcel, 44).FormulaA1 = "=SUMA(AN" & filaExcel & ":AQ" & filaExcel & ")"
+                    hoja2.Cell(filaExcel, 45).Value = dtgDatos.Rows(x).Cells(59).Value
+
+                    filaExcel = filaExcel + 1
 
 
                     Next x
@@ -3942,7 +3956,7 @@ Public Class frmnominasmarinos
 
              
 
-                limpiarCell(hoja2, 39) ', 1, dtgDatos.Rows.Count - 1)
+                limpiarCell(hoja2, 45) ', 1, dtgDatos.Rows.Count - 1)
                     '<<<<<<<<<<<<<<<Operadora Descanso>>>>>>>>>>>>>>>>>>
 
               
@@ -4025,6 +4039,12 @@ Public Class frmnominasmarinos
                         hoja2.Cell(filaExcel, 38).Value = dtgDatos.Rows(x).Cells(42).Value ' PRESTAMO
                         hoja2.Cell(filaExcel, 39).Value = dtgDatos.Rows(x).Cells(46).Value ' NETO A PAGAR
 
+                        hoja2.Cell(filaExcel, 40).Value = dtgDatos.Rows(x).Cells(55).Value
+                        hoja2.Cell(filaExcel, 41).Value = dtgDatos.Rows(x).Cells(56).Value
+                        hoja2.Cell(filaExcel, 42).Value = dtgDatos.Rows(x).Cells(57).Value
+                        hoja2.Cell(filaExcel, 43).Value = dtgDatos.Rows(x).Cells(58).Value
+                        hoja2.Cell(filaExcel, 44).FormulaA1 = "=SUMA(AN" & filaExcel & ":AQ" & filaExcel & ")"
+                        hoja2.Cell(filaExcel, 45).Value = dtgDatos.Rows(x).Cells(59).Value
                     End If
 
                   
