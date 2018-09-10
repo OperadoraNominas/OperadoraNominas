@@ -3612,7 +3612,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel + x, 19).Value = " "
                             hoja.Cell(filaExcel + x, 20).FormulaA1 = "(P" & filaExcel + x & "+R" & filaExcel + x & ")*2%"
                             hoja.Cell(filaExcel + x, 21).FormulaA1 = "=Q" & filaExcel + x & "*2%"
-                            Dim csocial As Double = CDbl(dtgDatos.Rows(x).Cells(49).Value) + CDbl(dtgDatos.Rows(x).Cells(50).Value) + CDbl(dtgDatos.Rows(x).Cells(51).Value) + CDbl(dtgDatos.Rows(x).Cells(52).Value)
+                        '  Dim csocial As Double = CDbl(dtgDatos.Rows(x).Cells(49).Value) + CDbl(dtgDatos.Rows(x).Cells(50).Value) + CDbl(dtgDatos.Rows(x).Cells(51).Value) + CDbl(dtgDatos.Rows(x).Cells(52).Value)
                         hoja.Cell(filaExcel + x, 22).Value = dtgDatos.Rows(x).Cells(59).Value 'COSTO SOCIAL
                             hoja.Cell(filaExcel + x, 24).FormulaA1 = "=P" & filaExcel + x & "+Q" & filaExcel + x & "+R" & filaExcel + x & "+T" & filaExcel + x & "+U" & filaExcel + x & "+V" & filaExcel + x
                             hoja.Cell(filaExcel + x, 25).FormulaA1 = "=X" & filaExcel + x & "*16%"
@@ -3667,8 +3667,8 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel + x, 19).Value = " "
                             hoja.Cell(filaExcel + x, 20).FormulaA1 = "(P" & filaExcel + x & "+R" & filaExcel + x & ")*2%"
                             hoja.Cell(filaExcel + x, 21).FormulaA1 = "=Q" & filaExcel + x & "*2%"
-                            Dim csocial As Double = CDbl(dtgDatos.Rows(x).Cells(49).Value) + CDbl(dtgDatos.Rows(x).Cells(50).Value) + CDbl(dtgDatos.Rows(x).Cells(51).Value) + CDbl(dtgDatos.Rows(x).Cells(52).Value)
-                            hoja.Cell(filaExcel + x, 22).Value = csocial 'COSTO SOCIAL
+                        ' Dim csocial As Double = CDbl(dtgDatos.Rows(x).Cells(49).Value) + CDbl(dtgDatos.Rows(x).Cells(50).Value) + CDbl(dtgDatos.Rows(x).Cells(51).Value) + CDbl(dtgDatos.Rows(x).Cells(52).Value)
+                        hoja.Cell(filaExcel + x, 22).Value = dtgDatos.Rows(x).Cells(59).Value 'COSTO SOCIAL
                             hoja.Cell(filaExcel + x, 23).Value = ""
                             hoja.Cell(filaExcel + x, 24).FormulaA1 = "=P" & filaExcel + x & "+Q" & filaExcel + x & "+R" & filaExcel + x & "+T" & filaExcel + x & "+U" & filaExcel + x & "+V" & filaExcel + x
                             hoja.Cell(filaExcel + x, 25).FormulaA1 = "=X" & filaExcel + x & "*16%"
@@ -5192,15 +5192,11 @@ Public Class frmnominasmarinos
 
     End Sub
 
-<<<<<<< HEAD
+
     Private Sub cboTipoNomina_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboTipoNomina.SelectedIndexChanged
         dtgDatos.Columns.Clear()
         dtgDatos.DataSource = ""
-=======
-    Private Sub cboTipoNomina_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboTipoNomina.SelectedIndexChanged
-        'dtgDatos.Columns.Clear()
-        'dtgDatos.DataSource = ""
->>>>>>> origin/master
+
     End Sub
 
     Private Sub AgregarTrabajadoresToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AgregarTrabajadoresToolStripMenuItem.Click
