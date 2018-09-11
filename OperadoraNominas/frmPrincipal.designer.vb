@@ -26,6 +26,7 @@ Partial Class frmPrincipal
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPrincipal))
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Nomina Operadora"}, 11, System.Drawing.Color.Black, System.Drawing.Color.Empty, Nothing)
         Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Importar Excel"}, 19, System.Drawing.Color.Black, System.Drawing.Color.Empty, Nothing)
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Empleados"}, 9, System.Drawing.Color.Black, System.Drawing.Color.Empty, Nothing)
         Me.pnlBar = New System.Windows.Forms.Panel()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.chkCBB = New System.Windows.Forms.CheckBox()
@@ -137,7 +138,8 @@ Partial Class frmPrincipal
         Me.lsvPanel.HoverSelection = True
         ListViewItem1.ToolTipText = "Calculo de Operadora"
         ListViewItem2.ToolTipText = "Exportar Excel  Nominas"
-        Me.lsvPanel.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2})
+        ListViewItem3.ToolTipText = "Empleados"
+        Me.lsvPanel.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3})
         Me.lsvPanel.LargeImageList = Me.ImageList1
         Me.lsvPanel.Location = New System.Drawing.Point(0, 0)
         Me.lsvPanel.Name = "lsvPanel"

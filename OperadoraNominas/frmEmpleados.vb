@@ -1,5 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
-
+Imports ClosedXML.Excel
 
 Public Class frmEmpleados
     Dim SQL As String
@@ -899,5 +899,85 @@ Public Class frmEmpleados
             MessageBox.Show("Seleccione un empleado primeramente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
+    End Sub
+
+    Private Sub cmdlista_Click(sender As System.Object, e As System.EventArgs) Handles cmdlista.Click
+        Dim filaExcel As Integer = 5
+        Dim dialogo As New SaveFileDialog()
+        Dim idtipo As Integer
+
+        SQL = "select cCodigoEmpleado,cNombreLargo,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe "
+        SQL &= " from EmpleadosC inner join bancos on EmpleadosC.fkiIdBanco=bancos.iIdBanco"
+        SQL &= " order by cNombreLargo"
+        Dim rwFilas As DataRow() = nConsulta(SQL)
+        If rwFilas Is Nothing = False Then
+            Dim libro As New ClosedXML.Excel.XLWorkbook
+            Dim hoja As IXLWorksheet = libro.Worksheets.Add("Control")
+            hoja.Column("A").Width = 15
+            hoja.Column("B").Width = 50
+            hoja.Column("C").Width = 25
+            hoja.Column("D").Width = 25
+            hoja.Column("E").Width = 25
+            hoja.Column("F").Width = 30
+            hoja.Column("G").Width = 25
+            hoja.Column("H").Width = 30
+            
+
+            hoja.Cell(2, 2).Value = "Fecha: " & Date.Now.ToShortDateString()
+
+            hoja.Cell(3, 2).Value = "LISTA DE EMPLEADOS"
+            'hoja.Cell(3, 2).Value = ":"
+            'hoja.Cell(3, 3).Value = ""
+
+            hoja.Range(4, 1, 4, 8).Style.Font.FontSize = 10
+            hoja.Range(4, 1, 4, 8).Style.Font.SetBold(True)
+            hoja.Range(4, 1, 4, 8).Style.Alignment.WrapText = True
+            hoja.Range(4, 1, 4, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+            hoja.Range(4, 1, 4, 8).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+            'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
+            hoja.Range(4, 1, 4, 8).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+            hoja.Range(4, 1, 4, 8).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+
+            'hoja.Cell(4, 1).Value = "Num"
+            hoja.Cell(4, 1).Value = "Id"
+            hoja.Cell(4, 2).Value = "Nombre"
+            hoja.Cell(4, 3).Value = "RFC"
+            hoja.Cell(4, 4).Value = "CURP"
+            hoja.Cell(4, 5).Value = "IMSS"
+            hoja.Cell(4, 6).Value = "BANCO"
+            hoja.Cell(4, 7).Value = "CUENTA"
+            hoja.Cell(4, 8).Value = "CLABE"
+
+
+
+            filaExcel = 4
+            For Each Fila In rwFilas
+                filaExcel = filaExcel + 1
+                hoja.Cell(filaExcel, 1).Value = "'" & Fila.Item("cCodigoEmpleado").ToString
+                hoja.Cell(filaExcel, 2).Value = Fila.Item("cNombreLargo")
+                hoja.Cell(filaExcel, 3).Value = Fila.Item("cRFC")
+                hoja.Cell(filaExcel, 4).Value = Fila.Item("cCURP")
+                hoja.Cell(filaExcel, 5).Value = Fila.Item("cIMSS")
+                hoja.Cell(filaExcel, 6).Value = Fila.Item("cBanco")
+                hoja.Cell(filaExcel, 7).Value = "'" & Fila.Item("NumCuenta")
+                hoja.Cell(filaExcel, 8).Value = "'" & Fila.Item("Clabe")
+
+
+
+            Next
+
+            dialogo.DefaultExt = "*.xlsx"
+            dialogo.FileName = "Lista de Empleados"
+            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            dialogo.ShowDialog()
+            libro.SaveAs(dialogo.FileName)
+            'libro.SaveAs("c:\temp\control.xlsx")
+            'libro.SaveAs(dialogo.FileName)
+            'apExcel.Quit()
+            libro = Nothing
+            MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End If
     End Sub
 End Class
