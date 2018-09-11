@@ -48,6 +48,9 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logooperadora.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML, Version=0.93.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -171,6 +174,10 @@
     <Compile Include="General\frmUsuarios.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="imss\frmImss.Designer.vb">
+      <DependentUpon>frmImss.vb</DependentUpon>
+    </Compile>
+    <Compile Include="imss\frmImss.vb" />
     <Compile Include="Modulos\GenPass.vb" />
     <Compile Include="Modulos\mdoFunciones.vb" />
     <Compile Include="Modulos\mdoInicio.vb" />
@@ -244,6 +251,9 @@
     <EmbeddedResource Include="General\frmUsuarios.resx">
       <DependentUpon>frmUsuarios.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="imss\frmImss.resx">
+      <DependentUpon>frmImss.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -263,6 +273,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="logooperadora.ico" />
     <Content Include="Resources\1361008137_export_excel.png" />
     <Content Include="Resources\bloggif_5a90660e3aaa9.png" />
     <Content Include="Resources\bloggif_5aa1be4bd8d66.png" />
@@ -273,6 +284,7 @@
     <Content Include="Resources\escala-de-la-justicia.png" />
     <Content Include="Resources\familia %282%29.png" />
     <Content Include="Resources\familia.png" />
+    <None Include="Resources\material-escolar.png" />
     <Content Include="Resources\pasaporte.png" />
     <Content Include="Resources\sobresalir %281%29.png" />
   </ItemGroup>
