@@ -31,6 +31,10 @@ OperadoraNominas
 	<summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
+</member><member name="P:OperadoraNominas.My.Resources.Resources.material_escolar">
+	<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
 </member><member name="P:OperadoraNominas.My.Resources.Resources.sobresalir__1_">
 	<summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
