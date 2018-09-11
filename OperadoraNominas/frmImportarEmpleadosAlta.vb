@@ -425,14 +425,14 @@ Public Class frmImportarEmpleadosAlta
                             clabe = Trim(empleadofull.SubItems(25).Text)
 
                         ElseIf Len(Trim(empleadofull.SubItems(25).Text) < 12) Then
-                            clabe = 0
+                            'clabe = 0
                             cuenta = Trim(empleadofull.SubItems(25).Text)
                         Else
                             clabe = 0
                             cuenta = 0
 
                         End If
-                        If Trim(empleadofull.SubItems(30).Text) = 18 Then 'clabe
+                        If Len(Trim(empleadofull.SubItems(30).Text)) = 18 Then 'clabe
                             clabe = Trim(empleadofull.SubItems(30).Text)
                         End If
 
@@ -473,7 +473,7 @@ Public Class frmImportarEmpleadosAlta
                         If rwFilas2 Is Nothing = False Then
                             Dim Fila As DataRow = rwFilas2(0)
                             SQL = "EXEC setSueldoAltaInsertar  0," & IIf(salario = "", 0, salario) & ",'" & dFechaPatrona ' Format(dtppatrona.Value.Date, "yyyy/dd/MM")
-                            SQL += "',0,''," & IIf(sd = "", 0, sd) & "," & IIf(sdi = "", 0, sdi) & "," & Fila.Item("id")
+                            SQL += "',0,''," & IIf(sd = "", 0, sd) & "," & IIf(sdi = "", 0, sdi) & "," & Fila.Item("id") '"1" 
                             SQL += ",'01/01/1900',''"
 
                         End If
