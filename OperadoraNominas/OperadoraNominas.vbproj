@@ -48,6 +48,9 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logooperadora.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML, Version=0.93.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -272,6 +275,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="logooperadora.ico" />
     <Content Include="Resources\1361008137_export_excel.png" />
     <Content Include="Resources\bloggif_5a90660e3aaa9.png" />
     <Content Include="Resources\bloggif_5aa1be4bd8d66.png" />
