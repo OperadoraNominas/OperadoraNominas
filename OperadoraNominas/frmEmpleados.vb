@@ -938,4 +938,6 @@ Public Class frmEmpleados
             MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
+
 End Class
