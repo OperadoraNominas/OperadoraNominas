@@ -949,4 +949,6 @@ Public Class frmEmpleados
             MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
     End Sub
+
+
 End Class
