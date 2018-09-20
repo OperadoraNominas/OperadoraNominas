@@ -864,16 +864,29 @@ Public Class frmEmpleados
 
     End Sub
 
-<<<<<<< HEAD
+
     Private Sub cmdimss_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdimss.Click
         Dim forma As New frmImss
-        If gIdEmpleado <> "" Then
-=======
-    Private Sub cmdlista_Click(sender As System.Object, e As System.EventArgs) Handles cmdlista.Click
+        If gIdEmpleado Is Nothing = False Then
+
+
+            forma.gIdEmpleado = gIdEmpleado
+            forma.gIdCliente = gIdCliente
+            forma.gIdEmpresa = 1
+            forma.ShowDialog()
+        Else
+            MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+
+
+
+
+    Private Sub cmdlista_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdlista.Click
         Dim filaExcel As Integer = 5
         Dim dialogo As New SaveFileDialog()
         Dim idtipo As Integer
->>>>>>> origin/master
 
         SQL = "select cCodigoEmpleado,cNombreLargo,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe "
         SQL &= " from EmpleadosC inner join bancos on EmpleadosC.fkiIdBanco=bancos.iIdBanco"
@@ -890,7 +903,7 @@ Public Class frmEmpleados
             hoja.Column("F").Width = 30
             hoja.Column("G").Width = 25
             hoja.Column("H").Width = 30
-            
+
 
             hoja.Cell(2, 2).Value = "Fecha: " & Date.Now.ToShortDateString()
 
