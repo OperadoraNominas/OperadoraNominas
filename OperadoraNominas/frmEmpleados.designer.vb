@@ -33,6 +33,7 @@ Partial Class frmEmpleados
         Me.txtsalario = New System.Windows.Forms.TextBox()
         Me.cbojornada = New System.Windows.Forms.ComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cmdlista = New System.Windows.Forms.Button()
         Me.cmdimss = New System.Windows.Forms.Button()
         Me.cmdPension = New System.Windows.Forms.Button()
         Me.cmdDocumentos = New System.Windows.Forms.Button()
@@ -151,7 +152,6 @@ Partial Class frmEmpleados
         Me.txtTelefono = New System.Windows.Forms.TextBox()
         Me.Label56 = New System.Windows.Forms.Label()
         Me.dtpFinContrato = New System.Windows.Forms.DateTimePicker()
-        Me.cmdlista = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.gpb1.SuspendLayout()
         Me.gpb2.SuspendLayout()
@@ -250,6 +250,19 @@ Partial Class frmEmpleados
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(205, 689)
         Me.Panel1.TabIndex = 184
+        '
+        'cmdlista
+        '
+        Me.cmdlista.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.cmdlista.Image = CType(resources.GetObject("cmdlista.Image"), System.Drawing.Image)
+        Me.cmdlista.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmdlista.Location = New System.Drawing.Point(107, 460)
+        Me.cmdlista.Name = "cmdlista"
+        Me.cmdlista.Size = New System.Drawing.Size(95, 72)
+        Me.cmdlista.TabIndex = 48
+        Me.cmdlista.Text = "Empleados"
+        Me.cmdlista.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdlista.UseVisualStyleBackColor = True
         '
         'cmdimss
         '
@@ -1291,19 +1304,6 @@ Partial Class frmEmpleados
         Me.dtpFinContrato.Name = "dtpFinContrato"
         Me.dtpFinContrato.Size = New System.Drawing.Size(154, 26)
         Me.dtpFinContrato.TabIndex = 216
-        '
-        'cmdlista
-        '
-        Me.cmdlista.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.cmdlista.Image = CType(resources.GetObject("cmdlista.Image"), System.Drawing.Image)
-        Me.cmdlista.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdlista.Location = New System.Drawing.Point(107, 460)
-        Me.cmdlista.Name = "cmdlista"
-        Me.cmdlista.Size = New System.Drawing.Size(95, 72)
-        Me.cmdlista.TabIndex = 48
-        Me.cmdlista.Text = "Clientes"
-        Me.cmdlista.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.cmdlista.UseVisualStyleBackColor = True
         '
         'frmEmpleados
         '
