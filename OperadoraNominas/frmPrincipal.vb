@@ -109,6 +109,15 @@ Public Class frmPrincipal
 
                     Catch ex As Exception
                     End Try
+                Case "Empleados"
+                    Try
+                        Dim Forma As New frmEmpleados
+                        Forma.gIdTipoPuesto = 0
+                        Forma.ShowDialog()
+
+                    Catch ex As Exception
+                    End Try
+
             End Select
 
         Catch ex As Exception
@@ -161,5 +170,8 @@ Public Class frmPrincipal
 
   
    
+    Private Sub lsvPanel_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lsvPanel.SelectedIndexChanged
+
+    End Sub
 End Class
 

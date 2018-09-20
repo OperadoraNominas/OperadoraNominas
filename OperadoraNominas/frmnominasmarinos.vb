@@ -1774,6 +1774,18 @@ Public Class frmnominasmarinos
     End Sub
     Private Sub cmdcalcular_Click(sender As Object, e As EventArgs) Handles cmdcalcular.Click
         Try
+            'Dim sql As String
+            'Sql = "delete from DetalleDescInfonavit"
+            'Sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+            'Sql &= " and iSerie=" & cboserie.SelectedIndex
+            ''sql &= " and iSerie=" & cboserie.SelectedIndex
+            'sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+
+            'If nExecute(Sql) = False Then
+            '    MessageBox.Show("Ocurrio un error ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            '    'pnlProgreso.Visible = False
+            '    Exit Sub
+            'End If
             calcular()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -2697,7 +2709,7 @@ Public Class frmnominasmarinos
 
                         If tipo = "PORCENTAJE" And valor > 0 Then
 
-                            valorinfonavit = ((sdi * (valor / 100) * numdias) + 15) / numdias
+                            valorinfonavit = ((sdi * (valor / 100) * numdias) + 15)
                         End If
 
 
@@ -5819,8 +5831,8 @@ Public Class frmnominasmarinos
 
 
     Private Sub cboTipoNomina_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboTipoNomina.SelectedIndexChanged
-        dtgDatos.Columns.Clear()
-        dtgDatos.DataSource = ""
+        'dtgDatos.Columns.Clear()
+        'dtgDatos.DataSource = ""
 
     End Sub
 

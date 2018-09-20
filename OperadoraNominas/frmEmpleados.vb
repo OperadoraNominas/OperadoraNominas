@@ -1,5 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
-
+Imports ClosedXML.Excel
 
 Public Class frmEmpleados
     Dim SQL As String
@@ -59,63 +59,6 @@ Public Class frmEmpleados
 
 
             '---
-            If blnNuevo Then
-                SQL = "select * from empleadosC where cCodigoEmpleado=" & txtcodigo.Text
-                Dim rwCodigo As DataRow() = nConsulta(SQL)
-
-                If rwCodigo Is Nothing = False Then
-                    MessageBox.Show("El codigo de empleado ya existe por favor verifique", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Exit Sub
-
-                End If
-            End If
-            'Agregar datos de sueldos para historial
-
-
-            If blnNuevo Then
-
-
-                SQL = "select max(iIdEmpleadoC) as id from empleadosC"
-                Dim rwFilas As DataRow() = nConsulta(SQL)
-
-                If rwFilas Is Nothing = False Then
-                    Dim Fila As DataRow = rwFilas(0)
-                    SQL = "EXEC setSueldoAltaInsertar  0," & IIf(txtsalario.Text = "", 0, txtsalario.Text) & ",'" & Format(dtppatrona.Value.Date, "yyyy/dd/MM")
-                    SQL += "',0,''," & IIf(txtsd.Text = "", 0, txtsd.Text) & "," & IIf(txtsdi.Text = "", 0, txtsdi.Text) & "," & Fila.Item("id")
-                    SQL += ",'01/01/1900',''"
-
-                End If
-
-                '***************************
-                'Se le agrego
-            Else
-
-                'verificamos el cambio de algun dato
-                SQL = "select * from empleadosC where iIdEmpleadoC = " & gIdEmpleado
-                Dim rwFilas As DataRow() = nConsulta(SQL)
-
-                If rwFilas Is Nothing = False Then
-
-                    Dim Fila As DataRow = rwFilas(0)
-                    If Fila.Item("fSueldoOrd") <> IIf(txtsalario.Text = "", 0, txtsalario.Text) Or Fila.Item("fSueldoBase") <> IIf(txtsd.Text = "", 0, txtsd.Text) Or Fila.Item("fSueldoIntegrado") <> IIf(txtsdi.Text = "", 0, txtsdi.Text) Then
-
-                        SQL = "EXEC setSueldoAltaInsertar  0," & IIf(txtsalario.Text = "", 0, txtsalario.Text) & ",'" & Date.Today.ToShortDateString()
-                        SQL += "',0,''," & IIf(txtsd.Text = "", 0, txtsd.Text) & "," & IIf(txtsdi.Text = "", 0, txtsdi.Text) & "," & gIdEmpleado
-                        SQL += ",'01/01/1900',''"
-
-
-                        ' Enviar_Mail(GenerarCorreo1(gIdEmpresa, gIdCliente, txtcodigo.Text), correo, "Cambio en sueldo")
-                    End If
-
-
-                End If
-            End If
-
-            If SQL <> "" Then
-                If nExecute(SQL) = False Then
-                    Exit Sub
-                End If
-            End If
 
 
 
@@ -180,53 +123,49 @@ Public Class frmEmpleados
                 Exit Sub
             End If
 
-            '*********************
             'Agregar alta/baja
-            If blnNuevo Then
-                'Obtener id
-                SQL = "select max(iIdEmpleadoC) as id from empleadosC"
-                Dim rwFilas As DataRow() = nConsulta(SQL)
+            'If blnNuevo Then
+            '    'Obtener id
+            '    SQL = "select max(iIdEmpleado) as id from empleados"
+            '    Dim rwFilas As DataRow() = nConsulta(SQL)
 
-                If rwFilas Is Nothing = False Then
-                    Dim Fila As DataRow = rwFilas(0)
-                    SQL = "EXEC setIngresoBajaAltaInsertar  0," & Fila.Item("id") & ",'" & IIf(cbostatus.SelectedIndex = 0, "A", "B") & "','" & Format(dtppatrona.Value.Date, "yyyy/dd/MM") & "','01/01/1900','',''"
-                    'Enviar correo
-
-                    'Enviar_Mail(GenerarCorreo1(gIdEmpresa, gIdCliente, txtcodigo.Text), correo, "Alta de empleado")
-                    'Enviar_Mail(GenerarCorreo(gIdEmpresa, cboclientefiscal.SelectedValue, Fila.Item("id")), "p.isidro@mbcgroup.mx;l.aquino@mbcgroup.mx;r.garcia@mbcgroup.mx", "Alta de empleado")
-                End If
+            '    If rwFilas Is Nothing = False Then
+            '        Dim Fila As DataRow = rwFilas(0)
+            '        SQL = "EXEC setIngresoBajaInsertar  0," & Fila.Item("id") & ",'" & IIf(cbostatus.SelectedIndex = 0, "A", "B") & "','" & Format(dtppatrona.Value.Date, "yyyy/dd/MM") & "','01/01/1900','',''"
+            '        'Enviar correo
+            '        Enviar_Mail(GenerarCorreo(gIdEmpresa, cboclientefiscal.SelectedValue, Fila.Item("id")), "p.isidro@mbcgroup.mx;l.aquino@mbcgroup.mx;r.garcia@mbcgroup.mx", "Alta de empleado")
+            '    End If
 
 
-            Else
-                SQL = "select * from IngresoBajaAlta"
-                SQL &= " where iIdIngresoBaja= (select max(iIdIngresoBaja) "
-                SQL &= " as maximo from IngresoBajaAlta where fkiIdEmpleado =" & gIdEmpleado & ")"
+            'Else
+            '    SQL = "select * from IngresoBaja"
+            '    SQL &= " where iIdIngresoBaja= (select max(iIdIngresoBaja) "
+            '    SQL &= " as maximo from IngresoBaja where fkiIdEmpleado =" & gIdEmpleado & ")"
 
 
-                Dim rwFilas As DataRow() = nConsulta(SQL)
+            '    Dim rwFilas As DataRow() = nConsulta(SQL)
 
-                If rwFilas Is Nothing = False Then
-                    SQL = ""
-                    Dim Fila As DataRow = rwFilas(0)
-                    If Fila.Item("Clave") <> IIf(cbostatus.SelectedIndex = 0, "A", "B") Then
+            '    If rwFilas Is Nothing = False Then
+            '        SQL = ""
+            '        Dim Fila As DataRow = rwFilas(0)
+            '        If Fila.Item("Clave") <> IIf(cbostatus.SelectedIndex = 0, "A", "B") Then
 
-                        SQL = "EXEC setIngresoBajaAltaInsertar  0," & gIdEmpleado & ",'" & IIf(cbostatus.SelectedIndex = 0, "A", "B") & "','" & Date.Today.ToShortDateString & "','01/01/1900','',''"
+            '            SQL = "EXEC setIngresoBajaInsertar  0," & gIdEmpleado & ",'" & IIf(cbostatus.SelectedIndex = 0, "A", "B") & "','" & Date.Today.ToShortDateString & "','01/01/1900','',''"
+            '            Enviar_Mail(GenerarCorreo(gIdEmpresa, cboclientefiscal.SelectedValue, gIdEmpleado), "p.isidro@mbcgroup.mx;l.aquino@mbcgroup.mx;r.garcia@mbcgroup.mx", "Modificacion Baja/reingreso")
 
-                        'Enviar_Mail(GenerarCorreo(gIdEmpresa, cboclientefiscal.SelectedValue, gIdEmpleado), "p.isidro@mbcgroup.mx;l.aquino@mbcgroup.mx;r.garcia@mbcgroup.mx", "Modificacion Baja/reingreso")
-                        'Enviar_Mail(GenerarCorreo1(gIdEmpresa, gIdCliente, txtcodigo.Text), correo, "Modificacion Baja/reingreso")
-                    End If
-
-
-                End If
+            '        End If
 
 
-            End If
+            '    End If
 
-            If SQL <> "" Then
-                If nExecute(SQL) = False Then
-                    Exit Sub
-                End If
-            End If
+
+            'End If
+
+            'If SQL <> "" Then
+            '    If nExecute(SQL) = False Then
+            '        Exit Sub
+            '    End If
+            'End If
 
 
 
@@ -925,17 +864,89 @@ Public Class frmEmpleados
 
     End Sub
 
+<<<<<<< HEAD
     Private Sub cmdimss_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdimss.Click
         Dim forma As New frmImss
         If gIdEmpleado <> "" Then
+=======
+    Private Sub cmdlista_Click(sender As System.Object, e As System.EventArgs) Handles cmdlista.Click
+        Dim filaExcel As Integer = 5
+        Dim dialogo As New SaveFileDialog()
+        Dim idtipo As Integer
+>>>>>>> origin/master
+
+        SQL = "select cCodigoEmpleado,cNombreLargo,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe "
+        SQL &= " from EmpleadosC inner join bancos on EmpleadosC.fkiIdBanco=bancos.iIdBanco"
+        SQL &= " order by cNombreLargo"
+        Dim rwFilas As DataRow() = nConsulta(SQL)
+        If rwFilas Is Nothing = False Then
+            Dim libro As New ClosedXML.Excel.XLWorkbook
+            Dim hoja As IXLWorksheet = libro.Worksheets.Add("Control")
+            hoja.Column("A").Width = 15
+            hoja.Column("B").Width = 50
+            hoja.Column("C").Width = 25
+            hoja.Column("D").Width = 25
+            hoja.Column("E").Width = 25
+            hoja.Column("F").Width = 30
+            hoja.Column("G").Width = 25
+            hoja.Column("H").Width = 30
+            
+
+            hoja.Cell(2, 2).Value = "Fecha: " & Date.Now.ToShortDateString()
+
+            hoja.Cell(3, 2).Value = "LISTA DE EMPLEADOS"
+            'hoja.Cell(3, 2).Value = ":"
+            'hoja.Cell(3, 3).Value = ""
+
+            hoja.Range(4, 1, 4, 8).Style.Font.FontSize = 10
+            hoja.Range(4, 1, 4, 8).Style.Font.SetBold(True)
+            hoja.Range(4, 1, 4, 8).Style.Alignment.WrapText = True
+            hoja.Range(4, 1, 4, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+            hoja.Range(4, 1, 4, 8).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+            'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
+            hoja.Range(4, 1, 4, 8).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+            hoja.Range(4, 1, 4, 8).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+
+            'hoja.Cell(4, 1).Value = "Num"
+            hoja.Cell(4, 1).Value = "Id"
+            hoja.Cell(4, 2).Value = "Nombre"
+            hoja.Cell(4, 3).Value = "RFC"
+            hoja.Cell(4, 4).Value = "CURP"
+            hoja.Cell(4, 5).Value = "IMSS"
+            hoja.Cell(4, 6).Value = "BANCO"
+            hoja.Cell(4, 7).Value = "CUENTA"
+            hoja.Cell(4, 8).Value = "CLABE"
 
 
-            forma.gIdEmpleado = gIdEmpleado
-            forma.gIdCliente = gIdCliente
-            forma.gIdEmpresa = 1
-            forma.ShowDialog()
+
+            filaExcel = 4
+            For Each Fila In rwFilas
+                filaExcel = filaExcel + 1
+                hoja.Cell(filaExcel, 1).Value = "'" & Fila.Item("cCodigoEmpleado").ToString
+                hoja.Cell(filaExcel, 2).Value = Fila.Item("cNombreLargo")
+                hoja.Cell(filaExcel, 3).Value = Fila.Item("cRFC")
+                hoja.Cell(filaExcel, 4).Value = Fila.Item("cCURP")
+                hoja.Cell(filaExcel, 5).Value = Fila.Item("cIMSS")
+                hoja.Cell(filaExcel, 6).Value = Fila.Item("cBanco")
+                hoja.Cell(filaExcel, 7).Value = "'" & Fila.Item("NumCuenta")
+                hoja.Cell(filaExcel, 8).Value = "'" & Fila.Item("Clabe")
+
+
+
+            Next
+
+            dialogo.DefaultExt = "*.xlsx"
+            dialogo.FileName = "Lista de Empleados"
+            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            dialogo.ShowDialog()
+            libro.SaveAs(dialogo.FileName)
+            'libro.SaveAs("c:\temp\control.xlsx")
+            'libro.SaveAs(dialogo.FileName)
+            'apExcel.Quit()
+            libro = Nothing
+            MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
-            MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
     End Sub
 End Class

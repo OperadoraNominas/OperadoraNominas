@@ -33,6 +33,7 @@ Partial Class frmEmpleados
         Me.txtsalario = New System.Windows.Forms.TextBox()
         Me.cbojornada = New System.Windows.Forms.ComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cmdlista = New System.Windows.Forms.Button()
         Me.cmdimss = New System.Windows.Forms.Button()
         Me.cmdPension = New System.Windows.Forms.Button()
         Me.cmdDocumentos = New System.Windows.Forms.Button()
@@ -232,6 +233,7 @@ Partial Class frmEmpleados
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.cmdlista)
         Me.Panel1.Controls.Add(Me.cmdimss)
         Me.Panel1.Controls.Add(Me.cmdPension)
         Me.Panel1.Controls.Add(Me.cmdDocumentos)
@@ -248,6 +250,19 @@ Partial Class frmEmpleados
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(205, 689)
         Me.Panel1.TabIndex = 184
+        '
+        'cmdlista
+        '
+        Me.cmdlista.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.cmdlista.Image = CType(resources.GetObject("cmdlista.Image"), System.Drawing.Image)
+        Me.cmdlista.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmdlista.Location = New System.Drawing.Point(107, 460)
+        Me.cmdlista.Name = "cmdlista"
+        Me.cmdlista.Size = New System.Drawing.Size(95, 72)
+        Me.cmdlista.TabIndex = 48
+        Me.cmdlista.Text = "Empleados"
+        Me.cmdlista.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdlista.UseVisualStyleBackColor = True
         '
         'cmdimss
         '
@@ -1538,5 +1553,6 @@ Partial Class frmEmpleados
     Friend WithEvents Label56 As System.Windows.Forms.Label
     Friend WithEvents dtpFinContrato As System.Windows.Forms.DateTimePicker
     Friend WithEvents cmdimss As System.Windows.Forms.Button
+    Friend WithEvents cmdlista As System.Windows.Forms.Button
 
 End Class
