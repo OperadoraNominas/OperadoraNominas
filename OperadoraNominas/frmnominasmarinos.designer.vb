@@ -63,6 +63,8 @@ Partial Class frmnominasmarinos
         Me.EliminarDeLaListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AgregarTrabajadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditarEmpleadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.layoutTimbrado = New System.Windows.Forms.Button()
+        Me.cmdInfonavit = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -150,8 +152,8 @@ Partial Class frmnominasmarinos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlCatalogo.Controls.Add(Me.cmdSubirDatos)
         Me.pnlCatalogo.Controls.Add(Me.btnReporte)
@@ -379,8 +381,8 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.AllowUserToDeleteRows = False
         Me.dtgDatos.AllowUserToOrderColumns = True
         Me.dtgDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 65)
         Me.dtgDatos.Name = "dtgDatos"
@@ -465,10 +467,36 @@ Partial Class frmnominasmarinos
         Me.EditarEmpleadoToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.EditarEmpleadoToolStripMenuItem.Text = "Editar Empleado"
         '
+        'layoutTimbrado
+        '
+        Me.layoutTimbrado.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.layoutTimbrado.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.layoutTimbrado.Location = New System.Drawing.Point(12, 514)
+        Me.layoutTimbrado.Name = "layoutTimbrado"
+        Me.layoutTimbrado.Size = New System.Drawing.Size(112, 27)
+        Me.layoutTimbrado.TabIndex = 28
+        Me.layoutTimbrado.Text = "Layout Timbrado"
+        Me.layoutTimbrado.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.layoutTimbrado.UseVisualStyleBackColor = True
+        '
+        'cmdInfonavit
+        '
+        Me.cmdInfonavit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdInfonavit.Location = New System.Drawing.Point(130, 514)
+        Me.cmdInfonavit.Name = "cmdInfonavit"
+        Me.cmdInfonavit.Size = New System.Drawing.Size(112, 27)
+        Me.cmdInfonavit.TabIndex = 29
+        Me.cmdInfonavit.Text = "Reporte Infonavit"
+        Me.cmdInfonavit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cmdInfonavit.UseVisualStyleBackColor = True
+        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1357, 553)
+        Me.Controls.Add(Me.cmdInfonavit)
+        Me.Controls.Add(Me.layoutTimbrado)
         Me.Controls.Add(Me.pnlProgreso)
         Me.Controls.Add(Me.pnlCatalogo)
         Me.Controls.Add(Me.ToolStrip1)
@@ -529,4 +557,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents pgbProgreso As System.Windows.Forms.ProgressBar
     Friend WithEvents btnReporte As System.Windows.Forms.Button
     Friend WithEvents cmdSubirDatos As System.Windows.Forms.Button
+    Friend WithEvents layoutTimbrado As System.Windows.Forms.Button
+    Friend WithEvents cmdInfonavit As System.Windows.Forms.Button
 End Class
