@@ -1465,7 +1465,7 @@ Public Class frmnominasmarinos
                 pnlProgreso.Visible = True
 
                 Application.DoEvents()
-                pnlCatalogo.Enabled = False
+                'pnlCatalogo.Enabled = False
                 pgbProgreso.Minimum = 0
                 pgbProgreso.Value = 0
                 pgbProgreso.Maximum = dtgDatos.Rows.Count
@@ -1632,7 +1632,7 @@ Public Class frmnominasmarinos
                     End If
                     
 
-                    If Double.Parse(dtgDatos.Rows(x).Cells(38).Value) Then
+                    If Double.Parse(IIf(dtgDatos.Rows(x).Cells(38).Value = "", "0", dtgDatos.Rows(x).Cells(38).Value)) Then
 
                         Dim MontoInfonavit As Double = MontoInfonavitF(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
 
@@ -3808,7 +3808,7 @@ Public Class frmnominasmarinos
                     Dim FechaInicioPeriodo1 As Date
 
 
-                    Dim numbimestre As Integer
+                    'Dim numbimestre As Integer
                     If rwPeriodo Is Nothing = False Then
                         FechaInicioPeriodo1 = Date.Parse(rwPeriodo(0)("dFechaInicio"))
 
