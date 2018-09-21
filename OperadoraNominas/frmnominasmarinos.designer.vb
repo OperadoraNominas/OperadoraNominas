@@ -33,6 +33,7 @@ Partial Class frmnominasmarinos
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cmdSubirDatos = New System.Windows.Forms.Button()
         Me.btnReporte = New System.Windows.Forms.Button()
         Me.cboTipoNomina = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -62,7 +63,6 @@ Partial Class frmnominasmarinos
         Me.EliminarDeLaListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AgregarTrabajadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditarEmpleadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdSubirDatos = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -178,8 +178,18 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Controls.Add(Me.cboperiodo)
         Me.pnlCatalogo.Location = New System.Drawing.Point(0, 51)
         Me.pnlCatalogo.Name = "pnlCatalogo"
-        Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 432)
+        Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'cmdSubirDatos
+        '
+        Me.cmdSubirDatos.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSubirDatos.Location = New System.Drawing.Point(1111, 34)
+        Me.cmdSubirDatos.Name = "cmdSubirDatos"
+        Me.cmdSubirDatos.Size = New System.Drawing.Size(103, 28)
+        Me.cmdSubirDatos.TabIndex = 25
+        Me.cmdSubirDatos.Text = "Subir datos"
+        Me.cmdSubirDatos.UseVisualStyleBackColor = True
         '
         'btnReporte
         '
@@ -374,7 +384,7 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 65)
         Me.dtgDatos.Name = "dtgDatos"
-        Me.dtgDatos.Size = New System.Drawing.Size(1349, 360)
+        Me.dtgDatos.Size = New System.Drawing.Size(1349, 379)
         Me.dtgDatos.TabIndex = 6
         '
         'cmdverdatos
@@ -409,7 +419,7 @@ Partial Class frmnominasmarinos
         Me.pnlProgreso.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlProgreso.Controls.Add(Me.Label2)
         Me.pnlProgreso.Controls.Add(Me.pgbProgreso)
-        Me.pnlProgreso.Location = New System.Drawing.Point(454, 225)
+        Me.pnlProgreso.Location = New System.Drawing.Point(454, 234)
         Me.pnlProgreso.Name = "pnlProgreso"
         Me.pnlProgreso.Size = New System.Drawing.Size(449, 84)
         Me.pnlProgreso.TabIndex = 27
@@ -455,20 +465,10 @@ Partial Class frmnominasmarinos
         Me.EditarEmpleadoToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.EditarEmpleadoToolStripMenuItem.Text = "Editar Empleado"
         '
-        'cmdSubirDatos
-        '
-        Me.cmdSubirDatos.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSubirDatos.Location = New System.Drawing.Point(1111, 34)
-        Me.cmdSubirDatos.Name = "cmdSubirDatos"
-        Me.cmdSubirDatos.Size = New System.Drawing.Size(103, 28)
-        Me.cmdSubirDatos.TabIndex = 25
-        Me.cmdSubirDatos.Text = "Subir datos"
-        Me.cmdSubirDatos.UseVisualStyleBackColor = True
-        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(1357, 534)
+        Me.ClientSize = New System.Drawing.Size(1357, 553)
         Me.Controls.Add(Me.pnlProgreso)
         Me.Controls.Add(Me.pnlCatalogo)
         Me.Controls.Add(Me.ToolStrip1)
