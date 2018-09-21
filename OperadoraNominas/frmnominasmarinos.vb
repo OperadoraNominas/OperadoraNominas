@@ -4555,7 +4555,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(filaExcel + 4, 38).FormulaA1 = "=SUM(AL9:AL" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 4, 38).FormulaA1 = "=SUM(AM9:AM" & filaExcel & ")"
 
-                limpiarCell(hoja3, 39) ', 1, dtgDatos.Rows.Count - 1)
+                limpiarCell(hoja3, 45) ', 1, dtgDatos.Rows.Count - 1)
 
 
 
@@ -4597,7 +4597,7 @@ Public Class frmnominasmarinos
                         hoja4.Cell(filaExcel, 5).Value = banco
                         hoja4.Cell(filaExcel, 6).Value = clabe
                         hoja4.Cell(filaExcel, 7).Value = cuenta
-                        hoja4.Cell(filaExcel, 8).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp & "+'OPERADORA DESCANSO'!AI" & filatmp
+                        hoja4.Cell(filaExcel, 8).FormulaA1 = "='OPERADORA ABORDO'!AM" & filatmp & "+'OPERADORA DESCANSO'!AM" & filatmp
                         hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!Q" & filatmp + 4
                     Else
                         filatmp = filatmp + 2
