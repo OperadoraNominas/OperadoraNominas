@@ -1043,7 +1043,7 @@ Partial Class frmEmpleados
         'cbosexo
         '
         Me.cbosexo.FormattingEnabled = True
-        Me.cbosexo.Items.AddRange(New Object() {"Femenino", "Masculino"})
+        Me.cbosexo.Items.AddRange(New Object() {"Masculino", "Femenino"})
         Me.cbosexo.Location = New System.Drawing.Point(10, 132)
         Me.cbosexo.Name = "cbosexo"
         Me.cbosexo.Size = New System.Drawing.Size(142, 26)
