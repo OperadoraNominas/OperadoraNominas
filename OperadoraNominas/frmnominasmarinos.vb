@@ -166,7 +166,7 @@ Public Class frmnominasmarinos
     End Sub
 
     Private Sub llenargrid()
-
+        'Cargar grid
         Try
             Dim sql As String
             Dim sql2 As String
