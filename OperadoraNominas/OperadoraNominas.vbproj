@@ -14,7 +14,23 @@
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -50,6 +66,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>logooperadora.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML, Version=0.93.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -162,6 +181,12 @@
     <Compile Include="frmPrincipal.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSubirDatos.Designer.vb">
+      <DependentUpon>frmSubirDatos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSubirDatos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="General\frmAcceso.designer.vb">
       <DependentUpon>frmAcceso.vb</DependentUpon>
     </Compile>
@@ -247,6 +272,9 @@
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSubirDatos.resx">
+      <DependentUpon>frmSubirDatos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="General\frmAcceso.resx">
       <DependentUpon>frmAcceso.vb</DependentUpon>
     </EmbeddedResource>
@@ -264,6 +292,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -287,11 +317,35 @@
     <Content Include="Resources\familia %282%29.png" />
     <Content Include="Resources\familia.png" />
     <None Include="Resources\material-escolar.png" />
+    <None Include="Resources\if_magnifier-data_532758.png" />
+    <None Include="Resources\if_rotation_job_seeker_employee_unemployee_work_2620504.png" />
     <Content Include="Resources\pasaporte.png" />
     <Content Include="Resources\sobresalir %281%29.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

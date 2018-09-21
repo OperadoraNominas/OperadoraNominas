@@ -980,4 +980,8 @@ Public Class frmEmpleados
             MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
     End Sub
+
+    Private Sub cmdPension_Click(sender As System.Object, e As System.EventArgs) Handles cmdPension.Click
+
+    End Sub
 End Class
