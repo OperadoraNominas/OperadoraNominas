@@ -8160,6 +8160,12 @@ Public Class frmnominasmarinos
                     hoja4.Cell(filaExcel, 7).Style.NumberFormat.Format = "@"
                     hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetBold(False)
 
+                    hoja4.Range(filaExcel, 8, filaExcel, 9).Style.NumberFormat.NumberFormatId = 4
+                    hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetFontColor(XLColor.Black)
+                    hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetFontName("Arial")
+                    hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetFontSize(8)
+                    hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetBold(False)
+
                     Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
                     If empleado Is Nothing = False Then
                         cuenta = empleado(0).Item("NumCuenta")
@@ -8185,7 +8191,7 @@ Public Class frmnominasmarinos
                         hoja4.Cell(filaExcel, 6).Value = clabe
                         hoja4.Cell(filaExcel, 7).Value = cuenta
                         hoja4.Cell(filaExcel, 8).FormulaA1 = "='OPERADORA ABORDO'!AM" & filatmp & "+'OPERADORA DESCANSO'!AM" & filatmp
-                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!Q" & filatmp + 4
+                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp + 4
                     Else
                         filatmp = filatmp + 2
 
@@ -8193,12 +8199,11 @@ Public Class frmnominasmarinos
                         hoja4.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(12).Value
                         hoja4.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(3).Value
                         hoja4.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(4).Value
-                        hoja4.Cell(filaExcel, 5).Value = ""
-                        hoja4.Cell(filaExcel, 6).Value = ""
-                        hoja4.Cell(filaExcel, 7).Value = ""
+                        hoja4.Cell(filaExcel, 5).Value = banco
+                        hoja4.Cell(filaExcel, 6).Value = clabe
+                        hoja4.Cell(filaExcel, 7).Value = cuenta
                         hoja4.Cell(filaExcel, 8).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp & "+'OPERADORA DESCANSO'!AI" & filatmp
-                        'hoja4.Cell(filaExcel, 9).Value = "='NOMINA TOTAL'!Q"
-                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!Q" & filatmp + 4
+                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp + 4
                     End If
 
 
