@@ -776,11 +776,13 @@ Public Class frmnominasmarinos
 
 
                     Next
-
-                    sql = "select * from nomina where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                    sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC  where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                    'sql = "select * from nomina inner join EmpleadosC on nomin where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
                     sql &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
                     sql &= " and iEstatusEmpleado=" & cboserie.SelectedIndex
                     sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+                    sql &= " order by " & campoordenamiento
+
                     Dim rwFila As DataRow() = nConsulta(sql)
 
                     If rwFila.Length = 1 Then
@@ -2062,8 +2064,32 @@ Public Class frmnominasmarinos
             pgbProgreso.Value = 0
             pgbProgreso.Maximum = dtgDatos.Rows.Count
 
+            
+
 
             For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+
+                'verificamos los sueldos
+                sql = "Select salariod,sbc,salariodTopado,sbcTopado from costosocial inner join puestos on costosocial.fkiIdPuesto=puestos.iIdPuesto "
+                sql &= " where cNombre = '" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
+
+                Dim rwDatosSalario As DataRow() = nConsulta(sql)
+
+                If rwDatosSalario Is Nothing = False Then
+                    If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
+                        dtgDatos.Rows(x).Cells(16).Value = rwDatosSalario(0)("salariodTopado")
+                        dtgDatos.Rows(x).Cells(17).Value = rwDatosSalario(0)("sbcTopado")
+                    Else
+                        dtgDatos.Rows(x).Cells(16).Value = rwDatosSalario(0)("salariod")
+                        dtgDatos.Rows(x).Cells(17).Value = rwDatosSalario(0)("sbc")
+                    End If
+
+                Else
+                    MessageBox.Show("No se encontraron datos")
+                End If
+
+
                 'Dim cadena As String = dgvCombo.Text
                 If dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Then
                     Sueldo = Double.Parse(dtgDatos.Rows(x).Cells(17).Value) * Double.Parse(IIf(dtgDatos.Rows(x).Cells(18).Value = "", "0", dtgDatos.Rows(x).Cells(18).Value))
@@ -2222,7 +2248,7 @@ Public Class frmnominasmarinos
                     dtgDatos.Rows(x).Cells(46).Value = Operadora
 
 
-                    
+
 
 
                 Else
@@ -2251,7 +2277,7 @@ Public Class frmnominasmarinos
                         'INFONAVIT
                         '##### VERIFICAR SI ESTA YA CALCULADO EL INFONAVIT DEL BIMESTRE
                         dtgDatos.Rows(x).Cells(38).Value = "0.00"
-                        
+
 
                         '############# CALCULO POR DIAS INFONAVIT
                         'dtgDatos.Rows(x).Cells(38).Value = Math.Round(infonavit(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Double.Parse(dtgDatos.Rows(x).Cells(18).Value), Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)), 2).ToString("###,##0.00")
@@ -2546,9 +2572,9 @@ Public Class frmnominasmarinos
                         dtgDatos.Rows(x).Cells(46).Value = Operadora
 
                     End If
-                    
 
-                    
+
+
 
                 End If
 
@@ -8316,7 +8342,7 @@ Public Class frmnominasmarinos
 
 
                 '<<<<<<<<<<<<<<<Operadora Descanso>>>>>>>>>>>>>>>>>>
-              
+
                 llenargridD("1")
 
                 'pgbProgreso.Value += 1
@@ -9012,7 +9038,7 @@ Public Class frmnominasmarinos
                     Case "text black"
                         hoja.Cell(f, c).Style.Font.SetFontColor(XLColor.Black)
 
-                 
+
 
 
                 End Select
