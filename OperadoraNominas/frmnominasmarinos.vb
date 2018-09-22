@@ -7455,7 +7455,7 @@ Public Class frmnominasmarinos
                 Dim filatmp As Integer = 13 - 4
                 Dim fecha As String
 
-                Dim arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, ignacio, gabriel, diego As Integer
+                Dim amarrados, arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, ignacio, gabriel, diego As Integer
 
                 Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB As String
 
@@ -7529,18 +7529,20 @@ Public Class frmnominasmarinos
                                 cruz = contadorexcelbuquefinal
                             Case "ISLA MONSERRAT", "ISLA MONTSERRAT", "ISLA MONTSERRAT"
                                 montserrat = contadorexcelbuquefinal
-                            Case "ISLA BLANCA"
+                            Case "ISLA BLANCA", "BLANCA"
                                 blanca = contadorexcelbuquefinal
                             Case "ISLA CIARI"
                                 ciari = contadorexcelbuquefinal
                             Case "ISLA JANITZIO"
                                 janitzio = contadorexcelbuquefinal
-                            Case "ISLA IGNACIO"
+                            Case "ISLA IGNACIO", "IGNACIO", "ISLA SAN IGNACIO"
                                 ignacio = contadorexcelbuquefinal
                             Case "ISLA SAN GABRIEL"
                                 gabriel = contadorexcelbuquefinal
-                            Case "ISLA DIEGO"
+                            Case "ISLA DIEGO", "ISLA SAN DIEGO"
                                 diego = contadorexcelbuquefinal
+                            Case "AMARRADOS", "ISLA AMARRADOS"
+                                amarrados = contadorexcelbuquefinal
                         End Select
 
                         hoja.Cell(filaExcel + x, 12).FormulaA1 = "=SUM(L" & contadorexcelbuqueinicial & ":L" & contadorexcelbuquefinal & ")"
@@ -7651,7 +7653,7 @@ Public Class frmnominasmarinos
                         arboleda = contadorexcelbuquefinal
                     Case "ISLA AZTECA"
                         azteca = contadorexcelbuquefinal
-                    Case "ISLA CEDROS"
+                    Case "ISLA CEDROS", "ISLA DE CEDROS"
                         cedros = contadorexcelbuquefinal
                     Case "ISLA MIRAMAR"
                         miramar = contadorexcelbuquefinal
@@ -7661,18 +7663,20 @@ Public Class frmnominasmarinos
                         cruz = contadorexcelbuquefinal
                     Case "ISLA MONSERRAT", "ISLA MONTSERRAT", "ISLA MONTSERRAT"
                         montserrat = contadorexcelbuquefinal
-                    Case "ISLA BLANCA"
+                    Case "ISLA BLANCA", "BLANCA"
                         blanca = contadorexcelbuquefinal
                     Case "ISLA CIARI"
                         ciari = contadorexcelbuquefinal
                     Case "ISLA JANITZIO"
                         janitzio = contadorexcelbuquefinal
-                    Case "ISLA IGNACIO"
+                    Case "ISLA IGNACIO", "IGNACIO", "ISLA SAN IGNACIO"
                         ignacio = contadorexcelbuquefinal
                     Case "ISLA SAN GABRIEL"
                         gabriel = contadorexcelbuquefinal
-                    Case "ISLA DIEGO"
+                    Case "ISLA DIEGO", "ISLA SAN DIEGO"
                         diego = contadorexcelbuquefinal
+                    Case "AMARRADOS", "ISLA AMARRADOS"
+                        amarrados = contadorexcelbuquefinal
                 End Select
 
 
@@ -7731,19 +7735,20 @@ Public Class frmnominasmarinos
                 Dim sep As Integer = filaExcel + total + 8
                 hoja.Range(4, sep, 17, sep + 7).Style.NumberFormat.NumberFormatId = 4
 
+
+
+
+                'ARBOLEDA
+                hoja.Cell(sep, 4).Value = "ISLA ARBOLEDA"
+                hoja.Cell(sep + 1, 4).Value = "TMM DIVISION"
+                hoja.Cell(sep + 3, 4).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell(sep + 4, 4).Value = "IVA"
+                hoja.Cell(sep + 5, 4).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell(sep + 6, 4).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell(sep + 7, 4).Value = "IVA"
+                hoja.Cell(sep + 8, 4).Value = "TOTAL DEPOSITO BIRYUSA"
+
                 If arboleda > 0 Then
-
-
-                    'ARBOLEDA
-                    hoja.Cell(sep, 4).Value = "ISLA ARBOLEDA"
-                    hoja.Cell(sep + 1, 4).Value = "TMM DIVISION"
-                    hoja.Cell(sep + 3, 4).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell(sep + 4, 4).Value = "IVA"
-                    hoja.Cell(sep + 5, 4).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell(sep + 6, 4).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell(sep + 7, 4).Value = "IVA"
-                    hoja.Cell(sep + 8, 4).Value = "TOTAL DEPOSITO BIRYUSA"
-
                     hoja.Cell(sep + 3, 5).FormulaA1 = "=R" & arboleda + 1 & "+T" & arboleda + 1 & "+V" & arboleda + 1 & "+X" & arboleda + 1
                     hoja.Cell(sep + 4, 5).FormulaA1 = "=E" & sep + 3 & "*16%"
                     hoja.Cell(sep + 5, 5).FormulaA1 = "=E" & sep + 3 & "+E" & sep + 4
@@ -7754,22 +7759,33 @@ Public Class frmnominasmarinos
 
                     hoja.Cell(sep + 10, 5).FormulaA1 = "E" & sep + 5 & "+E" & sep + 8
 
-                    hoja.Range(sep + 5, 4, sep + 5, 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range(sep + 8, 4, sep + 8, 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell(sep, 4).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                   
+                Else
+                    hoja.Cell(sep + 3, 5).FormulaA1 = "0"
+                    hoja.Cell(sep + 4, 5).FormulaA1 = "=E" & sep + 3 & "*16%"
+                    hoja.Cell(sep + 5, 5).FormulaA1 = "=E" & sep + 3 & "+E" & sep + 4
+
+                    hoja.Cell(sep + 6, 5).FormulaA1 = "0"
+                    hoja.Cell(sep + 7, 5).FormulaA1 = "=E" & sep + 6 & "*16%"
+                    hoja.Cell(sep + 8, 5).FormulaA1 = "=E" & sep + 6 & "+E" & sep + 7
+
+                    hoja.Cell(sep + 10, 5).FormulaA1 = "E" & sep + 5 & "+E" & sep + 8
                 End If
+                hoja.Range(sep + 5, 4, sep + 5, 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range(sep + 8, 4, sep + 8, 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell(sep, 4).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
+
+                'AZTECA
+                hoja.Cell(sep, 7).Value = "ISLA AZTECA"
+                hoja.Cell(sep + 1, 7).Value = "TMM DIVISION"
+                hoja.Cell(sep + 3, 7).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell(sep + 4, 7).Value = "IVA"
+                hoja.Cell(sep + 5, 7).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell(sep + 6, 7).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell(sep + 7, 7).Value = "IVA"
+                hoja.Cell(sep + 8, 7).Value = "TOTAL DEPOSITO BIRYUSA"
                 If azteca > 0 Then
-
-                    'AZTECA
-                    hoja.Cell(sep, 7).Value = "ISLA AZTECA"
-                    hoja.Cell(sep + 1, 7).Value = "TMM DIVISION"
-                    hoja.Cell(sep + 3, 7).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell(sep + 4, 7).Value = "IVA"
-                    hoja.Cell(sep + 5, 7).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell(sep + 6, 7).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell(sep + 7, 7).Value = "IVA"
-                    hoja.Cell(sep + 8, 7).Value = "TOTAL DEPOSITO BIRYUSA"
 
                     hoja.Cell(sep + 3, 9).FormulaA1 = "=R" & azteca + 1 & "+T" & azteca + 1 & "+V" & azteca + 1 & "+X" & azteca + 1
                     hoja.Cell(sep + 4, 9).FormulaA1 = "=I" & sep + 3 & "*16%"
@@ -7780,24 +7796,36 @@ Public Class frmnominasmarinos
                     hoja.Cell(sep + 8, 9).FormulaA1 = "=I" & sep + 6 & "+I" & sep + 7
 
                     hoja.Cell(sep + 10, 9).FormulaA1 = "I" & sep + 5 & "+I" & sep + 8
+                Else
+                    hoja.Cell(sep + 3, 9).FormulaA1 = "0"
+                    hoja.Cell(sep + 4, 9).FormulaA1 = "=I" & sep + 3 & "*16%"
+                    hoja.Cell(sep + 5, 9).FormulaA1 = "=I" & sep + 3 & "+I" & sep + 4
 
-                    hoja.Range(sep + 5, 7, sep + 5, 9).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range(sep + 8, 7, sep + 8, 9).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell(sep, 7).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                    hoja.Cell(sep + 6, 9).FormulaA1 = "0"
+                    hoja.Cell(sep + 7, 9).FormulaA1 = "=I" & sep + 6 & "*16%"
+                    hoja.Cell(sep + 8, 9).FormulaA1 = "=I" & sep + 6 & "+I" & sep + 7
 
+                    hoja.Cell(sep + 10, 9).FormulaA1 = "I" & sep + 5 & "+I" & sep + 8
+                    
                 End If
+
+                hoja.Range(sep + 5, 7, sep + 5, 9).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range(sep + 8, 7, sep + 8, 9).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell(sep, 7).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+
+
+
+                'CEDROS
+                hoja.Cell(sep, 11).Value = "ISLA CEDROS"
+                hoja.Cell(sep + 1, 11).Value = "TMM DIVISION"
+                hoja.Cell(sep + 3, 11).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell(sep + 4, 11).Value = "IVA"
+                hoja.Cell(sep + 5, 11).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell(sep + 6, 11).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell(sep + 7, 11).Value = "IVA"
+                hoja.Cell(sep + 8, 11).Value = "TOTAL DEPOSITO BIRYUSA"
                 If cedros > 0 Then
-
-
-                    'CEDROS
-                    hoja.Cell(sep, 11).Value = "ISLA CEDROS"
-                    hoja.Cell(sep + 1, 11).Value = "TMM DIVISION"
-                    hoja.Cell(sep + 3, 11).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell(sep + 4, 11).Value = "IVA"
-                    hoja.Cell(sep + 5, 11).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell(sep + 6, 11).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell(sep + 7, 11).Value = "IVA"
-                    hoja.Cell(sep + 8, 11).Value = "TOTAL DEPOSITO BIRYUSA"
 
                     hoja.Cell(sep + 3, 13).FormulaA1 = "=R" & cedros + 1 & "+T" & cedros + 1 & "+V" & cedros + 1 & "+X" & cedros + 1
                     hoja.Cell(sep + 4, 13).FormulaA1 = "=M" & sep + 3 & "*16%"
@@ -7809,22 +7837,37 @@ Public Class frmnominasmarinos
 
                     hoja.Cell(sep + 10, 13).FormulaA1 = "M" & sep + 5 & "+M" & sep + 8
 
+                Else
+                    hoja.Cell(sep + 3, 13).FormulaA1 = "0"
+                    hoja.Cell(sep + 4, 13).FormulaA1 = "=M" & sep + 3 & "*16%"
+                    hoja.Cell(sep + 5, 13).FormulaA1 = "=M" & sep + 3 & "+M" & sep + 4
 
-                    hoja.Range(sep + 5, 11, sep + 5, 13).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range(sep + 8, 11, sep + 8, 13).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell(sep, 11).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                    hoja.Cell(sep + 6, 13).FormulaA1 = "0"
+                    hoja.Cell(sep + 7, 13).FormulaA1 = "=M" & sep + 6 & "*16%"
+                    hoja.Cell(sep + 8, 13).FormulaA1 = "=M" & sep + 6 & "+M" & sep + 7
+
+                    hoja.Cell(sep + 10, 13).FormulaA1 = "M" & sep + 5 & "+M" & sep + 8
+
+                   
                 End If
-                If miramar > 0 Then
 
-                    'Miramar
-                    hoja.Cell("Q" & sep).Value = "ISLA MIRAMAR"
-                    hoja.Cell("Q" & sep + 1).Value = "TMM DIVISION"
-                    hoja.Cell("Q" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell("Q" & sep + 4).Value = "IVA"
-                    hoja.Cell("Q" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell("Q" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell("Q" & sep + 7).Value = "IVA"
-                    hoja.Cell("Q" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+                hoja.Range(sep + 5, 11, sep + 5, 13).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range(sep + 8, 11, sep + 8, 13).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell(sep, 11).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+
+
+                'Miramar
+                hoja.Cell("Q" & sep).Value = "ISLA MIRAMAR"
+                hoja.Cell("Q" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("Q" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("Q" & sep + 4).Value = "IVA"
+                hoja.Cell("Q" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("Q" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("Q" & sep + 7).Value = "IVA"
+                hoja.Cell("Q" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+
+                If miramar > 0 Then
 
                     hoja.Cell("S" & sep + 3).FormulaA1 = "=R" & miramar + 1 & "+T" & miramar + 1 & "+V" & miramar + 1 & "+X" & miramar + 1
                     hoja.Cell("S" & sep + 4).FormulaA1 = "=S" & sep + 3 & "*16%"
@@ -7835,23 +7878,35 @@ Public Class frmnominasmarinos
                     hoja.Cell("S" & sep + 8).FormulaA1 = "=S" & sep + 6 & "+S" & sep + 7
 
                     hoja.Cell("S" & sep + 10).FormulaA1 = "S" & sep + 5 & "+S" & sep + 8
+                Else
+                    hoja.Cell("S" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("S" & sep + 4).FormulaA1 = "=S" & sep + 3 & "*16%"
+                    hoja.Cell("S" & sep + 5).FormulaA1 = "=S" & sep + 3 & "+S" & sep + 4
 
-                    hoja.Range("Q" & sep + 5, "S" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range("Q" & sep + 8, "S" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell("Q" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                    hoja.Cell("S" & sep + 6).FormulaA1 = "0"
+                    hoja.Cell("S" & sep + 7).FormulaA1 = "=S" & sep + 6 & "*16%"
+                    hoja.Cell("S" & sep + 8).FormulaA1 = "=S" & sep + 6 & "+S" & sep + 7
+
+                    hoja.Cell("S" & sep + 10).FormulaA1 = "S" & sep + 5 & "+S" & sep + 8
+                   
 
                 End If
-                If verde > 0 Then
+                hoja.Range("Q" & sep + 5, "S" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("Q" & sep + 8, "S" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("Q" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
-                    'ISLA VERDE
-                    hoja.Cell(sep, 22).Value = "ISLA VERDE"
-                    hoja.Cell(sep + 1, 22).Value = "TMM DIVISION"
-                    hoja.Cell(sep + 3, 22).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell(sep + 4, 22).Value = "IVA"
-                    hoja.Cell(sep + 5, 22).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell(sep + 6, 22).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell(sep + 7, 22).Value = "IVA"
-                    hoja.Cell(sep + 8, 22).Value = "TOTAL DEPOSITO BIRYUSA"
+
+
+                'ISLA VERDE
+                hoja.Cell(sep, 22).Value = "ISLA VERDE"
+                hoja.Cell(sep + 1, 22).Value = "TMM DIVISION"
+                hoja.Cell(sep + 3, 22).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell(sep + 4, 22).Value = "IVA"
+                hoja.Cell(sep + 5, 22).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell(sep + 6, 22).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell(sep + 7, 22).Value = "IVA"
+                hoja.Cell(sep + 8, 22).Value = "TOTAL DEPOSITO BIRYUSA"
+                If verde > 0 Then
 
                     hoja.Cell(sep + 3, 24).FormulaA1 = "=R" & verde + 1 & "+T" & verde + 1 & "+V" & verde + 1 & "+X" & verde + 1
                     hoja.Cell(sep + 4, 24).FormulaA1 = "=X" & sep + 3 & "*16%"
@@ -7862,39 +7917,62 @@ Public Class frmnominasmarinos
                     hoja.Cell(sep + 8, 24).FormulaA1 = "=X" & sep + 6 & "+X" & sep + 7
 
                     hoja.Cell(sep + 10, 24).FormulaA1 = "X" & sep + 5 & "+X" & sep + 8
+                Else
+                    hoja.Cell(sep + 3, 24).FormulaA1 = "0"
+                    hoja.Cell(sep + 4, 24).FormulaA1 = "=X" & sep + 3 & "*16%"
+                    hoja.Cell(sep + 5, 24).FormulaA1 = "=X" & sep + 3 & "+X" & sep + 4
 
-                    hoja.Range(sep + 5, 22, sep + 5, 24).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range(sep + 8, 22, sep + 8, 24).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell(sep, 22).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                    hoja.Cell(sep + 6, 24).FormulaA1 = "0"
+                    hoja.Cell(sep + 7, 24).FormulaA1 = "=X" & sep + 6 & "*16%"
+                    hoja.Cell(sep + 8, 24).FormulaA1 = "=X" & sep + 6 & "+X" & sep + 7
+
+                    hoja.Cell(sep + 10, 24).FormulaA1 = "X" & sep + 5 & "+X" & sep + 8
+                   
 
                 End If
+                hoja.Range(sep + 5, 22, sep + 5, 24).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range(sep + 8, 22, sep + 8, 24).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell(sep, 22).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+
+
+
+                'ISLA SANTA CRUZ
+                hoja.Cell(sep, 26).Value = "ISLA SANTA CRUZ"
+                hoja.Cell(sep + 1, 26).Value = "TMM DIVISION"
+                hoja.Cell(sep + 3, 26).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell(sep + 4, 26).Value = "IVA"
+                hoja.Cell(sep + 5, 26).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell(sep + 6, 26).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell(sep + 7, 26).Value = "IVA"
+                hoja.Cell(sep + 8, 26).Value = "TOTAL DEPOSITO BIRYUSA"
+
                 If cruz > 0 Then
-
-
-                    'ISLA SANTA CRUZ
-                    hoja.Cell(sep, 26).Value = "ISLA SANTA CRUZ"
-                    hoja.Cell(sep + 1, 26).Value = "TMM DIVISION"
-                    hoja.Cell(sep + 3, 26).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell(sep + 4, 26).Value = "IVA"
-                    hoja.Cell(sep + 5, 26).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell(sep + 6, 26).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell(sep + 7, 26).Value = "IVA"
-                    hoja.Cell(sep + 8, 26).Value = "TOTAL DEPOSITO BIRYUSA"
-
                     hoja.Cell(sep + 3, 28).FormulaA1 = "=R" & cruz + 1 & "+T" & cruz + 1 & "+V" & cruz + 1 & "+X" & cruz + 1
-                    hoja.Cell(sep + 4, 28).FormulaA1 = "=AA" & sep + 3 & "*16%"
-                    hoja.Cell(sep + 5, 28).FormulaA1 = "=AA" & sep + 3 & "+AA" & sep + 4
+                    hoja.Cell(sep + 4, 28).FormulaA1 = "=AB" & sep + 3 & "*16%"
+                    hoja.Cell(sep + 5, 28).FormulaA1 = "=AB" & sep + 3 & "+AB" & sep + 4
 
                     hoja.Cell(sep + 6, 28).FormulaA1 = "=S" & cruz + 1 & "+W" & cruz + 1
-                    hoja.Cell(sep + 7, 28).FormulaA1 = "=AA" & sep + 6 & "*16%"
-                    hoja.Cell(sep + 8, 28).FormulaA1 = "=AA" & sep + 6 & "+AA" & sep + 7
+                    hoja.Cell(sep + 7, 28).FormulaA1 = "=AB" & sep + 6 & "*16%"
+                    hoja.Cell(sep + 8, 28).FormulaA1 = "=AB" & sep + 6 & "+AB" & sep + 7
 
-                    hoja.Cell(sep + 10, 28).FormulaA1 = "AA" & sep + 5 & "+AA" & sep + 8
+                    hoja.Cell(sep + 10, 28).FormulaA1 = "AB" & sep + 5 & "+AB" & sep + 8
+                Else
+                    hoja.Cell(sep + 3, 28).FormulaA1 = "0"
+                    hoja.Cell(sep + 4, 28).FormulaA1 = "=AB" & sep + 3 & "*16%"
+                    hoja.Cell(sep + 5, 28).FormulaA1 = "=AB" & sep + 3 & "+AB" & sep + 4
 
-                    hoja.Range(sep + 5, 26, sep + 5, 28).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range(sep + 8, 26, sep + 8, 28).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell(sep, 26).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                    hoja.Cell(sep + 6, 28).FormulaA1 = "0"
+                    hoja.Cell(sep + 7, 28).FormulaA1 = "=AB" & sep + 6 & "*16%"
+                    hoja.Cell(sep + 8, 28).FormulaA1 = "=AB" & sep + 6 & "+AB" & sep + 7
+
+                    hoja.Cell(sep + 10, 28).FormulaA1 = "AB" & sep + 5 & "+AB" & sep + 8
+                    
                 End If
+
+                hoja.Range(sep + 5, 26, sep + 5, 28).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range(sep + 8, 26, sep + 8, 28).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell(sep, 26).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
                 '<<<<FACT>>>>
                 hoja5.Cell("C6").FormulaA1 = IIf(arboleda > 0, "='NOMINA TOTAL'!E" & sep + 3, "0.0") 'Arboleda
@@ -7927,18 +8005,56 @@ Public Class frmnominasmarinos
 
                 '<<<<<<<<<<<<<<Second>>>>>>>>>>>>>>>>>>>>>
                 sep = sep + 12
+
+
+                ''ISLA AMARRADOS
+                hoja.Cell("D" & sep).Value = "ISLA AMARRADOS"
+                hoja.Cell("D" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("D" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("D" & sep + 4).Value = "IVA"
+                hoja.Cell("D" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("D" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("D" & sep + 7).Value = "IVA"
+                hoja.Cell("D" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+                If amarrados > 0 Then
+
+                    hoja.Cell("E" & sep + 3).FormulaA1 = "=R" & amarrados + 1 & "+T" & amarrados + 1 & "+V" & amarrados + 1 & "+X" & amarrados + 1
+                    hoja.Cell("E" & sep + 4).FormulaA1 = "=E" & sep + 3 & "*16%"
+                    hoja.Cell("E" & sep + 5).FormulaA1 = "=E" & sep + 3 & "+E" & sep + 4
+
+                    hoja.Cell("E" & sep + 6).FormulaA1 = "=S" & montserrat + 1 & "+W" & montserrat + 1
+                    hoja.Cell("E" & sep + 7).FormulaA1 = "=E" & sep + 6 & "*16%"
+                    hoja.Cell("E" & sep + 8).FormulaA1 = "=E" & sep + 6 & "+E" & sep + 7
+
+                    hoja.Cell("E" & sep + 10).FormulaA1 = "E" & sep + 5 & "+E" & sep + 8
+                Else
+                    hoja.Cell("E" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("E" & sep + 4).FormulaA1 = "=E" & sep + 3 & "*16%"
+                    hoja.Cell("E" & sep + 5).FormulaA1 = "=E" & sep + 3 & "+E" & sep + 4
+
+                    hoja.Cell("E" & sep + 6).FormulaA1 = "0"
+                    hoja.Cell("E" & sep + 7).FormulaA1 = "=E" & sep + 6 & "*16%"
+                    hoja.Cell("E" & sep + 8).FormulaA1 = "=E" & sep + 6 & "+E" & sep + 7
+
+                    hoja.Cell("E" & sep + 10).FormulaA1 = "E" & sep + 5 & "+E" & sep + 8
+
+                End If
+                hoja.Range("D" & sep + 5, "E" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("D" & sep + 8, "E" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("D" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+
+
+                ''ISLA MONTSERRAT
+                hoja.Cell("J" & sep).Value = "ISLA MONSERRAT"
+                hoja.Cell("J" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("J" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("J" & sep + 4).Value = "IVA"
+                hoja.Cell("J" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("J" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("J" & sep + 7).Value = "IVA"
+                hoja.Cell("J" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
                 If montserrat > 0 Then
-
-
-                    ''ISLA MONTSERRAT
-                    hoja.Cell("J" & sep).Value = "ISLA MONSERRAT"
-                    hoja.Cell("J" & sep + 1).Value = "TMM DIVISION"
-                    hoja.Cell("J" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell("J" & sep + 4).Value = "IVA"
-                    hoja.Cell("J" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell("J" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell("J" & sep + 7).Value = "IVA"
-                    hoja.Cell("J" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
 
                     hoja.Cell("L" & sep + 3).FormulaA1 = "=R" & montserrat + 1 & "+T" & montserrat + 1 & "+V" & montserrat + 1 & "+X" & montserrat + 1
                     hoja.Cell("L" & sep + 4).FormulaA1 = "=L" & sep + 3 & "*16%"
@@ -7949,23 +8065,35 @@ Public Class frmnominasmarinos
                     hoja.Cell("L" & sep + 8).FormulaA1 = "=L" & sep + 6 & "+L" & sep + 7
                     'hoja.Cell("L" & sep + 9).FormulaA1 = "L" & sep + 5 & "+L" & sep + 8
 
-                    hoja.Cell("L" & sep + 10).FormulaA1 = "S" & sep + 5 & "+S" & sep + 8
+                    hoja.Cell("L" & sep + 10).FormulaA1 = "L" & sep + 5 & "+L" & sep + 8
+                Else
+                    hoja.Cell("L" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("L" & sep + 4).FormulaA1 = "=L" & sep + 3 & "*16%"
+                    hoja.Cell("L" & sep + 5).FormulaA1 = "=L" & sep + 3 & "+L" & sep + 4
 
-                    hoja.Range("J" & sep + 5, "L" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range("J" & sep + 8, "L" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell("J" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                    hoja.Cell("L" & sep + 6).FormulaA1 = "=0"
+                    hoja.Cell("L" & sep + 7).FormulaA1 = "=L" & sep + 6 & "*16%"
+                    hoja.Cell("L" & sep + 8).FormulaA1 = "=L" & sep + 6 & "+L" & sep + 7
+                    'hoja.Cell("L" & sep + 9).FormulaA1 = "L" & sep + 5 & "+L" & sep + 8
+
+                    hoja.Cell("L" & sep + 10).FormulaA1 = "L" & sep + 5 & "+L" & sep + 8
                 End If
-                If blanca > 0 Then
-                    'ISLA BLANCA
-                    hoja.Cell("P" & sep).Value = "ISLA BLANCA"
-                    hoja.Cell("P" & sep + 1).Value = "TMM DIVISION"
-                    hoja.Cell("P" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell("P" & sep + 4).Value = "IVA"
-                    hoja.Cell("P" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell("P" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell("P" & sep + 7).Value = "IVA"
-                    hoja.Cell("P" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+                hoja.Range("J" & sep + 5, "L" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("J" & sep + 8, "L" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("J" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
+
+                'ISLA BLANCA
+                hoja.Cell("P" & sep).Value = "ISLA BLANCA"
+                hoja.Cell("P" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("P" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("P" & sep + 4).Value = "IVA"
+                hoja.Cell("P" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("P" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("P" & sep + 7).Value = "IVA"
+                hoja.Cell("P" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+
+                If blanca > 0 Then
                     hoja.Cell("R" & sep + 3).FormulaA1 = "=R" & blanca + 1 & "+T" & blanca + 1 & "+V" & blanca + 1 & "+X" & blanca + 1
                     hoja.Cell("R" & sep + 4).FormulaA1 = "=R" & sep + 3 & "*16%"
                     hoja.Cell("R" & sep + 5).FormulaA1 = "=R" & sep + 3 & "+R" & sep + 4
@@ -7975,21 +8103,34 @@ Public Class frmnominasmarinos
                     hoja.Cell("R" & sep + 8).FormulaA1 = "=R" & sep + 6 & "+R" & sep + 7
 
                     hoja.Cell("R" & sep + 10).FormulaA1 = "R" & sep + 5 & "+R" & sep + 8
+                Else
+                    hoja.Cell("R" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("R" & sep + 4).FormulaA1 = "=R" & sep + 3 & "*16%"
+                    hoja.Cell("R" & sep + 5).FormulaA1 = "=R" & sep + 3 & "+R" & sep + 4
 
-                    hoja.Range("P" & sep + 5, "R" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range("P" & sep + 8, "R" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell("P" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                    hoja.Cell("R" & sep + 6).FormulaA1 = "0"
+                    hoja.Cell("R" & sep + 7).FormulaA1 = "=R" & sep + 6 & "*16%"
+                    hoja.Cell("R" & sep + 8).FormulaA1 = "=R" & sep + 6 & "+R" & sep + 7
+
+                    hoja.Cell("R" & sep + 10).FormulaA1 = "R" & sep + 5 & "+R" & sep + 8
+                
                 End If
+                hoja.Range("P" & sep + 5, "R" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("P" & sep + 8, "R" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("P" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+
+                'ISLA CIARI
+                hoja.Cell("T" & sep).Value = "ISLA CIARI"
+                hoja.Cell("T" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("T" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("T" & sep + 4).Value = "IVA"
+                hoja.Cell("T" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("T" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("T" & sep + 7).Value = "IVA"
+                hoja.Cell("T" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+
                 If ciari > 0 Then
-                    'ISLA CIARI
-                    hoja.Cell("T" & sep).Value = "ISLA CIARI"
-                    hoja.Cell("T" & sep + 1).Value = "TMM DIVISION"
-                    hoja.Cell("T" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell("T" & sep + 4).Value = "IVA"
-                    hoja.Cell("T" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell("T" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell("T" & sep + 7).Value = "IVA"
-                    hoja.Cell("T" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
 
                     hoja.Cell("W" & sep + 3).FormulaA1 = "=R" & ciari + 1 & "+T" & ciari + 1 & "+V" & ciari + 1 & "+X" & ciari + 1
                     hoja.Cell("W" & sep + 4).FormulaA1 = "=W" & sep + 3 & "*16%"
@@ -8000,23 +8141,36 @@ Public Class frmnominasmarinos
                     hoja.Cell("W" & sep + 8).FormulaA1 = "=W" & sep + 6 & "+W" & sep + 7
                     hoja.Cell("W" & sep + 10).FormulaA1 = "W" & sep + 5 & "+W" & sep + 8
 
-                    hoja.Range("T" & sep + 5, "W" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range("T" & sep + 8, "W" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell("T" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                Else
+
+                    hoja.Cell("W" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("W" & sep + 4).FormulaA1 = "=W" & sep + 3 & "*16%"
+                    hoja.Cell("W" & sep + 5).FormulaA1 = "=W" & sep + 3 & "+W" & sep + 4
+
+                    hoja.Cell("W" & sep + 6).FormulaA1 = "0"
+                    hoja.Cell("W" & sep + 7).FormulaA1 = "=W" & sep + 6 & "*16%"
+                    hoja.Cell("W" & sep + 8).FormulaA1 = "=W" & sep + 6 & "+W" & sep + 7
+                    hoja.Cell("W" & sep + 10).FormulaA1 = "W" & sep + 5 & "+W" & sep + 8
+                   
 
                 End If
+                hoja.Range("T" & sep + 5, "W" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("T" & sep + 8, "W" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("T" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+
+
+                ''ISLA JANITZIO
+                hoja.Cell("Y" & sep).Value = "ISLA JANITZIO"
+                hoja.Cell("Y" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("Y" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("Y" & sep + 4).Value = "IVA"
+                hoja.Cell("Y" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("Y" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("Y" & sep + 7).Value = "IVA"
+                hoja.Cell("Y" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+
                 If janitzio > 0 Then
-
-                    ''ISLA JANITZIO
-                    hoja.Cell("Y" & sep).Value = "ISLA JANITZIO"
-                    hoja.Cell("Y" & sep + 1).Value = "TMM DIVISION"
-                    hoja.Cell("Y" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell("Y" & sep + 4).Value = "IVA"
-                    hoja.Cell("Y" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell("Y" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell("Y" & sep + 7).Value = "IVA"
-                    hoja.Cell("Y" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
-
                     hoja.Cell("AA" & sep + 3).FormulaA1 = "=R" & janitzio + 1 & "+T" & janitzio + 1 & "+V" & janitzio + 1 & "+X" & janitzio + 1
                     hoja.Cell("AA" & sep + 4).FormulaA1 = "=AA" & sep + 3 & "*16%"
                     hoja.Cell("AA" & sep + 5).FormulaA1 = "=AA" & sep + 3 & "+AA" & sep + 4
@@ -8026,11 +8180,19 @@ Public Class frmnominasmarinos
                     hoja.Cell("AA" & sep + 8).FormulaA1 = "=AA" & sep + 6 & "+AA" & sep + 7
                     hoja.Cell("AA" & sep + 10).FormulaA1 = "AA" & sep + 5 & "+AA" & sep + 8
 
-                    hoja.Range("Y" & sep + 5, "AA" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range("Y" & sep + 8, "AA" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell("Y" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
-                End If
+                Else
+                    hoja.Cell("AA" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("AA" & sep + 4).FormulaA1 = "=AA" & sep + 3 & "*16%"
+                    hoja.Cell("AA" & sep + 5).FormulaA1 = "=AA" & sep + 3 & "+AA" & sep + 4
 
+                    hoja.Cell("AA" & sep + 6).FormulaA1 = "0"
+                    hoja.Cell("AA" & sep + 7).FormulaA1 = "=AA" & sep + 6 & "*16%"
+                    hoja.Cell("AA" & sep + 8).FormulaA1 = "=AA" & sep + 6 & "+AA" & sep + 7
+                    hoja.Cell("AA" & sep + 10).FormulaA1 = "AA" & sep + 5 & "+AA" & sep + 8
+                End If
+                hoja.Range("Y" & sep + 5, "AA" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("Y" & sep + 8, "AA" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("Y" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
                 '<<<<FACT>>>>
 
@@ -8054,17 +8216,19 @@ Public Class frmnominasmarinos
                 '<<<<<<<<<THIR>>>>>>>>>>>>
                 sep = sep + 12
 
-                If ignacio > 0 Then
 
-                    ''ISLA IGNACIO
-                    hoja.Cell("J" & sep).Value = "ISLA IGNACIO"
-                    hoja.Cell("J" & sep + 1).Value = "TMM DIVISION"
-                    hoja.Cell("J" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell("J" & sep + 4).Value = "IVA"
-                    hoja.Cell("J" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell("J" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell("J" & sep + 7).Value = "IVA"
-                    hoja.Cell("J" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+
+                ''ISLA IGNACIO
+                hoja.Cell("J" & sep).Value = "ISLA IGNACIO"
+                hoja.Cell("J" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("J" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("J" & sep + 4).Value = "IVA"
+                hoja.Cell("J" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("J" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("J" & sep + 7).Value = "IVA"
+                hoja.Cell("J" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+
+                If ignacio > 0 Then
 
                     hoja.Cell("L" & sep + 3).FormulaA1 = "=R" & ignacio + 1 & "+T" & ignacio + 1 & "+V" & ignacio + 1 & "+X" & ignacio + 1
                     hoja.Cell("L" & sep + 4).FormulaA1 = "=L" & sep + 3 & "*16%"
@@ -8075,23 +8239,35 @@ Public Class frmnominasmarinos
                     hoja.Cell("L" & sep + 8).FormulaA1 = "=L" & sep + 6 & "+L" & sep + 7
                     hoja.Cell("L" & sep + 10).FormulaA1 = "L" & sep + 5 & "+L" & sep + 8
 
-                    hoja.Range("J" & sep + 5, "L" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range("J" & sep + 8, "L" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell("J" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                Else
+                    hoja.Cell("L" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("L" & sep + 4).FormulaA1 = "=L" & sep + 3 & "*16%"
+                    hoja.Cell("L" & sep + 5).FormulaA1 = "=L" & sep + 3 & "+L" & sep + 4
+
+                    hoja.Cell("L" & sep + 6).FormulaA1 = "0"
+                    hoja.Cell("L" & sep + 7).FormulaA1 = "=L" & sep + 6 & "*16%"
+                    hoja.Cell("L" & sep + 8).FormulaA1 = "=L" & sep + 6 & "+L" & sep + 7
+                    hoja.Cell("L" & sep + 10).FormulaA1 = "L" & sep + 5 & "+L" & sep + 8
 
                 End If
 
-                If gabriel > 0 Then
+                hoja.Range("J" & sep + 5, "L" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("J" & sep + 8, "L" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("J" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
-                    'ISLA SAN GABRIEL
-                    hoja.Cell("N" & sep).Value = "ISLA SAN GABRIEL"
-                    hoja.Cell("N" & sep + 1).Value = "TMM DIVISION"
-                    hoja.Cell("N" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell("N" & sep + 4).Value = "IVA"
-                    hoja.Cell("N" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell("N" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell("N" & sep + 7).Value = "IVA"
-                    hoja.Cell("N" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+
+
+
+                'ISLA SAN GABRIEL
+                hoja.Cell("N" & sep).Value = "ISLA SAN GABRIEL"
+                hoja.Cell("N" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("N" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("N" & sep + 4).Value = "IVA"
+                hoja.Cell("N" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("N" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("N" & sep + 7).Value = "IVA"
+                hoja.Cell("N" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+                If gabriel > 0 Then
 
                     hoja.Cell("P" & sep + 3).FormulaA1 = "=R" & gabriel + 1 & "+T" & gabriel + 1 & "+V" & gabriel + 1 & "+X" & gabriel + 1
                     hoja.Cell("P" & sep + 4).FormulaA1 = "=P" & sep + 3 & "*16%"
@@ -8102,24 +8278,36 @@ Public Class frmnominasmarinos
                     hoja.Cell("P" & sep + 8).FormulaA1 = "=P" & sep + 6 & "+P" & sep + 7
                     hoja.Cell("P" & sep + 10).FormulaA1 = "P" & sep + 5 & "+P" & sep + 8
 
-                    hoja.Range("N" & sep + 5, "P" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range("N" & sep + 8, "P" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell("N" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                Else
+                    hoja.Cell("P" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("P" & sep + 4).FormulaA1 = "=P" & sep + 3 & "*16%"
+                    hoja.Cell("P" & sep + 5).FormulaA1 = "=P" & sep + 3 & "+P" & sep + 4
+
+                    hoja.Cell("P" & sep + 6).FormulaA1 = "0"
+                    hoja.Cell("P" & sep + 7).FormulaA1 = "=P" & sep + 6 & "*16%"
+                    hoja.Cell("P" & sep + 8).FormulaA1 = "=P" & sep + 6 & "+P" & sep + 7
+                    hoja.Cell("P" & sep + 10).FormulaA1 = "P" & sep + 5 & "+P" & sep + 8
 
                 End If
+
+                hoja.Range("N" & sep + 5, "P" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("N" & sep + 8, "P" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("N" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+
+                'ISLA DIEGO
+                hoja.Cell("S" & sep).Value = "ISLA SAN DIEGO"
+                hoja.Cell("S" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("S" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("S" & sep + 4).Value = "IVA"
+                hoja.Cell("S" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("S" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("S" & sep + 7).Value = "IVA"
+                hoja.Cell("S" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+
                 If diego > 0 Then
 
-                    'ISLA DIEGO
-                    hoja.Cell("S" & sep).Value = "ISLA SAN GABRIEL"
-                    hoja.Cell("S" & sep + 1).Value = "TMM DIVISION"
-                    hoja.Cell("S" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
-                    hoja.Cell("S" & sep + 4).Value = "IVA"
-                    hoja.Cell("S" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
-                    hoja.Cell("S" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
-                    hoja.Cell("S" & sep + 7).Value = "IVA"
-                    hoja.Cell("S" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
-
-                    hoja.Cell("T" & sep + 3).FormulaA1 = "=T" & diego + 1 & "+T" & diego + 1 & "+V" & diego + 1 & "+X" & diego + 1
+                    hoja.Cell("T" & sep + 3).FormulaA1 = "=R" & diego + 1 & "+T" & diego + 1 & "+V" & diego + 1 & "+X" & diego + 1
                     hoja.Cell("T" & sep + 4).FormulaA1 = "=T" & sep + 3 & "*16%"
                     hoja.Cell("T" & sep + 5).FormulaA1 = "=T" & sep + 3 & "+T" & sep + 4
 
@@ -8129,11 +8317,23 @@ Public Class frmnominasmarinos
 
                     hoja.Cell("T" & sep + 10).FormulaA1 = "T" & sep + 5 & "+T" & sep + 8
 
-                    hoja.Range("S" & sep + 5, "T" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Range("S" & sep + 8, "T" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
-                    hoja.Cell("S" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+                Else
+                    hoja.Cell("T" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("T" & sep + 4).FormulaA1 = "=T" & sep + 3 & "*16%"
+                    hoja.Cell("T" & sep + 5).FormulaA1 = "=T" & sep + 3 & "+T" & sep + 4
+
+                    hoja.Cell("T" & sep + 6).FormulaA1 = "0"
+                    hoja.Cell("T" & sep + 7).FormulaA1 = "=T" & sep + 6 & "*16%"
+                    hoja.Cell("T" & sep + 8).FormulaA1 = "=T" & sep + 6 & "+T" & sep + 7
+
+                    hoja.Cell("T" & sep + 10).FormulaA1 = "T" & sep + 5 & "+T" & sep + 8
+
 
                 End If
+
+                hoja.Range("S" & sep + 5, "T" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("S" & sep + 8, "T" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("S" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
                 '<<<<<<<<<<<<<<<<<<<<<<<<<<FACT>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
                 hoja5.Cell("C3").Value = periodo
@@ -8358,7 +8558,7 @@ Public Class frmnominasmarinos
 
                 llenargridD("1")
 
-               
+
                 ''Operadora Descanso
                 filaExcel = 9
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
@@ -8388,7 +8588,7 @@ Public Class frmnominasmarinos
                     hoja3.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(11).FormattedValue 'puesto
                     hoja3.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(12).FormattedValue 'buqye
 
-                 
+
                     hoja3.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(13).Value 'Tipo infonavit
                     hoja3.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(14).Value 'Valor Infornavit
                     hoja3.Cell(filaExcel, 13).Value = dtgDatos.Rows(x).Cells(16).Value 'Salario Diario
