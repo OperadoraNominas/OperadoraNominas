@@ -9614,7 +9614,6 @@ Public Class frmnominasmarinos
 
 
                 'verificar costo social
-
                 Dim contador, Posicion1, Posicion2, Posicion3, Posicion4, Posicion5 As Integer
 
 
@@ -9645,11 +9644,13 @@ Public Class frmnominasmarinos
 
 
                     Next
-
-                    sql = "select * from nomina where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                    sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC  where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                    'sql = "select * from nomina inner join EmpleadosC on nomin where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
                     sql &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
                     sql &= " and iEstatusEmpleado=" & cboserie.SelectedIndex
-                    sql &= " and iTipoNomina=" & tiponom
+                    sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+                    sql &= " order by " & campoordenamiento
+
                     Dim rwFila As DataRow() = nConsulta(sql)
 
                     If rwFila.Length = 1 Then
@@ -9696,7 +9697,6 @@ Public Class frmnominasmarinos
                         CType(Me.dtgDatos.Rows(Posicion5).Cells(12), DataGridViewComboBoxCell).Value = rwFila(4)("Buque").ToString()
                     End If
                 Next
-
 
 
                 'Cambiamos el index del combro de departamentos
