@@ -8207,7 +8207,7 @@ Public Class frmnominasmarinos
 
                 '<<<<<<<<<<<<<<<Operadora Descanso>>>>>>>>>>>>>>>>>>
               
-                llenargridD()
+                llenargridD("1")
 
                 'pgbProgreso.Value += 1
                 'Application.DoEvents()
@@ -8357,6 +8357,7 @@ Public Class frmnominasmarinos
                     libro.SaveAs(dialogo.FileName)
                     libro = Nothing
                     MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    llenargridD("0")
                 Else
                     MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -8909,7 +8910,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    Private Sub llenargridD()
+    Private Sub llenargridD(ByRef tiponom As String)
         'Cargar grid
         Try
             Dim sql As String
@@ -9003,7 +9004,7 @@ Public Class frmnominasmarinos
             sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC"
             sql &= " where Nomina.fkiIdEmpresa = 1 And fkiIdPeriodo = " & cboperiodo.SelectedValue
             sql &= " and Nomina.iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
-            sql &= " and iTipoNomina=1"
+            sql &= " and iTipoNomina=" & tiponom
             sql &= " order by " & campoordenamiento 'cNombreLargo"
             'sql = "EXEC getNominaXEmpresaXPeriodo " & gIdEmpresa & "," & cboperiodo.SelectedValue & ",1"
 
@@ -9435,7 +9436,7 @@ Public Class frmnominasmarinos
                     sql = "select * from nomina where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
                     sql &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
                     sql &= " and iEstatusEmpleado=" & cboserie.SelectedIndex
-                    sql &= " and iTipoNomina=1"
+                    sql &= " and iTipoNomina=" & tiponom
                     Dim rwFila As DataRow() = nConsulta(sql)
 
 
@@ -9909,7 +9910,7 @@ Public Class frmnominasmarinos
                         Next
 
 
-                      
+
 
                         ' MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Else
