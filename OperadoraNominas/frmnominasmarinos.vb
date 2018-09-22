@@ -7455,7 +7455,7 @@ Public Class frmnominasmarinos
                     End If
                     If nombrebuque = dtgDatos.Rows(x).Cells(12).Value Then
 
-                        hoja.Cell(filaExcel + x, 3).Style.NumberFormat.Format = "@"
+                        hoja.Cell(filaExcel + x, 4).Style.NumberFormat.Format = "@"
 
                         hoja.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(12).Value 'BUQUE
                         hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(5).Value 'STATUS
@@ -9032,15 +9032,8 @@ Public Class frmnominasmarinos
             Dim PrimaSA As Double
             Dim cadenabanco As String
             dtgDatos.Columns.Clear()
+            dtgDatos.DataSource = Nothing
 
-            'dtgDatos.DataSource = Nothing
-            'pnlProgreso.Visible = True
-            'pnlCatalogo.Enabled = False
-            'Application.DoEvents()
-
-            'pgbProgreso.Minimum = 0
-            'pgbProgreso.Value = 0
-            'pgbProgreso.Maximum = 60
 
             dtgDatos.DefaultCellStyle.Font = New Font("Calibri", 8)
             dtgDatos.ColumnHeadersDefaultCellStyle.Font = New Font("Calibri", 9)
@@ -9048,6 +9041,49 @@ Public Class frmnominasmarinos
             dtgDatos.Columns.Add(chk)
             chk.HeaderText = ""
             chk.Name = "chk"
+            'dtgDatos.Columns(0).SortMode = DataGridViewColumnSortMode.NotSortable
+
+            'dtgDatos.Columns("chk").SortMode = DataGridViewColumnSortMode.NotSortable
+
+            'dtgDatos.Columns.Add("idempleado", "idempleado")
+            'dtgDatos.Columns(0).Width = 30
+            'dtgDatos.Columns(0).ReadOnly = True
+            ''dtgDatos.Columns(0).DataPropertyName("idempleado")
+
+            'dtgDatos.Columns.Add("departamento", "Departamento")
+            'dtgDatos.Columns(1).Width = 100
+            'dtgDatos.Columns(1).ReadOnly = True
+            'dtgDatos.Columns.Add("nombre", "Trabajador")
+            'dtgDatos.Columns(2).Width = 250
+            'dtgDatos.Columns(2).ReadOnly = True
+            'dtgDatos.Columns.Add("sueldo", "Sueldo Ordinario")
+            'dtgDatos.Columns(3).Width = 75
+            'dtgDatos.Columns.Add("neto", "Neto")
+            'dtgDatos.Columns(4).Width = 75
+            'dtgDatos.Columns.Add("infonavit", "Infonavit")
+            'dtgDatos.Columns(5).Width = 75
+            'dtgDatos.Columns.Add("descuento", "Descuento")
+            'dtgDatos.Columns(6).Width = 75
+            'dtgDatos.Columns.Add("prestamo", "Prestamo")
+            'dtgDatos.Columns(7).Width = 75
+            'dtgDatos.Columns.Add("sindicato", "Sindicato")
+            'dtgDatos.Columns(8).Width = 75
+            'dtgDatos.Columns.Add("neto", "Sueldo Neto")
+            'dtgDatos.Columns(9).Width = 75
+            'dtgDatos.Columns.Add("imss", "Retención IMSS")
+            'dtgDatos.Columns(10).Width = 75
+            'dtgDatos.Columns.Add("subsidiado", "Retenciones")
+            'dtgDatos.Columns(11).Width = 75
+            'dtgDatos.Columns.Add("costosocial", "Costo Social")
+            'dtgDatos.Columns(12).Width = 75
+            'dtgDatos.Columns.Add("comision", "Comisión")
+            'dtgDatos.Columns(13).Width = 75
+            'dtgDatos.Columns.Add("subtotal", "Subtotal")
+            'dtgDatos.Columns(14).Width = 75
+            'dtgDatos.Columns.Add("iva", "IVA")
+            'dtgDatos.Columns(15).Width = 75
+            'dtgDatos.Columns.Add("total", "Total")
+            'dtgDatos.Columns(16).Width = 75
 
 
             Dim dsPeriodo As New DataSet
@@ -9548,7 +9584,53 @@ Public Class frmnominasmarinos
 
                 'Cambiamos index del combo en el grid
 
+                'For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                '    sql = "select * from nomina where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                '    sql &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                '    sql &= " and iEstatusEmpleado=" & cboserie.SelectedIndex
+                '    sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+                '    Dim rwFila As DataRow() = nConsulta(sql)
+
+
+
+                '    CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                '    CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                'Next
+
+
+                'verificar costo social
+
+                Dim contador, Posicion1, Posicion2, Posicion3, Posicion4, Posicion5 As Integer
+
+
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                    contador = 0
+
+
+                    For y As Integer = 0 To dtgDatos.Rows.Count - 1
+                        If dtgDatos.Rows(x).Cells(2).Value = dtgDatos.Rows(y).Cells(2).Value Then
+                            contador = contador + 1
+                            If contador = 1 Then
+                                Posicion1 = y
+                            End If
+                            If contador = 2 Then
+                                Posicion2 = y
+                            End If
+                            If contador = 3 Then
+                                Posicion3 = y
+                            End If
+                            If contador = 4 Then
+                                Posicion4 = y
+                            End If
+                            If contador = 5 Then
+                                Posicion5 = y
+                            End If
+                        End If
+
+
+
+                    Next
 
                     sql = "select * from nomina where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
                     sql &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
@@ -9556,11 +9638,51 @@ Public Class frmnominasmarinos
                     sql &= " and iTipoNomina=" & tiponom
                     Dim rwFila As DataRow() = nConsulta(sql)
 
+                    If rwFila.Length = 1 Then
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
 
+                    End If
 
-                    CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
-                    CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                    If rwFila.Length = 2 Then
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
+
+                    End If
+                    If rwFila.Length = 3 Then
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(11), DataGridViewComboBoxCell).Value = rwFila(2)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(12), DataGridViewComboBoxCell).Value = rwFila(2)("Buque").ToString()
+                    End If
+                    If rwFila.Length = 4 Then
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(11), DataGridViewComboBoxCell).Value = rwFila(2)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(12), DataGridViewComboBoxCell).Value = rwFila(2)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion4).Cells(11), DataGridViewComboBoxCell).Value = rwFila(3)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion4).Cells(12), DataGridViewComboBoxCell).Value = rwFila(3)("Buque").ToString()
+                    End If
+                    If rwFila.Length = 5 Then
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(11), DataGridViewComboBoxCell).Value = rwFila(2)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(12), DataGridViewComboBoxCell).Value = rwFila(2)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion4).Cells(11), DataGridViewComboBoxCell).Value = rwFila(3)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion4).Cells(12), DataGridViewComboBoxCell).Value = rwFila(3)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion5).Cells(11), DataGridViewComboBoxCell).Value = rwFila(4)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion5).Cells(12), DataGridViewComboBoxCell).Value = rwFila(4)("Buque").ToString()
+                    End If
                 Next
+
 
 
                 'Cambiamos el index del combro de departamentos
@@ -9676,7 +9798,7 @@ Public Class frmnominasmarinos
                             dsPeriodo.Tables("Tabla").Rows.Add(fila)
 
 
-                        
+
 
                         Next
 
@@ -10027,9 +10149,20 @@ Public Class frmnominasmarinos
                         Next
 
 
+                        'Cambiamos el index del combro de departamentos
+
+                        'For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                        '    sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        '    Dim rwFila As DataRow() = nConsulta(sql)
 
 
-                        ' MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+                        'Next
+
+
+                        'MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Else
                         MessageBox.Show("No hay datos en este período", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
@@ -10039,13 +10172,14 @@ Public Class frmnominasmarinos
 
                     'No hay datos en este período
                 Else
-                    '  MessageBox.Show("Para la nomina Descanso, solo se mostraran datos guardados, no se podrá calcular de 0", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show("Para la nomina Descanso, solo se mostraran datos guardados, no se podrá calcular de 0", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
 
 
 
 
             End If
+
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
