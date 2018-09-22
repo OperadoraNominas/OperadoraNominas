@@ -7455,6 +7455,8 @@ Public Class frmnominasmarinos
                     End If
                     If nombrebuque = dtgDatos.Rows(x).Cells(12).Value Then
 
+                        hoja.Cell(filaExcel + x, 4).Style.NumberFormat.Format = "@"
+
                         hoja.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(12).Value 'BUQUE
                         hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(5).Value 'STATUS
                         hoja.Cell(filaExcel + x, 4).Value = dtgDatos.Rows(x).Cells(3).Value ' NO TRABAJADOR
@@ -7465,7 +7467,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 9).Value = dtgDatos.Rows(x).Cells(18).Value ' DIAS DESCANSO
                         hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L" & filaExcel + x & "/2" 'ABORDO 
                         hoja.Cell(filaExcel + x, 11).FormulaA1 = "=L" & filaExcel + x & "/2"  'DESCANSO
-                        hoja.Cell(filaExcel + x, 12).FormulaA1 = dtgDatos.Rows(x).Cells(15).Value  ' SUELDO ORDINARIO
+                        hoja.Cell(filaExcel + x, 12).Value = dtgDatos.Rows(x).Cells(15).Value  ' SUELDO ORDINARIO
                         hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x ' CREDITO INFONAVIT
                         hoja.Cell(filaExcel + x, 14).Value = "0.0"
                         hoja.Cell(filaExcel + x, 15).Value = "0.0"
@@ -7575,7 +7577,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 9).Value = dtgDatos.Rows(x).Cells(18).Value
                         hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L" & filaExcel + x & "/2" 'ABORDO 
                         hoja.Cell(filaExcel + x, 11).FormulaA1 = "=L" & filaExcel + x & "/2"  'DESCANSO
-                        hoja.Cell(filaExcel + x, 12).FormulaA1 = dtgDatos.Rows(x).Cells(15).Value  ' SUELDO ORDINARIO
+                        hoja.Cell(filaExcel + x, 12).Value = dtgDatos.Rows(x).Cells(15).Value  ' SUELDO ORDINARIO
                         hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x ' CREDITO INFONAVIT
                         hoja.Cell(filaExcel + x, 14).Value = "0.0"
                         hoja.Cell(filaExcel + x, 15).Value = "0.0"
@@ -8177,8 +8179,9 @@ Public Class frmnominasmarinos
                         nombrebuque = dtgDatos.Rows(x).Cells(12).Value
                     End If
                     If nombrebuque = dtgDatos.Rows(x).Cells(12).Value Then
+                        hoja4.Cell(filaExcel + x, 3).Style.NumberFormat.Format = "@"
                         hoja4.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(12).Value
-                        hoja4.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(3).Value
+                        hoja4.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(3).Value 'No empleado
                         hoja4.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(4).Value
                         hoja4.Cell(filaExcel, 5).Value = banco
                         hoja4.Cell(filaExcel, 6).Value = clabe
@@ -8223,6 +8226,7 @@ Public Class frmnominasmarinos
                 ''OPERADORA ABORDO
                 filaExcel = 9
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                    hoja2.Cell(filaExcel, 1).Style.NumberFormat.Format = "@"
 
                     ' dtgDatos.Rows(x).Cells(11).FormattedValue
 
@@ -8323,6 +8327,7 @@ Public Class frmnominasmarinos
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
                     ' dtgDatos.Rows(x).Cells(11).FormattedValue
+                    hoja3.Cell(filaExcel, 1).Style.NumberFormat.Format = "@"
 
                     hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value 'N° Trabajador
                     hoja3.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
@@ -8335,71 +8340,71 @@ Public Class frmnominasmarinos
                     hoja3.Cell(filaExcel, 9).Value = dtgDatos.Rows(x).Cells(11).FormattedValue 'puesto
                     hoja3.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(12).FormattedValue 'buqye
 
-                    If dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Then
+                    ''If dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Then
 
-                        hoja3.Cell(filaExcel, 11).Value = 0
-                        hoja3.Cell(filaExcel, 12).Value = 0
-                        hoja3.Cell(filaExcel, 13).Value = 0
-                        hoja3.Cell(filaExcel, 14).Value = 0
-                        hoja3.Cell(filaExcel, 15).Value = 0
-                        hoja3.Cell(filaExcel, 16).Value = 0
-                        hoja3.Cell(filaExcel, 17).Value = 0
-                        hoja3.Cell(filaExcel, 18).Value = 0
-                        hoja3.Cell(filaExcel, 19).Value = 0
-                        hoja3.Cell(filaExcel, 20).Value = 0
-                        hoja3.Cell(filaExcel, 21).Value = 0
-                        hoja3.Cell(filaExcel, 22).Value = 0
-                        hoja3.Cell(filaExcel, 23).Value = 0
-                        hoja3.Cell(filaExcel, 24).Value = 0
-                        hoja3.Cell(filaExcel, 25).Value = 0
-                        hoja3.Cell(filaExcel, 26).Value = 0
-                        hoja3.Cell(filaExcel, 27).Value = 0
-                        hoja3.Cell(filaExcel, 28).Value = 0
-                        hoja3.Cell(filaExcel, 29).Value = 0
-                        hoja3.Cell(filaExcel, 30).Value = 0
-                        hoja3.Cell(filaExcel, 31).Value = 0
-                        hoja3.Cell(filaExcel, 32).Value = 0
-                        hoja3.Cell(filaExcel, 33).Value = 0
-                        hoja3.Cell(filaExcel, 34).Value = 0
-                        hoja3.Cell(filaExcel, 35).Value = 0
-                        hoja3.Cell(filaExcel, 36).Value = 0
-                        hoja3.Cell(filaExcel, 37).Value = 0
-                        hoja3.Cell(filaExcel, 38).Value = 0
-
-
-                    Else
-                        hoja3.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(13).Value 'Tipo infonavit
-                        hoja3.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(14).Value 'Valor Infornavit
-                        hoja3.Cell(filaExcel, 13).Value = dtgDatos.Rows(x).Cells(16).Value 'Salario Diario
-                        hoja3.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(17).Value 'SDI
-                        hoja3.Cell(filaExcel, 15).Value = dtgDatos.Rows(x).Cells(18).Value ' Dias Trabajados
-                        hoja3.Cell(filaExcel, 16).Value = dtgDatos.Rows(x).Cells(19).Value ' Tipo incapacidad
-                        hoja3.Cell(filaExcel, 17).Value = dtgDatos.Rows(x).Cells(20).Value ' Numero dias
-                        hoja3.Cell(filaExcel, 18).Value = dtgDatos.Rows(x).Cells(21).Value 'Sueldo base
-                        hoja3.Cell(filaExcel, 19).Value = dtgDatos.Rows(x).Cells(22).Value ' Tiempo Extra Fijo Gravado
-                        hoja3.Cell(filaExcel, 20).Value = dtgDatos.Rows(x).Cells(23).Value 'Tiempo Extra Fijo Exento
-                        hoja3.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(24).Value ' Tiempo extra ocasional
-                        hoja3.Cell(filaExcel, 22).Value = dtgDatos.Rows(x).Cells(25).Value ' Desc. Sem Oblig.
-                        hoja3.Cell(filaExcel, 23).Value = dtgDatos.Rows(x).Cells(26).Value ' VAC. PROPOR
-                        hoja3.Cell(filaExcel, 24).Value = dtgDatos.Rows(x).Cells(27).Value ' AGINALDO GRA
-                        hoja3.Cell(filaExcel, 25).Value = dtgDatos.Rows(x).Cells(28).Value ' AGUINALDO EXENTO
-                        hoja3.Cell(filaExcel, 26).Value = dtgDatos.Rows(x).Cells(29).Value ' TOTAL AGUINALDO
-                        hoja3.Cell(filaExcel, 27).Value = dtgDatos.Rows(x).Cells(30).Value ' P. VAC. GRAVADO
-                        hoja3.Cell(filaExcel, 28).Value = dtgDatos.Rows(x).Cells(31).Value ' P. VAC. EXENTO
-                        hoja3.Cell(filaExcel, 29).Value = dtgDatos.Rows(x).Cells(32).Value ' TOTAL P. VAC
-                        hoja3.Cell(filaExcel, 30).Value = dtgDatos.Rows(x).Cells(33).Value ' TOTAL PERCEPCIONES
-                        hoja3.Cell(filaExcel, 31).Value = dtgDatos.Rows(x).Cells(34).Value ' TOTAL PERCEPC P/ISR
-                        hoja3.Cell(filaExcel, 32).Value = dtgDatos.Rows(x).Cells(35).Value ' INCAPACIDAD
-                        hoja3.Cell(filaExcel, 33).Value = dtgDatos.Rows(x).Cells(36).Value ' ISR
-                        hoja3.Cell(filaExcel, 34).Value = dtgDatos.Rows(x).Cells(37).Value ' IMSS
-                        hoja3.Cell(filaExcel, 35).Value = dtgDatos.Rows(x).Cells(38).Value ' INFONAVIT
-                        hoja3.Cell(filaExcel, 36).Value = dtgDatos.Rows(x).Cells(41).Value ' PENSION ALIMENTICIA
-                        hoja3.Cell(filaExcel, 37).Value = dtgDatos.Rows(x).Cells(45).Value ' SUBSIDIO
-                        hoja3.Cell(filaExcel, 38).Value = dtgDatos.Rows(x).Cells(42).Value ' PRESTAMO
-                        hoja3.Cell(filaExcel, 39).Value = dtgDatos.Rows(x).Cells(46).Value ' NETO A PAGAR
+                    'hoja3.Cell(filaExcel, 11).Value = 0
+                    'hoja3.Cell(filaExcel, 12).Value = 0
+                    'hoja3.Cell(filaExcel, 13).Value = 0
+                    'hoja3.Cell(filaExcel, 14).Value = 0
+                    'hoja3.Cell(filaExcel, 15).Value = 0
+                    'hoja3.Cell(filaExcel, 16).Value = 0
+                    'hoja3.Cell(filaExcel, 17).Value = 0
+                    'hoja3.Cell(filaExcel, 18).Value = 0
+                    'hoja3.Cell(filaExcel, 19).Value = 0
+                    'hoja3.Cell(filaExcel, 20).Value = 0
+                    'hoja3.Cell(filaExcel, 21).Value = 0
+                    'hoja3.Cell(filaExcel, 22).Value = 0
+                    'hoja3.Cell(filaExcel, 23).Value = 0
+                    'hoja3.Cell(filaExcel, 24).Value = 0
+                    'hoja3.Cell(filaExcel, 25).Value = 0
+                    'hoja3.Cell(filaExcel, 26).Value = 0
+                    'hoja3.Cell(filaExcel, 27).Value = 0
+                    'hoja3.Cell(filaExcel, 28).Value = 0
+                    'hoja3.Cell(filaExcel, 29).Value = 0
+                    'hoja3.Cell(filaExcel, 30).Value = 0
+                    'hoja3.Cell(filaExcel, 31).Value = 0
+                    'hoja3.Cell(filaExcel, 32).Value = 0
+                    'hoja3.Cell(filaExcel, 33).Value = 0
+                    'hoja3.Cell(filaExcel, 34).Value = 0
+                    'hoja3.Cell(filaExcel, 35).Value = 0
+                    'hoja3.Cell(filaExcel, 36).Value = 0
+                    'hoja3.Cell(filaExcel, 37).Value = 0
+                    'hoja3.Cell(filaExcel, 38).Value = 0
 
 
-                    End If
+                    'Else
+                    hoja3.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(13).Value 'Tipo infonavit
+                    hoja3.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(14).Value 'Valor Infornavit
+                    hoja3.Cell(filaExcel, 13).Value = dtgDatos.Rows(x).Cells(16).Value 'Salario Diario
+                    hoja3.Cell(filaExcel, 14).Value = dtgDatos.Rows(x).Cells(17).Value 'SDI
+                    hoja3.Cell(filaExcel, 15).Value = dtgDatos.Rows(x).Cells(18).Value ' Dias Trabajados
+                    hoja3.Cell(filaExcel, 16).Value = dtgDatos.Rows(x).Cells(19).Value ' Tipo incapacidad
+                    hoja3.Cell(filaExcel, 17).Value = dtgDatos.Rows(x).Cells(20).Value ' Numero dias
+                    hoja3.Cell(filaExcel, 18).Value = dtgDatos.Rows(x).Cells(21).Value 'Sueldo base
+                    hoja3.Cell(filaExcel, 19).Value = dtgDatos.Rows(x).Cells(22).Value ' Tiempo Extra Fijo Gravado
+                    hoja3.Cell(filaExcel, 20).Value = dtgDatos.Rows(x).Cells(23).Value 'Tiempo Extra Fijo Exento
+                    hoja3.Cell(filaExcel, 21).Value = dtgDatos.Rows(x).Cells(24).Value ' Tiempo extra ocasional
+                    hoja3.Cell(filaExcel, 22).Value = dtgDatos.Rows(x).Cells(25).Value ' Desc. Sem Oblig.
+                    hoja3.Cell(filaExcel, 23).Value = dtgDatos.Rows(x).Cells(26).Value ' VAC. PROPOR
+                    hoja3.Cell(filaExcel, 24).Value = dtgDatos.Rows(x).Cells(27).Value ' AGINALDO GRA
+                    hoja3.Cell(filaExcel, 25).Value = dtgDatos.Rows(x).Cells(28).Value ' AGUINALDO EXENTO
+                    hoja3.Cell(filaExcel, 26).Value = dtgDatos.Rows(x).Cells(29).Value ' TOTAL AGUINALDO
+                    hoja3.Cell(filaExcel, 27).Value = dtgDatos.Rows(x).Cells(30).Value ' P. VAC. GRAVADO
+                    hoja3.Cell(filaExcel, 28).Value = dtgDatos.Rows(x).Cells(31).Value ' P. VAC. EXENTO
+                    hoja3.Cell(filaExcel, 29).Value = dtgDatos.Rows(x).Cells(32).Value ' TOTAL P. VAC
+                    hoja3.Cell(filaExcel, 30).Value = dtgDatos.Rows(x).Cells(33).Value ' TOTAL PERCEPCIONES
+                    hoja3.Cell(filaExcel, 31).Value = dtgDatos.Rows(x).Cells(34).Value ' TOTAL PERCEPC P/ISR
+                    hoja3.Cell(filaExcel, 32).Value = dtgDatos.Rows(x).Cells(35).Value ' INCAPACIDAD
+                    hoja3.Cell(filaExcel, 33).Value = dtgDatos.Rows(x).Cells(36).Value ' ISR
+                    hoja3.Cell(filaExcel, 34).Value = dtgDatos.Rows(x).Cells(37).Value ' IMSS
+                    hoja3.Cell(filaExcel, 35).Value = dtgDatos.Rows(x).Cells(38).Value ' INFONAVIT
+                    hoja3.Cell(filaExcel, 36).Value = dtgDatos.Rows(x).Cells(41).Value ' PENSION ALIMENTICIA
+                    hoja3.Cell(filaExcel, 37).Value = dtgDatos.Rows(x).Cells(45).Value ' SUBSIDIO
+                    hoja3.Cell(filaExcel, 38).Value = dtgDatos.Rows(x).Cells(42).Value ' PRESTAMO
+                    hoja3.Cell(filaExcel, 39).Value = dtgDatos.Rows(x).Cells(46).Value ' NETO A PAGAR
+
+
+                    'End If
 
 
                     filaExcel = filaExcel + 1
@@ -9007,8 +9012,8 @@ Public Class frmnominasmarinos
                     Case "text black"
                         hoja.Cell(f, c).Style.Font.SetFontColor(XLColor.Black)
 
-                        'Case "insert"
-                        '    
+                 
+
 
                 End Select
             Next
@@ -9037,6 +9042,49 @@ Public Class frmnominasmarinos
             dtgDatos.Columns.Add(chk)
             chk.HeaderText = ""
             chk.Name = "chk"
+            'dtgDatos.Columns(0).SortMode = DataGridViewColumnSortMode.NotSortable
+
+            'dtgDatos.Columns("chk").SortMode = DataGridViewColumnSortMode.NotSortable
+
+            'dtgDatos.Columns.Add("idempleado", "idempleado")
+            'dtgDatos.Columns(0).Width = 30
+            'dtgDatos.Columns(0).ReadOnly = True
+            ''dtgDatos.Columns(0).DataPropertyName("idempleado")
+
+            'dtgDatos.Columns.Add("departamento", "Departamento")
+            'dtgDatos.Columns(1).Width = 100
+            'dtgDatos.Columns(1).ReadOnly = True
+            'dtgDatos.Columns.Add("nombre", "Trabajador")
+            'dtgDatos.Columns(2).Width = 250
+            'dtgDatos.Columns(2).ReadOnly = True
+            'dtgDatos.Columns.Add("sueldo", "Sueldo Ordinario")
+            'dtgDatos.Columns(3).Width = 75
+            'dtgDatos.Columns.Add("neto", "Neto")
+            'dtgDatos.Columns(4).Width = 75
+            'dtgDatos.Columns.Add("infonavit", "Infonavit")
+            'dtgDatos.Columns(5).Width = 75
+            'dtgDatos.Columns.Add("descuento", "Descuento")
+            'dtgDatos.Columns(6).Width = 75
+            'dtgDatos.Columns.Add("prestamo", "Prestamo")
+            'dtgDatos.Columns(7).Width = 75
+            'dtgDatos.Columns.Add("sindicato", "Sindicato")
+            'dtgDatos.Columns(8).Width = 75
+            'dtgDatos.Columns.Add("neto", "Sueldo Neto")
+            'dtgDatos.Columns(9).Width = 75
+            'dtgDatos.Columns.Add("imss", "Retención IMSS")
+            'dtgDatos.Columns(10).Width = 75
+            'dtgDatos.Columns.Add("subsidiado", "Retenciones")
+            'dtgDatos.Columns(11).Width = 75
+            'dtgDatos.Columns.Add("costosocial", "Costo Social")
+            'dtgDatos.Columns(12).Width = 75
+            'dtgDatos.Columns.Add("comision", "Comisión")
+            'dtgDatos.Columns(13).Width = 75
+            'dtgDatos.Columns.Add("subtotal", "Subtotal")
+            'dtgDatos.Columns(14).Width = 75
+            'dtgDatos.Columns.Add("iva", "IVA")
+            'dtgDatos.Columns(15).Width = 75
+            'dtgDatos.Columns.Add("total", "Total")
+            'dtgDatos.Columns(16).Width = 75
 
 
             Dim dsPeriodo As New DataSet
@@ -9537,7 +9585,53 @@ Public Class frmnominasmarinos
 
                 'Cambiamos index del combo en el grid
 
+                'For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                '    sql = "select * from nomina where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                '    sql &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                '    sql &= " and iEstatusEmpleado=" & cboserie.SelectedIndex
+                '    sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+                '    Dim rwFila As DataRow() = nConsulta(sql)
+
+
+
+                '    CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                '    CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                'Next
+
+
+                'verificar costo social
+
+                Dim contador, Posicion1, Posicion2, Posicion3, Posicion4, Posicion5 As Integer
+
+
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                    contador = 0
+
+
+                    For y As Integer = 0 To dtgDatos.Rows.Count - 1
+                        If dtgDatos.Rows(x).Cells(2).Value = dtgDatos.Rows(y).Cells(2).Value Then
+                            contador = contador + 1
+                            If contador = 1 Then
+                                Posicion1 = y
+                            End If
+                            If contador = 2 Then
+                                Posicion2 = y
+                            End If
+                            If contador = 3 Then
+                                Posicion3 = y
+                            End If
+                            If contador = 4 Then
+                                Posicion4 = y
+                            End If
+                            If contador = 5 Then
+                                Posicion5 = y
+                            End If
+                        End If
+
+
+
+                    Next
 
                     sql = "select * from nomina where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
                     sql &= " and fkiIdPeriodo=" & cboperiodo.SelectedValue
@@ -9545,11 +9639,51 @@ Public Class frmnominasmarinos
                     sql &= " and iTipoNomina=" & tiponom
                     Dim rwFila As DataRow() = nConsulta(sql)
 
+                    If rwFila.Length = 1 Then
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
 
+                    End If
 
-                    CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
-                    CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                    If rwFila.Length = 2 Then
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
+
+                    End If
+                    If rwFila.Length = 3 Then
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(11), DataGridViewComboBoxCell).Value = rwFila(2)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(12), DataGridViewComboBoxCell).Value = rwFila(2)("Buque").ToString()
+                    End If
+                    If rwFila.Length = 4 Then
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(11), DataGridViewComboBoxCell).Value = rwFila(2)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(12), DataGridViewComboBoxCell).Value = rwFila(2)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion4).Cells(11), DataGridViewComboBoxCell).Value = rwFila(3)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion4).Cells(12), DataGridViewComboBoxCell).Value = rwFila(3)("Buque").ToString()
+                    End If
+                    If rwFila.Length = 5 Then
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion1).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(11), DataGridViewComboBoxCell).Value = rwFila(1)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion2).Cells(12), DataGridViewComboBoxCell).Value = rwFila(1)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(11), DataGridViewComboBoxCell).Value = rwFila(2)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion3).Cells(12), DataGridViewComboBoxCell).Value = rwFila(2)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion4).Cells(11), DataGridViewComboBoxCell).Value = rwFila(3)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion4).Cells(12), DataGridViewComboBoxCell).Value = rwFila(3)("Buque").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion5).Cells(11), DataGridViewComboBoxCell).Value = rwFila(4)("Puesto").ToString()
+                        CType(Me.dtgDatos.Rows(Posicion5).Cells(12), DataGridViewComboBoxCell).Value = rwFila(4)("Buque").ToString()
+                    End If
                 Next
+
 
 
                 'Cambiamos el index del combro de departamentos
@@ -10016,9 +10150,20 @@ Public Class frmnominasmarinos
                         Next
 
 
+                        'Cambiamos el index del combro de departamentos
+
+                        'For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                        '    sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        '    Dim rwFila As DataRow() = nConsulta(sql)
 
 
-                        ' MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+                        'Next
+
+
+                        'MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Else
                         MessageBox.Show("No hay datos en este período", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End If
@@ -10028,13 +10173,14 @@ Public Class frmnominasmarinos
 
                     'No hay datos en este período
                 Else
-                    '  MessageBox.Show("Para la nomina Descanso, solo se mostraran datos guardados, no se podrá calcular de 0", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show("Para la nomina Descanso, solo se mostraran datos guardados, no se podrá calcular de 0", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
 
 
 
 
             End If
+
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
