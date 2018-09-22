@@ -7463,8 +7463,8 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(10).Value ' EDAD
                         hoja.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(18).Value ' DIAS ABORDO
                         hoja.Cell(filaExcel + x, 9).Value = dtgDatos.Rows(x).Cells(18).Value ' DIAS DESCANSO
-                        hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L49/" & filaExcel + x 'ABORDO 
-                        hoja.Cell(filaExcel + x, 11).FormulaA1 = "=L49/" & filaExcel + x  'DESCANSO
+                        hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L" & filaExcel + x & "/2" 'ABORDO 
+                        hoja.Cell(filaExcel + x, 11).FormulaA1 = "=L" & filaExcel + x & "/2"  'DESCANSO
                         hoja.Cell(filaExcel + x, 12).FormulaA1 = dtgDatos.Rows(x).Cells(15).Value  ' SUELDO ORDINARIO
                         hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x ' CREDITO INFONAVIT
                         hoja.Cell(filaExcel + x, 14).Value = "0.0"
@@ -7573,8 +7573,8 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(10).Value
                         hoja.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(18).Value
                         hoja.Cell(filaExcel + x, 9).Value = dtgDatos.Rows(x).Cells(18).Value
-                        hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L49/" & filaExcel + x 'ABORDO 
-                        hoja.Cell(filaExcel + x, 11).FormulaA1 = "=L49/" & filaExcel + x  'DESCANSO
+                        hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L" & filaExcel + x & "/2" 'ABORDO 
+                        hoja.Cell(filaExcel + x, 11).FormulaA1 = "=L" & filaExcel + x & "/2"  'DESCANSO
                         hoja.Cell(filaExcel + x, 12).FormulaA1 = dtgDatos.Rows(x).Cells(15).Value  ' SUELDO ORDINARIO
                         hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x ' CREDITO INFONAVIT
                         hoja.Cell(filaExcel + x, 14).Value = "0.0"
