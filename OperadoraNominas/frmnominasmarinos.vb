@@ -7455,7 +7455,7 @@ Public Class frmnominasmarinos
                 Dim filatmp As Integer = 13 - 4
                 Dim fecha As String
 
-                Dim amarrados, arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, ignacio, gabriel, diego As Integer
+                Dim amarrados, arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, luis, ignacio, gabriel, diego As Integer
 
                 Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB As String
 
@@ -7543,6 +7543,8 @@ Public Class frmnominasmarinos
                                 diego = contadorexcelbuquefinal
                             Case "AMARRADOS", "ISLA AMARRADOS"
                                 amarrados = contadorexcelbuquefinal
+                            Case "ISLA SAN LUIS", "SAN LUIS"
+                                luis = contadorexcelbuquefinal
                         End Select
 
                         hoja.Cell(filaExcel + x, 12).FormulaA1 = "=SUM(L" & contadorexcelbuqueinicial & ":L" & contadorexcelbuquefinal & ")"
@@ -7677,6 +7679,8 @@ Public Class frmnominasmarinos
                         diego = contadorexcelbuquefinal
                     Case "AMARRADOS", "ISLA AMARRADOS"
                         amarrados = contadorexcelbuquefinal
+                    Case "ISLA SAN LUIS", "SAN LUIS"
+                        luis = contadorexcelbuquefinal
                 End Select
 
 
@@ -8217,6 +8221,45 @@ Public Class frmnominasmarinos
                 sep = sep + 12
 
 
+                ''ISLA SAN LUIS
+                hoja.Cell("F" & sep).Value = "ISLA SAN LUIS"
+                hoja.Cell("F" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("F" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("F" & sep + 4).Value = "IVA"
+                hoja.Cell("F" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("F" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("F" & sep + 7).Value = "IVA"
+                hoja.Cell("F" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+
+                If luis > 0 Then
+
+                    hoja.Cell("H" & sep + 3).FormulaA1 = "=R" & luis + 1 & "+T" & luis + 1 & "+V" & luis + 1 & "+X" & luis + 1
+                    hoja.Cell("H" & sep + 4).FormulaA1 = "=h" & sep + 3 & "*16%"
+                    hoja.Cell("H" & sep + 5).FormulaA1 = "=h" & sep + 3 & "+h" & sep + 4
+
+                    hoja.Cell("H" & sep + 6).FormulaA1 = "=S" & ignacio + 1 & "+W" & ignacio + 1
+                    hoja.Cell("H" & sep + 7).FormulaA1 = "=H" & sep + 6 & "*16%"
+                    hoja.Cell("H" & sep + 8).FormulaA1 = "=H" & sep + 6 & "+H" & sep + 7
+                    hoja.Cell("H" & sep + 10).FormulaA1 = "H" & sep + 5 & "+H" & sep + 8
+
+                Else
+                    hoja.Cell("H" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("H" & sep + 4).FormulaA1 = "=H" & sep + 3 & "*16%"
+                    hoja.Cell("H" & sep + 5).FormulaA1 = "=H" & sep + 3 & "+H" & sep + 4
+
+                    hoja.Cell("H" & sep + 6).FormulaA1 = "0"
+                    hoja.Cell("H" & sep + 7).FormulaA1 = "=H" & sep + 6 & "*16%"
+                    hoja.Cell("H" & sep + 8).FormulaA1 = "=H" & sep + 6 & "+H" & sep + 7
+                    hoja.Cell("H" & sep + 10).FormulaA1 = "H" & sep + 5 & "+H" & sep + 8
+
+                End If
+
+                hoja.Range("F" & sep + 5, "H" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("F" & sep + 8, "H" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("F" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
+
+
 
                 ''ISLA IGNACIO
                 hoja.Cell("J" & sep).Value = "ISLA IGNACIO"
@@ -8404,36 +8447,16 @@ Public Class frmnominasmarinos
                     End If
 
 
-
-                    If inicio = x Then
-                        contadorexcelbuqueinicial = filaExcel + x
-                        nombrebuque = dtgDatos.Rows(x).Cells(12).Value
-                    End If
-                    If nombrebuque = dtgDatos.Rows(x).Cells(12).Value Then
-                        hoja4.Cell(filaExcel + x, 3).Style.NumberFormat.Format = "@"
-                        hoja4.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(12).Value
-                        hoja4.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(3).Value 'No empleado
-                        hoja4.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(4).Value
-                        hoja4.Cell(filaExcel, 5).Value = banco
-                        hoja4.Cell(filaExcel, 6).Value = clabe
-                        hoja4.Cell(filaExcel, 7).Value = cuenta
-                        hoja4.Cell(filaExcel, 8).FormulaA1 = "='OPERADORA ABORDO'!AM" & filatmp & "+'OPERADORA DESCANSO'!AM" & filatmp
-                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp + 4
-                    Else
-                        filatmp = filatmp + 2
-
-                        nombrebuque = dtgDatos.Rows(x).Cells(12).Value
-                        hoja4.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(12).Value
-                        hoja4.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(3).Value
-                        hoja4.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(4).Value
-                        hoja4.Cell(filaExcel, 5).Value = banco
-                        hoja4.Cell(filaExcel, 6).Value = clabe
-                        hoja4.Cell(filaExcel, 7).Value = cuenta
-                        hoja4.Cell(filaExcel, 8).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp & "+'OPERADORA DESCANSO'!AI" & filatmp
-                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp + 4
-                    End If
-
-
+                    hoja4.Cell(filaExcel + x, 3).Style.NumberFormat.Format = "@"
+                    hoja4.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(12).Value
+                    hoja4.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(3).Value 'No empleado
+                    hoja4.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(4).Value
+                    hoja4.Cell(filaExcel, 5).Value = banco
+                    hoja4.Cell(filaExcel, 6).Value = clabe
+                    hoja4.Cell(filaExcel, 7).Value = cuenta
+                    hoja4.Cell(filaExcel, 8).FormulaA1 = "='OPERADORA ABORDO'!AM" & filatmp & "+'OPERADORA DESCANSO'!AM" & filatmp
+                    hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp + 4
+                    
 
                     filaExcel = filaExcel + 1
                     filatmp = filatmp + 1
