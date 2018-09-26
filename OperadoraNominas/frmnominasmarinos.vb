@@ -4094,6 +4094,9 @@ Public Class frmnominasmarinos
                         nombrebuque = dtgDatos.Rows(x).Cells(12).Value
                     End If
                     If nombrebuque = dtgDatos.Rows(x).Cells(12).Value Then
+                        hoja2.Cell(filaExcel + x, 2).Style.NumberFormat.Format = "@"
+                        hoja2.Cell(filaExcel + x, 4).Style.NumberFormat.Format = "@"
+                        hoja2.Range(filaExcel + x, 8, filaExcel + x, 26).Style.NumberFormat.NumberFormatId = 4
 
                         hoja2.Cell(filaExcel + x, 1).Value = fechadepago 'FECHA DE PAGO
                         hoja2.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(3).Value 'no empleado
@@ -4126,8 +4129,6 @@ Public Class frmnominasmarinos
                         Else
                             hoja2.Cell(filaExcel + x, 18).Value = "0"
                         End If
-                        'hoja2.Cell(filaExcel + x, 17).Value = IIf(dtgDatos.Rows(x).Cells(46).Value <> "", dtgDatos.Rows(x).Cells(46).Value * 2%, "0") 'COMISION OPERADORA (Neto_pagar*2%)
-                        'hoja2.Cell(filaExcel + x, 18).Value = IIf(dtgDatos.Rows(x).Cells(56).Value <> "", dtgDatos.Rows(x).Cells(56).Value * 2%, "0") 'COMISION COMPLEMENTE
                         hoja2.Cell(filaExcel + x, 19).Value = dtgDatos.Rows(x).Cells(45).Value 'Subsidio
                         hoja2.Cell(filaExcel + x, 20).Value = dtgDatos.Rows(x).Cells(49).Value 'IMSS
                         hoja2.Cell(filaExcel + x, 21).Value = dtgDatos.Rows(x).Cells(50).Value ' SAR
@@ -4144,8 +4145,10 @@ Public Class frmnominasmarinos
                     Else
                         filatmp = filatmp + 1
 
+                        
+
                         contadorexcelbuquefinal = filaExcel + x - 1
-                        contadorexcelbuquefinalg = contadorexcelbuquefinal
+                        contadorexcelbuquefinal = contadorexcelbuquefinal
                         hoja2.Cell(filaExcel + x, 7).Value = "SUMA " + nombrebuque
                         hoja2.Cell(filaExcel + x, 8).FormulaA1 = "=SUM(H" & contadorexcelbuqueinicial & ":H" & contadorexcelbuquefinal & ")"
                         hoja2.Cell(filaExcel + x, 9).FormulaA1 = "=SUM(I" & contadorexcelbuqueinicial & ":I" & contadorexcelbuquefinal & ")"
@@ -4168,221 +4171,25 @@ Public Class frmnominasmarinos
                         hoja2.Cell(filaExcel + x, 26).FormulaA1 = "=SUM(Z" & contadorexcelbuqueinicial & ":Z" & contadorexcelbuquefinal & ")"
                         hoja2.Range(filaExcel + x, 7, filaExcel + x, 26).Style.Font.SetBold(True)
 
-                        '<<<<Mes>>>
+                        '<<<<<<Mes>>>>>>>
+
                         hoja.Cell(5, 2).Style.NumberFormat.Format = "@"
                         hoja.Cell(5, 2).Value = fechapagoletra(1) & " " & fechapagoletra(2) & " " & fechapagoletra(3)
                         hoja.Cell(16, 2).Value = MonthString(mes - 1).ToUpper & " ADICIONALES"
-                        hoja.Cell(24, 7).Value = MonthString(mes - 1).ToUpper
-                        hoja.Cell(24, 18).Value = MonthString(mes - 1).ToUpper & " ADICIONALES"
-                        hoja.Cell(24, 18).Style.Font.SetBold(True)
-                        Select Case nombrebuque
-                            Case "CEDROS", "ISLA CEDROS"
-                                hoja.Cell(5, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
-                                hoja.Cell(5, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
-
-
-
-
-
-                            Case "ISLA SAN JOSE"
-                                hoja.Cell(6, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
-                                hoja.Cell(6, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
-
-
-                            Case "ISLA GRANDE"
-                                hoja.Cell(7, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
-                                hoja.Cell(7, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
-
-
-
-
-                            Case "ISLA MIRAMAR"
-                                hoja.Cell(8, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
-                                hoja.Cell(8, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
-
-
-                            Case "ISLA MONSERRAT"
-                                hoja.Cell(9, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
-                                hoja.Cell(9, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
-
-
-
-                            Case "ISLA BLANCA"
-                                hoja.Cell(10, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
-                                hoja.Cell(10, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
-
-
-
-                            Case "ISLA CIARI"
-                                hoja.Cell(11, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
-                                hoja.Cell(11, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
-
-
-
-                            Case "ISLA JANITZIO"
-                                hoja.Cell(12, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
-                                hoja.Cell(12, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
-
-
-                            Case "ISLA SAN GABRIEL"
-                                hoja.Cell(13, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
-                                hoja.Cell(13, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
-
-
-
-                            Case "AMARRADOS"
-                                hoja.Cell(14, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
-                                hoja.Cell(14, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
-
-
-                        End Select
-
+                        hoja.Cell(31, 7).Value = MonthString(mes - 1).ToUpper
+                        hoja.Cell(31, 26).Value = MonthString(mes - 1).ToUpper & " ADICIONALES"
+                        hoja.Cell(31, 26).Style.Font.SetBold(True)
+                     
+                        llenardesgloce(nombrebuque, contadorexcelbuquefinal, hoja)
 
                         nombrebuque = dtgDatos.Rows(x).Cells(12).Value
                         filaExcel = filaExcel + 1
                         contadorexcelbuqueinicial = filaExcel + x
                         contadorexcelbuquefinal = 0
 
+                        hoja2.Cell(filaExcel + x, 2).Style.NumberFormat.Format = "@"
+                        hoja2.Cell(filaExcel + x, 4).Style.NumberFormat.Format = "@"
+                        hoja2.Range(filaExcel + x, 7, filaExcel + x, 26).Style.NumberFormat.NumberFormatId = 4
 
                         hoja2.Cell(filaExcel + x, 1).Value = fechadepago 'FECHA DE PAGO
                         hoja2.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(3).Value 'no empleado
@@ -4397,7 +4204,6 @@ Public Class frmnominasmarinos
                         Else
                             hoja2.Cell(filaExcel + x, 9).Value = "0"
                         End If
-
                         hoja2.Cell(filaExcel + x, 10).Value = dtgDatos.Rows(x).Cells(24).Value 'TIEMPO EXTRA OCASIONAL
                         hoja2.Cell(filaExcel + x, 11).Value = dtgDatos.Rows(x).Cells(25).Value ' DES SEM OBLIG
                         hoja2.Cell(filaExcel + x, 12).Value = dtgDatos.Rows(x).Cells(26).Value ' VACACIONES PROPOC
@@ -4455,6 +4261,8 @@ Public Class frmnominasmarinos
                 hoja2.Cell(filaExcel + total, 26).FormulaA1 = "=SUM(Z" & contadorexcelbuqueinicial & ":Z" & contadorexcelbuquefinal & ")"
                 hoja2.Range(filaExcel + total, 7, filaExcel + total, 26).Style.Font.SetBold(True)
 
+                llenardesgloce(nombrebuque, contadorexcelbuquefinal, hoja)
+
 
 
                 '<<<<<<<<<<RESUMEN>>>>>>>>>
@@ -4498,8 +4306,6 @@ Public Class frmnominasmarinos
                 hoja3.Cell(32, 5).FormulaA1 = "=" & periodo & "!Q6"
                 hoja3.Cell(33, 5).FormulaA1 = "=" & periodo & "!R6"
                 hoja3.Cell(34, 5).FormulaA1 = "=" & periodo & "!S6"
-
-
 
                 hoja3.Cell(6, 6).FormulaA1 = "=" & periodo & "!D7"
                 hoja3.Cell(7, 6).FormulaA1 = "=" & periodo & "!E7"
@@ -4577,7 +4383,6 @@ Public Class frmnominasmarinos
                 hoja3.Cell(16, 10).FormulaA1 = "=" & periodo & "!P11"
                 hoja3.Cell(19, 10).FormulaA1 = "=" & periodo & "!O11"
                 hoja3.Cell(20, 10).FormulaA1 = "=" & periodo & "!L11"
-
                 hoja3.Cell(31, 10).FormulaA1 = "=" & periodo & "!P11"
                 hoja3.Cell(32, 10).FormulaA1 = "=" & periodo & "!Q11"
                 hoja3.Cell(33, 10).FormulaA1 = "=" & periodo & "!R11"
@@ -4614,7 +4419,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(32, 12).FormulaA1 = "=" & periodo & "!Q13"
                 hoja3.Cell(33, 12).FormulaA1 = "=" & periodo & "!R13"
                 hoja3.Cell(34, 12).FormulaA1 = "=" & periodo & "!S13"
-
+                'AMARRADOS
                 hoja3.Cell(6, 13).FormulaA1 = "=" & periodo & "!D14"
                 hoja3.Cell(7, 13).FormulaA1 = "=" & periodo & "!E14"
                 hoja3.Cell(8, 13).FormulaA1 = "=" & periodo & "!F14"
@@ -4630,6 +4435,120 @@ Public Class frmnominasmarinos
                 hoja3.Cell(32, 13).FormulaA1 = "=" & periodo & "!Q14"
                 hoja3.Cell(33, 13).FormulaA1 = "=" & periodo & "!R14"
                 hoja3.Cell(34, 13).FormulaA1 = "=" & periodo & "!S14"
+                'ISLA ARBOLEADA
+                hoja3.Cell(6, 14).FormulaA1 = "=" & periodo & "!D15"
+                hoja3.Cell(7, 14).FormulaA1 = "=" & periodo & "!E15"
+                hoja3.Cell(8, 14).FormulaA1 = "=" & periodo & "!F15"
+                hoja3.Cell(9, 14).FormulaA1 = "=" & periodo & "!G15"
+                'hoja3.Cell(10, 14).FormulaA1 = "=" & periodo & "!H15"
+                hoja3.Cell(11, 14).FormulaA1 = "=" & periodo & "!I15"
+                hoja3.Cell(12, 14).FormulaA1 = "=" & periodo & "!H15"
+                hoja3.Cell(13, 14).FormulaA1 = "=" & periodo & "!J15"
+                hoja3.Cell(15, 14).FormulaA1 =
+                hoja3.Cell(16, 14).FormulaA1 = "=" & periodo & "!P15"
+                hoja3.Cell(19, 14).FormulaA1 = "=" & periodo & "!O15"
+                hoja3.Cell(20, 14).FormulaA1 = "=" & periodo & "!L15"
+                hoja3.Cell(31, 14).FormulaA1 = "=" & periodo & "!P15"
+                hoja3.Cell(32, 14).FormulaA1 = "=" & periodo & "!Q15"
+                hoja3.Cell(33, 14).FormulaA1 = "=" & periodo & "!R15"
+                hoja3.Cell(34, 14).FormulaA1 = "=" & periodo & "!S15"
+                'ISLA AZTECA
+                hoja3.Cell(6, 15).FormulaA1 = "=" & periodo & "!D16"
+                hoja3.Cell(7, 15).FormulaA1 = "=" & periodo & "!E16"
+                hoja3.Cell(8, 15).FormulaA1 = "=" & periodo & "!F16"
+                hoja3.Cell(9, 15).FormulaA1 = "=" & periodo & "!G16"
+                'hoja3.Cell(10, 15).FormulaA1 = "=" & periodo & "!H16"
+                hoja3.Cell(11, 15).FormulaA1 = "=" & periodo & "!I16"
+                hoja3.Cell(12, 15).FormulaA1 = "=" & periodo & "!H16"
+                hoja3.Cell(13, 15).FormulaA1 = "=" & periodo & "!J16"
+                hoja3.Cell(16, 15).FormulaA1 = "=" & periodo & "!P16"
+                hoja3.Cell(19, 15).FormulaA1 = "=" & periodo & "!O16"
+                hoja3.Cell(20, 15).FormulaA1 = "=" & periodo & "!L16"
+                hoja3.Cell(31, 15).FormulaA1 = "=" & periodo & "!P16"
+                hoja3.Cell(32, 15).FormulaA1 = "=" & periodo & "!Q16"
+                hoja3.Cell(33, 15).FormulaA1 = "=" & periodo & "!R16"
+                hoja3.Cell(34, 15).FormulaA1 = "=" & periodo & "!S16"
+                'ISLA SAN DIEGO
+                hoja3.Cell(6, 16).FormulaA1 = "=" & periodo & "!D17"
+                hoja3.Cell(7, 16).FormulaA1 = "=" & periodo & "!E17"
+                hoja3.Cell(8, 16).FormulaA1 = "=" & periodo & "!F17"
+                hoja3.Cell(9, 16).FormulaA1 = "=" & periodo & "!G17"
+                'hoja3.Cell(10, 16).FormulaA1 = "=" & periodo & "!H17"
+                hoja3.Cell(11, 16).FormulaA1 = "=" & periodo & "!I17"
+                hoja3.Cell(12, 16).FormulaA1 = "=" & periodo & "!H17"
+                hoja3.Cell(13, 16).FormulaA1 = "=" & periodo & "!J17"
+                hoja3.Cell(16, 16).FormulaA1 = "=" & periodo & "!P17"
+                hoja3.Cell(19, 16).FormulaA1 = "=" & periodo & "!O17"
+                hoja3.Cell(20, 16).FormulaA1 = "=" & periodo & "!L17"
+                hoja3.Cell(31, 16).FormulaA1 = "=" & periodo & "!P17"
+                hoja3.Cell(32, 16).FormulaA1 = "=" & periodo & "!Q17"
+                hoja3.Cell(33, 16).FormulaA1 = "=" & periodo & "!R17"
+                hoja3.Cell(34, 16).FormulaA1 = "=" & periodo & "!S17"
+                'ISLA SAN IGNACIO
+                hoja3.Cell(6, 17).FormulaA1 = "=" & periodo & "!D18"
+                hoja3.Cell(7, 17).FormulaA1 = "=" & periodo & "!E18"
+                hoja3.Cell(8, 17).FormulaA1 = "=" & periodo & "!F18"
+                hoja3.Cell(9, 17).FormulaA1 = "=" & periodo & "!G18"
+                'hoja3.Cell(10, 17).FormulaA1 = "=" & periodo & "!H18"
+                hoja3.Cell(11, 17).FormulaA1 = "=" & periodo & "!I18"
+                hoja3.Cell(12, 17).FormulaA1 = "=" & periodo & "!H18"
+                hoja3.Cell(13, 17).FormulaA1 = "=" & periodo & "!J18"
+                hoja3.Cell(16, 17).FormulaA1 = "=" & periodo & "!P18"
+                hoja3.Cell(19, 17).FormulaA1 = "=" & periodo & "!O18"
+                hoja3.Cell(20, 17).FormulaA1 = "=" & periodo & "!L18"
+                hoja3.Cell(31, 17).FormulaA1 = "=" & periodo & "!P18"
+                hoja3.Cell(32, 17).FormulaA1 = "=" & periodo & "!Q18"
+                hoja3.Cell(33, 17).FormulaA1 = "=" & periodo & "!R18"
+                hoja3.Cell(34, 17).FormulaA1 = "=" & periodo & "!S18"
+                'ISLA SAN LUIS
+                hoja3.Cell(6, 18).FormulaA1 = "=" & periodo & "!D19"
+                hoja3.Cell(7, 18).FormulaA1 = "=" & periodo & "!E19"
+                hoja3.Cell(8, 18).FormulaA1 = "=" & periodo & "!F19"
+                hoja3.Cell(9, 18).FormulaA1 = "=" & periodo & "!G19"
+                'hoja3.Cell(10, 18).FormulaA1 = "=" & periodo & "!H19"
+                hoja3.Cell(11, 18).FormulaA1 = "=" & periodo & "!I19"
+                hoja3.Cell(12, 18).FormulaA1 = "=" & periodo & "!H19"
+                hoja3.Cell(13, 18).FormulaA1 = "=" & periodo & "!J19"
+                hoja3.Cell(16, 18).FormulaA1 = "=" & periodo & "!P19"
+                hoja3.Cell(19, 18).FormulaA1 = "=" & periodo & "!O19"
+                hoja3.Cell(20, 18).FormulaA1 = "=" & periodo & "!L19"
+                hoja3.Cell(31, 18).FormulaA1 = "=" & periodo & "!P19"
+                hoja3.Cell(32, 18).FormulaA1 = "=" & periodo & "!Q19"
+                hoja3.Cell(33, 18).FormulaA1 = "=" & periodo & "!R19"
+                hoja3.Cell(34, 18).FormulaA1 = "=" & periodo & "!S19"
+
+                'ISLA SANTA CRUZ
+                hoja3.Cell(6, 19).FormulaA1 = "=" & periodo & "!D20"
+                hoja3.Cell(7, 19).FormulaA1 = "=" & periodo & "!E20"
+                hoja3.Cell(8, 19).FormulaA1 = "=" & periodo & "!F20"
+                hoja3.Cell(9, 19).FormulaA1 = "=" & periodo & "!G20"
+                'hoja3.Cell(10,19).FormulaA1 = "=" & periodo & "!H20"
+                hoja3.Cell(11, 19).FormulaA1 = "=" & periodo & "!I20"
+                hoja3.Cell(12, 19).FormulaA1 = "=" & periodo & "!H20"
+                hoja3.Cell(13, 19).FormulaA1 = "=" & periodo & "!J20"
+                hoja3.Cell(16, 19).FormulaA1 = "=" & periodo & "!P20"
+                hoja3.Cell(19, 19).FormulaA1 = "=" & periodo & "!O20"
+                hoja3.Cell(20, 19).FormulaA1 = "=" & periodo & "!L20"
+                hoja3.Cell(31, 19).FormulaA1 = "=" & periodo & "!P20"
+                hoja3.Cell(32, 19).FormulaA1 = "=" & periodo & "!Q20"
+                hoja3.Cell(33, 19).FormulaA1 = "=" & periodo & "!R20"
+                hoja3.Cell(34, 19).FormulaA1 = "=" & periodo & "!S20"
+                'ISLA VERDE
+                hoja3.Cell(6, 20).FormulaA1 = "=" & periodo & "!D21"
+                hoja3.Cell(7, 20).FormulaA1 = "=" & periodo & "!E21"
+                hoja3.Cell(8, 20).FormulaA1 = "=" & periodo & "!F21"
+                hoja3.Cell(9, 20).FormulaA1 = "=" & periodo & "!G21"
+                'hoja3.Cell(10,20).FormulaA1 = "=" & periodo & "!H21"
+                hoja3.Cell(11, 20).FormulaA1 = "=" & periodo & "!I21"
+                hoja3.Cell(12, 20).FormulaA1 = "=" & periodo & "!H21"
+                hoja3.Cell(13, 20).FormulaA1 = "=" & periodo & "!J21"
+                hoja3.Cell(16, 20).FormulaA1 = "=" & periodo & "!P21"
+                hoja3.Cell(19, 20).FormulaA1 = "=" & periodo & "!O21"
+                hoja3.Cell(20, 20).FormulaA1 = "=" & periodo & "!L21"
+                hoja3.Cell(31, 20).FormulaA1 = "=" & periodo & "!P21"
+                hoja3.Cell(32, 20).FormulaA1 = "=" & periodo & "!Q21"
+                hoja3.Cell(33, 20).FormulaA1 = "=" & periodo & "!R21"
+                hoja3.Cell(34, 20).FormulaA1 = "=" & periodo & "!S21"
 
                 'Titulo
                 Dim moment As Date = Date.Now()
@@ -4656,6 +4575,316 @@ Public Class frmnominasmarinos
             MessageBox.Show(ex.Message.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         End Try
+    End Sub
+    Public Sub llenardesgloce(ByRef nombrebuque As String, ByRef contadorexcelbuquefinal As Integer, ByRef hoja As IXLWorksheet)
+
+        Select Case nombrebuque
+            Case "CEDROS", "ISLA CEDROS"
+                hoja.Cell(5, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(5, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA SAN JOSE"
+                hoja.Cell(6, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(6, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+
+            Case "ISLA GRANDE"
+                hoja.Cell(7, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(7, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA MIRAMAR"
+                hoja.Cell(8, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(8, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+            Case "ISLA MONSERRAT"
+                hoja.Cell(9, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(9, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+            Case "ISLA BLANCA"
+                hoja.Cell(10, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(10, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA CIARI"
+                hoja.Cell(11, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(11, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA JANITZIO"
+                hoja.Cell(12, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(12, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA SAN GABRIEL"
+                hoja.Cell(13, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(13, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "AMARRADOS"
+                hoja.Cell(14, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(14, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA ARBOLEDA"
+                hoja.Cell(15, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(15, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA AZTECA"
+                hoja.Cell(16, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(16, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA SAN DIEGO", "ISLA DIEGO"
+                hoja.Cell(17, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(17, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA SAN IGNACIO", "ISLA IGNACIO"
+                hoja.Cell(18, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(18, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA SAN LUIS"
+                hoja.Cell(19, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(19, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA SANTA CRUZ"
+                hoja.Cell(20, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(20, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+            Case "ISLA VERDE"
+                hoja.Cell(21, 4).FormulaA1 = "=DESGLOSE!H" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 5).FormulaA1 = "=DESGLOSE!I" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 6).FormulaA1 = "=DESGLOSE!J" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 7).FormulaA1 = "=DESGLOSE!K" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 8).FormulaA1 = "=DESGLOSE!L" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 9).FormulaA1 = "=DESGLOSE!M" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 10).FormulaA1 = "=DESGLOSE!N" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 11).FormulaA1 = "=DESGLOSE!O" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 12).FormulaA1 = "=DESGLOSE!P" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 13).FormulaA1 = "=DESGLOSE!Q" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 14).FormulaA1 = "=DESGLOSE!R" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 15).FormulaA1 = "=DESGLOSE!S" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 16).FormulaA1 = "=DESGLOSE!T" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 17).FormulaA1 = "=DESGLOSE!U" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 18).FormulaA1 = "=DESGLOSE!V" & contadorexcelbuquefinal + 1
+                hoja.Cell(21, 19).FormulaA1 = "=DESGLOSE!W" & contadorexcelbuquefinal + 1
+
+        End Select
 
 
     End Sub
@@ -8645,7 +8874,7 @@ Public Class frmnominasmarinos
 
                     filaExcel = filaExcel + 1
 
-
+                  
                 Next x
 
 
