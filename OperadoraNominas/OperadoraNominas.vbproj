@@ -175,6 +175,12 @@
     <Compile Include="frmnominasmarinos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPensionAlimenticia.Designer.vb">
+      <DependentUpon>frmPensionAlimenticia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPensionAlimenticia.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPrincipal.designer.vb">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
     </Compile>
