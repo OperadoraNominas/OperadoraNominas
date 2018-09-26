@@ -852,7 +852,8 @@ Public Class frmEmpleados
     'End Sub
 
     Private Sub dtpfechanac_ValueChanged(sender As System.Object, e As System.EventArgs) Handles dtpfechanac.ValueChanged
-
+        Dim datenac As Date = CDate(dtpfechanac.Value)
+        txtedad.Text = DateTime.Now.Year - datenac.Year
     End Sub
 
   
