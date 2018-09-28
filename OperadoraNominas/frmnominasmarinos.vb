@@ -3874,6 +3874,8 @@ Public Class frmnominasmarinos
             Dim periodo, fechadepago As String
             Dim mes As String
             Dim fechapagoletra() As String
+            Dim cedros, jose, miramar, grande, montserrat, blanca, isla, ciari, janitzio, gabriel, amarrados, arboleda, azteca, diego, ignacio, luis, cruz, verde As Double
+
             If dtgDatos.Rows.Count > 0 Then
 
                 Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
@@ -3968,13 +3970,48 @@ Public Class frmnominasmarinos
                         hoja2.Cell(filaExcel + x, 25).FormulaA1 = "=X" & filaExcel + x & "*16%" 'IVA
                         hoja2.Cell(filaExcel + x, 26).FormulaA1 = "=X" & filaExcel & "+Y" & filaExcel + x ' TOTAL
 
-
-
-
+                        ' sumatoriaISR(nombrebuque, dtgDatos)
+                        Select Case nombrebuque
+                            Case "ISLA CEDROS"
+                                cedros += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SAN JOSE"
+                                jose += CDbl(dtgDatos.Rows(x).Cells(36).Value)                          
+                            Case "ISLA GRANDE"
+                                grande += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA MIRAMAR"
+                                miramar += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA MONSERRAT"
+                                montserrat += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA BLANCA"
+                                blanca += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA CIARI"
+                                ciari += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA JANITZIO"
+                                janitzio += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SAN GABRIEL"
+                                gabriel += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "AMARRADOS"
+                                amarrados += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA ARBOLEDA"
+                                arboleda += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA AZTECA"
+                                azteca += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SAN DIEGO", "ISLA DIEGO"
+                                diego += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SAN IGNACIO", "ISLA IGNACIO"
+                                ignacio += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SAN LUIS"
+                                luis += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SANTA CRUZ"
+                                cruz += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA VERDE"
+                                verde += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                        End Select
+                        
                     Else
                         filatmp = filatmp + 1
 
-                        
+
 
                         contadorexcelbuquefinal = filaExcel + x - 1
                         contadorexcelbuquefinal = contadorexcelbuquefinal
@@ -4008,7 +4045,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(31, 7).Value = MonthString(mes - 1).ToUpper
                         hoja.Cell(31, 26).Value = MonthString(mes - 1).ToUpper & " ADICIONALES"
                         hoja.Cell(31, 26).Style.Font.SetBold(True)
-                     
+
                         llenardesgloce(nombrebuque, contadorexcelbuquefinal, hoja)
 
                         nombrebuque = dtgDatos.Rows(x).Cells(12).Value
@@ -4100,8 +4137,8 @@ Public Class frmnominasmarinos
                 'For x As Integer = 0 To dtgDatos.Rows.Count - 1
                 hoja3.Cell(1, 2).Style.NumberFormat.Format = "@"
                 hoja3.Cell(1, 2).Value = fechapagoletra(1) & " " & fechapagoletra(2) & " " & fechapagoletra(3)
-                hoja3.Cell(1, 17).Value = MonthString(mes - 1).ToUpper & " ADICIONALES"
-                hoja3.Cell(1, 17).Style.Font.SetBold(True)
+                hoja3.Cell(1, 26).Value = MonthString(mes - 1).ToUpper & " ADICIONALES"
+                hoja3.Cell(1, 26).Style.Font.SetBold(True)
 
                 hoja3.Cell(6, 4).FormulaA1 = "=" & periodo & "!D5"
                 hoja3.Cell(7, 4).FormulaA1 = "=" & periodo & "!E5"
@@ -4111,6 +4148,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 4).FormulaA1 = "=" & periodo & "!I5"
                 hoja3.Cell(12, 4).FormulaA1 = "=" & periodo & "!H5"
                 hoja3.Cell(13, 4).FormulaA1 = "=" & periodo & "!J5"
+                hoja3.Cell(15, 4).Value = cedros
                 hoja3.Cell(16, 4).FormulaA1 = "=" & periodo & "!P5"
                 hoja3.Cell(19, 4).FormulaA1 = "=" & periodo & "!O5"
                 hoja3.Cell(20, 4).FormulaA1 = "=" & periodo & "!L5"
@@ -4118,7 +4156,6 @@ Public Class frmnominasmarinos
                 hoja3.Cell(32, 4).FormulaA1 = "=" & periodo & "!Q5"
                 hoja3.Cell(33, 4).FormulaA1 = "=" & periodo & "!R5"
                 hoja3.Cell(34, 4).FormulaA1 = "=" & periodo & "!S5"
-
 
                 hoja3.Cell(6, 5).FormulaA1 = "=" & periodo & "!D6"
                 hoja3.Cell(7, 5).FormulaA1 = "=" & periodo & "!E6"
@@ -4128,6 +4165,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 5).FormulaA1 = "=" & periodo & "!I6"
                 hoja3.Cell(12, 5).FormulaA1 = "=" & periodo & "!H6"
                 hoja3.Cell(13, 5).FormulaA1 = "=" & periodo & "!J6"
+                hoja3.Cell(15, 5).Value = jose
                 hoja3.Cell(16, 5).FormulaA1 = "=" & periodo & "!P6"
                 hoja3.Cell(19, 5).FormulaA1 = "=" & periodo & "!O6"
                 hoja3.Cell(20, 5).FormulaA1 = "=" & periodo & "!L6"
@@ -4144,6 +4182,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 6).FormulaA1 = "=" & periodo & "!I7"
                 hoja3.Cell(12, 6).FormulaA1 = "=" & periodo & "!H7"
                 hoja3.Cell(13, 6).FormulaA1 = "=" & periodo & "!J7"
+                hoja3.Cell(15, 6).Value = grande
                 hoja3.Cell(16, 6).FormulaA1 = "=" & periodo & "!P7"
                 hoja3.Cell(19, 6).FormulaA1 = "=" & periodo & "!O7"
                 hoja3.Cell(20, 6).FormulaA1 = "=" & periodo & "!L7"
@@ -4160,6 +4199,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 7).FormulaA1 = "=" & periodo & "!I8"
                 hoja3.Cell(12, 7).FormulaA1 = "=" & periodo & "!H8"
                 hoja3.Cell(13, 7).FormulaA1 = "=" & periodo & "!J8"
+                hoja3.Cell(15, 7).Value = miramar
                 hoja3.Cell(16, 7).FormulaA1 = "=" & periodo & "!P8"
                 hoja3.Cell(19, 7).FormulaA1 = "=" & periodo & "!O8"
                 hoja3.Cell(20, 7).FormulaA1 = "=" & periodo & "!L8"
@@ -4176,6 +4216,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 8).FormulaA1 = "=" & periodo & "!I9"
                 hoja3.Cell(12, 8).FormulaA1 = "=" & periodo & "!H9"
                 hoja3.Cell(13, 8).FormulaA1 = "=" & periodo & "!J9"
+                hoja3.Cell(15, 8).Value = montserrat
                 hoja3.Cell(16, 8).FormulaA1 = "=" & periodo & "!P9"
                 hoja3.Cell(19, 8).FormulaA1 = "=" & periodo & "!O9"
                 hoja3.Cell(20, 8).FormulaA1 = "=" & periodo & "!L9"
@@ -4192,6 +4233,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 9).FormulaA1 = "=" & periodo & "!I10"
                 hoja3.Cell(12, 9).FormulaA1 = "=" & periodo & "!H10"
                 hoja3.Cell(13, 9).FormulaA1 = "=" & periodo & "!J10"
+                hoja3.Cell(15, 9).Value = blanca
                 hoja3.Cell(16, 9).FormulaA1 = "=" & periodo & "!P10"
                 hoja3.Cell(19, 9).FormulaA1 = "=" & periodo & "!O10"
                 hoja3.Cell(20, 9).FormulaA1 = "=" & periodo & "!L10"
@@ -4209,6 +4251,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 10).FormulaA1 = "=" & periodo & "!I11"
                 hoja3.Cell(12, 10).FormulaA1 = "=" & periodo & "!H11"
                 hoja3.Cell(13, 10).FormulaA1 = "=" & periodo & "!J11"
+                hoja3.Cell(15, 10).Value = ciari
                 hoja3.Cell(16, 10).FormulaA1 = "=" & periodo & "!P11"
                 hoja3.Cell(19, 10).FormulaA1 = "=" & periodo & "!O11"
                 hoja3.Cell(20, 10).FormulaA1 = "=" & periodo & "!L11"
@@ -4225,6 +4268,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 11).FormulaA1 = "=" & periodo & "!I12"
                 hoja3.Cell(12, 11).FormulaA1 = "=" & periodo & "!H12"
                 hoja3.Cell(13, 11).FormulaA1 = "=" & periodo & "!J12"
+                hoja3.Cell(15, 11).Value = janitzio
                 hoja3.Cell(16, 11).FormulaA1 = "=" & periodo & "!P12"
                 hoja3.Cell(19, 11).FormulaA1 = "=" & periodo & "!O12"
                 hoja3.Cell(20, 11).FormulaA1 = "=" & periodo & "!L12"
@@ -4241,6 +4285,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 12).FormulaA1 = "=" & periodo & "!I13"
                 hoja3.Cell(12, 12).FormulaA1 = "=" & periodo & "!H13"
                 hoja3.Cell(13, 12).FormulaA1 = "=" & periodo & "!J13"
+                hoja3.Cell(15, 12).Value = gabriel
                 hoja3.Cell(16, 12).FormulaA1 = "=" & periodo & "!P13"
                 hoja3.Cell(19, 12).FormulaA1 = "=" & periodo & "!O13"
                 hoja3.Cell(20, 12).FormulaA1 = "=" & periodo & "!L13"
@@ -4257,6 +4302,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 13).FormulaA1 = "=" & periodo & "!I14"
                 hoja3.Cell(12, 13).FormulaA1 = "=" & periodo & "!H14"
                 hoja3.Cell(13, 13).FormulaA1 = "=" & periodo & "!J14"
+                hoja3.Cell(15, 13).Value = amarrados
                 hoja3.Cell(16, 13).FormulaA1 = "=" & periodo & "!P14"
                 hoja3.Cell(19, 13).FormulaA1 = "=" & periodo & "!O14"
                 hoja3.Cell(20, 13).FormulaA1 = "=" & periodo & "!L14"
@@ -4273,7 +4319,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 14).FormulaA1 = "=" & periodo & "!I15"
                 hoja3.Cell(12, 14).FormulaA1 = "=" & periodo & "!H15"
                 hoja3.Cell(13, 14).FormulaA1 = "=" & periodo & "!J15"
-                hoja3.Cell(15, 14).FormulaA1 =
+                hoja3.Cell(15, 14).Value = arboleda
                 hoja3.Cell(16, 14).FormulaA1 = "=" & periodo & "!P15"
                 hoja3.Cell(19, 14).FormulaA1 = "=" & periodo & "!O15"
                 hoja3.Cell(20, 14).FormulaA1 = "=" & periodo & "!L15"
@@ -4290,6 +4336,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 15).FormulaA1 = "=" & periodo & "!I16"
                 hoja3.Cell(12, 15).FormulaA1 = "=" & periodo & "!H16"
                 hoja3.Cell(13, 15).FormulaA1 = "=" & periodo & "!J16"
+                hoja3.Cell(15, 15).Value = azteca
                 hoja3.Cell(16, 15).FormulaA1 = "=" & periodo & "!P16"
                 hoja3.Cell(19, 15).FormulaA1 = "=" & periodo & "!O16"
                 hoja3.Cell(20, 15).FormulaA1 = "=" & periodo & "!L16"
@@ -4306,6 +4353,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 16).FormulaA1 = "=" & periodo & "!I17"
                 hoja3.Cell(12, 16).FormulaA1 = "=" & periodo & "!H17"
                 hoja3.Cell(13, 16).FormulaA1 = "=" & periodo & "!J17"
+                hoja3.Cell(15, 16).Value = diego
                 hoja3.Cell(16, 16).FormulaA1 = "=" & periodo & "!P17"
                 hoja3.Cell(19, 16).FormulaA1 = "=" & periodo & "!O17"
                 hoja3.Cell(20, 16).FormulaA1 = "=" & periodo & "!L17"
@@ -4322,6 +4370,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 17).FormulaA1 = "=" & periodo & "!I18"
                 hoja3.Cell(12, 17).FormulaA1 = "=" & periodo & "!H18"
                 hoja3.Cell(13, 17).FormulaA1 = "=" & periodo & "!J18"
+                hoja3.Cell(15, 17).Value = ignacio
                 hoja3.Cell(16, 17).FormulaA1 = "=" & periodo & "!P18"
                 hoja3.Cell(19, 17).FormulaA1 = "=" & periodo & "!O18"
                 hoja3.Cell(20, 17).FormulaA1 = "=" & periodo & "!L18"
@@ -4338,6 +4387,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 18).FormulaA1 = "=" & periodo & "!I19"
                 hoja3.Cell(12, 18).FormulaA1 = "=" & periodo & "!H19"
                 hoja3.Cell(13, 18).FormulaA1 = "=" & periodo & "!J19"
+                hoja3.Cell(15, 18).Value = luis
                 hoja3.Cell(16, 18).FormulaA1 = "=" & periodo & "!P19"
                 hoja3.Cell(19, 18).FormulaA1 = "=" & periodo & "!O19"
                 hoja3.Cell(20, 18).FormulaA1 = "=" & periodo & "!L19"
@@ -4355,6 +4405,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 19).FormulaA1 = "=" & periodo & "!I20"
                 hoja3.Cell(12, 19).FormulaA1 = "=" & periodo & "!H20"
                 hoja3.Cell(13, 19).FormulaA1 = "=" & periodo & "!J20"
+                hoja3.Cell(15, 19).Value = cruz
                 hoja3.Cell(16, 19).FormulaA1 = "=" & periodo & "!P20"
                 hoja3.Cell(19, 19).FormulaA1 = "=" & periodo & "!O20"
                 hoja3.Cell(20, 19).FormulaA1 = "=" & periodo & "!L20"
@@ -4371,6 +4422,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 20).FormulaA1 = "=" & periodo & "!I21"
                 hoja3.Cell(12, 20).FormulaA1 = "=" & periodo & "!H21"
                 hoja3.Cell(13, 20).FormulaA1 = "=" & periodo & "!J21"
+                hoja3.Cell(15, 20).Value = verde
                 hoja3.Cell(16, 20).FormulaA1 = "=" & periodo & "!P21"
                 hoja3.Cell(19, 20).FormulaA1 = "=" & periodo & "!O21"
                 hoja3.Cell(20, 20).FormulaA1 = "=" & periodo & "!L21"
@@ -4378,6 +4430,39 @@ Public Class frmnominasmarinos
                 hoja3.Cell(32, 20).FormulaA1 = "=" & periodo & "!Q21"
                 hoja3.Cell(33, 20).FormulaA1 = "=" & periodo & "!R21"
                 hoja3.Cell(34, 20).FormulaA1 = "=" & periodo & "!S21"
+
+                'Adicionales
+                hoja3.Cell("Z6").FormulaA1 = "=" & periodo & "!D25"
+                hoja3.Cell("Z7").FormulaA1 = "=" & periodo & "!E25"
+                hoja3.Cell("Z8").FormulaA1 = "=" & periodo & "!F25"
+                hoja3.Cell("Z9").FormulaA1 = "=" & periodo & "!G25"
+                hoja3.Cell("Z11").FormulaA1 = "=" & periodo & "!I25"
+                hoja3.Cell("Z12").FormulaA1 = "=" & periodo & "!H25"
+                hoja3.Cell("Z13").FormulaA1 = "=" & periodo & "!J25"
+
+                hoja3.Cell("AA6").FormulaA1 = "=" & periodo & "!D26"
+                hoja3.Cell("AA7").FormulaA1 = "=" & periodo & "!E26"
+                hoja3.Cell("AA8").FormulaA1 = "=" & periodo & "!F26"
+                hoja3.Cell("AA9").FormulaA1 = "=" & periodo & "!G26"
+                hoja3.Cell("AA11").FormulaA1 = "=" & periodo & "!I26"
+                hoja3.Cell("AA12").FormulaA1 = "=" & periodo & "!H26"
+                hoja3.Cell("AA13").FormulaA1 = "=" & periodo & "!J26"
+
+                hoja3.Cell("AB6").FormulaA1 = "=" & periodo & "!D27"
+                hoja3.Cell("AB7").FormulaA1 = "=" & periodo & "!E27"
+                hoja3.Cell("AB8").FormulaA1 = "=" & periodo & "!F27"
+                hoja3.Cell("AB9").FormulaA1 = "=" & periodo & "!G27"
+                hoja3.Cell("AB11").FormulaA1 = "=" & periodo & "!I27"
+                hoja3.Cell("AB12").FormulaA1 = "=" & periodo & "!H27"
+                hoja3.Cell("AB13").FormulaA1 = "=" & periodo & "!J27"
+
+                hoja3.Cell("AC6").FormulaA1 = "=" & periodo & "!D28"
+                hoja3.Cell("AC7").FormulaA1 = "=" & periodo & "!E28"
+                hoja3.Cell("AC8").FormulaA1 = "=" & periodo & "!F28"
+                hoja3.Cell("AC9").FormulaA1 = "=" & periodo & "!G28"
+                hoja3.Cell("AC11").FormulaA1 = "=" & periodo & "!I28"
+                hoja3.Cell("AC12").FormulaA1 = "=" & periodo & "!H28"
+                hoja3.Cell("AC13").FormulaA1 = "=" & periodo & "!J28"
 
                 'Titulo
                 Dim moment As Date = Date.Now()

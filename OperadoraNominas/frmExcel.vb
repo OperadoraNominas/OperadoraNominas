@@ -348,50 +348,50 @@ Public Class frmExcel
                     hoja.Range(2, 6, filaExcel, 6).Style.NumberFormat.Format = "@"
                     hoja.Range(2, 26, filaExcel, 26).Style.NumberFormat.Format = "@"
 
-                    If dato.SubItems(9).Text <> "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Then
+                    'If dato.SubItems(9).Text <> "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Then
 
 
-                        ''Generales
-                        hoja.Cell(filaExcel, 1).Value = dato.SubItems(1).Text 'N° Empleado
-                        hoja.Cell(filaExcel, 2).Value = dato.SubItems(4).Text 'RFC
-                        hoja.Cell(filaExcel, 3).Value = dato.SubItems(2).Text 'NOMBRE
-                        hoja.Cell(filaExcel, 4).Value = dato.SubItems(5).Text 'CURP
-                        hoja.Cell(filaExcel, 5).Value = dato.SubItems(6).Text 'SSA
-                        hoja.Cell(filaExcel, 6).Value = (dato.SubItems(43).Text.ToString.Replace("'", "")) 'Cuenta
-                        hoja.Cell(filaExcel, 7).Value = dato.SubItems(14).Text 'SBC
-                        hoja.Cell(filaExcel, 8).Value = dato.SubItems(13).Text 'SDI
-                        hoja.Cell(filaExcel, 9).Value = "A1131077105" 'REG. PATRONAL
-                        hoja.Cell(filaExcel, 10).Value = "CAM" 'ENT. FEDERATIVA
-                        hoja.Cell(filaExcel, 11).Value = dato.SubItems(15).Text 'DIAS PAGADOS
-                        hoja.Cell(filaExcel, 12).Value = dato.SubItems(44).Text ' FECHA INICIO RELABORAL
-                        hoja.Cell(filaExcel, 13).Value = "3" 'TIPO DE CONTRATO
-                        hoja.Cell(filaExcel, 14).Value = ""
-                        hoja.Cell(filaExcel, 15).Value = ""   'SINDICALIZADO
-                        hoja.Cell(filaExcel, 16).Value = "1"  ''TIPO JORNADA
-                        hoja.Cell(filaExcel, 17).Value = ""
-                        hoja.Cell(filaExcel, 18).Value = "2" 'TIPO REGIMEN 
-                        hoja.Cell(filaExcel, 19).Value = ""
-                        hoja.Cell(filaExcel, 20).Value = "" 'DEPARTAMENTO
-                        hoja.Cell(filaExcel, 21).Value = dato.SubItems(9).Text  'PUESTO
-                        hoja.Cell(filaExcel, 22).Value = "4"  'RIESGO PUESTO
-                        hoja.Cell(filaExcel, 23).Value = ""
-                        hoja.Cell(filaExcel, 24).Value = "5"  'PERIODICIDAD PAGO
-                        hoja.Cell(filaExcel, 25).Value = ""
-                        hoja.Cell(filaExcel, 26).Value = dato.SubItems(42).Text  ''Banco
-                        hoja.Cell(filaExcel, 27).Value = ""
-                        hoja.Cell(filaExcel, 28).Value = "" 'SUBCONTRATACION
-                        hoja.Cell(filaExcel, 29).Value = cboTipoR.SelectedItem.ToString() 'TIPO DE RECIBO
-                        hoja.Cell(filaExcel, 30).Value = cboMes.SelectedIndex + 1 ' MES DE PAGO
-                        hoja.Cell(filaExcel, 31).Value = dato.SubItems(10).Text ' BUQUE
-                        filaExcel = filaExcel + 1
-                    End If
+                    ''Generales
+                    hoja.Cell(filaExcel, 1).Value = dato.SubItems(1).Text 'N° Empleado
+                    hoja.Cell(filaExcel, 2).Value = dato.SubItems(4).Text 'RFC
+                    hoja.Cell(filaExcel, 3).Value = dato.SubItems(2).Text 'NOMBRE
+                    hoja.Cell(filaExcel, 4).Value = dato.SubItems(5).Text 'CURP
+                    hoja.Cell(filaExcel, 5).Value = dato.SubItems(6).Text 'SSA
+                    hoja.Cell(filaExcel, 6).Value = (dato.SubItems(43).Text.ToString.Replace("'", "")) 'Cuenta
+                    hoja.Cell(filaExcel, 7).Value = dato.SubItems(14).Text 'SBC
+                    hoja.Cell(filaExcel, 8).Value = dato.SubItems(13).Text 'SDI
+                    hoja.Cell(filaExcel, 9).Value = "A1131077105" 'REG. PATRONAL
+                    hoja.Cell(filaExcel, 10).Value = "CAM" 'ENT. FEDERATIVA
+                    hoja.Cell(filaExcel, 11).Value = dato.SubItems(15).Text 'DIAS PAGADOS
+                    hoja.Cell(filaExcel, 12).Value = dato.SubItems(44).Text ' FECHA INICIO RELABORAL
+                    hoja.Cell(filaExcel, 13).Value = "3" 'TIPO DE CONTRATO
+                    hoja.Cell(filaExcel, 14).Value = ""
+                    hoja.Cell(filaExcel, 15).Value = ""   'SINDICALIZADO
+                    hoja.Cell(filaExcel, 16).Value = "1"  ''TIPO JORNADA
+                    hoja.Cell(filaExcel, 17).Value = ""
+                    hoja.Cell(filaExcel, 18).Value = "2" 'TIPO REGIMEN 
+                    hoja.Cell(filaExcel, 19).Value = ""
+                    hoja.Cell(filaExcel, 20).Value = "" 'DEPARTAMENTO
+                    hoja.Cell(filaExcel, 21).Value = dato.SubItems(9).Text  'PUESTO
+                    hoja.Cell(filaExcel, 22).Value = "4"  'RIESGO PUESTO
+                    hoja.Cell(filaExcel, 23).Value = ""
+                    hoja.Cell(filaExcel, 24).Value = "5"  'PERIODICIDAD PAGO
+                    hoja.Cell(filaExcel, 25).Value = ""
+                    hoja.Cell(filaExcel, 26).Value = dato.SubItems(42).Text  ''Banco
+                    hoja.Cell(filaExcel, 27).Value = ""
+                    hoja.Cell(filaExcel, 28).Value = "" 'SUBCONTRATACION
+                    hoja.Cell(filaExcel, 29).Value = cboTipoR.SelectedItem.ToString() 'TIPO DE RECIBO
+                    hoja.Cell(filaExcel, 30).Value = cboMes.SelectedIndex + 1 ' MES DE PAGO
+                    hoja.Cell(filaExcel, 31).Value = dato.SubItems(10).Text ' BUQUE
+                    filaExcel = filaExcel + 1
+                    ' End If
 
                 Next
 
-            filaExcel = 4
-            For Each dato As ListViewItem In lsvLista.CheckedItems
+                filaExcel = 4
+                For Each dato As ListViewItem In lsvLista.CheckedItems
 
-                If dato.SubItems(9).Text <> "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Then
+                    'If dato.SubItems(9).Text <> "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Then
 
                     'Percepciones
                     hoja2.Cell(filaExcel, 1).Value = dato.SubItems(4).Text 'RFC
@@ -438,45 +438,45 @@ Public Class frmExcel
                     hoja4.Cell(filaExcel, 4).Value = dato.SubItems(49).Text 'SUBSIDIO CAUSADO
 
                     filaExcel = filaExcel + 1
+                    'End If
+
+                Next
+                'Dim tmp() = rutita.Split("\")
+                'Dim ind As Integer = 0
+                'For index As Integer = 1 To 31
+                '    ''Debug.Write(index.ToString & " ")
+                '    If (tmp(tmp.Length - 1).IndexOf(index.ToString) > -1) Then
+
+                '        ind = tmp(tmp.Length - 1).IndexOf(index.ToString)
+
+                '        Exit For
+                '    End If
+
+                'Next
+                'Dim fectitulo = Mid(tmp(tmp.Length - 1), ind, 12)
+
+                Dim moment As Date = Date.Now()
+                Dim month As Integer = moment.Month
+                Dim year As Integer = moment.Year
+
+                dialogo.DefaultExt = "*.xlsx"
+                Dim fechita() As String = Date.Parse(fechadepago).ToLongDateString().Split(",")
+                dialogo.FileName = "Isla-Arca " & fechita(1).ToUpper() & " " & cboTipoR.SelectedItem.ToString()
+                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                ''  dialogo.ShowDialog()
+
+                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                    ' OK button pressed
+                    libro.SaveAs(dialogo.FileName)
+                    libro = Nothing
+                    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
                 End If
-
-            Next
-            'Dim tmp() = rutita.Split("\")
-            'Dim ind As Integer = 0
-            'For index As Integer = 1 To 31
-            '    ''Debug.Write(index.ToString & " ")
-            '    If (tmp(tmp.Length - 1).IndexOf(index.ToString) > -1) Then
-
-            '        ind = tmp(tmp.Length - 1).IndexOf(index.ToString)
-
-            '        Exit For
-            '    End If
-
-            'Next
-            'Dim fectitulo = Mid(tmp(tmp.Length - 1), ind, 12)
-
-            Dim moment As Date = Date.Now()
-            Dim month As Integer = moment.Month
-            Dim year As Integer = moment.Year
-
-            dialogo.DefaultExt = "*.xlsx"
-            Dim fechita() As String = Date.Parse(fechadepago).ToLongDateString().Split(",")
-            dialogo.FileName = "Isla-Arca " & fechita(1).ToUpper() & " " & cboTipoR.SelectedItem.ToString()
-            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-            ''  dialogo.ShowDialog()
-
-            If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                ' OK button pressed
-                libro.SaveAs(dialogo.FileName)
-                libro = Nothing
-                MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Else
-                MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-            End If
             Else
 
-            MessageBox.Show("Por favor seleccione al menos una registro para importar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                MessageBox.Show("Por favor seleccione al menos una registro para importar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             End If
 
         Catch ex As Exception
@@ -629,11 +629,7 @@ Public Class frmExcel
 
     Private Sub tsbGuardar2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbGuardar2.Click
 
-
         Try
-
-
-
             Dim tipo As String
             '' Format(Date.Now, "MMMM yyyy") & " " & cboTipoR.SelectedItem.ToString()
             Select Case cboTipoR.SelectedItem.ToString()
