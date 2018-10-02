@@ -7629,6 +7629,10 @@ Public Class frmnominasmarinos
 
                 Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB As String
 
+                If cboTipoNomina.SelectedIndex = 1 Then
+                    llenargridD("0")
+
+                End If
 
                 '<<<<<<<<<<<<<<<<<<<<<<Nomina Total>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -8469,8 +8473,6 @@ Public Class frmnominasmarinos
                 hoja.Cell("J" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
 
-
-
                 'ISLA SAN GABRIEL
                 hoja.Cell("N" & sep).Value = "ISLA SAN GABRIEL"
                 hoja.Cell("N" & sep + 1).Value = "TMM DIVISION"
@@ -8506,7 +8508,6 @@ Public Class frmnominasmarinos
                 hoja.Range("N" & sep + 5, "P" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Range("N" & sep + 8, "P" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Cell("N" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
-
 
                 'ISLA DIEGO
                 hoja.Cell("S" & sep).Value = "ISLA SAN DIEGO"
@@ -8547,6 +8548,7 @@ Public Class frmnominasmarinos
                 hoja.Range("S" & sep + 5, "T" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Range("S" & sep + 8, "T" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Cell("S" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
                 '<<<<<<<<<<<<<<<<<<<<<<<<<<FACT>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
                 hoja5.Cell("C3").Value = periodo
@@ -8583,7 +8585,6 @@ Public Class frmnominasmarinos
                 hoja.Cell("AB11").Clear()
                 hoja.Cell("AB12").Clear()
 
-
                 '<<<<<<<<<<<<<<<Detalle>>>>>>>>>>>>>>>>>>
 
                 filaExcel = 6
@@ -8599,12 +8600,12 @@ Public Class frmnominasmarinos
                     hoja4.Cell(filaExcel, 6).Style.NumberFormat.Format = "@"
                     hoja4.Cell(filaExcel, 7).Style.NumberFormat.Format = "@"
                     hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetBold(False)
-
                     hoja4.Range(filaExcel, 8, filaExcel, 9).Style.NumberFormat.NumberFormatId = 4
                     hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetFontColor(XLColor.Black)
                     hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetFontName("Arial")
                     hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetFontSize(8)
                     hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetBold(False)
+                    hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
 
                     Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
                     If empleado Is Nothing = False Then
@@ -8617,7 +8618,7 @@ Public Class frmnominasmarinos
                     End If
 
 
-                    hoja4.Cell(filaExcel + x, 3).Style.NumberFormat.Format = "@"
+                    hoja4.Cell(filaExcel, 3).Style.NumberFormat.Format = "@"
                     hoja4.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(12).Value
                     hoja4.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(3).Value 'No empleado
                     hoja4.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(4).Value
@@ -8626,7 +8627,6 @@ Public Class frmnominasmarinos
                     hoja4.Cell(filaExcel, 7).Value = cuenta
                     hoja4.Cell(filaExcel, 8).FormulaA1 = "='OPERADORA ABORDO'!AM" & filatmp & "+'OPERADORA DESCANSO'!AM" & filatmp
                     hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp + 4
-                    
 
                     filaExcel = filaExcel + 1
                     filatmp = filatmp + 1
@@ -8636,7 +8636,17 @@ Public Class frmnominasmarinos
 
                 Next x
 
+
+                'Formulas
+                hoja4.Range(filaExcel + 2, 8, filaExcel + 4, 11).Style.Font.SetBold(True)
+                hoja4.Cell(filaExcel + 2, 8).FormulaA1 = "=SUM(H6:H" & filaExcel & ")"
+                hoja4.Cell(filaExcel + 2, 9).FormulaA1 = "=SUM(I6:I" & filaExcel & ")"
+
+
                 '<<<<<<<<<<<<<<<<<Operadora Abordo>>>>>>>>>>>>>>>>>>>>>>>>
+
+                'Validamos en que nomina esta
+               
 
                 Dim rwPeriodo As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
                 If rwPeriodo Is Nothing = False Then
@@ -8660,7 +8670,9 @@ Public Class frmnominasmarinos
                     hoja2.Range(filaExcel, 1, filaExcel, 45).Style.Font.SetFontSize(8)
                     hoja2.Range(filaExcel, 1, filaExcel, 45).Style.Font.SetBold(False)
 
-
+                    hoja2.Range(filaExcel, 1, filaExcel, 11).Style.NumberFormat.Format = "@"
+                    hoja2.Cell(filaExcel, 15).Style.NumberFormat.Format = "@"
+                    hoja2.Range(filaExcel, 1, filaExcel, 45).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
                     'Datos
                     hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value 'N° Trabajador
                     hoja2.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
@@ -8714,8 +8726,10 @@ Public Class frmnominasmarinos
 
                 Next x
 
-                'Formulas
-
+                'STYLE
+                hoja2.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.Font.SetFontColor(XLColor.Black)
+                hoja2.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.NumberFormat.NumberFormatId = 4
+                hoja2.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.Font.SetBold(True)
                 'Operadora Abordo
 
                 hoja2.Cell(filaExcel + 4, 18).FormulaA1 = "=SUM(R9:R" & filaExcel & ")"
@@ -8741,16 +8755,11 @@ Public Class frmnominasmarinos
                 hoja2.Cell(filaExcel + 4, 38).FormulaA1 = "=SUM(AL9:AL" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 4, 39).FormulaA1 = "=SUM(AM9:AM" & filaExcel & ")"
 
-
-
-
                 limpiarCell(hoja2, 46) ', 1, dtgDatos.Rows.Count - 1)
-
 
                 '<<<<<<<<<<<<<<<Operadora Descanso>>>>>>>>>>>>>>>>>>
 
                 llenargridD("1")
-
 
                 ''Operadora Descanso
                 filaExcel = 9
@@ -8768,6 +8777,9 @@ Public Class frmnominasmarinos
                     hoja3.Range(filaExcel, 1, filaExcel, 45).Style.Font.SetFontSize(8)
                     hoja3.Range(filaExcel, 1, filaExcel, 45).Style.Font.SetBold(False)
 
+                    hoja3.Range(filaExcel, 1, filaExcel, 11).Style.NumberFormat.Format = "@"
+                    hoja3.Cell(filaExcel, 15).Style.NumberFormat.Format = "@"
+                    hoja3.Range(filaExcel, 1, filaExcel, 45).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
                     'Datos
 
                     hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value 'N° Trabajador
@@ -8815,12 +8827,17 @@ Public Class frmnominasmarinos
 
                     filaExcel = filaExcel + 1
 
-                  
+
                 Next x
 
 
-                'Operadora Descanso
 
+                'STYLE
+                hoja3.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.Font.SetFontColor(XLColor.Black)
+                hoja3.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.NumberFormat.NumberFormatId = 4
+                hoja3.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.Font.SetBold(True)
+
+                'Operadora Descanso
                 hoja3.Cell(filaExcel + 4, 18).FormulaA1 = "=SUM(R9:R" & filaExcel & ")"
                 hoja3.Cell(filaExcel + 4, 19).FormulaA1 = "=SUM(S9:S" & filaExcel & ")"
                 hoja3.Cell(filaExcel + 4, 20).FormulaA1 = "=SUM(T9:T" & filaExcel & ")"
@@ -8847,16 +8864,6 @@ Public Class frmnominasmarinos
                 limpiarCell(hoja3, 40) ', 1, dtgDatos.Rows.Count - 1)
 
 
-
-
-                'Formulas
-                hoja4.Range(filaExcel + 4, 8, filaExcel + 4, 11).Style.Font.SetBold(True)
-                hoja4.Cell(filaExcel + 4, 8).FormulaA1 = "=SUM(H6:H" & filaExcel & ")"
-                hoja4.Cell(filaExcel + 4, 9).FormulaA1 = "=SUM(I6:I" & filaExcel & ")"
-
-
-
-
                 'Titulo
                 Dim moment As Date = Date.Now()
                 Dim month As Integer = moment.Month
@@ -8874,7 +8881,13 @@ Public Class frmnominasmarinos
                     libro.SaveAs(dialogo.FileName)
                     libro = Nothing
                     MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    llenargridD("0")
+
+                    If cboTipoNomina.SelectedIndex = "0" Then
+                        llenargridD("0")
+                    Else
+                        llenargridD("1")
+                    End If
+
                 Else
                     MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -8925,6 +8938,8 @@ Public Class frmnominasmarinos
 
 
     Public Function ExisteEnLista()
+
+
         'Revisa si existen duplicados
         Dim dialogo As New SaveFileDialog()
 
@@ -8936,6 +8951,9 @@ Public Class frmnominasmarinos
         Dim mesperiodo As String
         Dim mesid As String
         Dim fechapagoletra As String
+
+
+        dtgDupl.ColumnCount = dtgDatos.ColumnCount
 
         Dim rwPeriodo0 As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as periodo, iMes, iEjercicio, iNumeroPeriodo, iIdPeriodo, dFechaFin  from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
         If rwPeriodo0 Is Nothing = False Then
@@ -8954,7 +8972,8 @@ Public Class frmnominasmarinos
 
         If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
 
-            dtgDupl.ColumnCount = dtgDatos.ColumnCount
+           
+
             'Revisa el datagrid
             For filas = 0 To dtgDatos.Rows.Count - 1
                 For filas2 = 1 + filas To dtgDatos.Rows.Count - 1
@@ -8982,15 +9001,18 @@ Public Class frmnominasmarinos
                 'Se quitan los seleccionados 
                 dtgDatos.Rows.Remove(Seleccion)
                 dtgDupl.ClearSelection()
+                
             Next
-
+            
             'Se verifica si la nueva tabla tiene datos
             'Se guardaron repetidos
             If dtgDupl.Rows.Count - 1 <= 0 Then
+               
                 '1 Nomina
                 generarLayout2(dtgDatos, path)
 
             Else
+                
                 'Nomina A
                 generarLayout2(dtgDatos, path.Replace(".xlsx", " A .xlsx"))
                 'Verfica si en el nuevo datagrid
@@ -9001,7 +9023,11 @@ Public Class frmnominasmarinos
 
             dtgDupl.Rows.Clear()
 
+            pnlProgreso.Visible = False
+            pnlCatalogo.Enabled = True
+
             llenargrid()
+
         Else
             MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -9176,6 +9202,14 @@ Public Class frmnominasmarinos
             Dim filaExcel As Integer = 2
             Dim dialogo As New SaveFileDialog()
 
+            pnlProgreso.Visible = True
+            pnlCatalogo.Enabled = False
+            Application.DoEvents()
+
+            pgbProgreso.Minimum = 0
+            pgbProgreso.Value = 0
+            pgbProgreso.Maximum = dtgD.Rows.Count
+
             Dim rwPeriodo0 As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as periodo, iMes, iEjercicio, iNumeroPeriodo, iIdPeriodo, dFechaFin  from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
             If rwPeriodo0 Is Nothing = False Then
 
@@ -9234,11 +9268,7 @@ Public Class frmnominasmarinos
                     hoja.Range(2, 26, filaExcel, 26).Style.NumberFormat.Format = "@"
 
 
-
-
-
                     If dtgD.Rows(x).Cells(3).Value <> "" Then
-
 
 
                         ''Generales
@@ -9275,7 +9305,11 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel, 31).Value = dtgD.Rows(x).Cells(12).FormattedValue ' Buque
                         filaExcel = filaExcel + 1
                     End If
+                    pgbProgreso.Value += 1
+                    Application.DoEvents()
                 Next
+                
+
                 filaExcel = 4
                 For x As Integer = 0 To dtgD.Rows.Count - 1
 
@@ -9329,12 +9363,15 @@ Public Class frmnominasmarinos
                     hoja4.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(45).Value ' SUBSIDIO CUSADO
 
                     filaExcel = filaExcel + 1
-
+                   
                 Next
 
                 'Se guarda
                 libro.SaveAs(path)
                 libro = Nothing
+
+                pnlProgreso.Visible = False
+                pnlCatalogo.Enabled = True
             Else
 
                 MessageBox.Show("Por favor seleccione al menos una registro para importar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
