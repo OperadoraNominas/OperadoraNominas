@@ -435,7 +435,7 @@ Public Class frmExcel
                     hoja4.Cell(filaExcel, 1).Value = dato.SubItems(4).Text ' RFC
                     hoja4.Cell(filaExcel, 2).Value = dato.SubItems(2).Text ' NOMBRE
                     hoja4.Cell(filaExcel, 3).Value = dato.SubItems(37).Text ' IMPORTE SUBSIDIO
-                    hoja4.Cell(filaExcel, 4).Value = dato.SubItems(49).Text 'SUBSIDIO CAUSADO
+                    hoja4.Cell(filaExcel, 4).Value = dato.SubItems(48).Text 'SUBSIDIO CAUSADO
 
                     filaExcel = filaExcel + 1
                     'End If

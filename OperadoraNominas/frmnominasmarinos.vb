@@ -7623,6 +7623,7 @@ Public Class frmnominasmarinos
                 Dim contadorexcelbuquefinal As Integer = 0
                 Dim total As Integer = dtgDatos.Rows.Count - 1
                 Dim filatmp As Integer = 13 - 4
+                Dim filatmp2 As Integer = filaExcel
                 Dim fecha As String
 
                 Dim amarrados, arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, luis, ignacio, gabriel, diego As Integer
@@ -7767,7 +7768,7 @@ Public Class frmnominasmarinos
                         contadorexcelbuqueinicial = filaExcel + x
                         contadorexcelbuquefinal = 0
 
-
+                        hoja.Cell(filaExcel + x, 4).Style.NumberFormat.Format = "@"
 
 
                         hoja.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(12).Value
@@ -8200,7 +8201,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("E" & sep + 4).FormulaA1 = "=E" & sep + 3 & "*16%"
                     hoja.Cell("E" & sep + 5).FormulaA1 = "=E" & sep + 3 & "+E" & sep + 4
 
-                    hoja.Cell("E" & sep + 6).FormulaA1 = "=S" & montserrat + 1 & "+W" & montserrat + 1
+                    hoja.Cell("E" & sep + 6).FormulaA1 = "=S" & amarrados + 1 & "+W" & amarrados + 1
                     hoja.Cell("E" & sep + 7).FormulaA1 = "=E" & sep + 6 & "*16%"
                     hoja.Cell("E" & sep + 8).FormulaA1 = "=E" & sep + 6 & "+E" & sep + 7
 
@@ -8589,6 +8590,8 @@ Public Class frmnominasmarinos
 
                 filaExcel = 6
                 filatmp = 9
+                filatmp2 = 13
+
                 Dim cuenta, banco, clabe As String
 
                 hoja4.Cell(4, 3).Style.Font.SetBold(True)
@@ -8626,7 +8629,28 @@ Public Class frmnominasmarinos
                     hoja4.Cell(filaExcel, 6).Value = clabe
                     hoja4.Cell(filaExcel, 7).Value = cuenta
                     hoja4.Cell(filaExcel, 8).FormulaA1 = "='OPERADORA ABORDO'!AM" & filatmp & "+'OPERADORA DESCANSO'!AM" & filatmp
-                    hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp + 4
+
+
+                    If inicio = x Then
+                        contadorexcelbuqueinicial = filatmp2 + x
+                        nombrebuque = dtgDatos.Rows(x).Cells(12).Value
+                    End If
+                    If nombrebuque = dtgDatos.Rows(x).Cells(12).Value Then
+
+                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp2 + x
+
+                    Else
+                        contadorexcelbuquefinal = filatmp2 + x - 1
+
+                        nombrebuque = dtgDatos.Rows(x).Cells(12).Value
+                        filatmp2 = filatmp2 + 2
+                        contadorexcelbuqueinicial = filatmp2 + x
+                        contadorexcelbuquefinal = 0
+
+                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp2 + x
+                    End If
+
+
 
                     filaExcel = filaExcel + 1
                     filatmp = filatmp + 1
@@ -8646,7 +8670,7 @@ Public Class frmnominasmarinos
                 '<<<<<<<<<<<<<<<<<Operadora Abordo>>>>>>>>>>>>>>>>>>>>>>>>
 
                 'Validamos en que nomina esta
-               
+
 
                 Dim rwPeriodo As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
                 If rwPeriodo Is Nothing = False Then
