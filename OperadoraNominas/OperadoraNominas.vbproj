@@ -115,6 +115,12 @@
     <Compile Include="frmBuscarEmpleado.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmConcentradoInfonavit.Designer.vb">
+      <DependentUpon>frmConcentradoInfonavit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConcentradoInfonavit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDocumentos.designer.vb">
       <DependentUpon>frmDocumentos.vb</DependentUpon>
     </Compile>
@@ -250,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBuscarEmpleado.resx">
       <DependentUpon>frmBuscarEmpleado.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConcentradoInfonavit.resx">
+      <DependentUpon>frmConcentradoInfonavit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDocumentos.resx">
       <DependentUpon>frmDocumentos.vb</DependentUpon>
