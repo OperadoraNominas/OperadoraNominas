@@ -57,46 +57,53 @@ Public Class frmEmpleados
             'Agregar datos de sueldos para historial
 
 
-            'If blnNuevo Then
-            '    SQL = "select max(iIdEmpleado) as id from empleados"
-            '    Dim rwFilas As DataRow() = nConsulta(SQL)
-
-            '    If rwFilas Is Nothing = False Then
-            '        Dim Fila As DataRow = rwFilas(0)
-            '        SQL = "EXEC setSueldoInsertar  0," & IIf(txtsalario.Text = "", 0, txtsalario.Text) & ",'" & Format(dtppatrona.Value.Date, "yyyy/dd/MM")
-            '        SQL += "',0,''," & IIf(txtsd.Text = "", 0, txtsd.Text) & "," & IIf(txtsdi.Text = "", 0, txtsdi.Text) & "," & Fila.Item("id")
-            '        SQL += ",'01/01/1900',''"
-
-            '    End If
-            'Else
-            '    'verificamos el cambio de algun dato
-            '    SQL = "select * from empleados where iIdEmpleado = " & gIdEmpleado
-            '    Dim rwFilas As DataRow() = nConsulta(SQL)
-
-            '    If rwFilas Is Nothing = False Then
-
-            '        Dim Fila As DataRow = rwFilas(0)
-            '        If Fila.Item("fSueldoOrd") <> IIf(txtsalario.Text = "", 0, txtsalario.Text) Or Fila.Item("fSueldoBase") <> IIf(txtsd.Text = "", 0, txtsd.Text) Or Fila.Item("fSueldoIntegrado") <> IIf(txtsdi.Text = "", 0, txtsdi.Text) Then
-
-            '            SQL = "EXEC setSueldoInsertar  0," & IIf(txtsalario.Text = "", 0, txtsalario.Text) & ",'" & Date.Today.ToShortDateString()
-            '            SQL += "',0,''," & IIf(txtsd.Text = "", 0, txtsd.Text) & "," & IIf(txtsdi.Text = "", 0, txtsdi.Text) & "," & gIdEmpleado
-            '            SQL += ",'01/01/1900',''"
-            '            Enviar_Mail(GenerarCorreo(gIdEmpresa, cboclientefiscal.SelectedValue, gIdEmpleado), "p.isidro@mbcgroup.mx;l.aquino@mbcgroup.mx;r.garcia@mbcgroup.mx", "Cambio en sueldo")
-            '        End If
+      
+            If blnNuevo Then
 
 
-            '    End If
-            'End If
+                SQL = "select max(iIdEmpleadoC) as id from empleadosC"
+                Dim rwFilas As DataRow() = nConsulta(SQL)
 
-            'If SQL <> "" Then
-            '    If nExecute(SQL) = False Then
-            '        Exit Sub
-            '    End If
-            'End If
+                If rwFilas Is Nothing = False Then
+                    Dim Fila As DataRow = rwFilas(0)
+                    SQL = "EXEC setSueldoAltaInsertar  0," & IIf(txtsalario.Text = "", 0, txtsalario.Text) & ",'" & Format(dtppatrona.Value.Date, "yyyy/dd/MM")
+                    SQL += "',0,''," & IIf(txtsd.Text = "", 0, txtsd.Text) & "," & IIf(txtsdi.Text = "", 0, txtsdi.Text) & "," & Fila.Item("id")
+                    SQL += ",'01/01/1900',''"
+
+                End If
+                'Se le agrego
+            Else
+
+                'verificamos el cambio de algun dato
+                SQL = "select * from empleadosC where iIdEmpleadoC = " & gIdEmpleado
+                Dim rwFilas As DataRow() = nConsulta(SQL)
+
+                If rwFilas Is Nothing = False Then
+
+                    Dim Fila As DataRow = rwFilas(0)
+                    If Fila.Item("fSueldoOrd") <> IIf(txtsalario.Text = "", 0, txtsalario.Text) Or Fila.Item("fSueldoBase") <> IIf(txtsd.Text = "", 0, txtsd.Text) Or Fila.Item("fSueldoIntegrado") <> IIf(txtsdi.Text = "", 0, txtsdi.Text) Then
+
+                        SQL = "EXEC setSueldoAltaInsertar  0," & IIf(txtsalario.Text = "", 0, txtsalario.Text) & ",'" & Date.Today.ToShortDateString()
+                        SQL += "',0,''," & IIf(txtsd.Text = "", 0, txtsd.Text) & "," & IIf(txtsdi.Text = "", 0, txtsdi.Text) & "," & gIdEmpleado
+                        SQL += ",'01/01/1900',''"
+
+
+                        ' Enviar_Mail(GenerarCorreo1(gIdEmpresa, gIdCliente, txtcodigo.Text), correo, "Cambio en sueldo")
+                    End If
+
+
+                End If
+            End If
+
+            If SQL <> "" Then
+                If nExecute(SQL) = False Then
+                    Exit Sub
+                End If
+            End If
+
 
 
             '---
-
 
 
             If blnNuevo Then
@@ -160,49 +167,49 @@ Public Class frmEmpleados
                 Exit Sub
             End If
 
-            'Agregar alta/baja
-            'If blnNuevo Then
-            '    'Obtener id
-            '    SQL = "select max(iIdEmpleado) as id from empleados"
-            '    Dim rwFilas As DataRow() = nConsulta(SQL)
+            If blnNuevo Then
+                'Obtener id
+                SQL = "select max(iIdEmpleadoC) as id from empleadosC"
+                Dim rwFilas As DataRow() = nConsulta(SQL)
 
-            '    If rwFilas Is Nothing = False Then
-            '        Dim Fila As DataRow = rwFilas(0)
-            '        SQL = "EXEC setIngresoBajaInsertar  0," & Fila.Item("id") & ",'" & IIf(cbostatus.SelectedIndex = 0, "A", "B") & "','" & Format(dtppatrona.Value.Date, "yyyy/dd/MM") & "','01/01/1900','',''"
-            '        'Enviar correo
-            '        Enviar_Mail(GenerarCorreo(gIdEmpresa, cboclientefiscal.SelectedValue, Fila.Item("id")), "p.isidro@mbcgroup.mx;l.aquino@mbcgroup.mx;r.garcia@mbcgroup.mx", "Alta de empleado")
-            '    End If
+                If rwFilas Is Nothing = False Then
+                    Dim Fila As DataRow = rwFilas(0)
+                    SQL = "EXEC setIngresoBajaAltaInsertar  0," & Fila.Item("id") & ",'" & IIf(cbostatus.SelectedIndex = 0, "A", "B") & "','" & Format(dtppatrona.Value.Date, "yyyy/dd/MM") & "','01/01/1900','',''"
+                    'Enviar correo
 
-
-            'Else
-            '    SQL = "select * from IngresoBaja"
-            '    SQL &= " where iIdIngresoBaja= (select max(iIdIngresoBaja) "
-            '    SQL &= " as maximo from IngresoBaja where fkiIdEmpleado =" & gIdEmpleado & ")"
+                   End If
 
 
-            '    Dim rwFilas As DataRow() = nConsulta(SQL)
-
-            '    If rwFilas Is Nothing = False Then
-            '        SQL = ""
-            '        Dim Fila As DataRow = rwFilas(0)
-            '        If Fila.Item("Clave") <> IIf(cbostatus.SelectedIndex = 0, "A", "B") Then
-
-            '            SQL = "EXEC setIngresoBajaInsertar  0," & gIdEmpleado & ",'" & IIf(cbostatus.SelectedIndex = 0, "A", "B") & "','" & Date.Today.ToShortDateString & "','01/01/1900','',''"
-            '            Enviar_Mail(GenerarCorreo(gIdEmpresa, cboclientefiscal.SelectedValue, gIdEmpleado), "p.isidro@mbcgroup.mx;l.aquino@mbcgroup.mx;r.garcia@mbcgroup.mx", "Modificacion Baja/reingreso")
-
-            '        End If
+            Else
+                SQL = "select * from IngresoBajaAlta"
+                SQL &= " where iIdIngresoBaja= (select max(iIdIngresoBaja) "
+                SQL &= " as maximo from IngresoBajaAlta where fkiIdEmpleado =" & gIdEmpleado & ")"
 
 
-            '    End If
+                Dim rwFilas As DataRow() = nConsulta(SQL)
+
+                If rwFilas Is Nothing = False Then
+                    SQL = ""
+                    Dim Fila As DataRow = rwFilas(0)
+                    If Fila.Item("Clave") <> IIf(cbostatus.SelectedIndex = 0, "A", "B") Then
+
+                        SQL = "EXEC setIngresoBajaAltaInsertar  0," & gIdEmpleado & ",'" & IIf(cbostatus.SelectedIndex = 0, "A", "B") & "','" & Date.Today.ToShortDateString & "','01/01/1900','',''"
+
+                       
+                    End If
 
 
-            'End If
+                End If
 
-            'If SQL <> "" Then
-            '    If nExecute(SQL) = False Then
-            '        Exit Sub
-            '    End If
-            'End If
+
+            End If
+
+            If SQL <> "" Then
+                If nExecute(SQL) = False Then
+                    Exit Sub
+                End If
+            End If
+
 
 
 
@@ -983,12 +990,23 @@ Public Class frmEmpleados
     End Sub
 
     Private Sub cmdPension_Click(sender As System.Object, e As System.EventArgs) Handles cmdPension.Click
+        Dim forma As New frmPensionA
 
+        If gIdEmpleado Is Nothing = False Then
+
+
+            forma.gIdEmpleado = gIdEmpleado
+            forma.gIdCliente = gIdCliente
+            forma.gIdEmpresa = 1
+            forma.ShowDialog()
+        Else
+            MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
     End Sub
 
     Private Sub cmdimss_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdimss.Click
 
-        Dim forma As New frmImss
+        Dim forma As New frmPension
 
         If gIdEmpleado Is Nothing = False Then
 

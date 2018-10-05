@@ -243,6 +243,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="pension\frmPensionA.Designer.vb">
+      <DependentUpon>frmPensionA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="pension\frmPensionA.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmAgregarEmpleado.resx">
@@ -304,6 +310,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pension\frmPensionA.resx">
+      <DependentUpon>frmPensionA.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

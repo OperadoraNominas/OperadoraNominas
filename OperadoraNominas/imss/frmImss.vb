@@ -1,4 +1,4 @@
-﻿Public Class frmImss
+﻿Public Class frmPension
     Public gIdEmpresa As String
     Public gIdCliente As String
     Public gIdEmpleado As String
@@ -170,11 +170,11 @@
 
 
 
-        
+
 
     End Sub
 
-   
+
 
     Private Sub lsvSalario_ItemActivate(ByVal sender As Object, ByVal e As System.EventArgs) Handles lsvSalario.ItemActivate
         'Verificar si se tienen permisos
@@ -210,7 +210,7 @@
 
         End Try
 
-        
+
     End Sub
 
     Private Sub cmdAgregar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAgregar.Click
@@ -302,7 +302,7 @@
             End If
 
 
-            
+
         Catch ex As Exception
 
         End Try
@@ -310,7 +310,7 @@
 
 
     Private Sub Limpiar(ByVal Contenedor As Object)
-        
+
         txtfolio.Text = ""
 
 
@@ -325,7 +325,7 @@
 
     End Sub
 
-   
+
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdBorrar.Click
         Dim sql As String
         Dim datos As ListView.SelectedListViewItemCollection = lsvincapacidad.SelectedItems

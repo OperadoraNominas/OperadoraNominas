@@ -3874,6 +3874,8 @@ Public Class frmnominasmarinos
             Dim periodo, fechadepago As String
             Dim mes As String
             Dim fechapagoletra() As String
+            Dim cedros, jose, miramar, grande, montserrat, blanca, isla, ciari, janitzio, gabriel, amarrados, arboleda, azteca, diego, ignacio, luis, cruz, verde As Double
+
             If dtgDatos.Rows.Count > 0 Then
 
                 Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
@@ -3968,13 +3970,48 @@ Public Class frmnominasmarinos
                         hoja2.Cell(filaExcel + x, 25).FormulaA1 = "=X" & filaExcel + x & "*16%" 'IVA
                         hoja2.Cell(filaExcel + x, 26).FormulaA1 = "=X" & filaExcel & "+Y" & filaExcel + x ' TOTAL
 
-
-
-
+                        ' sumatoriaISR(nombrebuque, dtgDatos)
+                        Select Case nombrebuque
+                            Case "ISLA CEDROS"
+                                cedros += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SAN JOSE"
+                                jose += CDbl(dtgDatos.Rows(x).Cells(36).Value)                          
+                            Case "ISLA GRANDE"
+                                grande += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA MIRAMAR"
+                                miramar += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA MONSERRAT"
+                                montserrat += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA BLANCA"
+                                blanca += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA CIARI"
+                                ciari += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA JANITZIO"
+                                janitzio += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SAN GABRIEL"
+                                gabriel += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "AMARRADOS"
+                                amarrados += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA ARBOLEDA"
+                                arboleda += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA AZTECA"
+                                azteca += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SAN DIEGO", "ISLA DIEGO"
+                                diego += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SAN IGNACIO", "ISLA IGNACIO"
+                                ignacio += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SAN LUIS"
+                                luis += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA SANTA CRUZ"
+                                cruz += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                            Case "ISLA VERDE"
+                                verde += CDbl(dtgDatos.Rows(x).Cells(36).Value)
+                        End Select
+                        
                     Else
                         filatmp = filatmp + 1
 
-                        
+
 
                         contadorexcelbuquefinal = filaExcel + x - 1
                         contadorexcelbuquefinal = contadorexcelbuquefinal
@@ -4008,7 +4045,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(31, 7).Value = MonthString(mes - 1).ToUpper
                         hoja.Cell(31, 26).Value = MonthString(mes - 1).ToUpper & " ADICIONALES"
                         hoja.Cell(31, 26).Style.Font.SetBold(True)
-                     
+
                         llenardesgloce(nombrebuque, contadorexcelbuquefinal, hoja)
 
                         nombrebuque = dtgDatos.Rows(x).Cells(12).Value
@@ -4100,8 +4137,8 @@ Public Class frmnominasmarinos
                 'For x As Integer = 0 To dtgDatos.Rows.Count - 1
                 hoja3.Cell(1, 2).Style.NumberFormat.Format = "@"
                 hoja3.Cell(1, 2).Value = fechapagoletra(1) & " " & fechapagoletra(2) & " " & fechapagoletra(3)
-                hoja3.Cell(1, 17).Value = MonthString(mes - 1).ToUpper & " ADICIONALES"
-                hoja3.Cell(1, 17).Style.Font.SetBold(True)
+                hoja3.Cell(1, 26).Value = MonthString(mes - 1).ToUpper & " ADICIONALES"
+                hoja3.Cell(1, 26).Style.Font.SetBold(True)
 
                 hoja3.Cell(6, 4).FormulaA1 = "=" & periodo & "!D5"
                 hoja3.Cell(7, 4).FormulaA1 = "=" & periodo & "!E5"
@@ -4111,6 +4148,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 4).FormulaA1 = "=" & periodo & "!I5"
                 hoja3.Cell(12, 4).FormulaA1 = "=" & periodo & "!H5"
                 hoja3.Cell(13, 4).FormulaA1 = "=" & periodo & "!J5"
+                hoja3.Cell(15, 4).Value = cedros
                 hoja3.Cell(16, 4).FormulaA1 = "=" & periodo & "!P5"
                 hoja3.Cell(19, 4).FormulaA1 = "=" & periodo & "!O5"
                 hoja3.Cell(20, 4).FormulaA1 = "=" & periodo & "!L5"
@@ -4118,7 +4156,6 @@ Public Class frmnominasmarinos
                 hoja3.Cell(32, 4).FormulaA1 = "=" & periodo & "!Q5"
                 hoja3.Cell(33, 4).FormulaA1 = "=" & periodo & "!R5"
                 hoja3.Cell(34, 4).FormulaA1 = "=" & periodo & "!S5"
-
 
                 hoja3.Cell(6, 5).FormulaA1 = "=" & periodo & "!D6"
                 hoja3.Cell(7, 5).FormulaA1 = "=" & periodo & "!E6"
@@ -4128,6 +4165,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 5).FormulaA1 = "=" & periodo & "!I6"
                 hoja3.Cell(12, 5).FormulaA1 = "=" & periodo & "!H6"
                 hoja3.Cell(13, 5).FormulaA1 = "=" & periodo & "!J6"
+                hoja3.Cell(15, 5).Value = jose
                 hoja3.Cell(16, 5).FormulaA1 = "=" & periodo & "!P6"
                 hoja3.Cell(19, 5).FormulaA1 = "=" & periodo & "!O6"
                 hoja3.Cell(20, 5).FormulaA1 = "=" & periodo & "!L6"
@@ -4144,6 +4182,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 6).FormulaA1 = "=" & periodo & "!I7"
                 hoja3.Cell(12, 6).FormulaA1 = "=" & periodo & "!H7"
                 hoja3.Cell(13, 6).FormulaA1 = "=" & periodo & "!J7"
+                hoja3.Cell(15, 6).Value = grande
                 hoja3.Cell(16, 6).FormulaA1 = "=" & periodo & "!P7"
                 hoja3.Cell(19, 6).FormulaA1 = "=" & periodo & "!O7"
                 hoja3.Cell(20, 6).FormulaA1 = "=" & periodo & "!L7"
@@ -4160,6 +4199,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 7).FormulaA1 = "=" & periodo & "!I8"
                 hoja3.Cell(12, 7).FormulaA1 = "=" & periodo & "!H8"
                 hoja3.Cell(13, 7).FormulaA1 = "=" & periodo & "!J8"
+                hoja3.Cell(15, 7).Value = miramar
                 hoja3.Cell(16, 7).FormulaA1 = "=" & periodo & "!P8"
                 hoja3.Cell(19, 7).FormulaA1 = "=" & periodo & "!O8"
                 hoja3.Cell(20, 7).FormulaA1 = "=" & periodo & "!L8"
@@ -4176,6 +4216,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 8).FormulaA1 = "=" & periodo & "!I9"
                 hoja3.Cell(12, 8).FormulaA1 = "=" & periodo & "!H9"
                 hoja3.Cell(13, 8).FormulaA1 = "=" & periodo & "!J9"
+                hoja3.Cell(15, 8).Value = montserrat
                 hoja3.Cell(16, 8).FormulaA1 = "=" & periodo & "!P9"
                 hoja3.Cell(19, 8).FormulaA1 = "=" & periodo & "!O9"
                 hoja3.Cell(20, 8).FormulaA1 = "=" & periodo & "!L9"
@@ -4192,6 +4233,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 9).FormulaA1 = "=" & periodo & "!I10"
                 hoja3.Cell(12, 9).FormulaA1 = "=" & periodo & "!H10"
                 hoja3.Cell(13, 9).FormulaA1 = "=" & periodo & "!J10"
+                hoja3.Cell(15, 9).Value = blanca
                 hoja3.Cell(16, 9).FormulaA1 = "=" & periodo & "!P10"
                 hoja3.Cell(19, 9).FormulaA1 = "=" & periodo & "!O10"
                 hoja3.Cell(20, 9).FormulaA1 = "=" & periodo & "!L10"
@@ -4209,6 +4251,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 10).FormulaA1 = "=" & periodo & "!I11"
                 hoja3.Cell(12, 10).FormulaA1 = "=" & periodo & "!H11"
                 hoja3.Cell(13, 10).FormulaA1 = "=" & periodo & "!J11"
+                hoja3.Cell(15, 10).Value = ciari
                 hoja3.Cell(16, 10).FormulaA1 = "=" & periodo & "!P11"
                 hoja3.Cell(19, 10).FormulaA1 = "=" & periodo & "!O11"
                 hoja3.Cell(20, 10).FormulaA1 = "=" & periodo & "!L11"
@@ -4225,6 +4268,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 11).FormulaA1 = "=" & periodo & "!I12"
                 hoja3.Cell(12, 11).FormulaA1 = "=" & periodo & "!H12"
                 hoja3.Cell(13, 11).FormulaA1 = "=" & periodo & "!J12"
+                hoja3.Cell(15, 11).Value = janitzio
                 hoja3.Cell(16, 11).FormulaA1 = "=" & periodo & "!P12"
                 hoja3.Cell(19, 11).FormulaA1 = "=" & periodo & "!O12"
                 hoja3.Cell(20, 11).FormulaA1 = "=" & periodo & "!L12"
@@ -4241,6 +4285,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 12).FormulaA1 = "=" & periodo & "!I13"
                 hoja3.Cell(12, 12).FormulaA1 = "=" & periodo & "!H13"
                 hoja3.Cell(13, 12).FormulaA1 = "=" & periodo & "!J13"
+                hoja3.Cell(15, 12).Value = gabriel
                 hoja3.Cell(16, 12).FormulaA1 = "=" & periodo & "!P13"
                 hoja3.Cell(19, 12).FormulaA1 = "=" & periodo & "!O13"
                 hoja3.Cell(20, 12).FormulaA1 = "=" & periodo & "!L13"
@@ -4257,6 +4302,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 13).FormulaA1 = "=" & periodo & "!I14"
                 hoja3.Cell(12, 13).FormulaA1 = "=" & periodo & "!H14"
                 hoja3.Cell(13, 13).FormulaA1 = "=" & periodo & "!J14"
+                hoja3.Cell(15, 13).Value = amarrados
                 hoja3.Cell(16, 13).FormulaA1 = "=" & periodo & "!P14"
                 hoja3.Cell(19, 13).FormulaA1 = "=" & periodo & "!O14"
                 hoja3.Cell(20, 13).FormulaA1 = "=" & periodo & "!L14"
@@ -4273,7 +4319,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 14).FormulaA1 = "=" & periodo & "!I15"
                 hoja3.Cell(12, 14).FormulaA1 = "=" & periodo & "!H15"
                 hoja3.Cell(13, 14).FormulaA1 = "=" & periodo & "!J15"
-                hoja3.Cell(15, 14).FormulaA1 =
+                hoja3.Cell(15, 14).Value = arboleda
                 hoja3.Cell(16, 14).FormulaA1 = "=" & periodo & "!P15"
                 hoja3.Cell(19, 14).FormulaA1 = "=" & periodo & "!O15"
                 hoja3.Cell(20, 14).FormulaA1 = "=" & periodo & "!L15"
@@ -4290,6 +4336,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 15).FormulaA1 = "=" & periodo & "!I16"
                 hoja3.Cell(12, 15).FormulaA1 = "=" & periodo & "!H16"
                 hoja3.Cell(13, 15).FormulaA1 = "=" & periodo & "!J16"
+                hoja3.Cell(15, 15).Value = azteca
                 hoja3.Cell(16, 15).FormulaA1 = "=" & periodo & "!P16"
                 hoja3.Cell(19, 15).FormulaA1 = "=" & periodo & "!O16"
                 hoja3.Cell(20, 15).FormulaA1 = "=" & periodo & "!L16"
@@ -4306,6 +4353,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 16).FormulaA1 = "=" & periodo & "!I17"
                 hoja3.Cell(12, 16).FormulaA1 = "=" & periodo & "!H17"
                 hoja3.Cell(13, 16).FormulaA1 = "=" & periodo & "!J17"
+                hoja3.Cell(15, 16).Value = diego
                 hoja3.Cell(16, 16).FormulaA1 = "=" & periodo & "!P17"
                 hoja3.Cell(19, 16).FormulaA1 = "=" & periodo & "!O17"
                 hoja3.Cell(20, 16).FormulaA1 = "=" & periodo & "!L17"
@@ -4322,6 +4370,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 17).FormulaA1 = "=" & periodo & "!I18"
                 hoja3.Cell(12, 17).FormulaA1 = "=" & periodo & "!H18"
                 hoja3.Cell(13, 17).FormulaA1 = "=" & periodo & "!J18"
+                hoja3.Cell(15, 17).Value = ignacio
                 hoja3.Cell(16, 17).FormulaA1 = "=" & periodo & "!P18"
                 hoja3.Cell(19, 17).FormulaA1 = "=" & periodo & "!O18"
                 hoja3.Cell(20, 17).FormulaA1 = "=" & periodo & "!L18"
@@ -4338,6 +4387,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 18).FormulaA1 = "=" & periodo & "!I19"
                 hoja3.Cell(12, 18).FormulaA1 = "=" & periodo & "!H19"
                 hoja3.Cell(13, 18).FormulaA1 = "=" & periodo & "!J19"
+                hoja3.Cell(15, 18).Value = luis
                 hoja3.Cell(16, 18).FormulaA1 = "=" & periodo & "!P19"
                 hoja3.Cell(19, 18).FormulaA1 = "=" & periodo & "!O19"
                 hoja3.Cell(20, 18).FormulaA1 = "=" & periodo & "!L19"
@@ -4355,6 +4405,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 19).FormulaA1 = "=" & periodo & "!I20"
                 hoja3.Cell(12, 19).FormulaA1 = "=" & periodo & "!H20"
                 hoja3.Cell(13, 19).FormulaA1 = "=" & periodo & "!J20"
+                hoja3.Cell(15, 19).Value = cruz
                 hoja3.Cell(16, 19).FormulaA1 = "=" & periodo & "!P20"
                 hoja3.Cell(19, 19).FormulaA1 = "=" & periodo & "!O20"
                 hoja3.Cell(20, 19).FormulaA1 = "=" & periodo & "!L20"
@@ -4371,6 +4422,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(11, 20).FormulaA1 = "=" & periodo & "!I21"
                 hoja3.Cell(12, 20).FormulaA1 = "=" & periodo & "!H21"
                 hoja3.Cell(13, 20).FormulaA1 = "=" & periodo & "!J21"
+                hoja3.Cell(15, 20).Value = verde
                 hoja3.Cell(16, 20).FormulaA1 = "=" & periodo & "!P21"
                 hoja3.Cell(19, 20).FormulaA1 = "=" & periodo & "!O21"
                 hoja3.Cell(20, 20).FormulaA1 = "=" & periodo & "!L21"
@@ -4379,6 +4431,66 @@ Public Class frmnominasmarinos
                 hoja3.Cell(33, 20).FormulaA1 = "=" & periodo & "!R21"
                 hoja3.Cell(34, 20).FormulaA1 = "=" & periodo & "!S21"
 
+                'Adicionales
+                hoja3.Cell("Z6").FormulaA1 = "=" & periodo & "!D25"
+                hoja3.Cell("Z7").FormulaA1 = "=" & periodo & "!E25"
+                hoja3.Cell("Z8").FormulaA1 = "=" & periodo & "!F25"
+                hoja3.Cell("Z9").FormulaA1 = "=" & periodo & "!G25"
+                hoja3.Cell("Z11").FormulaA1 = "=" & periodo & "!I25"
+                hoja3.Cell("Z12").FormulaA1 = "=" & periodo & "!H25"
+                hoja3.Cell("Z13").FormulaA1 = "=" & periodo & "!J25"
+                hoja3.Cell("Z16").FormulaA1 = "=" & periodo & "!P25"
+                hoja3.Cell("Z19").FormulaA1 = "=" & periodo & "!O25"
+                hoja3.Cell("Z20").FormulaA1 = "=" & periodo & "!L25"
+                hoja3.Cell("Z31").FormulaA1 = "=" & periodo & "!P25"
+                hoja3.Cell("Z32").FormulaA1 = "=" & periodo & "!Q25"
+                hoja3.Cell("Z33").FormulaA1 = "=" & periodo & "!R25"
+                hoja3.Cell("Z34").FormulaA1 = "=" & periodo & "!S25"
+
+                hoja3.Cell("AA6").FormulaA1 = "=" & periodo & "!D26"
+                hoja3.Cell("AA7").FormulaA1 = "=" & periodo & "!E26"
+                hoja3.Cell("AA8").FormulaA1 = "=" & periodo & "!F26"
+                hoja3.Cell("AA9").FormulaA1 = "=" & periodo & "!G26"
+                hoja3.Cell("AA11").FormulaA1 = "=" & periodo & "!I26"
+                hoja3.Cell("AA12").FormulaA1 = "=" & periodo & "!H26"
+                hoja3.Cell("AA13").FormulaA1 = "=" & periodo & "!J26"
+                hoja3.Cell("AA16").FormulaA1 = "=" & periodo & "!P26"
+                hoja3.Cell("AA19").FormulaA1 = "=" & periodo & "!O26"
+                hoja3.Cell("AA20").FormulaA1 = "=" & periodo & "!L26"
+                hoja3.Cell("AA31").FormulaA1 = "=" & periodo & "!P26"
+                hoja3.Cell("AA32").FormulaA1 = "=" & periodo & "!Q26"
+                hoja3.Cell("AA33").FormulaA1 = "=" & periodo & "!R26"
+                hoja3.Cell("AA34").FormulaA1 = "=" & periodo & "!S26"
+
+                hoja3.Cell("AB6").FormulaA1 = "=" & periodo & "!D27"
+                hoja3.Cell("AB7").FormulaA1 = "=" & periodo & "!E27"
+                hoja3.Cell("AB8").FormulaA1 = "=" & periodo & "!F27"
+                hoja3.Cell("AB9").FormulaA1 = "=" & periodo & "!G27"
+                hoja3.Cell("AB11").FormulaA1 = "=" & periodo & "!I27"
+                hoja3.Cell("AB12").FormulaA1 = "=" & periodo & "!H27"
+                hoja3.Cell("AB13").FormulaA1 = "=" & periodo & "!J27"
+                hoja3.Cell("AB16").FormulaA1 = "=" & periodo & "!P27"
+                hoja3.Cell("AB19").FormulaA1 = "=" & periodo & "!O27"
+                hoja3.Cell("AB20").FormulaA1 = "=" & periodo & "!L27"
+                hoja3.Cell("AB31").FormulaA1 = "=" & periodo & "!P27"
+                hoja3.Cell("AB32").FormulaA1 = "=" & periodo & "!Q27"
+                hoja3.Cell("AB33").FormulaA1 = "=" & periodo & "!R27"
+                hoja3.Cell("AB34").FormulaA1 = "=" & periodo & "!S27"
+
+                hoja3.Cell("AC6").FormulaA1 = "=" & periodo & "!D28"
+                hoja3.Cell("AC7").FormulaA1 = "=" & periodo & "!E28"
+                hoja3.Cell("AC8").FormulaA1 = "=" & periodo & "!F28"
+                hoja3.Cell("AC9").FormulaA1 = "=" & periodo & "!G28"
+                hoja3.Cell("AC11").FormulaA1 = "=" & periodo & "!I28"
+                hoja3.Cell("AC12").FormulaA1 = "=" & periodo & "!H28"
+                hoja3.Cell("AC13").FormulaA1 = "=" & periodo & "!J28"
+                hoja3.Cell("AC16").FormulaA1 = "=" & periodo & "!P28"
+                hoja3.Cell("AC19").FormulaA1 = "=" & periodo & "!O28"
+                hoja3.Cell("AC20").FormulaA1 = "=" & periodo & "!L28"
+                hoja3.Cell("AC31").FormulaA1 = "=" & periodo & "!P28"
+                hoja3.Cell("AC32").FormulaA1 = "=" & periodo & "!Q28"
+                hoja3.Cell("AC33").FormulaA1 = "=" & periodo & "!R28"
+                hoja3.Cell("AC34").FormulaA1 = "=" & periodo & "!S28"
                 'Titulo
                 Dim moment As Date = Date.Now()
                 Dim month As Integer = moment.Month
@@ -7523,12 +7635,17 @@ Public Class frmnominasmarinos
                 Dim contadorexcelbuquefinal As Integer = 0
                 Dim total As Integer = dtgDatos.Rows.Count - 1
                 Dim filatmp As Integer = 13 - 4
+                Dim filatmp2 As Integer = filaExcel
                 Dim fecha As String
 
                 Dim amarrados, arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, luis, ignacio, gabriel, diego As Integer
 
                 Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB As String
 
+                If cboTipoNomina.SelectedIndex = 1 Then
+                    llenargridD("0")
+
+                End If
 
                 '<<<<<<<<<<<<<<<<<<<<<<Nomina Total>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -7663,7 +7780,7 @@ Public Class frmnominasmarinos
                         contadorexcelbuqueinicial = filaExcel + x
                         contadorexcelbuquefinal = 0
 
-
+                        hoja.Cell(filaExcel + x, 4).Style.NumberFormat.Format = "@"
 
 
                         hoja.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(12).Value
@@ -8096,7 +8213,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("E" & sep + 4).FormulaA1 = "=E" & sep + 3 & "*16%"
                     hoja.Cell("E" & sep + 5).FormulaA1 = "=E" & sep + 3 & "+E" & sep + 4
 
-                    hoja.Cell("E" & sep + 6).FormulaA1 = "=S" & montserrat + 1 & "+W" & montserrat + 1
+                    hoja.Cell("E" & sep + 6).FormulaA1 = "=S" & amarrados + 1 & "+W" & amarrados + 1
                     hoja.Cell("E" & sep + 7).FormulaA1 = "=E" & sep + 6 & "*16%"
                     hoja.Cell("E" & sep + 8).FormulaA1 = "=E" & sep + 6 & "+E" & sep + 7
 
@@ -8369,8 +8486,6 @@ Public Class frmnominasmarinos
                 hoja.Cell("J" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
 
-
-
                 'ISLA SAN GABRIEL
                 hoja.Cell("N" & sep).Value = "ISLA SAN GABRIEL"
                 hoja.Cell("N" & sep + 1).Value = "TMM DIVISION"
@@ -8406,7 +8521,6 @@ Public Class frmnominasmarinos
                 hoja.Range("N" & sep + 5, "P" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Range("N" & sep + 8, "P" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Cell("N" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
-
 
                 'ISLA DIEGO
                 hoja.Cell("S" & sep).Value = "ISLA SAN DIEGO"
@@ -8447,6 +8561,7 @@ Public Class frmnominasmarinos
                 hoja.Range("S" & sep + 5, "T" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Range("S" & sep + 8, "T" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Cell("S" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
+
                 '<<<<<<<<<<<<<<<<<<<<<<<<<<FACT>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
                 hoja5.Cell("C3").Value = periodo
@@ -8483,11 +8598,12 @@ Public Class frmnominasmarinos
                 hoja.Cell("AB11").Clear()
                 hoja.Cell("AB12").Clear()
 
-
                 '<<<<<<<<<<<<<<<Detalle>>>>>>>>>>>>>>>>>>
 
                 filaExcel = 6
                 filatmp = 9
+                filatmp2 = 13
+
                 Dim cuenta, banco, clabe As String
 
                 hoja4.Cell(4, 3).Style.Font.SetBold(True)
@@ -8499,12 +8615,12 @@ Public Class frmnominasmarinos
                     hoja4.Cell(filaExcel, 6).Style.NumberFormat.Format = "@"
                     hoja4.Cell(filaExcel, 7).Style.NumberFormat.Format = "@"
                     hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetBold(False)
-
                     hoja4.Range(filaExcel, 8, filaExcel, 9).Style.NumberFormat.NumberFormatId = 4
                     hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetFontColor(XLColor.Black)
                     hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetFontName("Arial")
                     hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetFontSize(8)
                     hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Font.SetBold(False)
+                    hoja4.Range(filaExcel, 2, filaExcel, 9).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
 
                     Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
                     If empleado Is Nothing = False Then
@@ -8517,7 +8633,7 @@ Public Class frmnominasmarinos
                     End If
 
 
-                    hoja4.Cell(filaExcel + x, 3).Style.NumberFormat.Format = "@"
+                    hoja4.Cell(filaExcel, 3).Style.NumberFormat.Format = "@"
                     hoja4.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(12).Value
                     hoja4.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(3).Value 'No empleado
                     hoja4.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(4).Value
@@ -8525,8 +8641,28 @@ Public Class frmnominasmarinos
                     hoja4.Cell(filaExcel, 6).Value = clabe
                     hoja4.Cell(filaExcel, 7).Value = cuenta
                     hoja4.Cell(filaExcel, 8).FormulaA1 = "='OPERADORA ABORDO'!AM" & filatmp & "+'OPERADORA DESCANSO'!AM" & filatmp
-                    hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp + 4
-                    
+
+
+                    If inicio = x Then
+                        contadorexcelbuqueinicial = filatmp2 + x
+                        nombrebuque = dtgDatos.Rows(x).Cells(12).Value
+                    End If
+                    If nombrebuque = dtgDatos.Rows(x).Cells(12).Value Then
+
+                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp2 + x
+
+                    Else
+                        contadorexcelbuquefinal = filatmp2 + x - 1
+
+                        nombrebuque = dtgDatos.Rows(x).Cells(12).Value
+                        filatmp2 = filatmp2 + 2
+                        contadorexcelbuqueinicial = filatmp2 + x
+                        contadorexcelbuquefinal = 0
+
+                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp2 + x
+                    End If
+
+
 
                     filaExcel = filaExcel + 1
                     filatmp = filatmp + 1
@@ -8536,7 +8672,17 @@ Public Class frmnominasmarinos
 
                 Next x
 
+
+                'Formulas
+                hoja4.Range(filaExcel + 2, 8, filaExcel + 4, 11).Style.Font.SetBold(True)
+                hoja4.Cell(filaExcel + 2, 8).FormulaA1 = "=SUM(H6:H" & filaExcel & ")"
+                hoja4.Cell(filaExcel + 2, 9).FormulaA1 = "=SUM(I6:I" & filaExcel & ")"
+
+
                 '<<<<<<<<<<<<<<<<<Operadora Abordo>>>>>>>>>>>>>>>>>>>>>>>>
+
+                'Validamos en que nomina esta
+
 
                 Dim rwPeriodo As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
                 If rwPeriodo Is Nothing = False Then
@@ -8560,7 +8706,9 @@ Public Class frmnominasmarinos
                     hoja2.Range(filaExcel, 1, filaExcel, 45).Style.Font.SetFontSize(8)
                     hoja2.Range(filaExcel, 1, filaExcel, 45).Style.Font.SetBold(False)
 
-
+                    hoja2.Range(filaExcel, 1, filaExcel, 11).Style.NumberFormat.Format = "@"
+                    hoja2.Cell(filaExcel, 15).Style.NumberFormat.Format = "@"
+                    hoja2.Range(filaExcel, 1, filaExcel, 45).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
                     'Datos
                     hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value 'N° Trabajador
                     hoja2.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
@@ -8614,8 +8762,10 @@ Public Class frmnominasmarinos
 
                 Next x
 
-                'Formulas
-
+                'STYLE
+                hoja2.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.Font.SetFontColor(XLColor.Black)
+                hoja2.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.NumberFormat.NumberFormatId = 4
+                hoja2.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.Font.SetBold(True)
                 'Operadora Abordo
 
                 hoja2.Cell(filaExcel + 4, 18).FormulaA1 = "=SUM(R9:R" & filaExcel & ")"
@@ -8641,16 +8791,11 @@ Public Class frmnominasmarinos
                 hoja2.Cell(filaExcel + 4, 38).FormulaA1 = "=SUM(AL9:AL" & filaExcel & ")"
                 hoja2.Cell(filaExcel + 4, 39).FormulaA1 = "=SUM(AM9:AM" & filaExcel & ")"
 
-
-
-
                 limpiarCell(hoja2, 46) ', 1, dtgDatos.Rows.Count - 1)
-
 
                 '<<<<<<<<<<<<<<<Operadora Descanso>>>>>>>>>>>>>>>>>>
 
                 llenargridD("1")
-
 
                 ''Operadora Descanso
                 filaExcel = 9
@@ -8668,6 +8813,9 @@ Public Class frmnominasmarinos
                     hoja3.Range(filaExcel, 1, filaExcel, 45).Style.Font.SetFontSize(8)
                     hoja3.Range(filaExcel, 1, filaExcel, 45).Style.Font.SetBold(False)
 
+                    hoja3.Range(filaExcel, 1, filaExcel, 11).Style.NumberFormat.Format = "@"
+                    hoja3.Cell(filaExcel, 15).Style.NumberFormat.Format = "@"
+                    hoja3.Range(filaExcel, 1, filaExcel, 45).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
                     'Datos
 
                     hoja3.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value 'N° Trabajador
@@ -8715,12 +8863,17 @@ Public Class frmnominasmarinos
 
                     filaExcel = filaExcel + 1
 
-                  
+
                 Next x
 
 
-                'Operadora Descanso
 
+                'STYLE
+                hoja3.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.Font.SetFontColor(XLColor.Black)
+                hoja3.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.NumberFormat.NumberFormatId = 4
+                hoja3.Range(filaExcel + 4, 18, filaExcel + 4, 39).Style.Font.SetBold(True)
+
+                'Operadora Descanso
                 hoja3.Cell(filaExcel + 4, 18).FormulaA1 = "=SUM(R9:R" & filaExcel & ")"
                 hoja3.Cell(filaExcel + 4, 19).FormulaA1 = "=SUM(S9:S" & filaExcel & ")"
                 hoja3.Cell(filaExcel + 4, 20).FormulaA1 = "=SUM(T9:T" & filaExcel & ")"
@@ -8747,16 +8900,6 @@ Public Class frmnominasmarinos
                 limpiarCell(hoja3, 40) ', 1, dtgDatos.Rows.Count - 1)
 
 
-
-
-                'Formulas
-                hoja4.Range(filaExcel + 4, 8, filaExcel + 4, 11).Style.Font.SetBold(True)
-                hoja4.Cell(filaExcel + 4, 8).FormulaA1 = "=SUM(H6:H" & filaExcel & ")"
-                hoja4.Cell(filaExcel + 4, 9).FormulaA1 = "=SUM(I6:I" & filaExcel & ")"
-
-
-
-
                 'Titulo
                 Dim moment As Date = Date.Now()
                 Dim month As Integer = moment.Month
@@ -8774,7 +8917,13 @@ Public Class frmnominasmarinos
                     libro.SaveAs(dialogo.FileName)
                     libro = Nothing
                     MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    llenargridD("0")
+
+                    If cboTipoNomina.SelectedIndex = "0" Then
+                        llenargridD("0")
+                    Else
+                        llenargridD("1")
+                    End If
+
                 Else
                     MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -8827,7 +8976,7 @@ Public Class frmnominasmarinos
     Public Function ExisteEnLista()
 
 
-
+        'Revisa si existen duplicados
         Dim dialogo As New SaveFileDialog()
 
         Dim filas, filas2 As Integer
@@ -8838,6 +8987,9 @@ Public Class frmnominasmarinos
         Dim mesperiodo As String
         Dim mesid As String
         Dim fechapagoletra As String
+
+
+        dtgDupl.ColumnCount = dtgDatos.ColumnCount
 
         Dim rwPeriodo0 As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as periodo, iMes, iEjercicio, iNumeroPeriodo, iIdPeriodo, dFechaFin  from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
         If rwPeriodo0 Is Nothing = False Then
@@ -8854,21 +9006,16 @@ Public Class frmnominasmarinos
         dialogo.FileName = "Isla-Arca " & fechita(1).ToUpper() & " " & IIf(cboTipoNomina.SelectedIndex = 0, "NA", "ND")
         dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
 
-
-
         If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
 
+           
 
-
-            dtgDupl.ColumnCount = dtgDatos.ColumnCount
-
+            'Revisa el datagrid
             For filas = 0 To dtgDatos.Rows.Count - 1
                 For filas2 = 1 + filas To dtgDatos.Rows.Count - 1
-                    ''MsgBox(lsvLista.Items.Item(filas).SubItems(1).Text)
-
+                    'Compara si existe un duplicado
                     If dtgDatos.Rows(filas).Cells(3).Value = dtgDatos.Rows(filas2).Cells(3).Value Then
-                        '  lsvLista.Items(filas2).BackColor = Color.GreenYellow
-                        'dtgDatos.Rows(filas2).DefaultCellStyle.BackColor = Color.BlueViolet
+                        'Selecciona el valor duplicado
                         dtgDatos.Rows(filas2).Selected = True
                         contador = contador + 1
 
@@ -8883,23 +9030,28 @@ Public Class frmnominasmarinos
             Next
 
             Dim path As String = dialogo.FileName
-            '   revisar(dtgDupl, dialogo.FileName)
+            'Revisa las filas seleccionadas
             For Each Seleccion As DataGridViewRow In dtgDatos.SelectedRows
-
-
+                'Se guarda en una nueva DataGrind
                 dtgDupl.Rows.Add(ObtenerValoresFila(Seleccion))
-                ' MiDataSet.Tables(0).Rows.Add(ObtenerValoresFila(Seleccion))
+                'Se quitan los seleccionados 
                 dtgDatos.Rows.Remove(Seleccion)
                 dtgDupl.ClearSelection()
+                
             Next
-
-
+            
+            'Se verifica si la nueva tabla tiene datos
+            'Se guardaron repetidos
             If dtgDupl.Rows.Count - 1 <= 0 Then
+               
+                '1 Nomina
                 generarLayout2(dtgDatos, path)
 
             Else
+                
+                'Nomina A
                 generarLayout2(dtgDatos, path.Replace(".xlsx", " A .xlsx"))
-
+                'Verfica si en el nuevo datagrid
                 If ExisteEnLista2(dtgDupl, path) = False Then
                     generarLayout2(dtgDupl, path.Replace(".xlsx", " B.xlsx"))
                 End If
@@ -8907,14 +9059,17 @@ Public Class frmnominasmarinos
 
             dtgDupl.Rows.Clear()
 
+            pnlProgreso.Visible = False
+            pnlCatalogo.Enabled = True
+
             llenargrid()
+
         Else
             MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         End If
     End Function
     Public Function ExisteEnLista2(ByRef dtgTercer As DataGridView, ByVal path As String) As Boolean
-
         Dim filas, filas2 As Integer
         Dim contador As Integer = 0
         Dim pos, pos2 As Integer
@@ -8925,38 +9080,24 @@ Public Class frmnominasmarinos
 
         For filas = 0 To dtgTercer.Rows.Count - 1
             For filas2 = 1 + filas To dtgTercer.Rows.Count - 1
-                ''MsgBox(lsvLista.Items.Item(filas).SubItems(1).Text)
 
                 If dtgTercer.Rows(filas).Cells(3).Value = dtgTercer.Rows(filas2).Cells(3).Value Then
-                    '  lsvLista.Items(filas2).BackColor = Color.GreenYellow
-                    'dtgDatos.Rows(filas2).DefaultCellStyle.BackColor = Color.BlueViolet
+
                     dtgTercer.Rows(filas2).Selected = True
                     contador = contador + 1
-
-
                 End If
-
-
-
                 If filas2 = dtgTercer.Rows.Count Then
                     Exit For
                 End If
-
             Next
-
-
             If filas = dtgTercer.Rows.Count Then
 
                 Exit Function
-
             End If
         Next
-
         For Each Seleccion As DataGridViewRow In dtgTercer.SelectedRows
 
-
             dtgDupl2.Rows.Add(ObtenerValoresFila(Seleccion))
-            ' MiDataSet.Tables(0).Rows.Add(ObtenerValoresFila(Seleccion))
             dtgTercer.Rows.Remove(Seleccion)
             dtgDupl2.ClearSelection()
         Next
@@ -8965,13 +9106,15 @@ Public Class frmnominasmarinos
         If dtgDupl2.Rows.Count - 1 <= 0 Then
             generarLayout2(dtgTercer, path.Replace(".xlsx", " B.xlsx"))
             Return False
-            'MsgBox(contador.ToString & " Datos repetidos")
+
         Else
-            ' este seria para un tercero
-            ' ExisteEnLista3(dtgDupl)
-            'Dim Ruta As String = generarLayout()
+            ' este seria para Segundo
             generarLayout2(dtgTercer, path.Replace(".xlsx", " B.xlsx"))
-            generarLayout2(dtgDupl2, path.Replace(".xlsx", " C.xlsx"))
+
+            If ExisteEnLista3(dtgDupl2, path) = False Then
+                generarLayout2(dtgDupl2, path.Replace(".xlsx", " C.xlsx"))
+            End If
+
             Return True
 
         End If
@@ -8980,7 +9123,112 @@ Public Class frmnominasmarinos
 
 
     End Function
+    Public Function ExisteEnLista3(ByRef dtgCuarto As DataGridView, ByVal path As String) As Boolean
+        Dim filas, filas2 As Integer
+        Dim contador As Integer = 0
+        Dim pos, pos2 As Integer
+        Dim dtgDupl3 As New DataGridView
+        Dim MiDataSet As New DataSet()
 
+        dtgDupl3.ColumnCount = dtgCuarto.ColumnCount
+
+        For filas = 0 To dtgCuarto.Rows.Count - 1
+            For filas2 = 1 + filas To dtgCuarto.Rows.Count - 1
+
+                If dtgCuarto.Rows(filas).Cells(3).Value = dtgCuarto.Rows(filas2).Cells(3).Value Then
+
+                    dtgCuarto.Rows(filas2).Selected = True
+                    contador = contador + 1
+                End If
+                If filas2 = dtgCuarto.Rows.Count Then
+                    Exit For
+                End If
+            Next
+            If filas = dtgCuarto.Rows.Count Then
+
+                Exit Function
+            End If
+        Next
+        For Each Seleccion As DataGridViewRow In dtgCuarto.SelectedRows
+
+            dtgDupl3.Rows.Add(ObtenerValoresFila(Seleccion))
+            dtgCuarto.Rows.Remove(Seleccion)
+            dtgDupl3.ClearSelection()
+        Next
+
+
+        If dtgDupl3.Rows.Count - 1 <= 0 Then
+            generarLayout2(dtgCuarto, path.Replace(".xlsx", " C.xlsx"))
+            Return False
+            'MsgBox(contador.ToString & " Datos repetidos")
+        Else
+            ' este seria para un tercero
+            generarLayout2(dtgCuarto, path.Replace(".xlsx", " C.xlsx"))
+
+            If ExisteEnLista4(dtgDupl3, path) = False Then
+                generarLayout2(dtgDupl3, path.Replace(".xlsx", " D.xlsx"))
+            End If
+
+            Return True
+
+        End If
+
+        dtgDupl3.Rows.Clear()
+
+    End Function
+    Public Function ExisteEnLista4(ByRef dtgCinco As DataGridView, ByVal path As String) As Boolean
+        Dim filas, filas2 As Integer
+        Dim contador As Integer = 0
+        Dim pos, pos2 As Integer
+        Dim dtgDupl4 As New DataGridView
+        Dim MiDataSet As New DataSet()
+
+        dtgDupl4.ColumnCount = dtgCinco.ColumnCount
+
+        For filas = 0 To dtgCinco.Rows.Count - 1
+            For filas2 = 1 + filas To dtgCinco.Rows.Count - 1
+
+                If dtgCinco.Rows(filas).Cells(3).Value = dtgCinco.Rows(filas2).Cells(3).Value Then
+
+                    dtgCinco.Rows(filas2).Selected = True
+                    contador = contador + 1
+                End If
+                If filas2 = dtgCinco.Rows.Count Then
+                    Exit For
+                End If
+            Next
+            If filas = dtgCinco.Rows.Count Then
+
+                Exit Function
+            End If
+        Next
+        For Each Seleccion As DataGridViewRow In dtgCinco.SelectedRows
+
+            dtgDupl4.Rows.Add(ObtenerValoresFila(Seleccion))
+            dtgCinco.Rows.Remove(Seleccion)
+            dtgDupl4.ClearSelection()
+        Next
+
+
+        If dtgDupl4.Rows.Count - 1 <= 0 Then
+            generarLayout2(dtgCinco, path.Replace(".xlsx", " D.xlsx"))
+            Return False
+
+        Else
+            ' este seria para un cuarto
+            generarLayout2(dtgCinco, path.Replace(".xlsx", " D.xlsx"))
+
+            ' If ExisteEnLista4(dtgDupl4, path) = False Then
+            generarLayout2(dtgDupl4, path.Replace(".xlsx", " E.xlsx"))
+            'End If
+
+            Return True
+
+        End If
+
+        dtgDupl4.Rows.Clear()
+
+    End Function
     Function generarLayout2(ByVal dtgD As DataGridView, ByVal path As String)
         Try
             Dim ejercicio As String
@@ -8989,6 +9237,14 @@ Public Class frmnominasmarinos
             Dim fechapagoletra As String
             Dim filaExcel As Integer = 2
             Dim dialogo As New SaveFileDialog()
+
+            pnlProgreso.Visible = True
+            pnlCatalogo.Enabled = False
+            Application.DoEvents()
+
+            pgbProgreso.Minimum = 0
+            pgbProgreso.Value = 0
+            pgbProgreso.Maximum = dtgD.Rows.Count
 
             Dim rwPeriodo0 As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as periodo, iMes, iEjercicio, iNumeroPeriodo, iIdPeriodo, dFechaFin  from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
             If rwPeriodo0 Is Nothing = False Then
@@ -9048,41 +9304,47 @@ Public Class frmnominasmarinos
                     hoja.Range(2, 26, filaExcel, 26).Style.NumberFormat.Format = "@"
 
 
+                    If dtgD.Rows(x).Cells(3).Value <> "" Then
 
-                    ''Generales
-                    hoja.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(3).Value 'No Empleado
-                    hoja.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(6).Value 'RFC
-                    hoja.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(4).Value 'Nombre
-                    hoja.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(7).Value 'CURP
-                    hoja.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(8).Value 'SSA
-                    hoja.Cell(filaExcel, 6).Value = cuenta ' Cuenta Bancaria
-                    hoja.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(15).Value 'SBC //O 17 SALARIO_COTIZACION
-                    hoja.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(16).Value 'SDI
-                    hoja.Cell(filaExcel, 9).Value = "A1131077105" 'Reg. Patronal 
-                    hoja.Cell(filaExcel, 10).Value = "CAM" 'Ent. Federativa  
-                    hoja.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(18).Value 'Días Pagados
-                    hoja.Cell(filaExcel, 12).Value = fechainiciorelaboral 'FechaInicioRelaboral
-                    hoja.Cell(filaExcel, 13).Value = "3" 'Tipo Contrato 
-                    hoja.Cell(filaExcel, 14).Value = ""
-                    hoja.Cell(filaExcel, 15).Value = ""  'Sndicalizado
-                    hoja.Cell(filaExcel, 16).Value = "1"  'Tipo Jornada
-                    hoja.Cell(filaExcel, 17).Value = ""
-                    hoja.Cell(filaExcel, 18).Value = "2"  'Tipo Regimen
-                    hoja.Cell(filaExcel, 19).Value = ""
-                    hoja.Cell(filaExcel, 20).Value = ""
-                    hoja.Cell(filaExcel, 21).Value = dtgD.Rows(x).Cells(11).FormattedValue   'Puesto
-                    hoja.Cell(filaExcel, 22).Value = "4"  'Riesgo Puesto
-                    hoja.Cell(filaExcel, 23).Value = ""
-                    hoja.Cell(filaExcel, 24).Value = "5"  'Periodicidad Pago
-                    hoja.Cell(filaExcel, 25).Value = ""
-                    hoja.Cell(filaExcel, 26).Value = clavebanco  'Banco
-                    hoja.Cell(filaExcel, 27).Value = ""
-                    hoja.Cell(filaExcel, 28).Value = "" 'Subcontratacion
-                    hoja.Cell(filaExcel, 29).Value = IIf(cboTipoNomina.SelectedIndex = 0, "NA", "ND") 'Tipo de Recibo
-                    hoja.Cell(filaExcel, 30).Value = mesid ' Mes Pago
-                    hoja.Cell(filaExcel, 31).Value = dtgD.Rows(x).Cells(12).FormattedValue ' Buque
-                    filaExcel = filaExcel + 1
+
+                        ''Generales
+                        hoja.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(3).Value 'No Empleado
+                        hoja.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(6).Value 'RFC
+                        hoja.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(4).Value 'Nombre
+                        hoja.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(7).Value 'CURP
+                        hoja.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(8).Value 'SSA
+                        hoja.Cell(filaExcel, 6).Value = cuenta ' Cuenta Bancaria
+                        hoja.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(15).Value 'SBC //O 17 SALARIO_COTIZACION
+                        hoja.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(16).Value 'SDI
+                        hoja.Cell(filaExcel, 9).Value = "A1131077105" 'Reg. Patronal 
+                        hoja.Cell(filaExcel, 10).Value = "CAM" 'Ent. Federativa  
+                        hoja.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(18).Value 'Días Pagados
+                        hoja.Cell(filaExcel, 12).Value = fechainiciorelaboral 'FechaInicioRelaboral
+                        hoja.Cell(filaExcel, 13).Value = "3" 'Tipo Contrato 
+                        hoja.Cell(filaExcel, 14).Value = ""
+                        hoja.Cell(filaExcel, 15).Value = ""  'Sndicalizado
+                        hoja.Cell(filaExcel, 16).Value = "1"  'Tipo Jornada
+                        hoja.Cell(filaExcel, 17).Value = ""
+                        hoja.Cell(filaExcel, 18).Value = "2"  'Tipo Regimen
+                        hoja.Cell(filaExcel, 19).Value = ""
+                        hoja.Cell(filaExcel, 20).Value = ""
+                        hoja.Cell(filaExcel, 21).Value = dtgD.Rows(x).Cells(11).FormattedValue   'Puesto
+                        hoja.Cell(filaExcel, 22).Value = "4"  'Riesgo Puesto
+                        hoja.Cell(filaExcel, 23).Value = ""
+                        hoja.Cell(filaExcel, 24).Value = "5"  'Periodicidad Pago
+                        hoja.Cell(filaExcel, 25).Value = ""
+                        hoja.Cell(filaExcel, 26).Value = clavebanco  'Banco
+                        hoja.Cell(filaExcel, 27).Value = ""
+                        hoja.Cell(filaExcel, 28).Value = "" 'Subcontratacion
+                        hoja.Cell(filaExcel, 29).Value = IIf(cboTipoNomina.SelectedIndex = 0, "NA", "ND") 'Tipo de Recibo
+                        hoja.Cell(filaExcel, 30).Value = mesid ' Mes Pago
+                        hoja.Cell(filaExcel, 31).Value = dtgD.Rows(x).Cells(12).FormattedValue ' Buque
+                        filaExcel = filaExcel + 1
+                    End If
+                    pgbProgreso.Value += 1
+                    Application.DoEvents()
                 Next
+                
 
                 filaExcel = 4
                 For x As Integer = 0 To dtgD.Rows.Count - 1
@@ -9137,12 +9399,15 @@ Public Class frmnominasmarinos
                     hoja4.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(45).Value ' SUBSIDIO CUSADO
 
                     filaExcel = filaExcel + 1
-
+                   
                 Next
 
                 'Se guarda
                 libro.SaveAs(path)
                 libro = Nothing
+
+                pnlProgreso.Visible = False
+                pnlCatalogo.Enabled = True
             Else
 
                 MessageBox.Show("Por favor seleccione al menos una registro para importar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
