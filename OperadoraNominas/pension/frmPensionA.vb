@@ -5,6 +5,7 @@
     Dim idPension As String
     Dim Tipo As String
     Dim fkidbanco As String
+    Dim iEstatus As String
     Dim blnNuevo As Boolean
     Dim SQL As String
 
@@ -12,7 +13,7 @@
         Cargarhistorial()
         MostrarBancos()
 
-        cmdAgregar.Enabled = False
+        ' cmdAgregar.Enabled = False
         blnNuevo = True
         'txtBeneficiario.Enabled = False
         'txtClabe.Enabled = False
@@ -34,6 +35,7 @@
             If rwFilas Is Nothing = False Then
                 For Each Fila In rwFilas
                     fkidbanco = Fila.Item("fkIidBanco")
+                    iEstatus = Fila.Item("iEstatus")
                     Dim banco As DataRow() = nConsulta("select * from bancos where iIdBanco = " & fkidbanco)
                     item = lsvHistorial.Items.Add(Fila.Item("Nombrebeneficiario"))
                     ' item.SubItems.Add("" & Fila.Item("Nombrebeneficiario"))
@@ -103,6 +105,8 @@
                     cbobanco.SelectedValue = fkidbanco 'lsvHistorial.SelectedItems(0).SubItems(2).Text
                     txtClabe.Text = lsvHistorial.SelectedItems(0).SubItems(3).Text
                     txtCuenta.Text = lsvHistorial.SelectedItems(0).SubItems(4).Text
+                    cboEstatus.SelectedIndex = IIf(iEstatus = "1", 0, 1)
+
                     cmdAgregar.Enabled = True
                     'Tipo = "1"
                     MessageBox.Show("Pensión lista para editar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
