@@ -2614,7 +2614,7 @@ Public Class frmnominasmarinos
                 ComplementoAsimilados = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot - PrestamoPersonalAsimilados - AdeudoINfonavitAsimilados - DiferenciaInfonavitAsimilados - Operadora, 2)
                 dtgDatos.Rows(x).Cells(50).Value = ComplementoAsimilados
                 'Retenciones_Operadora
-                RetencionOperadora = Math.Round(Incapacidad + isr + imss + infonavitvalor + infonavitanterior + ajusteinfonavit + pension + prestamo + fonacot)
+                RetencionOperadora = Math.Round(Incapacidad + isr + imss + infonavitvalor + infonavitanterior + ajusteinfonavit + pension + prestamo + fonacot, 2)
                 dtgDatos.Rows(x).Cells(51).Value = RetencionOperadora
 
                 '%Comision
@@ -7425,15 +7425,27 @@ Public Class frmnominasmarinos
 
                     'Cambiamos index del combo en el grid
 
-                    For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                    For x As Integer = 0 To Forma.dsReporte.Tables(0).Rows.Count - 1
 
-                        Sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-                        Dim rwFila As DataRow() = nConsulta(Sql)
+                        'sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        'Dim rwFila As DataRow() = nConsulta(sql)
 
 
+                        'buscar el nombre del puesto
 
-                        CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwFila(0)("cPuesto").ToString()
-                        CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwFila(0)("cFuncionesPuesto").ToString()
+                        sql = "select * from puestos where iIdPuesto=" & Forma.dsReporte.Tables(0).Rows(x)("CodigoPuesto")
+                        Dim rwPuesto As DataRow() = nConsulta(sql)
+
+
+                        CType(Me.dtgDatos.Rows(x).Cells(11), DataGridViewComboBoxCell).Value = rwPuesto(0)("cNombre").ToString()
+
+
+                        'buscar el nombre del buque
+                        sql = "select * from departamentos where iIdDepartamento=" & Forma.dsReporte.Tables(0).Rows(x)("CodigoBuque")
+                        Dim rwBuque As DataRow() = nConsulta(sql)
+
+                        CType(Me.dtgDatos.Rows(x).Cells(12), DataGridViewComboBoxCell).Value = rwBuque(0)("cNombre").ToString()
+
                     Next
 
 
@@ -10477,6 +10489,202 @@ Public Class frmnominasmarinos
 
         Catch ex As Exception
             MessageBox.Show(ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub cmdComision_Click(sender As System.Object, e As System.EventArgs) Handles cmdComision.Click
+        'Enviar datos a excel
+        Dim SQL As String, Alter As Boolean = False
+
+        Dim promotor As String = ""
+        Dim filaExcel As Integer = 5
+        Dim dialogo As New SaveFileDialog()
+        Dim contadorfacturas As Integer
+        Dim Operadora As Double
+        Dim ISR As Double
+        Dim Infonavit As Double
+        Dim Pension As Double
+        Dim costo As Double
+        Dim comision As Double
+        Dim retenciones As Double
+        Dim Asimilados As Double
+        Dim comisionasimilados As Double
+        Dim sueldoTMM As Double
+
+        Alter = True
+        Try
+
+            SQL = "select departamentos.cNombre,sum(fsalariobase) as salariobase, sum(fOperadora) as Operadora,"
+            SQL &= " sum(fRetencionOperadora) as retencion, sum(fComisionOperadora) as Comoperadora,"
+            SQL &= " sum(fInfonavit) as infonavit,sum(fInfonavitBanterior) as infonavitanterior, sum(fAjusteInfonavit) as ajusteinfonavit,"
+            SQL &= " sum(fPensionAlimenticia) as pensionalimenticia, sum(fIsr) as ISR,CostoSocial"
+            SQL &= " from (nomina inner join departamentos on nomina.fkiIdDepartamento=departamentos.iIdDepartamento)"
+            SQL &= " inner join (select fkiIdDepartamento,sum(fTotalCostoSocial) as CostoSocial"
+            SQL &= " from nomina"
+            SQL &= " where fkiIdPeriodo =" & cboperiodo.SelectedValue & " And iEstatusEmpleado =" & cboserie.SelectedIndex & " And iTiponomina = 0"
+            SQL &= " group by fkiIdDepartamento"
+            SQL &= " ) as CS on departamentos.iIdDepartamento=CS.fkiIdDepartamento"
+            SQL &= " where fkiIdPeriodo =" & cboperiodo.SelectedValue & " And iEstatusEmpleado =" & cboserie.SelectedIndex
+            SQL &= " group by departamentos.cNombre,CostoSocial"
+            SQL &= " order by departamentos.cNombre"
+
+            Dim rwFilas As DataRow() = nConsulta(SQL)
+
+            If rwFilas.Length > 0 Then
+                Dim libro As New ClosedXML.Excel.XLWorkbook
+                Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
+                'Dim hoja2 As IXLWorksheet = libro.Worksheets.Add("Resumen pago")
+
+                hoja.Column("B").Width = 20
+                hoja.Column("C").Width = 15
+                hoja.Column("D").Width = 15
+                hoja.Column("E").Width = 15
+                hoja.Column("F").Width = 15
+                hoja.Column("G").Width = 15
+                hoja.Column("H").Width = 15
+                hoja.Column("I").Width = 15
+                hoja.Column("J").Width = 15
+                hoja.Column("K").Width = 15
+                hoja.Column("L").Width = 15
+                hoja.Column("M").Width = 15
+                hoja.Column("N").Width = 15
+                hoja.Column("O").Width = 15
+
+
+                hoja.Cell(1, 2).Value = "Comision Nomina"
+                hoja.Range(1, 2, 1, 2).Style.Font.SetBold(True)
+                hoja.Cell(2, 2).Value = "Fecha:" & Date.Now.ToShortDateString & " " & Date.Now.ToShortTimeString
+                hoja.Cell(3, 2).Value = "PERIODO: " & cboperiodo.Text
+                hoja.Range(3, 2, 3, 2).Style.Font.SetBold(True)
+
+                'hoja.Cell(3, 2).Value = ":"
+                'hoja.Cell(3, 3).Value = ""
+
+                hoja.Range(4, 2, 4, 15).Style.Font.FontSize = 10
+                hoja.Range(4, 2, 4, 15).Style.Font.SetBold(True)
+                hoja.Range(4, 2, 4, 15).Style.Alignment.WrapText = True
+                hoja.Range(4, 2, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+                hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+                'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
+                hoja.Range(4, 2, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+                hoja.Range(4, 2, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+
+                hoja.Range(5, 2, 1000, 26).Style.NumberFormat.NumberFormatId = 4
+
+                'Format = ("$ #,###,##0.00")
+                'hoja.Cell(4, 1).Value = "Num"
+
+                hoja.Cell(4, 2).Value = "Barco"
+                hoja.Cell(4, 3).Value = "Dispersión"
+                hoja.Cell(4, 4).Value = "Costo Social"
+                hoja.Cell(4, 5).Value = "Retenciones"
+                hoja.Cell(4, 6).Value = "Comisión"
+                hoja.Cell(4, 7).Value = "Subtotal Routes"
+                hoja.Cell(4, 8).Value = "IVA"
+                hoja.Cell(4, 9).Value = "TOTAL"
+                hoja.Cell(4, 10).Value = ""
+
+                hoja.Cell(4, 11).Value = "Dispersión"
+                hoja.Cell(4, 12).Value = "Comisión"
+                hoja.Cell(4, 13).Value = "Subtotal Biryusa"
+                hoja.Cell(4, 14).Value = "IVA"
+                hoja.Cell(4, 15).Value = "TOTAL"
+
+
+                filaExcel = 5
+                contadorfacturas = 1
+
+                For x As Integer = 0 To rwFilas.Length - 1
+
+                    Operadora = Double.Parse(rwFilas(x)("Operadora"))
+                    ISR = Double.Parse(rwFilas(x)("ISR"))
+                    Infonavit = Double.Parse(rwFilas(x)("Infonavit"))
+                    Pension = Double.Parse(rwFilas(x)("pensionalimenticia"))
+                    costo = Double.Parse(rwFilas(x)("CostoSocial"))
+                    comision = Double.Parse(rwFilas(x)("Comoperadora"))
+                    retenciones = ISR + Infonavit + Pension
+                    sueldoTMM = Double.Parse(rwFilas(x)("salariobase"))
+                    Asimilados = sueldoTMM - Infonavit - Pension - Operadora
+                    comisionasimilados = Asimilados * 0.02
+
+
+
+
+
+                    'Barco
+                    hoja.Cell(filaExcel + x, 2).Value = rwFilas(x)("cNombre")
+                    'Dispersion
+                    hoja.Cell(filaExcel + x, 3).Value = Operadora
+
+                    'Costo
+                    hoja.Cell(filaExcel + x, 4).Value = costo
+                    'Retenciones
+                    hoja.Cell(filaExcel + x, 5).Value = retenciones
+                    'Comision
+                    hoja.Cell(filaExcel + x, 6).Value = comision
+                    'Subtotal
+                    hoja.Cell(filaExcel + x, 7).Value = Operadora + costo + retenciones + comision
+                    'IVA
+                    hoja.Cell(filaExcel + x, 8).Value = Math.Round((Operadora + costo + retenciones + comision) * 0.16, 2)
+                    'TOTAL
+                    hoja.Cell(filaExcel + x, 9).FormulaA1 = "=SUM(G" & filaExcel + x & ":H" & filaExcel + x & ")"
+                    'nada
+                    hoja.Cell(filaExcel + x, 10).Value = ""
+                    'Dispersion Asimilados
+                    hoja.Cell(filaExcel + x, 11).Value = Asimilados
+                    'Comision
+                    hoja.Cell(filaExcel + x, 12).Value = comisionasimilados
+                    'Subtotal
+                    hoja.Cell(filaExcel + x, 13).Value = Asimilados + comisionasimilados
+                    'IVA
+                    hoja.Cell(filaExcel + x, 14).Value = Math.Round((Asimilados + comisionasimilados) * 0.16, 2)
+                    'TOTAL
+                    hoja.Cell(filaExcel + x, 15).FormulaA1 = "=SUM(M" & filaExcel + x & ":N" & filaExcel + x & ")"
+
+                Next
+
+
+                hoja.Cell(filaExcel + rwFilas.Length, 2).FormulaA1 = "=SUM(B" & filaExcel & ":B" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 3).FormulaA1 = "=SUM(C" & filaExcel & ":C" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 4).FormulaA1 = "=SUM(D" & filaExcel & ":D" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 5).FormulaA1 = "=SUM(E" & filaExcel & ":E" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 6).FormulaA1 = "=SUM(F" & filaExcel & ":F" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 7).FormulaA1 = "=SUM(G" & filaExcel & ":G" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 8).FormulaA1 = "=SUM(H" & filaExcel & ":G" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 9).FormulaA1 = "=SUM(I" & filaExcel & ":I" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 10).FormulaA1 = "=SUM(J" & filaExcel & ":J" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 11).FormulaA1 = "=SUM(K" & filaExcel & ":K" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 12).FormulaA1 = "=SUM(L" & filaExcel & ":L" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 13).FormulaA1 = "=SUM(M" & filaExcel & ":M" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 14).FormulaA1 = "=SUM(N" & filaExcel & ":N" & filaExcel + rwFilas.Length - 1 & ")"
+                hoja.Cell(filaExcel + rwFilas.Length, 15).FormulaA1 = "=SUM(O" & filaExcel & ":O" & filaExcel + rwFilas.Length - 1 & ")"
+
+
+                hoja.Range(filaExcel + rwFilas.Length, 2, filaExcel + dtgDatos.Rows.Count, 11).Style.Font.SetBold(True)
+
+
+                '##### HOJA NUMERO 2 RESUMEN PAGO
+
+
+                dialogo.DefaultExt = "*.xlsx"
+                dialogo.FileName = "Resumen Comision"
+                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                dialogo.ShowDialog()
+                libro.SaveAs(dialogo.FileName)
+                'libro.SaveAs("c:\temp\control.xlsx")
+                'libro.SaveAs(dialogo.FileName)
+                'apExcel.Quit()
+                libro = Nothing
+
+                MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            Else
+                MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End If
+
+        Catch ex As Exception
+
         End Try
 
     End Sub
