@@ -8199,7 +8199,7 @@ Public Class frmnominasmarinos
 
 
                 ''ISLA AMARRADOS
-                hoja.Cell("D" & sep).Value = "ISLA AMARRADOS"
+                hoja.Cell("D" & sep).Value = "AMARRADOS"
                 hoja.Cell("D" & sep + 1).Value = "TMM DIVISION"
                 hoja.Cell("D" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
                 hoja.Cell("D" & sep + 4).Value = "IVA"

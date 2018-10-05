@@ -316,6 +316,9 @@ Public Class frmExcel
             Dim filaExcel As Integer = 2
             Dim dialogo As New SaveFileDialog()
 
+            Dim pilotin As Boolean = False
+
+
             If lsvLista.CheckedItems.Count > 0 Then
                 'Abrimos el machote
                 Dim ruta As String
@@ -348,97 +351,109 @@ Public Class frmExcel
                     hoja.Range(2, 6, filaExcel, 6).Style.NumberFormat.Format = "@"
                     hoja.Range(2, 26, filaExcel, 26).Style.NumberFormat.Format = "@"
 
-                    'If dato.SubItems(9).Text <> "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Then
+                    If dato.SubItems(9).Text = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" And cboTipoR.SelectedItem.ToString() = "ND" Then
+                        pilotin = True
+                    Else
+                        pilotin = False
+                    End If
+
+                    If pilotin = False Then
 
 
-                    ''Generales
-                    hoja.Cell(filaExcel, 1).Value = dato.SubItems(1).Text 'N° Empleado
-                    hoja.Cell(filaExcel, 2).Value = dato.SubItems(4).Text 'RFC
-                    hoja.Cell(filaExcel, 3).Value = dato.SubItems(2).Text 'NOMBRE
-                    hoja.Cell(filaExcel, 4).Value = dato.SubItems(5).Text 'CURP
-                    hoja.Cell(filaExcel, 5).Value = dato.SubItems(6).Text 'SSA
-                    hoja.Cell(filaExcel, 6).Value = (dato.SubItems(43).Text.ToString.Replace("'", "")) 'Cuenta
-                    hoja.Cell(filaExcel, 7).Value = dato.SubItems(14).Text 'SBC
-                    hoja.Cell(filaExcel, 8).Value = dato.SubItems(13).Text 'SDI
-                    hoja.Cell(filaExcel, 9).Value = "A1131077105" 'REG. PATRONAL
-                    hoja.Cell(filaExcel, 10).Value = "CAM" 'ENT. FEDERATIVA
-                    hoja.Cell(filaExcel, 11).Value = dato.SubItems(15).Text 'DIAS PAGADOS
-                    hoja.Cell(filaExcel, 12).Value = dato.SubItems(44).Text ' FECHA INICIO RELABORAL
-                    hoja.Cell(filaExcel, 13).Value = "3" 'TIPO DE CONTRATO
-                    hoja.Cell(filaExcel, 14).Value = ""
-                    hoja.Cell(filaExcel, 15).Value = ""   'SINDICALIZADO
-                    hoja.Cell(filaExcel, 16).Value = "1"  ''TIPO JORNADA
-                    hoja.Cell(filaExcel, 17).Value = ""
-                    hoja.Cell(filaExcel, 18).Value = "2" 'TIPO REGIMEN 
-                    hoja.Cell(filaExcel, 19).Value = ""
-                    hoja.Cell(filaExcel, 20).Value = "" 'DEPARTAMENTO
-                    hoja.Cell(filaExcel, 21).Value = dato.SubItems(9).Text  'PUESTO
-                    hoja.Cell(filaExcel, 22).Value = "4"  'RIESGO PUESTO
-                    hoja.Cell(filaExcel, 23).Value = ""
-                    hoja.Cell(filaExcel, 24).Value = "5"  'PERIODICIDAD PAGO
-                    hoja.Cell(filaExcel, 25).Value = ""
-                    hoja.Cell(filaExcel, 26).Value = dato.SubItems(42).Text  ''Banco
-                    hoja.Cell(filaExcel, 27).Value = ""
-                    hoja.Cell(filaExcel, 28).Value = "" 'SUBCONTRATACION
-                    hoja.Cell(filaExcel, 29).Value = cboTipoR.SelectedItem.ToString() 'TIPO DE RECIBO
-                    hoja.Cell(filaExcel, 30).Value = cboMes.SelectedIndex + 1 ' MES DE PAGO
-                    hoja.Cell(filaExcel, 31).Value = dato.SubItems(10).Text ' BUQUE
-                    filaExcel = filaExcel + 1
-                    ' End If
+                        ''Generales
+                        hoja.Cell(filaExcel, 1).Value = dato.SubItems(1).Text 'N° Empleado
+                        hoja.Cell(filaExcel, 2).Value = dato.SubItems(4).Text 'RFC
+                        hoja.Cell(filaExcel, 3).Value = dato.SubItems(2).Text 'NOMBRE
+                        hoja.Cell(filaExcel, 4).Value = dato.SubItems(5).Text 'CURP
+                        hoja.Cell(filaExcel, 5).Value = dato.SubItems(6).Text 'SSA
+                        hoja.Cell(filaExcel, 6).Value = (dato.SubItems(43).Text.ToString.Replace("'", "")) 'Cuenta
+                        hoja.Cell(filaExcel, 7).Value = dato.SubItems(14).Text 'SBC
+                        hoja.Cell(filaExcel, 8).Value = dato.SubItems(13).Text 'SDI
+                        hoja.Cell(filaExcel, 9).Value = "A1131077105" 'REG. PATRONAL
+                        hoja.Cell(filaExcel, 10).Value = "CAM" 'ENT. FEDERATIVA
+                        hoja.Cell(filaExcel, 11).Value = dato.SubItems(15).Text 'DIAS PAGADOS
+                        hoja.Cell(filaExcel, 12).Value = dato.SubItems(44).Text ' FECHA INICIO RELABORAL
+                        hoja.Cell(filaExcel, 13).Value = "3" 'TIPO DE CONTRATO
+                        hoja.Cell(filaExcel, 14).Value = ""
+                        hoja.Cell(filaExcel, 15).Value = ""   'SINDICALIZADO
+                        hoja.Cell(filaExcel, 16).Value = "1"  ''TIPO JORNADA
+                        hoja.Cell(filaExcel, 17).Value = ""
+                        hoja.Cell(filaExcel, 18).Value = "2" 'TIPO REGIMEN 
+                        hoja.Cell(filaExcel, 19).Value = ""
+                        hoja.Cell(filaExcel, 20).Value = "" 'DEPARTAMENTO
+                        hoja.Cell(filaExcel, 21).Value = dato.SubItems(9).Text  'PUESTO
+                        hoja.Cell(filaExcel, 22).Value = "4"  'RIESGO PUESTO
+                        hoja.Cell(filaExcel, 23).Value = ""
+                        hoja.Cell(filaExcel, 24).Value = "5"  'PERIODICIDAD PAGO
+                        hoja.Cell(filaExcel, 25).Value = ""
+                        hoja.Cell(filaExcel, 26).Value = dato.SubItems(42).Text  ''Banco
+                        hoja.Cell(filaExcel, 27).Value = ""
+                        hoja.Cell(filaExcel, 28).Value = "" 'SUBCONTRATACION
+                        hoja.Cell(filaExcel, 29).Value = cboTipoR.SelectedItem.ToString() 'TIPO DE RECIBO
+                        hoja.Cell(filaExcel, 30).Value = cboMes.SelectedIndex + 1 ' MES DE PAGO
+                        hoja.Cell(filaExcel, 31).Value = dato.SubItems(10).Text ' BUQUE
+                        filaExcel = filaExcel + 1
+                    End If
 
                 Next
 
                 filaExcel = 4
                 For Each dato As ListViewItem In lsvLista.CheckedItems
 
-                    'If dato.SubItems(9).Text <> "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Then
+                    If dato.SubItems(9).Text = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" And cboTipoR.SelectedItem.ToString() = "ND" Then
+                        pilotin = True
+                    Else
+                        pilotin = False
+                    End If
 
-                    'Percepciones
-                    hoja2.Cell(filaExcel, 1).Value = dato.SubItems(4).Text 'RFC
-                    hoja2.Cell(filaExcel, 2).Value = dato.SubItems(2).Text 'NOMBRE
-                    hoja2.Cell(filaExcel, 3).Value = dato.SubItems(23).Text ' VAC. PORP GRAV
-                    hoja2.Cell(filaExcel, 4).Value = ""
-                    hoja2.Cell(filaExcel, 5).Value = dato.SubItems(22).Text 'DESC. SEM. OBLIGATORIO
-                    hoja2.Cell(filaExcel, 6).Value = ""
-                    hoja2.Cell(filaExcel, 7).Value = dato.SubItems(21).Text 'TIEMPO EXTRA OCASIONA
-                    hoja2.Cell(filaExcel, 8).Value = ""
-                    hoja2.Cell(filaExcel, 9).Value = dato.SubItems(19).Text ' TIEMPO EXTRA FIJO GRAVADO
-                    hoja2.Cell(filaExcel, 10).Value = dato.SubItems(20).Text 'EXENTO
-                    hoja2.Cell(filaExcel, 11).Value = dato.SubItems(18).Text ' SUELDO BASE
-                    hoja2.Cell(filaExcel, 12).Value = ""
-                    hoja2.Cell(filaExcel, 13).Value = dato.SubItems(24).Text ' AGUINALDO GRVADO
-                    hoja2.Cell(filaExcel, 14).Value = dato.SubItems(25).Text ' EXENTO
-                    hoja2.Cell(filaExcel, 15).Value = dato.SubItems(27).Text ' PRIMA VACIONAL
-                    hoja2.Cell(filaExcel, 16).Value = dato.SubItems(28).Text 'EXENTO
-                    hoja2.Cell(filaExcel, 17).Value = ""
-                    hoja2.Cell(filaExcel, 18).Value = ""
-                    hoja2.Cell(filaExcel, 19).Value = ""
-                    hoja2.Cell(filaExcel, 20).Value = ""
-                    hoja2.Cell(filaExcel, 21).Value = ""
-                    hoja2.Cell(filaExcel, 22).Value = ""
-                    hoja2.Cell(filaExcel, 23).Value = ""
+                    If pilotin = False Then
 
-                    ''Deducciones
-                    hoja3.Cell(filaExcel, 1).Value = dato.SubItems(4).Text ' RFC
-                    hoja3.Cell(filaExcel, 2).Value = dato.SubItems(2).Text ' NOMBRE
-                    hoja3.Cell(filaExcel, 3).Value = dato.SubItems(34).Text ' IMSS
-                    hoja3.Cell(filaExcel, 4).Value = dato.SubItems(33).Text ' ISR
-                    hoja3.Cell(filaExcel, 5).Value = ""
-                    hoja3.Cell(filaExcel, 6).Value = ""
-                    hoja3.Cell(filaExcel, 7).Value = dato.SubItems(32).Text 'INCAPACIDAD IMPORTE
-                    hoja3.Cell(filaExcel, 8).Value = dato.SubItems(36).Text 'PENSION ALIMENTICIA
-                    hoja3.Cell(filaExcel, 9).Value = dato.SubItems(35).Text ' INFONAVIT
+                        'Percepciones
+                        hoja2.Cell(filaExcel, 1).Value = dato.SubItems(4).Text 'RFC
+                        hoja2.Cell(filaExcel, 2).Value = dato.SubItems(2).Text 'NOMBRE
+                        hoja2.Cell(filaExcel, 3).Value = dato.SubItems(23).Text ' VAC. PORP GRAV
+                        hoja2.Cell(filaExcel, 4).Value = ""
+                        hoja2.Cell(filaExcel, 5).Value = dato.SubItems(22).Text 'DESC. SEM. OBLIGATORIO
+                        hoja2.Cell(filaExcel, 6).Value = ""
+                        hoja2.Cell(filaExcel, 7).Value = dato.SubItems(21).Text 'TIEMPO EXTRA OCASIONA
+                        hoja2.Cell(filaExcel, 8).Value = ""
+                        hoja2.Cell(filaExcel, 9).Value = dato.SubItems(19).Text ' TIEMPO EXTRA FIJO GRAVADO
+                        hoja2.Cell(filaExcel, 10).Value = dato.SubItems(20).Text 'EXENTO
+                        hoja2.Cell(filaExcel, 11).Value = dato.SubItems(18).Text ' SUELDO BASE
+                        hoja2.Cell(filaExcel, 12).Value = ""
+                        hoja2.Cell(filaExcel, 13).Value = dato.SubItems(24).Text ' AGUINALDO GRVADO
+                        hoja2.Cell(filaExcel, 14).Value = dato.SubItems(25).Text ' EXENTO
+                        hoja2.Cell(filaExcel, 15).Value = dato.SubItems(27).Text ' PRIMA VACIONAL
+                        hoja2.Cell(filaExcel, 16).Value = dato.SubItems(28).Text 'EXENTO
+                        hoja2.Cell(filaExcel, 17).Value = ""
+                        hoja2.Cell(filaExcel, 18).Value = ""
+                        hoja2.Cell(filaExcel, 19).Value = ""
+                        hoja2.Cell(filaExcel, 20).Value = ""
+                        hoja2.Cell(filaExcel, 21).Value = ""
+                        hoja2.Cell(filaExcel, 22).Value = ""
+                        hoja2.Cell(filaExcel, 23).Value = ""
 
-                    ''Otros Pagos
-                    hoja4.Columns("A").Width = 20
-                    hoja4.Columns("B").Width = 20
-                    hoja4.Cell(filaExcel, 1).Value = dato.SubItems(4).Text ' RFC
-                    hoja4.Cell(filaExcel, 2).Value = dato.SubItems(2).Text ' NOMBRE
-                    hoja4.Cell(filaExcel, 3).Value = dato.SubItems(37).Text ' IMPORTE SUBSIDIO
-                    hoja4.Cell(filaExcel, 4).Value = dato.SubItems(48).Text 'SUBSIDIO CAUSADO
+                        ''Deducciones
+                        hoja3.Cell(filaExcel, 1).Value = dato.SubItems(4).Text ' RFC
+                        hoja3.Cell(filaExcel, 2).Value = dato.SubItems(2).Text ' NOMBRE
+                        hoja3.Cell(filaExcel, 3).Value = dato.SubItems(34).Text ' IMSS
+                        hoja3.Cell(filaExcel, 4).Value = dato.SubItems(33).Text ' ISR
+                        hoja3.Cell(filaExcel, 5).Value = ""
+                        hoja3.Cell(filaExcel, 6).Value = ""
+                        hoja3.Cell(filaExcel, 7).Value = dato.SubItems(32).Text 'INCAPACIDAD IMPORTE
+                        hoja3.Cell(filaExcel, 8).Value = dato.SubItems(36).Text 'PENSION ALIMENTICIA
+                        hoja3.Cell(filaExcel, 9).Value = dato.SubItems(35).Text ' INFONAVIT
 
-                    filaExcel = filaExcel + 1
-                    'End If
+                        ''Otros Pagos
+                        hoja4.Columns("A").Width = 20
+                        hoja4.Columns("B").Width = 20
+                        hoja4.Cell(filaExcel, 1).Value = dato.SubItems(4).Text ' RFC
+                        hoja4.Cell(filaExcel, 2).Value = dato.SubItems(2).Text ' NOMBRE
+                        hoja4.Cell(filaExcel, 3).Value = dato.SubItems(37).Text ' IMPORTE SUBSIDIO
+                        hoja4.Cell(filaExcel, 4).Value = dato.SubItems(49).Text 'SUBSIDIO CAUSADO
+
+                        filaExcel = filaExcel + 1
+                    End If
 
                 Next
                 'Dim tmp() = rutita.Split("\")

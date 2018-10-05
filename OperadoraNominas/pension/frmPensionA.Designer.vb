@@ -43,12 +43,16 @@ Partial Class frmPensionA
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.cboEstatus = New System.Windows.Forms.ComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Label8)
+        Me.Panel1.Controls.Add(Me.cboEstatus)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.txtCuenta)
         Me.Panel1.Controls.Add(Me.Label4)
@@ -222,6 +226,24 @@ Partial Class frmPensionA
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Beneficiario"
         '
+        'cboEstatus
+        '
+        Me.cboEstatus.FormattingEnabled = True
+        Me.cboEstatus.Items.AddRange(New Object() {"ACTIVO", "INACTIVO"})
+        Me.cboEstatus.Location = New System.Drawing.Point(624, 108)
+        Me.cboEstatus.Name = "cboEstatus"
+        Me.cboEstatus.Size = New System.Drawing.Size(177, 26)
+        Me.cboEstatus.TabIndex = 188
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(630, 85)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(52, 18)
+        Me.Label8.TabIndex = 189
+        Me.Label8.Text = "Estatus"
+        '
         'frmPensionA
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -260,4 +282,6 @@ Partial Class frmPensionA
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents txtCuenta As System.Windows.Forms.TextBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents cboEstatus As System.Windows.Forms.ComboBox
 End Class
