@@ -8604,7 +8604,7 @@ Public Class frmnominasmarinos
                 filatmp = 9
                 filatmp2 = 13
 
-                Dim cuenta, banco, clabe As String
+                Dim cuenta, banco, clabe, nombrecompleto As String
 
                 hoja4.Cell(4, 3).Style.Font.SetBold(True)
                 hoja4.Cell(4, 3).Style.NumberFormat.Format = "@"
@@ -8624,6 +8624,7 @@ Public Class frmnominasmarinos
 
                     Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
                     If empleado Is Nothing = False Then
+                        nombrecompleto = empleado(0).Item("cNombre") & " " & empleado(0).Item("cApellidoP") & " " & empleado(0).Item("cApellidoM")
                         cuenta = empleado(0).Item("NumCuenta")
                         clabe = empleado(0).Item("Clabe")
                         Dim bank As DataRow() = nConsulta("select * from bancos where iIdBanco =" & empleado(0).Item("fkiIdBanco"))

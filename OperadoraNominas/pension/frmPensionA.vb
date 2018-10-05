@@ -14,7 +14,7 @@
         MostrarBancos()
 
         ' cmdAgregar.Enabled = False
-        blnNuevo = True
+        'blnNuevo = True
         'txtBeneficiario.Enabled = False
         'txtClabe.Enabled = False
         'txtPorcentaje.Enabled = False
