@@ -8637,7 +8637,7 @@ Public Class frmnominasmarinos
                     hoja4.Cell(filaExcel, 3).Style.NumberFormat.Format = "@"
                     hoja4.Cell(filaExcel, 2).Value = dtgDatos.Rows(x).Cells(12).Value
                     hoja4.Cell(filaExcel, 3).Value = dtgDatos.Rows(x).Cells(3).Value 'No empleado
-                    hoja4.Cell(filaExcel, 4).Value = dtgDatos.Rows(x).Cells(4).Value
+                    hoja4.Cell(filaExcel, 4).Value = nombrecompleto 'dtgDatos.Rows(x).Cells(4).Value
                     hoja4.Cell(filaExcel, 5).Value = banco
                     hoja4.Cell(filaExcel, 6).Value = clabe
                     hoja4.Cell(filaExcel, 7).Value = cuenta
@@ -9239,6 +9239,8 @@ Public Class frmnominasmarinos
             Dim filaExcel As Integer = 2
             Dim dialogo As New SaveFileDialog()
 
+            Dim pilotin As Boolean = False
+
             pnlProgreso.Visible = True
             pnlCatalogo.Enabled = False
             Application.DoEvents()
@@ -9284,6 +9286,15 @@ Public Class frmnominasmarinos
                 '' filaExcel = 6
                 For x As Integer = 0 To dtgD.Rows.Count - 1
 
+                    If dtgD.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" And cboTipoNomina.SelectedItem.ToString() = "Descanso" Then
+                        pilotin = True
+                    Else
+                        pilotin = False
+                    End If
+
+                    If pilotin = False Then
+
+                    End If
                     Dim cuenta, clavebanco, fechainiciorelaboral As String
 
                     If (dtgD.Rows(x).Cells(3).Value Is Nothing = False) Then
@@ -9315,7 +9326,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(7).Value 'CURP
                         hoja.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(8).Value 'SSA
                         hoja.Cell(filaExcel, 6).Value = cuenta ' Cuenta Bancaria
-                        hoja.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(15).Value 'SBC //O 17 SALARIO_COTIZACION
+                        hoja.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(17).Value 'SBC //O 17 SALARIO_COTIZACION
                         hoja.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(16).Value 'SDI
                         hoja.Cell(filaExcel, 9).Value = "A1131077105" 'Reg. Patronal 
                         hoja.Cell(filaExcel, 10).Value = "CAM" 'Ent. Federativa  
@@ -9349,58 +9360,67 @@ Public Class frmnominasmarinos
 
                 filaExcel = 4
                 For x As Integer = 0 To dtgD.Rows.Count - 1
-
-                    'Percepciones
-                    hoja2.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(6).Value 'RFC
-                    hoja2.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'Nombre
-                    hoja2.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(25).Value 'Vac Proporcionales Gravado
-                    hoja2.Cell(filaExcel, 4).Value = "" 'Vac Proporcionales Exento
-                    hoja2.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(24).Value ' Desc. Sem. Obligatorio Gravado
-                    hoja2.Cell(filaExcel, 6).Value = "" ' Desc. Sem. Obligatorio Gravado
-                    hoja2.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(23).Value 'Tiempo Extra Ocasional Gravado 
-                    hoja2.Cell(filaExcel, 8).Value = "" ' Tiempo Extra Ocasional Exento
-                    hoja2.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(22).Value ' Tiempo Extra Fijo Gravado
-                    hoja2.Cell(filaExcel, 10).Value = dtgD.Rows(x).Cells(23).Value ' Tiempo Extra Fijo Exento
-                    hoja2.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(21).Value ' Sueldo Base Gravado
-                    hoja2.Cell(filaExcel, 12).Value = "" ' Sueldo Base Exento
-                    hoja2.Cell(filaExcel, 13).Value = dtgD.Rows(x).Cells(27).Value ' Aguinaldo Gravado
-                    hoja2.Cell(filaExcel, 14).Value = dtgD.Rows(x).Cells(28).Value ' Aguinaldo Exento
-                    hoja2.Cell(filaExcel, 15).Value = dtgD.Rows(x).Cells(30).Value ' Prima Vacional Gravado
-                    hoja2.Cell(filaExcel, 16).Value = dtgD.Rows(x).Cells(31).Value ' Prima Vacional Exento
-                    hoja2.Cell(filaExcel, 17).Value = ""
-                    hoja2.Cell(filaExcel, 18).Value = ""
-                    hoja2.Cell(filaExcel, 19).Value = ""
-                    hoja2.Cell(filaExcel, 20).Value = ""
-                    hoja2.Cell(filaExcel, 21).Value = ""
-                    hoja2.Cell(filaExcel, 22).Value = ""
-                    hoja2.Cell(filaExcel, 23).Value = ""
-
-                    ''Deducciones
-                    hoja3.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(6).Value 'RFC
-                    hoja3.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'Nombre
-                    hoja3.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(37).Value ' IMSS
-                    hoja3.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(36).Value 'ISR
-                    hoja3.Cell(filaExcel, 5).Value = "" 'INCAPACIDAD, DIAS
-                    hoja3.Cell(filaExcel, 6).Value = "" ' TIPO
-                    hoja3.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(35).Value 'IMPORTE
-                    hoja3.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(42).Value 'PENSION ALIMENTICIA IMPORTE
-                    If (dtgD.Rows(x).Cells(38).Value = "") Then
-                        hoja3.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(38).Value ' INFONAVIT IMPORTE
+                    If dtgD.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" And cboTipoNomina.SelectedItem.ToString() = "Descanso" Then
+                        pilotin = True
                     Else
-                        hoja3.Cell(filaExcel, 9).Value = validateInfonavit(dtgD.Rows(x).Cells(39).Value, dtgD.Rows(x).Cells(38).Value)
+                        pilotin = False
                     End If
 
+                    If pilotin = False Then
 
-                    ''Otros Pagos
-                    hoja4.Columns("A").Width = 20
-                    hoja4.Columns("B").Width = 20
-                    hoja4.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(6).Value ' RFC
-                    hoja4.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
-                    hoja4.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(44).Value ' SUBSIDIO IMPORTE
-                    hoja4.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(45).Value ' SUBSIDIO CUSADO
+                        'Percepciones
+                        hoja2.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(6).Value 'RFC
+                        hoja2.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'Nombre
+                        hoja2.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(26).Value 'Vac Proporcionales Gravado
+                        hoja2.Cell(filaExcel, 4).Value = "" 'Vac Proporcionales Exento
+                        hoja2.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(25).Value ' Desc. Sem. Obligatorio Gravado
+                        hoja2.Cell(filaExcel, 6).Value = "" ' Desc. Sem. Obligatorio Gravado
+                        hoja2.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(24).Value 'Tiempo Extra Ocasional Gravado 
+                        hoja2.Cell(filaExcel, 8).Value = "" ' Tiempo Extra Ocasional Exento
+                        hoja2.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(22).Value ' Tiempo Extra Fijo Gravado
+                        hoja2.Cell(filaExcel, 10).Value = dtgD.Rows(x).Cells(23).Value ' Tiempo Extra Fijo Exento
+                        hoja2.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(21).Value ' Sueldo Base Gravado
+                        hoja2.Cell(filaExcel, 12).Value = "" ' Sueldo Base Exento
+                        hoja2.Cell(filaExcel, 13).Value = dtgD.Rows(x).Cells(27).Value ' Aguinaldo Gravado
+                        hoja2.Cell(filaExcel, 14).Value = dtgD.Rows(x).Cells(28).Value ' Aguinaldo Exento
+                        hoja2.Cell(filaExcel, 15).Value = dtgD.Rows(x).Cells(30).Value ' Prima Vacional Gravado
+                        hoja2.Cell(filaExcel, 16).Value = dtgD.Rows(x).Cells(31).Value ' Prima Vacional Exento
+                        hoja2.Cell(filaExcel, 17).Value = ""
+                        hoja2.Cell(filaExcel, 18).Value = ""
+                        hoja2.Cell(filaExcel, 19).Value = ""
+                        hoja2.Cell(filaExcel, 20).Value = ""
+                        hoja2.Cell(filaExcel, 21).Value = ""
+                        hoja2.Cell(filaExcel, 22).Value = ""
+                        hoja2.Cell(filaExcel, 23).Value = ""
 
-                    filaExcel = filaExcel + 1
-                   
+                        ''Deducciones
+                        hoja3.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(6).Value 'RFC
+                        hoja3.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'Nombre
+                        hoja3.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(37).Value ' IMSS
+                        hoja3.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(36).Value 'ISR
+                        hoja3.Cell(filaExcel, 5).Value = "" 'INCAPACIDAD, DIAS
+                        hoja3.Cell(filaExcel, 6).Value = "" ' TIPO
+                        hoja3.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(35).Value 'IMPORTE
+                        hoja3.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(41).Value 'PENSION ALIMENTICIA IMPORTE
+                        If (dtgD.Rows(x).Cells(38).Value = "") Then
+                            hoja3.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(38).Value ' INFONAVIT IMPORTE
+                        Else
+                            hoja3.Cell(filaExcel, 9).Value = validateInfonavit(dtgD.Rows(x).Cells(39).Value, dtgD.Rows(x).Cells(38).Value)
+                        End If
+
+
+                        ''Otros Pagos
+                        hoja4.Columns("A").Width = 20
+                        hoja4.Columns("B").Width = 20
+                        hoja4.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(6).Value ' RFC
+                        hoja4.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'NOMBRE
+                        hoja4.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(45).Value ' SUBSIDIO IMPORTE
+                        hoja4.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(44).Value ' SUBSIDIO CUSADO
+
+                        filaExcel = filaExcel + 1
+
+                    End If
+
                 Next
 
                 'Se guarda

@@ -14,7 +14,7 @@
         MostrarBancos()
 
         ' cmdAgregar.Enabled = False
-        'blnNuevo = True
+        blnNuevo = True
         'txtBeneficiario.Enabled = False
         'txtClabe.Enabled = False
         'txtPorcentaje.Enabled = False
@@ -112,10 +112,11 @@
                     cbobanco.SelectedValue = fkidbanco 'lsvHistorial.SelectedItems(0).SubItems(2).Text
                     txtClabe.Text = lsvHistorial.SelectedItems(0).SubItems(3).Text
                     txtCuenta.Text = lsvHistorial.SelectedItems(0).SubItems(4).Text
-                    cboEstatus.SelectedIndex = IIf(iEstatus = "1", 0, 1)
+                    cboEstatus.SelectedIndex = IIf(iEstatus = "1", 1, 0)
 
                     cmdAgregar.Enabled = True
                     'Tipo = "1"
+                    blnNuevo = False
                     MessageBox.Show("Pensión lista para editar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 Else
@@ -144,6 +145,7 @@
                 SQL &= "Clabe='" & txtClabe.Text & "', Cuenta='" & txtCuenta.Text & "'"
                 SQL &= " WHERE iIdPensionAlimenticia=" & idPension
 
+
             Else
                 SQL = "EXEC setPensionAlimenticiaInsertar 0,"
                 SQL &= gIdEmpleado & ", " & nudPorcentaje.Value & ","
@@ -163,6 +165,7 @@
             nudPorcentaje.Value = "0.0"
             cbobanco.SelectedIndex = 0
 
+            blnNuevo = True
             MessageBox.Show("Datos guardados correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
            
