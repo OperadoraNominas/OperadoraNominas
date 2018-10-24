@@ -353,7 +353,7 @@ Public Class frmImportarEmpleadosAlta
                             p = 0
                         End If
 
-                        
+                        'Nombre depto
 
                         Dim d As String = Trim(empleadofull.SubItems(38).Text) ''Depto
                         Dim iIdDpto As String
@@ -370,7 +370,7 @@ Public Class frmImportarEmpleadosAlta
                         Else
                             d = 0
                         End If
-
+                        'Clave del estado
                         Dim l As String = Trim(empleadofull.SubItems(19).Text) ''Code
                         Dim cLugar As String
                         If l <> "" Then

@@ -10974,6 +10974,99 @@ Public Class frmnominasmarinos
         End Try
 
     End Sub
+
+    Private Sub btnAsimilados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsimilados.Click
+        Try
+
+            Dim filaExcel As Integer = 0
+            Dim dialogo As New SaveFileDialog()
+
+            If dtgDatos.Rows.Count > 0 Then
+                Dim ruta As String
+                ruta = My.Application.Info.DirectoryPath() & "\Archivos\asimilados.xlsm"
+
+                Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+                Dim libro As New ClosedXML.Excel.XLWorkbook
+                book.Worksheet(1).CopyTo(libro, "ASIMILADOS")
+
+                Dim hoja4 As IXLWorksheet = libro.Worksheets(0)
+
+
+
+                Dim cuenta, banco, clabe As String
+                '<<<<<<<<<<<<<<ASIMILADOS >>>>>>>>>
+                filaExcel = 2
+
+                recorrerFilasColumnas(hoja4, 2, dtgDatos.Rows.Count + 30, 13, "clear")
+
+                Dim app, apm, nom As String
+                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                    Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
+                    If empleado Is Nothing = False Then
+                        cuenta = empleado(0).Item("NumCuenta")
+                        clabe = empleado(0).Item("Clabe")
+                        app = empleado(0).Item("cApellidoP")
+                        apm = empleado(0).Item("cApellidoM")
+                        nom = empleado(0).Item("cNombre")
+                        Dim bank As DataRow() = nConsulta("select * from bancos where iIdBanco =" & empleado(0).Item("fkiIdBanco"))
+                        If bank Is Nothing = False Then
+                            banco = bank(0).Item("cBANCO")
+                        End If
+                    End If
+
+                    hoja4.Cell(filaExcel, 5).Style.NumberFormat.Format = "@"
+                    hoja4.Cell(filaExcel, 8).Style.NumberFormat.Format = "@"
+                    hoja4.Cell(filaExcel, 9).Style.NumberFormat.Format = "@"
+                    hoja4.Cell(filaExcel, 11).Style.NumberFormat.Format = "@"
+                    hoja4.Cell(filaExcel, 12).Style.NumberFormat.Format = "@"
+
+                    hoja4.Cell(filaExcel, 1).Value = app ' Apellido Paterno
+                    hoja4.Cell(filaExcel, 2).Value = apm ' Apellido Materno
+                    hoja4.Cell(filaExcel, 3).Value = nom ' Nombre
+                    hoja4.Cell(filaExcel, 4).FormulaA1 = " " '"=MARINOS!U" & filatmp 'Asimilado
+                    hoja4.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(8).Value '# Afiliacion IMSS
+                    hoja4.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(18).Value 'Dias Trabajandos
+                    hoja4.Cell(filaExcel, 7).Value = banco
+                    hoja4.Cell(filaExcel, 8).Value = clabe
+                    hoja4.Cell(filaExcel, 9).Value = cuenta
+                    hoja4.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(7).Value ' CURP
+                    hoja4.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
+                    'hoja4.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(7).Value ' CURP
+
+                    filaExcel = filaExcel + 1
+                    'filatmp = filatmp + 1
+                Next x
+
+                'Titulo
+                Dim moment As Date = Date.Now()
+                Dim month As Integer = moment.Month
+                Dim year As Integer = moment.Year
+
+                pnlProgreso.Visible = False
+                pnlCatalogo.Enabled = True
+
+                dialogo.FileName = "ASIMILADOS"
+                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                ''  dialogo.ShowDialog()
+
+                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                    ' OK button pressed
+                    libro.SaveAs(dialogo.FileName)
+                    libro = Nothing
+                    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                   
+                Else
+                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                End If
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class
 
 

@@ -56,3 +56,4 @@ C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x8
 D:\Escritorio\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmConcentradoInfonavit.resources
 D:\Escritorio\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPension.resources
 D:\Escritorio\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPensionA.resources
+D:\Escritorio\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
