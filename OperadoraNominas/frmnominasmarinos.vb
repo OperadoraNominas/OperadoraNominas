@@ -2649,7 +2649,7 @@ Public Class frmnominasmarinos
                 sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
                 Dim rwEmpleado As DataRow() = nConsulta(sql)
                 If rwEmpleado Is Nothing = False Then
-                    sql = "select * from costosocial where fkiIdPuesto=" & rwEmpleado(0)("fkiIdPuesto").ToString & " and anio=" & aniocostosocial
+                    sql = "select * from puestos inner join costosocial on puestos.iidPuesto= costosocial.fkiIdPuesto where puestos.cnombre='" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
                     Dim rwCostoSocial As DataRow() = nConsulta(sql)
                     If rwCostoSocial Is Nothing = False Then
                         If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
@@ -9021,7 +9021,7 @@ Public Class frmnominasmarinos
 
         If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
 
-           
+
 
             'Revisa el datagrid
             For filas = 0 To dtgDatos.Rows.Count - 1
@@ -9050,18 +9050,18 @@ Public Class frmnominasmarinos
                 'Se quitan los seleccionados 
                 dtgDatos.Rows.Remove(Seleccion)
                 dtgDupl.ClearSelection()
-                
+
             Next
-            
+
             'Se verifica si la nueva tabla tiene datos
             'Se guardaron repetidos
             If dtgDupl.Rows.Count - 1 <= 0 Then
-               
+
                 '1 Nomina
                 generarLayout2(dtgDatos, path)
 
             Else
-                
+
                 'Nomina A
                 generarLayout2(dtgDatos, path.Replace(".xlsx", " A .xlsx"))
                 'Verfica si en el nuevo datagrid
@@ -9368,7 +9368,7 @@ Public Class frmnominasmarinos
                     pgbProgreso.Value += 1
                     Application.DoEvents()
                 Next
-                
+
 
                 filaExcel = 4
                 For x As Integer = 0 To dtgD.Rows.Count - 1
