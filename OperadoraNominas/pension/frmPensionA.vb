@@ -32,8 +32,11 @@
             SQL &= " order by Nombrebeneficiario "
             Dim rwFilas As DataRow() = nConsulta(SQL)
             Dim item As ListViewItem
+
             If rwFilas Is Nothing = False Then
+
                 For Each Fila In rwFilas
+
                     fkidbanco = Fila.Item("fkIidBanco")
                     iEstatus = Fila.Item("iEstatus")
                     Dim banco As DataRow() = nConsulta("select * from bancos where iIdBanco = " & fkidbanco)
@@ -46,9 +49,13 @@
                     item.Tag = Fila.Item("iIdPensionAlimenticia")
                     item.BackColor = IIf(Alter, Color.WhiteSmoke, Color.White)
                     Alter = Not Alter
+                    blnNuevo = False
 
                 Next
+            Else
+                blnNuevo = True
             End If
+
             If lsvHistorial.Items.Count > 0 Then
                 lsvHistorial.Focus()
                 lsvHistorial.Items(0).Selected = True
@@ -101,14 +108,15 @@
 
 
                     txtBeneficiario.Text = lsvHistorial.SelectedItems(0).SubItems(0).Text
-                    txtPorcentaje.Text = lsvHistorial.SelectedItems(0).SubItems(1).Text
+                    nudPorcentaje.Value = lsvHistorial.SelectedItems(0).SubItems(1).Text
                     cbobanco.SelectedValue = fkidbanco 'lsvHistorial.SelectedItems(0).SubItems(2).Text
                     txtClabe.Text = lsvHistorial.SelectedItems(0).SubItems(3).Text
                     txtCuenta.Text = lsvHistorial.SelectedItems(0).SubItems(4).Text
-                    cboEstatus.SelectedIndex = IIf(iEstatus = "1", 0, 1)
+                    cboEstatus.SelectedIndex = IIf(iEstatus = "1", 1, 0)
 
                     cmdAgregar.Enabled = True
                     'Tipo = "1"
+                    blnNuevo = False
                     MessageBox.Show("Pensión lista para editar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 Else
@@ -125,25 +133,43 @@
     Private Sub cmdAgregar_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAgregar.Click
 
         Try
-            SQL = "UPDATE PensionAlimenticia SET "
-            SQL &= "fPorcentaje=" & txtPorcentaje.Text & ","
-            SQL &= "Nombrebeneficiario='" & txtBeneficiario.Text & "', fkiIdBanco=" & fkidbanco & ","
-            SQL &= "Clabe='" & txtClabe.Text & "', Cuenta='" & txtCuenta.Text & "'"
-            SQL &= " WHERE iIdPensionAlimenticia=" & idPension
+            If txtBeneficiario.Text = "" Then
+                MessageBox.Show("Agrege el nombre del beneficiario", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If blnNuevo = False Then
+                SQL = "UPDATE PensionAlimenticia SET "
+                SQL &= "fPorcentaje=" & nudPorcentaje.Value & ","
+                SQL &= "Nombrebeneficiario='" & txtBeneficiario.Text & "', fkiIdBanco=" & fkidbanco & ","
+                SQL &= "Clabe='" & txtClabe.Text & "', Cuenta='" & txtCuenta.Text & "'"
+                SQL &= " WHERE iIdPensionAlimenticia=" & idPension
+
+
+            Else
+                SQL = "EXEC setPensionAlimenticiaInsertar 0,"
+                SQL &= gIdEmpleado & ", " & nudPorcentaje.Value & ","
+                SQL &= "'" & txtBeneficiario.Text & "', " & cbobanco.SelectedValue & ","
+                SQL &= "'" & txtClabe.Text & "','" & txtCuenta.Text & "', "
+                SQL &= cboEstatus.SelectedIndex
+
+            End If
 
             If nExecute(SQL) = False Then
                 Exit Sub
             End If
-            cmdAgregar.Enabled = False
+            'cmdAgregar.Enabled = False
             txtBeneficiario.Text = ""
             txtClabe.Text = ""
             txtCuenta.Text = ""
-            txtPorcentaje.Text = ""
+            nudPorcentaje.Value = "0.0"
             cbobanco.SelectedIndex = 0
+
+            blnNuevo = True
             MessageBox.Show("Datos guardados correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+           
             Cargarhistorial()
-
         Catch ex As Exception
 
         End Try
