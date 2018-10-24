@@ -22,98 +22,97 @@ Partial Class frmConcentradoInfonavit
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.cboserie = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cbobimestre = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cboperiodo = New System.Windows.Forms.ComboBox()
-        Me.chkinter = New System.Windows.Forms.CheckBox()
-        Me.chkPeriodo = New System.Windows.Forms.CheckBox()
+        Me.cmdAceptar = New System.Windows.Forms.Button()
+        Me.cmdCancelar = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cboAnio = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
-        'cboserie
+        'cbobimestre
         '
-        Me.cboserie.FormattingEnabled = True
-        Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I"})
-        Me.cboserie.Location = New System.Drawing.Point(343, 42)
-        Me.cboserie.Name = "cboserie"
-        Me.cboserie.Size = New System.Drawing.Size(59, 26)
-        Me.cboserie.TabIndex = 25
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(294, 46)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(44, 18)
-        Me.Label3.TabIndex = 24
-        Me.Label3.Text = "Serie:"
+        Me.cbobimestre.FormattingEnabled = True
+        Me.cbobimestre.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6"})
+        Me.cbobimestre.Location = New System.Drawing.Point(106, 12)
+        Me.cbobimestre.Name = "cbobimestre"
+        Me.cbobimestre.Size = New System.Drawing.Size(59, 26)
+        Me.cbobimestre.TabIndex = 22
+        Me.cbobimestre.UseWaitCursor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(29, 46)
+        Me.Label1.Location = New System.Drawing.Point(3, 16)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(61, 18)
+        Me.Label1.Size = New System.Drawing.Size(101, 18)
         Me.Label1.TabIndex = 23
-        Me.Label1.Text = "Periodo:"
+        Me.Label1.Text = "Num bimestre:"
+        Me.Label1.UseWaitCursor = True
         '
-        'cboperiodo
+        'cmdAceptar
         '
-        Me.cboperiodo.FormattingEnabled = True
-        Me.cboperiodo.Location = New System.Drawing.Point(97, 42)
-        Me.cboperiodo.Name = "cboperiodo"
-        Me.cboperiodo.Size = New System.Drawing.Size(191, 26)
-        Me.cboperiodo.TabIndex = 22
+        Me.cmdAceptar.Location = New System.Drawing.Point(49, 58)
+        Me.cmdAceptar.Name = "cmdAceptar"
+        Me.cmdAceptar.Size = New System.Drawing.Size(84, 31)
+        Me.cmdAceptar.TabIndex = 24
+        Me.cmdAceptar.Text = "Aceptar"
+        Me.cmdAceptar.UseVisualStyleBackColor = True
         '
-        'chkinter
+        'cmdCancelar
         '
-        Me.chkinter.AutoSize = True
-        Me.chkinter.BackColor = System.Drawing.Color.Transparent
-        Me.chkinter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkinter.Location = New System.Drawing.Point(297, 74)
-        Me.chkinter.Name = "chkinter"
-        Me.chkinter.Size = New System.Drawing.Size(110, 22)
-        Me.chkinter.TabIndex = 27
-        Me.chkinter.Text = "Interbancario"
-        Me.chkinter.UseVisualStyleBackColor = False
+        Me.cmdCancelar.Location = New System.Drawing.Point(167, 58)
+        Me.cmdCancelar.Name = "cmdCancelar"
+        Me.cmdCancelar.Size = New System.Drawing.Size(84, 31)
+        Me.cmdCancelar.TabIndex = 25
+        Me.cmdCancelar.Text = "Cancelar"
+        Me.cmdCancelar.UseVisualStyleBackColor = True
         '
-        'chkPeriodo
+        'Label2
         '
-        Me.chkPeriodo.AutoSize = True
-        Me.chkPeriodo.BackColor = System.Drawing.Color.Transparent
-        Me.chkPeriodo.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPeriodo.Location = New System.Drawing.Point(32, 74)
-        Me.chkPeriodo.Name = "chkPeriodo"
-        Me.chkPeriodo.Size = New System.Drawing.Size(235, 22)
-        Me.chkPeriodo.TabIndex = 26
-        Me.chkPeriodo.Text = "Tomar en cuenta todo el Bimestre"
-        Me.chkPeriodo.UseVisualStyleBackColor = False
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(173, 16)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(37, 18)
+        Me.Label2.TabIndex = 27
+        Me.Label2.Text = "Año:"
+        Me.Label2.UseWaitCursor = True
+        '
+        'cboAnio
+        '
+        Me.cboAnio.FormattingEnabled = True
+        Me.cboAnio.Items.AddRange(New Object() {"2018", "2019", "2020", "2021", "2022", "2023"})
+        Me.cboAnio.Location = New System.Drawing.Point(213, 12)
+        Me.cboAnio.Name = "cboAnio"
+        Me.cboAnio.Size = New System.Drawing.Size(74, 26)
+        Me.cboAnio.TabIndex = 26
+        Me.cboAnio.UseWaitCursor = True
         '
         'frmConcentradoInfonavit
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(645, 397)
-        Me.Controls.Add(Me.chkinter)
-        Me.Controls.Add(Me.chkPeriodo)
-        Me.Controls.Add(Me.cboserie)
-        Me.Controls.Add(Me.Label3)
+        Me.ClientSize = New System.Drawing.Size(300, 102)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.cboAnio)
+        Me.Controls.Add(Me.cmdCancelar)
+        Me.Controls.Add(Me.cmdAceptar)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.cboperiodo)
+        Me.Controls.Add(Me.cbobimestre)
         Me.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmConcentradoInfonavit"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "frmConcentradoInfonavit"
+        Me.Text = "Concentrado Infonavit"
         Me.UseWaitCursor = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents cboserie As System.Windows.Forms.ComboBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents cbobimestre As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents cboperiodo As System.Windows.Forms.ComboBox
-    Friend WithEvents chkinter As System.Windows.Forms.CheckBox
-    Friend WithEvents chkPeriodo As System.Windows.Forms.CheckBox
+    Friend WithEvents cmdAceptar As System.Windows.Forms.Button
+    Friend WithEvents cmdCancelar As System.Windows.Forms.Button
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents cboAnio As System.Windows.Forms.ComboBox
 End Class

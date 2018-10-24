@@ -24,6 +24,12 @@ Partial Class frmSubirDatos
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSubirDatos))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.tsbNuevo = New System.Windows.Forms.ToolStripButton()
+        Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbGuardar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbAgregar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbProcesar = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
         Me.pnlProgreso = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -32,12 +38,6 @@ Partial Class frmSubirDatos
         Me.lsvLista = New System.Windows.Forms.ListView()
         Me.lblRuta = New System.Windows.Forms.Label()
         Me.cmdCerrar = New System.Windows.Forms.Button()
-        Me.tsbNuevo = New System.Windows.Forms.ToolStripButton()
-        Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbGuardar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbAgregar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbProcesar = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         Me.pnlProgreso.SuspendLayout()
@@ -53,6 +53,70 @@ Partial Class frmSubirDatos
         Me.ToolStrip1.Size = New System.Drawing.Size(808, 54)
         Me.ToolStrip1.TabIndex = 32
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'tsbNuevo
+        '
+        Me.tsbNuevo.Image = Global.OperadoraNominas.My.Resources.Resources.sobresalir__1_
+        Me.tsbNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbNuevo.Name = "tsbNuevo"
+        Me.tsbNuevo.Size = New System.Drawing.Size(82, 51)
+        Me.tsbNuevo.Text = "Subir Archivo"
+        Me.tsbNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbImportar
+        '
+        Me.tsbImportar.Enabled = False
+        Me.tsbImportar.Image = Global.OperadoraNominas.My.Resources.Resources.material_escolar
+        Me.tsbImportar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbImportar.Name = "tsbImportar"
+        Me.tsbImportar.Size = New System.Drawing.Size(99, 51)
+        Me.tsbImportar.Text = "Importar archivo"
+        Me.tsbImportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbGuardar
+        '
+        Me.tsbGuardar.AutoSize = False
+        Me.tsbGuardar.Enabled = False
+        Me.tsbGuardar.Image = Global.OperadoraNominas.My.Resources.Resources.if_magnifier_data_532758
+        Me.tsbGuardar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbGuardar.Name = "tsbGuardar"
+        Me.tsbGuardar.Size = New System.Drawing.Size(90, 51)
+        Me.tsbGuardar.Text = "Verificar"
+        Me.tsbGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbAgregar
+        '
+        Me.tsbAgregar.AutoSize = False
+        Me.tsbAgregar.Enabled = False
+        Me.tsbAgregar.Image = Global.OperadoraNominas.My.Resources.Resources.if_rotation_job_seeker_employee_unemployee_work_2620504
+        Me.tsbAgregar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbAgregar.Name = "tsbAgregar"
+        Me.tsbAgregar.Size = New System.Drawing.Size(100, 51)
+        Me.tsbAgregar.Text = "Agregar a Nomina"
+        Me.tsbAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbAgregar.ToolTipText = "Agregar"
+        '
+        'tsbCancelar
+        '
+        Me.tsbCancelar.AutoSize = False
+        Me.tsbCancelar.Enabled = False
+        Me.tsbCancelar.Image = Global.OperadoraNominas.My.Resources.Resources.cerrar
+        Me.tsbCancelar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbCancelar.Name = "tsbCancelar"
+        Me.tsbCancelar.Size = New System.Drawing.Size(90, 51)
+        Me.tsbCancelar.Text = "Cancelar"
+        Me.tsbCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbProcesar
+        '
+        Me.tsbProcesar.Enabled = False
+        Me.tsbProcesar.Image = CType(resources.GetObject("tsbProcesar.Image"), System.Drawing.Image)
+        Me.tsbProcesar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbProcesar.Name = "tsbProcesar"
+        Me.tsbProcesar.Size = New System.Drawing.Size(98, 51)
+        Me.tsbProcesar.Text = "Procesar archivo"
+        Me.tsbProcesar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbProcesar.Visible = False
         '
         'pnlCatalogo
         '
@@ -147,70 +211,6 @@ Partial Class frmSubirDatos
         Me.cmdCerrar.Text = "Cerrar"
         Me.cmdCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdCerrar.UseVisualStyleBackColor = True
-        '
-        'tsbNuevo
-        '
-        Me.tsbNuevo.Image = Global.OperadoraNominas.My.Resources.Resources.sobresalir__1_
-        Me.tsbNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbNuevo.Name = "tsbNuevo"
-        Me.tsbNuevo.Size = New System.Drawing.Size(82, 51)
-        Me.tsbNuevo.Text = "Subir Archivo"
-        Me.tsbNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbImportar
-        '
-        Me.tsbImportar.Enabled = False
-        Me.tsbImportar.Image = Global.OperadoraNominas.My.Resources.Resources.material_escolar
-        Me.tsbImportar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbImportar.Name = "tsbImportar"
-        Me.tsbImportar.Size = New System.Drawing.Size(99, 51)
-        Me.tsbImportar.Text = "Importar archivo"
-        Me.tsbImportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbGuardar
-        '
-        Me.tsbGuardar.AutoSize = False
-        Me.tsbGuardar.Enabled = False
-        Me.tsbGuardar.Image = Global.OperadoraNominas.My.Resources.Resources.if_magnifier_data_532758
-        Me.tsbGuardar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbGuardar.Name = "tsbGuardar"
-        Me.tsbGuardar.Size = New System.Drawing.Size(90, 51)
-        Me.tsbGuardar.Text = "Verificar"
-        Me.tsbGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbAgregar
-        '
-        Me.tsbAgregar.AutoSize = False
-        Me.tsbAgregar.Enabled = False
-        Me.tsbAgregar.Image = Global.OperadoraNominas.My.Resources.Resources.if_rotation_job_seeker_employee_unemployee_work_2620504
-        Me.tsbAgregar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbAgregar.Name = "tsbAgregar"
-        Me.tsbAgregar.Size = New System.Drawing.Size(100, 51)
-        Me.tsbAgregar.Text = "Agregar a Nomina"
-        Me.tsbAgregar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsbAgregar.ToolTipText = "Agregar"
-        '
-        'tsbCancelar
-        '
-        Me.tsbCancelar.AutoSize = False
-        Me.tsbCancelar.Enabled = False
-        Me.tsbCancelar.Image = Global.OperadoraNominas.My.Resources.Resources.cerrar
-        Me.tsbCancelar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbCancelar.Name = "tsbCancelar"
-        Me.tsbCancelar.Size = New System.Drawing.Size(90, 51)
-        Me.tsbCancelar.Text = "Cancelar"
-        Me.tsbCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbProcesar
-        '
-        Me.tsbProcesar.Enabled = False
-        Me.tsbProcesar.Image = CType(resources.GetObject("tsbProcesar.Image"), System.Drawing.Image)
-        Me.tsbProcesar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbProcesar.Name = "tsbProcesar"
-        Me.tsbProcesar.Size = New System.Drawing.Size(98, 51)
-        Me.tsbProcesar.Text = "Procesar archivo"
-        Me.tsbProcesar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsbProcesar.Visible = False
         '
         'frmSubirDatos
         '
