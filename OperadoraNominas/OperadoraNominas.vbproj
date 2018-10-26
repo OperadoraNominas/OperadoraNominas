@@ -289,6 +289,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmnominasmarinos.resx">
       <DependentUpon>frmnominasmarinos.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
@@ -330,6 +331,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logooperadora.ico" />
+    <Content Include="LOGO_NAVIGATOR.ico" />
     <Content Include="Resources\1361008137_export_excel.png" />
     <Content Include="Resources\bloggif_5a90660e3aaa9.png" />
     <Content Include="Resources\bloggif_5aa1be4bd8d66.png" />

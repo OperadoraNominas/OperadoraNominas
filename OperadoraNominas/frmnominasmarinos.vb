@@ -7694,15 +7694,15 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 12).Value = dtgDatos.Rows(x).Cells(15).Value  ' SUELDO ORDINARIO
                         hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x ' CREDITO INFONAVIT
                         hoja.Cell(filaExcel + x, 14).Value = "0.0"
-                        hoja.Cell(filaExcel + x, 15).Value = "0.0"
+                        hoja.Cell(filaExcel + x, 15).Value = CInt(dtgDatos.Rows(x).Cells(47).Value) + CInt(dtgDatos.Rows(x).Cells(48).Value) + CInt(dtgDatos.Rows(x).Cells(49).Value)
                         hoja.Cell(filaExcel + x, 16).FormulaA1 = "='OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x
-                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "=L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x & "-P" & filaExcel + x ' sueldo ordinario real
+                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "=L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x & "-O" & filaExcel + x & "-P" & filaExcel + x ' sueldo ordinario real----
                         hoja.Cell(filaExcel + x, 18).FormulaA1 = "='OPERADORA ABORDO'!AM" & filatmp + x & "+'OPERADORA DESCANSO'!AM" & filatmp + x 'Operadora mx
                         hoja.Cell(filaExcel + x, 19).FormulaA1 = "=Q" & filaExcel + x & "-R" & filaExcel + x ' asimilados
                         hoja.Cell(filaExcel + x, 20).FormulaA1 = "='OPERADORA ABORDO'!AG" & filatmp + x & "+'OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AG" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x ' retenciones
                         hoja.Cell(filaExcel + x, 21).FormulaA1 = ""
                         hoja.Cell(filaExcel + x, 22).FormulaA1 = "=(R" & filaExcel + x & "+T" & filaExcel + x & ")*2%"
-                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=S" & filaExcel + x & "*2%"
+                        hoja.Cell(filaExcel + x, 23).FormulaA1 = "=O" & filaExcel + x & "+S" & filaExcel + x & "*2%"
                         hoja.Cell(filaExcel + x, 24).FormulaA1 = "='OPERADORA ABORDO'!AS" & filatmp + x
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = "=R" & filaExcel + x & "+S" & filaExcel + x & "+T" & filaExcel + x & "+V" & filaExcel + x & "+W" & filaExcel + x & "+X" & filaExcel + x
                         hoja.Cell(filaExcel + x, 26).FormulaA1 = "=Y" & filaExcel + x & "*16%"
@@ -10987,108 +10987,114 @@ Public Class frmnominasmarinos
 
     End Sub
 
-<<<<<<< HEAD
+
     Private Sub btnAsimilados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsimilados.Click
         Try
 
-            Dim filaExcel As Integer = 0
-            Dim dialogo As New SaveFileDialog()
+      
 
-            If dtgDatos.Rows.Count > 0 Then
-                Dim ruta As String
-                ruta = My.Application.Info.DirectoryPath() & "\Archivos\asimilados.xlsm"
+        Dim filaExcel As Integer = 0
+        Dim dialogo As New SaveFileDialog()
 
-                Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
-                Dim libro As New ClosedXML.Excel.XLWorkbook
-                book.Worksheet(1).CopyTo(libro, "ASIMILADOS")
+        If dtgDatos.Rows.Count > 0 Then
+            Dim ruta As String
+            ruta = My.Application.Info.DirectoryPath() & "\Archivos\asimilados.xlsm"
 
-                Dim hoja4 As IXLWorksheet = libro.Worksheets(0)
+            Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+            Dim libro As New ClosedXML.Excel.XLWorkbook
+            book.Worksheet(1).CopyTo(libro, "ASIMILADOS")
+
+            Dim hoja4 As IXLWorksheet = libro.Worksheets(0)
 
 
 
-                Dim cuenta, banco, clabe As String
-                '<<<<<<<<<<<<<<ASIMILADOS >>>>>>>>>
-                filaExcel = 2
+            Dim cuenta, banco, clabe As String
+            '<<<<<<<<<<<<<<ASIMILADOS >>>>>>>>>
+            filaExcel = 2
 
-                recorrerFilasColumnas(hoja4, 2, dtgDatos.Rows.Count + 30, 13, "clear")
+            recorrerFilasColumnas(hoja4, 2, dtgDatos.Rows.Count + 30, 13, "clear")
 
-                Dim app, apm, nom As String
-                For x As Integer = 0 To dtgDatos.Rows.Count - 1
+            Dim app, apm, nom As String
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
-                    Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
-                    If empleado Is Nothing = False Then
-                        cuenta = empleado(0).Item("NumCuenta")
-                        clabe = empleado(0).Item("Clabe")
-                        app = empleado(0).Item("cApellidoP")
-                        apm = empleado(0).Item("cApellidoM")
-                        nom = empleado(0).Item("cNombre")
-                        Dim bank As DataRow() = nConsulta("select * from bancos where iIdBanco =" & empleado(0).Item("fkiIdBanco"))
-                        If bank Is Nothing = False Then
-                            banco = bank(0).Item("cBANCO")
-                        End If
+                Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
+                If empleado Is Nothing = False Then
+                    cuenta = empleado(0).Item("NumCuenta")
+                    clabe = empleado(0).Item("Clabe")
+                    app = empleado(0).Item("cApellidoP")
+                    apm = empleado(0).Item("cApellidoM")
+                    nom = empleado(0).Item("cNombre")
+                    Dim bank As DataRow() = nConsulta("select * from bancos where iIdBanco =" & empleado(0).Item("fkiIdBanco"))
+                    If bank Is Nothing = False Then
+                        banco = bank(0).Item("cBANCO")
                     End If
-
-                    hoja4.Cell(filaExcel, 5).Style.NumberFormat.Format = "@"
-                    hoja4.Cell(filaExcel, 8).Style.NumberFormat.Format = "@"
-                    hoja4.Cell(filaExcel, 9).Style.NumberFormat.Format = "@"
-                    hoja4.Cell(filaExcel, 11).Style.NumberFormat.Format = "@"
-                    hoja4.Cell(filaExcel, 12).Style.NumberFormat.Format = "@"
-
-                    hoja4.Cell(filaExcel, 1).Value = app ' Apellido Paterno
-                    hoja4.Cell(filaExcel, 2).Value = apm ' Apellido Materno
-                    hoja4.Cell(filaExcel, 3).Value = nom ' Nombre
-                    hoja4.Cell(filaExcel, 4).FormulaA1 = " " '"=MARINOS!U" & filatmp 'Asimilado
-                    hoja4.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(8).Value '# Afiliacion IMSS
-                    hoja4.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(18).Value 'Dias Trabajandos
-                    hoja4.Cell(filaExcel, 7).Value = banco
-                    hoja4.Cell(filaExcel, 8).Value = clabe
-                    hoja4.Cell(filaExcel, 9).Value = cuenta
-                    hoja4.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(7).Value ' CURP
-                    hoja4.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
-                    'hoja4.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(7).Value ' CURP
-
-                    filaExcel = filaExcel + 1
-                    'filatmp = filatmp + 1
-                Next x
-
-                'Titulo
-                Dim moment As Date = Date.Now()
-                Dim month As Integer = moment.Month
-                Dim year As Integer = moment.Year
-
-                pnlProgreso.Visible = False
-                pnlCatalogo.Enabled = True
-
-                dialogo.FileName = "ASIMILADOS"
-                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-                ''  dialogo.ShowDialog()
-
-                If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-                    ' OK button pressed
-                    libro.SaveAs(dialogo.FileName)
-                    libro = Nothing
-                    MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                   
-                Else
-                    MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
                 End If
-            End If
 
-=======
-    Private Sub cmdReporteInfonavit_Click(sender As System.Object, e As System.EventArgs) Handles cmdReporteInfonavit.Click
+                hoja4.Cell(filaExcel, 5).Style.NumberFormat.Format = "@"
+                hoja4.Cell(filaExcel, 8).Style.NumberFormat.Format = "@"
+                hoja4.Cell(filaExcel, 9).Style.NumberFormat.Format = "@"
+                hoja4.Cell(filaExcel, 11).Style.NumberFormat.Format = "@"
+                hoja4.Cell(filaExcel, 12).Style.NumberFormat.Format = "@"
+
+                hoja4.Cell(filaExcel, 1).Value = app ' Apellido Paterno
+                hoja4.Cell(filaExcel, 2).Value = apm ' Apellido Materno
+                hoja4.Cell(filaExcel, 3).Value = nom ' Nombre
+                hoja4.Cell(filaExcel, 4).FormulaA1 = " " '"=MARINOS!U" & filatmp 'Asimilado
+                hoja4.Cell(filaExcel, 5).Value = dtgDatos.Rows(x).Cells(8).Value '# Afiliacion IMSS
+                hoja4.Cell(filaExcel, 6).Value = dtgDatos.Rows(x).Cells(18).Value 'Dias Trabajandos
+                hoja4.Cell(filaExcel, 7).Value = banco
+                hoja4.Cell(filaExcel, 8).Value = clabe
+                hoja4.Cell(filaExcel, 9).Value = cuenta
+                hoja4.Cell(filaExcel, 10).Value = dtgDatos.Rows(x).Cells(7).Value ' CURP
+                hoja4.Cell(filaExcel, 11).Value = dtgDatos.Rows(x).Cells(6).Value ' RFC
+                'hoja4.Cell(filaExcel, 12).Value = dtgDatos.Rows(x).Cells(7).Value ' CURP
+
+                filaExcel = filaExcel + 1
+                'filatmp = filatmp + 1
+            Next x
+
+            'Titulo
+            Dim moment As Date = Date.Now()
+            Dim month As Integer = moment.Month
+            Dim year As Integer = moment.Year
+
+            pnlProgreso.Visible = False
+            pnlCatalogo.Enabled = True
+
+            dialogo.FileName = "ASIMILADOS"
+            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            ''  dialogo.ShowDialog()
+
+            If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                ' OK button pressed
+                libro.SaveAs(dialogo.FileName)
+                libro = Nothing
+                MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+            Else
+                MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            End If
+        End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
+    Private Sub cmdReporteInfonavit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdReporteInfonavit.Click
 
     End Sub
 
-    Private Sub cmdResumenInfo_Click(sender As System.Object, e As System.EventArgs) Handles cmdResumenInfo.Click
+    Private Sub cmdResumenInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdResumenInfo.Click
         Dim SQL As String
         Dim filaExcel As Integer = 5
         Dim contador As Integer
         Dim dialogo As New SaveFileDialog()
 
         Dim Forma As New frmConcentradoInfonavit
-        
+
         If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
             SQL = "select iBimestre,iAnio,Calculoinfonavit.fkiIdEmpleadoC,cNombreLargo,Calculoinfonavit.cTipoFactor,Calculoinfonavit.fFactor,Monto,retenido from (calculoinfonavit "
             SQL &= " inner join empleadosC on calculoinfonavit.fkiIdEmpleadoC=empleadosC.iIdEmpleadoC)"
@@ -11113,7 +11119,7 @@ Public Class frmnominasmarinos
                 hoja.Column("F").Width = 15
                 hoja.Column("G").Width = 15
                 hoja.Column("H").Width = 15
-                
+
 
 
                 hoja.Cell(1, 2).Value = "Concentrado Infonavit"
@@ -11146,7 +11152,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(4, 6).Value = "Factor"
                 hoja.Cell(4, 7).Value = "Monto Bimestre"
                 hoja.Cell(4, 8).Value = "Retenido"
-                
+
 
 
                 filaExcel = 5
@@ -11154,7 +11160,7 @@ Public Class frmnominasmarinos
 
                 For x As Integer = 0 To rwFilas.Length - 1
 
-                   
+
 
 
 
@@ -11173,12 +11179,12 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 7).Value = rwFilas(x)("Monto")
                     'Retenido
                     hoja.Cell(filaExcel + x, 8).Value = rwFilas(x)("retenido")
-                    
+
 
                 Next
 
 
-                
+
 
                 '##### HOJA NUMERO 2 RESUMEN PAGO
 
@@ -11203,7 +11209,7 @@ Public Class frmnominasmarinos
         End If
     End Sub
 
-    Private Sub NoCalcularInofnavitToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles NoCalcularInofnavitToolStripMenuItem.Click
+    Private Sub NoCalcularInofnavitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NoCalcularInofnavitToolStripMenuItem.Click
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Tag = "1"
@@ -11213,12 +11219,12 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub ActicarCalculoInfonavitToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ActicarCalculoInfonavitToolStripMenuItem.Click
+    Private Sub ActicarCalculoInfonavitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ActicarCalculoInfonavitToolStripMenuItem.Click
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Tag = ""
             iFila.Cells(1).Style.BackColor = Color.White
->>>>>>> origin/master
+
         Catch ex As Exception
 
         End Try

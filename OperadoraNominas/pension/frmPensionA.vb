@@ -142,7 +142,8 @@
                 SQL = "UPDATE PensionAlimenticia SET "
                 SQL &= "fPorcentaje=" & nudPorcentaje.Value & ","
                 SQL &= "Nombrebeneficiario='" & txtBeneficiario.Text & "', fkiIdBanco=" & fkidbanco & ","
-                SQL &= "Clabe='" & txtClabe.Text & "', Cuenta='" & txtCuenta.Text & "'"
+                SQL &= "Clabe='" & txtClabe.Text & "', Cuenta='" & txtCuenta.Text & "',"
+                SQL &= "iEstatus=" & cboEstatus.SelectedIndex
                 SQL &= " WHERE iIdPensionAlimenticia=" & idPension
 
 

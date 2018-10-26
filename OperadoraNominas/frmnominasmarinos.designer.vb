@@ -68,12 +68,12 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavit = New System.Windows.Forms.Button()
         Me.cmdReporteInfonavit = New System.Windows.Forms.Button()
         Me.cmdComision = New System.Windows.Forms.Button()
-<<<<<<< HEAD
+
         Me.btnAsimilados = New System.Windows.Forms.Button()
-=======
+
         Me.NoCalcularInofnavitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ActicarCalculoInfonavitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
->>>>>>> origin/master
+
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -533,7 +533,7 @@ Partial Class frmnominasmarinos
         Me.cmdComision.Text = "Comisión"
         Me.cmdComision.UseVisualStyleBackColor = True
         '
-<<<<<<< HEAD
+
         'btnAsimilados
         '
         Me.btnAsimilados.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -545,7 +545,7 @@ Partial Class frmnominasmarinos
         Me.btnAsimilados.Text = "Asimilados"
         Me.btnAsimilados.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.btnAsimilados.UseVisualStyleBackColor = True
-=======
+
         'NoCalcularInofnavitToolStripMenuItem
         '
         Me.NoCalcularInofnavitToolStripMenuItem.Name = "NoCalcularInofnavitToolStripMenuItem"
@@ -557,7 +557,7 @@ Partial Class frmnominasmarinos
         Me.ActicarCalculoInfonavitToolStripMenuItem.Name = "ActicarCalculoInfonavitToolStripMenuItem"
         Me.ActicarCalculoInfonavitToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
         Me.ActicarCalculoInfonavitToolStripMenuItem.Text = "Activar Calculo Infonavit"
->>>>>>> origin/master
+
         '
         'frmnominasmarinos
         '
@@ -633,10 +633,10 @@ Partial Class frmnominasmarinos
     Friend WithEvents cmdReporteInfonavit As System.Windows.Forms.Button
     Friend WithEvents cmdResumenInfo As System.Windows.Forms.Button
     Friend WithEvents cmdComision As System.Windows.Forms.Button
-<<<<<<< HEAD
+
     Friend WithEvents btnAsimilados As System.Windows.Forms.Button
-=======
+
     Friend WithEvents NoCalcularInofnavitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ActicarCalculoInfonavitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
->>>>>>> origin/master
+
 End Class
