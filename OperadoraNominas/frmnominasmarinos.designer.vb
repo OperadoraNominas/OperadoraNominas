@@ -70,17 +70,14 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavit = New System.Windows.Forms.Button()
         Me.cmdReporteInfonavit = New System.Windows.Forms.Button()
         Me.cmdComision = New System.Windows.Forms.Button()
-<<<<<<< HEAD
 
         Me.btnAsimilados = New System.Windows.Forms.Button()
 
         Me.NoCalcularInofnavitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ActicarCalculoInfonavitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-
-=======
         Me.chkInfonavit0 = New System.Windows.Forms.CheckBox()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
->>>>>>> origin/master
+
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -553,7 +550,7 @@ Partial Class frmnominasmarinos
         Me.cmdComision.Text = "Comisión"
         Me.cmdComision.UseVisualStyleBackColor = True
         '
-<<<<<<< HEAD
+
 
         'btnAsimilados
         '
@@ -579,7 +576,7 @@ Partial Class frmnominasmarinos
         Me.ActicarCalculoInfonavitToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
         Me.ActicarCalculoInfonavitToolStripMenuItem.Text = "Activar Calculo Infonavit"
 
-=======
+
         'chkInfonavit0
         '
         Me.chkInfonavit0.AutoSize = True
@@ -602,17 +599,17 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavitNominaSerie.TabIndex = 32
         Me.cmdInfonavitNominaSerie.Text = "Concentrado INfonavit x nomina"
         Me.cmdInfonavitNominaSerie.UseVisualStyleBackColor = True
->>>>>>> origin/master
+
         '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1357, 553)
-<<<<<<< HEAD
+
         Me.Controls.Add(Me.btnAsimilados)
-=======
+
         Me.Controls.Add(Me.cmdInfonavitNominaSerie)
->>>>>>> origin/master
+
         Me.Controls.Add(Me.cmdComision)
         Me.Controls.Add(Me.cmdReporteInfonavit)
         Me.Controls.Add(Me.cmdInfonavit)
@@ -687,10 +684,9 @@ Partial Class frmnominasmarinos
 
     Friend WithEvents NoCalcularInofnavitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ActicarCalculoInfonavitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-<<<<<<< HEAD
 
-=======
+
     Friend WithEvents chkInfonavit0 As System.Windows.Forms.CheckBox
     Friend WithEvents cmdInfonavitNominaSerie As System.Windows.Forms.Button
->>>>>>> origin/master
+
 End Class
