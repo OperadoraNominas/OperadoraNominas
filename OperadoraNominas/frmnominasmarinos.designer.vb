@@ -33,6 +33,7 @@ Partial Class frmnominasmarinos
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.chkInfonavit0 = New System.Windows.Forms.CheckBox()
         Me.cmdResumenInfo = New System.Windows.Forms.Button()
         Me.cmdSubirDatos = New System.Windows.Forms.Button()
         Me.btnReporte = New System.Windows.Forms.Button()
@@ -70,7 +71,7 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavit = New System.Windows.Forms.Button()
         Me.cmdReporteInfonavit = New System.Windows.Forms.Button()
         Me.cmdComision = New System.Windows.Forms.Button()
-        Me.chkInfonavit0 = New System.Windows.Forms.CheckBox()
+        Me.btnAsimilados = New System.Windows.Forms.Button()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
@@ -159,8 +160,8 @@ Partial Class frmnominasmarinos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlCatalogo.Controls.Add(Me.chkInfonavit0)
         Me.pnlCatalogo.Controls.Add(Me.cmdResumenInfo)
@@ -192,6 +193,18 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
         '
+        'chkInfonavit0
+        '
+        Me.chkInfonavit0.AutoSize = True
+        Me.chkInfonavit0.BackColor = System.Drawing.Color.Transparent
+        Me.chkInfonavit0.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkInfonavit0.Location = New System.Drawing.Point(172, 36)
+        Me.chkInfonavit0.Name = "chkInfonavit0"
+        Me.chkInfonavit0.Size = New System.Drawing.Size(93, 22)
+        Me.chkInfonavit0.TabIndex = 27
+        Me.chkInfonavit0.Text = "Infonavit 0"
+        Me.chkInfonavit0.UseVisualStyleBackColor = False
+        '
         'cmdResumenInfo
         '
         Me.cmdResumenInfo.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -205,7 +218,7 @@ Partial Class frmnominasmarinos
         'cmdSubirDatos
         '
         Me.cmdSubirDatos.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSubirDatos.Location = New System.Drawing.Point(1056, 34)
+        Me.cmdSubirDatos.Location = New System.Drawing.Point(1111, 34)
         Me.cmdSubirDatos.Name = "cmdSubirDatos"
         Me.cmdSubirDatos.Size = New System.Drawing.Size(103, 28)
         Me.cmdSubirDatos.TabIndex = 25
@@ -215,7 +228,7 @@ Partial Class frmnominasmarinos
         'btnReporte
         '
         Me.btnReporte.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReporte.Location = New System.Drawing.Point(947, 34)
+        Me.btnReporte.Location = New System.Drawing.Point(1002, 34)
         Me.btnReporte.Name = "btnReporte"
         Me.btnReporte.Size = New System.Drawing.Size(103, 28)
         Me.btnReporte.TabIndex = 24
@@ -400,8 +413,8 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.AllowUserToDeleteRows = False
         Me.dtgDatos.AllowUserToOrderColumns = True
         Me.dtgDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 65)
         Me.dtgDatos.Name = "dtgDatos"
@@ -544,23 +557,23 @@ Partial Class frmnominasmarinos
         Me.cmdComision.Text = "Comisión"
         Me.cmdComision.UseVisualStyleBackColor = True
         '
-        'chkInfonavit0
+        'btnAsimilados
         '
-        Me.chkInfonavit0.AutoSize = True
-        Me.chkInfonavit0.BackColor = System.Drawing.Color.Transparent
-        Me.chkInfonavit0.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkInfonavit0.Location = New System.Drawing.Point(172, 36)
-        Me.chkInfonavit0.Name = "chkInfonavit0"
-        Me.chkInfonavit0.Size = New System.Drawing.Size(93, 22)
-        Me.chkInfonavit0.TabIndex = 27
-        Me.chkInfonavit0.Text = "Infonavit 0"
-        Me.chkInfonavit0.UseVisualStyleBackColor = False
+        Me.btnAsimilados.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnAsimilados.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAsimilados.Location = New System.Drawing.Point(458, 514)
+        Me.btnAsimilados.Name = "btnAsimilados"
+        Me.btnAsimilados.Size = New System.Drawing.Size(87, 27)
+        Me.btnAsimilados.TabIndex = 32
+        Me.btnAsimilados.Text = "Asimilados"
+        Me.btnAsimilados.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.btnAsimilados.UseVisualStyleBackColor = True
         '
         'cmdInfonavitNominaSerie
         '
         Me.cmdInfonavitNominaSerie.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdInfonavitNominaSerie.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(458, 514)
+        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(551, 514)
         Me.cmdInfonavitNominaSerie.Name = "cmdInfonavitNominaSerie"
         Me.cmdInfonavitNominaSerie.Size = New System.Drawing.Size(203, 27)
         Me.cmdInfonavitNominaSerie.TabIndex = 32
@@ -571,6 +584,7 @@ Partial Class frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1357, 553)
+        Me.Controls.Add(Me.btnAsimilados)
         Me.Controls.Add(Me.cmdInfonavitNominaSerie)
         Me.Controls.Add(Me.cmdComision)
         Me.Controls.Add(Me.cmdReporteInfonavit)
@@ -638,11 +652,18 @@ Partial Class frmnominasmarinos
     Friend WithEvents cmdSubirDatos As System.Windows.Forms.Button
     Friend WithEvents layoutTimbrado As System.Windows.Forms.Button
     Friend WithEvents cmdInfonavit As System.Windows.Forms.Button
+
     Friend WithEvents cmdReporteInfonavit As System.Windows.Forms.Button
     Friend WithEvents cmdResumenInfo As System.Windows.Forms.Button
     Friend WithEvents cmdComision As System.Windows.Forms.Button
+
+    Friend WithEvents btnAsimilados As System.Windows.Forms.Button
+
     Friend WithEvents NoCalcularInofnavitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ActicarCalculoInfonavitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+
+
     Friend WithEvents chkInfonavit0 As System.Windows.Forms.CheckBox
     Friend WithEvents cmdInfonavitNominaSerie As System.Windows.Forms.Button
+
 End Class
