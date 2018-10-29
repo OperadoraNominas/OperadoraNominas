@@ -319,8 +319,6 @@ Public Class frmSubirDatos
                     dsReporte.Tables("Tabla").Columns.Add("Bono")
                     dsReporte.Tables("Tabla").Columns.Add("Refrendo")
                     dsReporte.Tables("Tabla").Columns.Add("SalarioTMM")
-                    dsReporte.Tables("Tabla").Columns.Add("CodigoPuesto")
-                    dsReporte.Tables("Tabla").Columns.Add("CodigoBuque")
 
                     Dim mensaje As String
 
@@ -347,13 +345,11 @@ Public Class frmSubirDatos
 
                                 fila.Item("Id_empleado") = rwFilas(0)("iIdEmpleadoC")
                                 fila.Item("CodigoEmpleado") = Trim(producto.SubItems(1).Text).Substring(2, 4)
-                                fila.Item("dias") = Trim(producto.SubItems(9).Text)
-                                fila.Item("Salario") = Trim(producto.SubItems(12).Text)
-                                fila.Item("Bono") = Trim(producto.SubItems(13).Text)
-                                fila.Item("Refrendo") = Trim(producto.SubItems(14).Text)
-                                fila.Item("SalarioTMM") = Trim(producto.SubItems(17).Text)
-                                fila.Item("CodigoPuesto") = Trim(producto.SubItems(4).Text)
-                                fila.Item("CodigoBuque") = Trim(producto.SubItems(10).Text)
+                                fila.Item("dias") = Trim(producto.SubItems(8).Text)
+                                fila.Item("Salario") = Trim(producto.SubItems(10).Text)
+                                fila.Item("Bono") = Trim(producto.SubItems(11).Text)
+                                fila.Item("Refrendo") = Trim(producto.SubItems(12).Text)
+                                fila.Item("SalarioTMM") = Trim(producto.SubItems(15).Text)
                                 dsReporte.Tables("Tabla").Rows.Add(fila)
 
                             End If
