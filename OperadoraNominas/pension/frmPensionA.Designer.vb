@@ -23,6 +23,9 @@ Partial Class frmPensionA
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.nudPorcentaje = New System.Windows.Forms.NumericUpDown()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.cboEstatus = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtCuenta = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -34,7 +37,6 @@ Partial Class frmPensionA
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cmdAgregar = New System.Windows.Forms.Button()
-        Me.txtPorcentaje = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.lsvHistorial = New System.Windows.Forms.ListView()
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -43,14 +45,14 @@ Partial Class frmPensionA
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.cboEstatus = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
+        CType(Me.nudPorcentaje, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.nudPorcentaje)
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.cboEstatus)
         Me.Panel1.Controls.Add(Me.Label6)
@@ -64,11 +66,35 @@ Partial Class frmPensionA
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.cmdAgregar)
-        Me.Panel1.Controls.Add(Me.txtPorcentaje)
         Me.Panel1.Location = New System.Drawing.Point(12, 12)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(824, 155)
         Me.Panel1.TabIndex = 7
+        '
+        'nudPorcentaje
+        '
+        Me.nudPorcentaje.Location = New System.Drawing.Point(391, 56)
+        Me.nudPorcentaje.Name = "nudPorcentaje"
+        Me.nudPorcentaje.Size = New System.Drawing.Size(120, 26)
+        Me.nudPorcentaje.TabIndex = 190
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(630, 85)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(52, 18)
+        Me.Label8.TabIndex = 189
+        Me.Label8.Text = "Estatus"
+        '
+        'cboEstatus
+        '
+        Me.cboEstatus.FormattingEnabled = True
+        Me.cboEstatus.Items.AddRange(New Object() {"INACTIVO", "ACTIVO"})
+        Me.cboEstatus.Location = New System.Drawing.Point(624, 108)
+        Me.cboEstatus.Name = "cboEstatus"
+        Me.cboEstatus.Size = New System.Drawing.Size(177, 26)
+        Me.cboEstatus.TabIndex = 188
         '
         'Label6
         '
@@ -162,13 +188,6 @@ Partial Class frmPensionA
         Me.cmdAgregar.Text = "Agregar"
         Me.cmdAgregar.UseVisualStyleBackColor = True
         '
-        'txtPorcentaje
-        '
-        Me.txtPorcentaje.Location = New System.Drawing.Point(391, 56)
-        Me.txtPorcentaje.Name = "txtPorcentaje"
-        Me.txtPorcentaje.Size = New System.Drawing.Size(152, 26)
-        Me.txtPorcentaje.TabIndex = 3
-        '
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.lsvHistorial)
@@ -226,24 +245,6 @@ Partial Class frmPensionA
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Beneficiario"
         '
-        'cboEstatus
-        '
-        Me.cboEstatus.FormattingEnabled = True
-        Me.cboEstatus.Items.AddRange(New Object() {"ACTIVO", "INACTIVO"})
-        Me.cboEstatus.Location = New System.Drawing.Point(624, 108)
-        Me.cboEstatus.Name = "cboEstatus"
-        Me.cboEstatus.Size = New System.Drawing.Size(177, 26)
-        Me.cboEstatus.TabIndex = 188
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(630, 85)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(52, 18)
-        Me.Label8.TabIndex = 189
-        Me.Label8.Text = "Estatus"
-        '
         'frmPensionA
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -256,6 +257,7 @@ Partial Class frmPensionA
         Me.Text = "Imss"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.nudPorcentaje, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
@@ -271,7 +273,6 @@ Partial Class frmPensionA
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents cmdAgregar As System.Windows.Forms.Button
-    Friend WithEvents txtPorcentaje As System.Windows.Forms.TextBox
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents lsvHistorial As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
@@ -284,4 +285,5 @@ Partial Class frmPensionA
     Friend WithEvents txtCuenta As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents cboEstatus As System.Windows.Forms.ComboBox
+    Friend WithEvents nudPorcentaje As System.Windows.Forms.NumericUpDown
 End Class
