@@ -8653,33 +8653,23 @@ Public Class frmnominasmarinos
                 hoja.Cell(sep, 26).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
                 '<<<<FACT>>>>
+
                 hoja5.Cell("C6").FormulaA1 = IIf(arboleda > 0, "='NOMINA TOTAL'!E" & sep + 3, "0.0") 'Arboleda
                 hoja5.Cell("C7").FormulaA1 = IIf(azteca > 0, "='NOMINA TOTAL'!I" & sep + 3, "0.0") 'Azteca
                 hoja5.Cell("C11").FormulaA1 = IIf(cedros > 0, "='NOMINA TOTAL'!M" & sep + 3, "0.00") 'Cedros
                 hoja5.Cell("C12").FormulaA1 = IIf(miramar > 0, "='NOMINA TOTAL'!S" & sep + 3, "0.00") ' Miramar
                 hoja5.Cell("C13").FormulaA1 = IIf(verde > 0, "='NOMINA TOTAL'!X" & sep + 3, "0.00") ' Verde
-                hoja5.Cell("C14").FormulaA1 = IIf(cruz > 0, "='NOMINA TOTAL'!AA" & sep + 3, "0.00") 'Santa Cruz
+                hoja5.Cell("C14").FormulaA1 = IIf(cruz > 0, "='NOMINA TOTAL'!AB" & sep + 3, "0.0") 'SANTA CRUZ
+
 
                 hoja5.Cell("C27").FormulaA1 = IIf(arboleda > 0, "='NOMINA TOTAL'!E" & sep + 6, "0.0")
                 hoja5.Cell("C28").FormulaA1 = IIf(azteca > 0, "='NOMINA TOTAL'!I" & sep + 6, "0.0")
                 hoja5.Cell("C32").FormulaA1 = IIf(cedros > 0, "='NOMINA TOTAL'!M" & sep + 6, "0.0")
                 hoja5.Cell("C33").FormulaA1 = IIf(miramar > 0, "='NOMINA TOTAL'!S" & sep + 6, "0.0")
                 hoja5.Cell("C34").FormulaA1 = IIf(verde > 0, "='NOMINA TOTAL'!X" & sep + 6, "0.0")
-                hoja5.Cell("C35").FormulaA1 = IIf(cruz > 0, "='NOMINA TOTAL'!AA" & sep + 6, "0.0")
+                hoja5.Cell("C35").FormulaA1 = IIf(cruz > 0, "='NOMINA TOTAL'!AB" & sep + 6, "0.0") 'SANTA CRUZ
 
-                'hoja.Cell("N6").FormulaA1 = "='NOMINA TOTAL'!E" & sep + 3 & "*M6" 'Arboleda
-                'hoja.Cell("N7").FormulaA1 = "" 'Arcas
-                'hoja.Cell("N8").FormulaA1 = "='NOMINA TOTAL'!I" & sep + 3 & "*M8" 'Azteca
-                'hoja.Cell("N9").FormulaA1 = "" 'Creciente
-                'hoja.Cell("N10").FormulaA1 = "" ' Grande
-                'hoja.Cell("N11").FormulaA1 = "" 'Guadalupe
 
-                'hoja.Cell("N27").FormulaA1 = "='NOMINA TOTAL'!E" & sep + 6 & "*M6" 'Arboleda
-                'hoja.Cell("N28").FormulaA1 = "" 'Arcas
-                'hoja.Cell("N29").FormulaA1 = "='NOMINA TOTAL'!I" & sep + 6 & "*M8" 'Azteca
-                'hoja.Cell("N30").FormulaA1 = "" 'Creciente
-                'hoja.Cell("N31").FormulaA1 = "" ' Grande
-                'hoja.Cell("N32").FormulaA1 = "" 'Guadalupe
 
                 '<<<<<<<<<<<<<<Second>>>>>>>>>>>>>>>>>>>>>
                 sep = sep + 12
@@ -8873,24 +8863,19 @@ Public Class frmnominasmarinos
                 hoja.Cell("Y" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
                 '<<<<FACT>>>>
-                hoja5.Cell("C14").FormulaA1 = IIf(cruz > 0, "='NOMINA TOTAL'!AB" & sep + 3, "0.0") 'SANTA CRUZ
+
                 hoja5.Cell("C15").FormulaA1 = IIf(montserrat > 0, "='NOMINA TOTAL'!L" & sep + 3, "0.0") 'Monserrat
                 hoja5.Cell("C16").FormulaA1 = IIf(blanca > 0, "='NOMINA TOTAL'!R" & sep + 3, "0.0") 'Blanca
                 hoja5.Cell("C17").FormulaA1 = IIf(ciari > 0, "='NOMINA TOTAL'!W" & sep + 3, "0.0") 'Ciari
                 hoja5.Cell("C18").FormulaA1 = IIf(janitzio > 0, "='NOMINA TOTAL'!AA" & sep + 3, "0.0") 'Janitzio
 
-                hoja5.Cell("C35").FormulaA1 = IIf(cruz > 0, "='NOMINA TOTAL'!AB" & sep + 6, "0.0") 'SANTA CRUZ
+
                 hoja5.Cell("C36").FormulaA1 = IIf(montserrat > 0, "='NOMINA TOTAL'!L" & sep + 6, "0.0")
                 hoja5.Cell("C37").FormulaA1 = IIf(blanca > 0, "='NOMINA TOTAL'!R" & sep + 6, "0.0")
                 hoja5.Cell("C38").FormulaA1 = IIf(ciari > 0, "='NOMINA TOTAL'!W" & sep + 6, "0.0")
                 hoja5.Cell("C39").FormulaA1 = IIf(janitzio > 0, "='NOMINA TOTAL'!AA" & sep + 6, "0.0")
 
-                'hoja.Cell("N12").FormulaA1 = " " 'Leon
-                'hoja.Cell("N13").FormulaA1 = "" 'Pelicano
-                'hoja.Cell("N14").FormulaA1 = "" 'Diego
-                'hoja.Cell("N15").FormulaA1 = "" 'Jose
-                'hoja.Cell("N16").FormulaA1 = "" 'Luis
-                'hoja.Cell("N17").FormulaA1 = "='NOMINA TOTAL'!R" & sep + 3 & "*M17" 'Blanca
+               
 
                 '<<<<<<<<<THIR>>>>>>>>>>>>
                 sep = sep + 12
@@ -9059,28 +9044,15 @@ Public Class frmnominasmarinos
                 hoja5.Cell("C21").FormulaA1 = IIf(gabriel > 0, "='NOMINA TOTAL'!P" & sep + 3, "0.00") 'Gabriel
                 hoja5.Cell("C22").FormulaA1 = IIf(diego > 0, "='NOMINA TOTAL'!T" & sep + 3, "0.00") 'Diego
 
-                'hoja5.Cell("C19").FormulaA1 = "=SUM(C6:C18)"
-                'hoja5.Cell("C20").FormulaA1 = "=C19*16%"
-                'hoja5.Cell("C21").FormulaA1 = "=SUM(C19:C20)"
 
                 hoja5.Cell("C40").FormulaA1 = IIf(luis > 0, "='NOMINA TOTAL'!H" & sep + 6, "0.00") 'Luis
                 hoja5.Cell("C41").FormulaA1 = IIf(ignacio > 0, "='NOMINA TOTAL'!L" & sep + 6, "0.00")
                 hoja5.Cell("C42").FormulaA1 = IIf(gabriel > 0, "='NOMINA TOTAL'!P" & sep + 6, "0.00")
                 hoja5.Cell("C43").FormulaA1 = IIf(diego > 0, "='NOMINA TOTAL'!T" & sep + 6, "0.00")
 
-                hoja5.Cell("C36").FormulaA1 = "=SUM(C23:C35)"
-                hoja5.Cell("C37").FormulaA1 = "=C36*16%"
-                hoja5.Cell("C38").FormulaA1 = "=SUM(C36:C37)"
+               
 
 
-                'hoja.Cell("N18").FormulaA1 = "" 'Colorado
-                'hoja.Cell("N19").FormulaA1 = "" 'Passavera
-                'hoja.Cell("N20").FormulaA1 = "" 'Margot Marianne
-                'hoja.Cell("N21").FormulaA1 = "" 'Subsea 88
-
-                ''hoja.Cell("N23").FormulaA1 = "=SUM(N6:N22)"
-                ''hoja.Cell("N24").FormulaA1 = "=N23*16%"
-                ''hoja.Cell("N25").FormulaA1 = "=+N23+N24"
 
                 '<<<<FOURT>>>>>>>
                 sep = sep + 12
@@ -9207,10 +9179,10 @@ Public Class frmnominasmarinos
                 hoja.Range("N" & sep + 8, "P" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Cell("N" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
-                hoja.Cell("AA12").Value = "TOTAL"
+                'hoja.Cell("AA12").Value = "TOTAL"
 
-                hoja.Cell("AB11").Clear()
-                hoja.Cell("AB12").Clear()
+                'hoja.Cell("AB11").Clear()
+                'hoja.Cell("AB12").Clear()
 
 
                 '<<<<<<Facturacion>>>>
