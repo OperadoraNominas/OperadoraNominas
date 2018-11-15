@@ -93,6 +93,7 @@ Module mdoInicio
                 'Servidor.IP = "localhost"            
                 Servidor.Nombre = "Equipo1\sqlexpress"
                 Servidor.Base = "OperadoraNominas"
+                'Servidor.Base = "NavigatorNominas"
                 Servidor.User = "sa"
                 Servidor.PWD = "kiosko2016"
 

@@ -914,7 +914,7 @@ Public Class frmEmpleados
         Dim dialogo As New SaveFileDialog()
         Dim idtipo As Integer
 
-        SQL = "select cCodigoEmpleado,cNombreLargo,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe "
+        SQL = "select cCodigoEmpleado,cNombreLargo,cApellidoP,cApellidoM,cNombre,cRFC,cCURP,cIMSS,cBanco,NumCuenta,Clabe "
         SQL &= " from EmpleadosC inner join bancos on EmpleadosC.fkiIdBanco=bancos.iIdBanco"
         SQL &= " order by cNombreLargo"
         Dim rwFilas As DataRow() = nConsulta(SQL)
@@ -937,24 +937,26 @@ Public Class frmEmpleados
             'hoja.Cell(3, 2).Value = ":"
             'hoja.Cell(3, 3).Value = ""
 
-            hoja.Range(4, 1, 4, 8).Style.Font.FontSize = 10
-            hoja.Range(4, 1, 4, 8).Style.Font.SetBold(True)
-            hoja.Range(4, 1, 4, 8).Style.Alignment.WrapText = True
-            hoja.Range(4, 1, 4, 8).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-            hoja.Range(4, 1, 4, 8).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+            hoja.Range(4, 1, 4, 10).Style.Font.FontSize = 10
+            hoja.Range(4, 1, 4, 10).Style.Font.SetBold(True)
+            hoja.Range(4, 1, 4, 10).Style.Alignment.WrapText = True
+            hoja.Range(4, 1, 4, 10).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+            hoja.Range(4, 1, 4, 10).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
             'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
-            hoja.Range(4, 1, 4, 8).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-            hoja.Range(4, 1, 4, 8).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+            hoja.Range(4, 1, 4, 10).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+            hoja.Range(4, 1, 4, 10).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
 
             'hoja.Cell(4, 1).Value = "Num"
             hoja.Cell(4, 1).Value = "Id"
-            hoja.Cell(4, 2).Value = "Nombre"
-            hoja.Cell(4, 3).Value = "RFC"
-            hoja.Cell(4, 4).Value = "CURP"
-            hoja.Cell(4, 5).Value = "IMSS"
-            hoja.Cell(4, 6).Value = "BANCO"
-            hoja.Cell(4, 7).Value = "CUENTA"
-            hoja.Cell(4, 8).Value = "CLABE"
+            hoja.Cell(4, 2).Value = "Apellido Paterno"
+            hoja.Cell(4, 3).Value = "Apellido Materno"
+            hoja.Cell(4, 4).Value = "Nombre"
+            hoja.Cell(4, 5).Value = "RFC"
+            hoja.Cell(4, 6).Value = "CURP"
+            hoja.Cell(4, 7).Value = "IMSS"
+            hoja.Cell(4, 8).Value = "BANCO"
+            hoja.Cell(4, 9).Value = "CUENTA"
+            hoja.Cell(4, 10).Value = "CLABE"
 
 
 
@@ -962,13 +964,15 @@ Public Class frmEmpleados
             For Each Fila In rwFilas
                 filaExcel = filaExcel + 1
                 hoja.Cell(filaExcel, 1).Value = "'" & Fila.Item("cCodigoEmpleado").ToString
-                hoja.Cell(filaExcel, 2).Value = Fila.Item("cNombreLargo")
-                hoja.Cell(filaExcel, 3).Value = Fila.Item("cRFC")
-                hoja.Cell(filaExcel, 4).Value = Fila.Item("cCURP")
-                hoja.Cell(filaExcel, 5).Value = Fila.Item("cIMSS")
-                hoja.Cell(filaExcel, 6).Value = Fila.Item("cBanco")
-                hoja.Cell(filaExcel, 7).Value = "'" & Fila.Item("NumCuenta")
-                hoja.Cell(filaExcel, 8).Value = "'" & Fila.Item("Clabe")
+                hoja.Cell(filaExcel, 2).Value = Fila.Item("cApellidoP")
+                hoja.Cell(filaExcel, 3).Value = Fila.Item("cApellidoM")
+                hoja.Cell(filaExcel, 4).Value = Fila.Item("cNombre")
+                hoja.Cell(filaExcel, 5).Value = Fila.Item("cRFC")
+                hoja.Cell(filaExcel, 6).Value = Fila.Item("cCURP")
+                hoja.Cell(filaExcel, 7).Value = Fila.Item("cIMSS")
+                hoja.Cell(filaExcel, 8).Value = Fila.Item("cBanco")
+                hoja.Cell(filaExcel, 9).Value = "'" & Fila.Item("NumCuenta")
+                hoja.Cell(filaExcel, 10).Value = "'" & Fila.Item("Clabe")
 
 
 
