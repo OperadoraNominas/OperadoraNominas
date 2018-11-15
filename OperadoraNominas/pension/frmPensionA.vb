@@ -20,9 +20,9 @@
         'txtPorcentaje.Enabled = False
         'txtCuenta.Enabled = False
         'cbobanco.Enabled = False
-       
+
     End Sub
- 
+
     Private Sub Cargarhistorial()
         Dim SQL As String, Alter As Boolean = False
         Try
@@ -70,7 +70,7 @@
         End Try
     End Sub
 
-  
+
     Private Sub MostrarBancos()
         SQL = "Select * from bancos order by cBanco"
         nCargaCBO(cbobanco, SQL, "cBanco", "iIdBanco")
@@ -78,16 +78,16 @@
     End Sub
 
 
-   
+
     Private Sub Limpiar(ByVal Contenedor As Object)
 
-      
+
     End Sub
 
-    
 
-  
-    
+
+
+
     Private Sub lsvHistorial_ItemActivate_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lsvHistorial.ItemActivate
 
         'Verificar si se tienen permisos
@@ -169,7 +169,7 @@
             blnNuevo = True
             MessageBox.Show("Datos guardados correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-           
+
             Cargarhistorial()
         Catch ex As Exception
 
