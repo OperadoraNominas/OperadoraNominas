@@ -218,7 +218,7 @@ Partial Class frmnominasmarinos
         'cmdSubirDatos
         '
         Me.cmdSubirDatos.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSubirDatos.Location = New System.Drawing.Point(1111, 34)
+        Me.cmdSubirDatos.Location = New System.Drawing.Point(1058, 34)
         Me.cmdSubirDatos.Name = "cmdSubirDatos"
         Me.cmdSubirDatos.Size = New System.Drawing.Size(103, 28)
         Me.cmdSubirDatos.TabIndex = 25
@@ -228,7 +228,7 @@ Partial Class frmnominasmarinos
         'btnReporte
         '
         Me.btnReporte.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReporte.Location = New System.Drawing.Point(1002, 34)
+        Me.btnReporte.Location = New System.Drawing.Point(942, 33)
         Me.btnReporte.Name = "btnReporte"
         Me.btnReporte.Size = New System.Drawing.Size(103, 28)
         Me.btnReporte.TabIndex = 24

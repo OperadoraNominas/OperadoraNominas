@@ -249,6 +249,24 @@
     <Compile Include="pension\frmPensionA.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="prestamo\frmDeudaInfonavit.Designer.vb">
+      <DependentUpon>frmDeudaInfonavit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="prestamo\frmDeudaInfonavit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="prestamo\frmPrestamo.Designer.vb">
+      <DependentUpon>frmPrestamo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="prestamo\frmPrestamo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="prestamo\frmFonacot.Designer.vb">
+      <DependentUpon>frmFonacot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="prestamo\frmFonacot.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmAgregarEmpleado.resx">
@@ -314,6 +332,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pension\frmPensionA.resx">
       <DependentUpon>frmPensionA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prestamo\frmDeudaInfonavit.resx">
+      <DependentUpon>frmDeudaInfonavit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prestamo\frmPrestamo.resx">
+      <DependentUpon>frmPrestamo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prestamo\frmFonacot.resx">
+      <DependentUpon>frmFonacot.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

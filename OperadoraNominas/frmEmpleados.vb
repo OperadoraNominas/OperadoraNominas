@@ -994,7 +994,7 @@ Public Class frmEmpleados
     End Sub
 
     Private Sub cmdPension_Click(sender As System.Object, e As System.EventArgs) Handles cmdPension.Click
-        Dim forma As New frmPensionA
+        Dim forma As New frmFonacot
 
         If gIdEmpleado Is Nothing = False Then
 
@@ -1011,6 +1011,53 @@ Public Class frmEmpleados
     Private Sub cmdimss_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdimss.Click
 
         Dim forma As New frmPension
+
+        If gIdEmpleado Is Nothing = False Then
+
+
+            forma.gIdEmpleado = gIdEmpleado
+            forma.gIdCliente = gIdCliente
+            forma.gIdEmpresa = 1
+            forma.ShowDialog()
+        Else
+            MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub cmdFonacot_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdFonacot.Click
+
+        Dim forma As New frmFonacot
+
+        If gIdEmpleado Is Nothing = False Then
+
+
+            forma.gIdEmpleado = gIdEmpleado
+            forma.gIdCliente = gIdCliente
+            forma.gIdEmpresa = 1
+            forma.ShowDialog()
+        Else
+            MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub cmdPrestam_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdPrestam.Click
+        Dim forma As New frmPrestamo
+
+        If gIdEmpleado Is Nothing = False Then
+
+
+            forma.gIdEmpleado = gIdEmpleado
+            forma.gIdCliente = gIdCliente
+            forma.gIdEmpresa = 1
+            forma.ShowDialog()
+        Else
+            MessageBox.Show("Seleccione un empleado primero", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub cmdInfonavit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdInfonavit.Click
+
+        Dim forma As New frmDeudaInfonavit
 
         If gIdEmpleado Is Nothing = False Then
 
