@@ -38,15 +38,15 @@
             If rwFilas Is Nothing = False Then
 
                 For Each Fila In rwFilas
+                    idDeuda = Fila.Item("iIdDeudaInfonavit")
                     iEstatus = Fila.Item("iEstatus")
                     item = lsvHistorial.Items.Add(Fila.Item("iIdDeudaInfonavit"))
-                    item.SubItems.Add("" & Fila.Item("iIdDeudaInfonavit"))
+                    'item.SubItems.Add("" & Fila.Item("iIdDeudaInfonavit"))
                     item.SubItems.Add("" & Fila.Item("fechaAlta"))
                     item.SubItems.Add("" & Fila.Item("montototal"))
                     item.SubItems.Add("" & Fila.Item("descuento"))
                     item.SubItems.Add("" & Fila.Item("fechainiciopago"))
-
-
+                    item.Tag = Fila.Item("iIdDeudaInfonavit")
                     item.BackColor = IIf(Alter, Color.WhiteSmoke, Color.White)
                     Alter = Not Alter
                     blnNuevo = False
@@ -120,6 +120,14 @@
                     cboEstatus.SelectedIndex = IIf(iEstatus = "1", 1, 0)
 
 
+                    txtMontoTotal.Enabled = True
+                    txtDescuento.Enabled = True
+                    cboEstatus.Enabled = True
+                    dtpFechaAlta.Enabled = True
+                    dtpInicioPago.Enabled = True
+                    cmdguardar.Enabled = True
+                    cmdcancelar.Enabled = True
+                    cmdDeleted.Enabled = True
                     'Tipo = "1"
                     blnNuevo = False
                     MessageBox.Show("Deuda Infonavit listo para editar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -144,7 +152,7 @@
 
             If blnNuevo = False Then
                 SQL = "EXEC setDeudaInfonavitActualizar "
-                SQL = idDeuda & ","
+                SQL &= idDeuda & ","
                 SQL &= "'" & txtMontoTotal.Text & "',"
                 SQL &= "'" & txtDescuento.Text & "',"
                 SQL &= "'" & dtpFechaAlta.Value.ToShortDateString & "',"

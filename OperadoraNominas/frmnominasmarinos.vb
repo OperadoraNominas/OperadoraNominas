@@ -4416,27 +4416,27 @@ Public Class frmnominasmarinos
                         hoja2.Cell(filaExcel + x, 5).Value = dtgDatos.Rows(x).Cells(11).FormattedValue 'puesto
                         hoja2.Cell(filaExcel + x, 6).Value = dtgDatos.Rows(x).Cells(18).Value ' dias pagados
                         hoja2.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(12).FormattedValue ' buqyes
-                        hoja2.Cell(filaExcel + x, 8).Value = Math.Round(dtgDatos.Rows(x).Cells(21).Value, 2) * 2 ' sueldo base
+                        hoja2.Cell(filaExcel + x, 8).Value = CDbl(dtgDatos.Rows(x).Cells(21).Value) * 2 ' sueldo base
                         If dtgDatos.Rows(x).Cells(22).Value <> "" And dtgDatos.Rows(x).Cells(23).Value <> "" Then
-                            hoja2.Cell(filaExcel + x, 9).Value = (CInt(Math.Round(dtgDatos.Rows(x).Cells(22).Value, 2)) + CInt(Math.Round(dtgDatos.Rows(x).Cells(23).Value, 2))) * 2  'Tiempo fijo extra
+                            hoja2.Cell(filaExcel + x, 9).Value = (CDbl(dtgDatos.Rows(x).Cells(22).Value) * 2) + (CDbl(dtgDatos.Rows(x).Cells(23).Value) * 2)  'Tiempo fijo extra
                         Else
                             hoja2.Cell(filaExcel + x, 9).Value = "0"
                         End If
 
-                        hoja2.Cell(filaExcel + x, 10).Value = Math.Round(dtgDatos.Rows(x).Cells(24).Value) * 2 'TIEMPO EXTRA OCASIONAL
-                        hoja2.Cell(filaExcel + x, 11).Value = Math.Round(dtgDatos.Rows(x).Cells(25).Value) * 2 ' DES SEM OBLIG
-                        hoja2.Cell(filaExcel + x, 12).Value = Math.Round(dtgDatos.Rows(x).Cells(26).Value) * 2 ' VACACIONES PROPOC"
-                        hoja2.Cell(filaExcel + x, 13).Value = Math.Round(dtgDatos.Rows(x).Cells(29).Value) * 2 ' TOTAL AGUINALDO
-                        hoja2.Cell(filaExcel + x, 14).Value = Math.Round(dtgDatos.Rows(x).Cells(32).Value) * 2 ' TOTAL P. VACACIONAL
-                        hoja2.Cell(filaExcel + x, 15).Value = Math.Round(dtgDatos.Rows(x).Cells(33).Value) * 2 ' TOAL PERCEPCIONES
-                        hoja2.Cell(filaExcel + x, 16).Value = Math.Round(dtgDatos.Rows(x).Cells(50).Value) * 2 ' COMPLEMENTO ASIM
+                        hoja2.Cell(filaExcel + x, 10).Value = CDbl(dtgDatos.Rows(x).Cells(24).Value * 2) 'TIEMPO EXTRA OCASIONAL
+                        hoja2.Cell(filaExcel + x, 11).Value = CDbl(dtgDatos.Rows(x).Cells(25).Value * 2) ' DES SEM OBLIG
+                        hoja2.Cell(filaExcel + x, 12).Value = CDbl(dtgDatos.Rows(x).Cells(26).Value * 2) ' VACACIONES PROPOC"
+                        hoja2.Cell(filaExcel + x, 13).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value * 2) ' TOTAL AGUINALDO
+                        hoja2.Cell(filaExcel + x, 14).Value = CDbl(dtgDatos.Rows(x).Cells(32).Value * 2) ' TOTAL P. VACACIONAL
+                        hoja2.Cell(filaExcel + x, 15).Value = CDbl(dtgDatos.Rows(x).Cells(33).Value * 2) ' TOAL PERCEPCIONES
+                        hoja2.Cell(filaExcel + x, 16).Value = CDbl(dtgDatos.Rows(x).Cells(50).Value * 2) ' COMPLEMENTO ASIM
                         If dtgDatos.Rows(x).Cells(53).Value <> "" Then
-                            hoja2.Cell(filaExcel + x, 17).Value = Math.Round(dtgDatos.Rows(x).Cells(53).Value) * 2 'COMISION OPERADORA
+                            hoja2.Cell(filaExcel + x, 17).Value = CDbl(dtgDatos.Rows(x).Cells(53).Value * 2) 'COMISION OPERADORA
                         Else
                             hoja2.Cell(filaExcel + x, 17).Value = "0"
                         End If
                         If dtgDatos.Rows(x).Cells(54).Value <> "" Then
-                            hoja2.Cell(filaExcel + x, 18).Value = Math.Round(dtgDatos.Rows(x).Cells(54).Value) * 2 'COMISION COMPLE
+                            hoja2.Cell(filaExcel + x, 18).Value = CDbl(dtgDatos.Rows(x).Cells(54).Value * 2) 'COMISION COMPLE
                         Else
                             hoja2.Cell(filaExcel + x, 18).Value = "0"
                         End If
@@ -4554,7 +4554,7 @@ Public Class frmnominasmarinos
                         hoja2.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(12).FormattedValue ' buqyes
                         hoja2.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(21).Value * 2 ' sueldo base
                         If dtgDatos.Rows(x).Cells(22).Value <> "" And dtgDatos.Rows(x).Cells(23).Value <> "" Then
-                            hoja2.Cell(filaExcel + x, 9).Value = (CInt(dtgDatos.Rows(x).Cells(22).Value) + CInt(dtgDatos.Rows(x).Cells(23).Value)) * 2  'Tiempo fijo extra
+                            hoja2.Cell(filaExcel + x, 9).Value = (CDbl(dtgDatos.Rows(x).Cells(22).Value) * 2) + (CDbl(dtgDatos.Rows(x).Cells(23).Value) * 2)  'Tiempo fijo extra
                         Else
                             hoja2.Cell(filaExcel + x, 9).Value = "0"
                         End If
@@ -8187,6 +8187,8 @@ Public Class frmnominasmarinos
             Dim dialogo As New SaveFileDialog()
             Dim periodo As String
 
+            Dim tiponomina, sueldodescanso As String
+
             pnlProgreso.Visible = True
             pnlCatalogo.Enabled = False
             Application.DoEvents()
@@ -8240,8 +8242,10 @@ Public Class frmnominasmarinos
                 Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB, AC As String
 
                 If cboTipoNomina.SelectedIndex = 1 Then
-
+                    tiponomina = "0"
                     llenargridD("0")
+                Else
+                    tiponomina = "1"
 
                 End If
 
@@ -8256,6 +8260,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(10, 2).Value = periodo
 
                 End If
+
 
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
@@ -8283,8 +8288,8 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L" & filaExcel + x & "/2" 'ABORDO 
                             hoja.Cell(filaExcel + x, 11).FormulaA1 = "=L" & filaExcel + x & "/2"  'DESCANSO
                         End If
-                       
-                        hoja.Cell(filaExcel + x, 12).Value = dtgDatos.Rows(x).Cells(15).Value  ' SUELDO ORDINARIO
+
+                        hoja.Cell(filaExcel + x, 12).Value = (dtgDatos.Rows(x).Cells(15).Value) + getsueldoordinario(tiponomina, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "sueldoO") ' SUELDO ORDINARIO
                         hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA ABORDO'!AK" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AK" & filatmp + x  ' CREDITO INFONAVIT
                         hoja.Cell(filaExcel + x, 14).Value = "0.0"
                         hoja.Cell(filaExcel + x, 15).FormulaA1 = "='OPERADORA ABORDO'!AW" & filatmp + x & "+'OPERADORA ABORDO'!AX" & filatmp + x & "+'OPERADORA ABORDO'!AY" & filatmp + x & "+'OPERADORA DESCANSO'!AQ" & filatmp + x & "+'OPERADORA DESCANSO'!AR" & filatmp + x & "+'OPERADORA DESCANSO'!AS" & filatmp + x  'DESC ASIMILADOS
@@ -8293,15 +8298,16 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 18).FormulaA1 = "='OPERADORA ABORDO'!AO" & filatmp + x & "+'OPERADORA DESCANSO'!AO" & filatmp + x 'Fonacot
                         hoja.Cell(filaExcel + x, 19).FormulaA1 = "=L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x & "-O" & filaExcel + x & "-P" & filaExcel + x & "-Q" & filaExcel + x & "-R" & filaExcel + x ' sueldo ordinario real
                         hoja.Cell(filaExcel + x, 20).FormulaA1 = "='OPERADORA ABORDO'!AP" & filatmp + x & "+'OPERADORA DESCANSO'!AP" & filatmp + x 'Operadora mx
-                        hoja.Cell(filaExcel + x, 21).FormulaA1 = "=S" & filaExcel + x & "-T" & filaExcel + x ' asimilados
+                        hoja.Cell(filaExcel + x, 21).FormulaA1 = "=S" & filaExcel + x & "-T" & filaExcel + x '& "-O" & filaExcel + x ' asimilados
                         hoja.Cell(filaExcel + x, 22).FormulaA1 = "='OPERADORA ABORDO'!AG" & filatmp + x & "+'OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA ABORDO'!AK" & filatmp + x & "+'OPERADORA ABORDO'!AL" & filatmp + x & "+'OPERADORA ABORDO'!AN" & filatmp + x & "+'OPERADORA ABORDO'!AO" & filatmp + x & "+'OPERADORA DESCANSO'!AG" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AK" & filatmp + x & "+'OPERADORA DESCANSO'!AL" & filatmp + x & "+'OPERADORA DESCANSO'!AN" & filatmp + x & "+'OPERADORA DESCANSO'!AO" & filatmp + x ' retenciones
                         hoja.Cell(filaExcel + x, 23).FormulaA1 = ""
                         hoja.Cell(filaExcel + x, 24).FormulaA1 = "=(T" & filaExcel + x & "+V" & filaExcel + x & ")*2%"
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = "=(O" & filaExcel + x & "+U" & filaExcel + x & ")*2%"
                         hoja.Cell(filaExcel + x, 26).FormulaA1 = "='OPERADORA ABORDO'!AV" & filatmp + x
-                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=T" & filaExcel + x & "+U" & filaExcel + x & "+V" & filaExcel + x & "+X" & filaExcel + x & "+Y" & filaExcel + x & "+Z" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=T" & filaExcel + x & "+U" & filaExcel + x & "+V" & filaExcel + x & "+X" & filaExcel + x & "+Y" & filaExcel + x & "+Z" & filaExcel + x & "+O" & filaExcel + x
                         hoja.Cell(filaExcel + x, 28).FormulaA1 = "=AA" & filaExcel + x & "*16%"
-                        hoja.Cell(filaExcel + x, 29).FormulaA1 = "=AA" & filaExcel + x & "+AB" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 29).FormulaA1 = "=AA" & filaExcel + x & "+AB" & filaExcel + x 'total
+
 
 
                     Else
@@ -8369,6 +8375,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 27).FormulaA1 = "=SUM(AA" & contadorexcelbuqueinicial & ":AA" & contadorexcelbuquefinal & ")"
                         hoja.Cell(filaExcel + x, 28).FormulaA1 = "=SUM(AB" & contadorexcelbuqueinicial & ":AB" & contadorexcelbuquefinal & ")"
                         hoja.Cell(filaExcel + x, 29).FormulaA1 = "=SUM(AC" & contadorexcelbuqueinicial & ":AC" & contadorexcelbuquefinal & ")"
+                        ' hoja.Cell(filaExcel + x, 30).FormulaA1 = "=SUM(AD" & contadorexcelbuqueinicial & ":AD" & contadorexcelbuquefinal & ")"
 
                         hoja.Range(filaExcel + x, 12, filaExcel + x, 29).Style.Fill.BackgroundColor = XLColor.PowderBlue
                         hoja.Range(filaExcel + x, 12, filaExcel + x, 29).Style.Font.SetBold(True)
@@ -8403,14 +8410,13 @@ Public Class frmnominasmarinos
 
                         hoja.Cell(filaExcel + x, 4).Style.NumberFormat.Format = "@"
 
-
-                        hoja.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(12).Value
-                        hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(5).Value
-                        hoja.Cell(filaExcel + x, 4).Value = dtgDatos.Rows(x).Cells(3).Value
-                        hoja.Cell(filaExcel + x, 5).Value = dtgDatos.Rows(x).Cells(4).Value
-                        hoja.Cell(filaExcel + x, 6).Value = dtgDatos.Rows(x).Cells(11).Value
-                        hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(10).Value
-                        hoja.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(18).Value
+                        hoja.Cell(filaExcel + x, 2).Value = dtgDatos.Rows(x).Cells(12).Value 'BUQUE
+                        hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(5).Value 'STATUS
+                        hoja.Cell(filaExcel + x, 4).Value = dtgDatos.Rows(x).Cells(3).Value ' NO TRABAJADOR
+                        hoja.Cell(filaExcel + x, 5).Value = dtgDatos.Rows(x).Cells(4).Value ' TRABAJADOR
+                        hoja.Cell(filaExcel + x, 6).Value = dtgDatos.Rows(x).Cells(11).Value ' CATEGORIA
+                        hoja.Cell(filaExcel + x, 7).Value = dtgDatos.Rows(x).Cells(10).Value ' EDAD
+                        hoja.Cell(filaExcel + x, 8).Value = dtgDatos.Rows(x).Cells(18).Value ' DIAS ABORDO
                         If dtgDatos.Rows(x).Cells(11).Value = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).Value = "SUBALTERNO EN FORMACIÓN" Then
                             hoja.Cell(filaExcel + x, 9).Value = "0.0" 'DIAS DESCANSO
                             hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L" & filaExcel + x 'ABORDO
@@ -8421,24 +8427,25 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel + x, 11).FormulaA1 = "=L" & filaExcel + x & "/2"  'DESCANSO
                         End If
 
-                        hoja.Cell(filaExcel + x, 12).Value = dtgDatos.Rows(x).Cells(15).Value  ' SUELDO ORDINARIO
-                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x ' CREDITO INFONAVIT
+                        hoja.Cell(filaExcel + x, 12).Value = (dtgDatos.Rows(x).Cells(15).Value) + getsueldoordinario(tiponomina, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "sueldoO") ' SUELDO ORDINARIO
+                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA ABORDO'!AK" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AK" & filatmp + x  ' CREDITO INFONAVIT
                         hoja.Cell(filaExcel + x, 14).Value = "0.0"
                         hoja.Cell(filaExcel + x, 15).FormulaA1 = "='OPERADORA ABORDO'!AW" & filatmp + x & "+'OPERADORA ABORDO'!AX" & filatmp + x & "+'OPERADORA ABORDO'!AY" & filatmp + x & "+'OPERADORA DESCANSO'!AQ" & filatmp + x & "+'OPERADORA DESCANSO'!AR" & filatmp + x & "+'OPERADORA DESCANSO'!AS" & filatmp + x  'DESC ASIMILADOS
                         hoja.Cell(filaExcel + x, 16).FormulaA1 = "='OPERADORA ABORDO'!AL" & filatmp + x & "+'OPERADORA DESCANSO'!AL" & filatmp + x 'PENSION ALIMENTICIA
-                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp + x ' Prestamo
-                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "='OPERADORA ABORDO'!AO" & filatmp + x 'Fonacot
+                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp + x & "+'OPERADORA DESCANSO'!AN" & filatmp + x 'Prestamo
+                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "='OPERADORA ABORDO'!AO" & filatmp + x & "+'OPERADORA DESCANSO'!AO" & filatmp + x 'Fonacot
                         hoja.Cell(filaExcel + x, 19).FormulaA1 = "=L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x & "-O" & filaExcel + x & "-P" & filaExcel + x & "-Q" & filaExcel + x & "-R" & filaExcel + x ' sueldo ordinario real
                         hoja.Cell(filaExcel + x, 20).FormulaA1 = "='OPERADORA ABORDO'!AP" & filatmp + x & "+'OPERADORA DESCANSO'!AP" & filatmp + x 'Operadora mx
-                        hoja.Cell(filaExcel + x, 21).FormulaA1 = "=S" & filaExcel + x & "-T" & filaExcel + x ' asimilados
+                        hoja.Cell(filaExcel + x, 21).FormulaA1 = "=S" & filaExcel + x & "-T" & filaExcel + x '& "-O" & filaExcel + x ' asimilados
                         hoja.Cell(filaExcel + x, 22).FormulaA1 = "='OPERADORA ABORDO'!AG" & filatmp + x & "+'OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA ABORDO'!AK" & filatmp + x & "+'OPERADORA ABORDO'!AL" & filatmp + x & "+'OPERADORA ABORDO'!AN" & filatmp + x & "+'OPERADORA ABORDO'!AO" & filatmp + x & "+'OPERADORA DESCANSO'!AG" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AK" & filatmp + x & "+'OPERADORA DESCANSO'!AL" & filatmp + x & "+'OPERADORA DESCANSO'!AN" & filatmp + x & "+'OPERADORA DESCANSO'!AO" & filatmp + x ' retenciones
                         hoja.Cell(filaExcel + x, 23).FormulaA1 = ""
                         hoja.Cell(filaExcel + x, 24).FormulaA1 = "=(T" & filaExcel + x & "+V" & filaExcel + x & ")*2%"
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = "=(O" & filaExcel + x & "+U" & filaExcel + x & ")*2%"
                         hoja.Cell(filaExcel + x, 26).FormulaA1 = "='OPERADORA ABORDO'!AV" & filatmp + x
-                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=T" & filaExcel + x & "+U" & filaExcel + x & "+V" & filaExcel + x & "+X" & filaExcel + x & "+Y" & filaExcel + x & "+Z" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=T" & filaExcel + x & "+U" & filaExcel + x & "+V" & filaExcel + x & "+X" & filaExcel + x & "+Y" & filaExcel + x & "+Z" & filaExcel + x & "+O" & filaExcel + x
                         hoja.Cell(filaExcel + x, 28).FormulaA1 = "=AA" & filaExcel + x & "*16%"
-                        hoja.Cell(filaExcel + x, 29).FormulaA1 = "=AA" & filaExcel + x & "+AB" & filaExcel + x
+                        hoja.Cell(filaExcel + x, 29).FormulaA1 = "=AA" & filaExcel + x & "+AB" & filaExcel + x 'total
+
 
 
 
@@ -8587,7 +8594,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(sep + 4, 5).FormulaA1 = "=E" & sep + 3 & "*16%"
                     hoja.Cell(sep + 5, 5).FormulaA1 = "=E" & sep + 3 & "+E" & sep + 4
 
-                    hoja.Cell(sep + 6, 5).FormulaA1 = "=U" & arboleda + 1 & "+Y" & arboleda + 1
+                    hoja.Cell(sep + 6, 5).FormulaA1 = "=U" & arboleda + 1 & "+Y" & arboleda + 1 & "+O" & arboleda + 1
                     hoja.Cell(sep + 7, 5).FormulaA1 = "=E" & sep + 6 & "*16%"
                     hoja.Cell(sep + 8, 5).FormulaA1 = "=E" & sep + 6 & "+E" & sep + 7
 
@@ -8625,7 +8632,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(sep + 4, 9).FormulaA1 = "=I" & sep + 3 & "*16%"
                     hoja.Cell(sep + 5, 9).FormulaA1 = "=I" & sep + 3 & "+I" & sep + 4
 
-                    hoja.Cell(sep + 6, 9).FormulaA1 = "=U" & azteca + 1 & "+Y" & azteca + 1
+                    hoja.Cell(sep + 6, 9).FormulaA1 = "=U" & azteca + 1 & "+Y" & azteca + 1 & "+O" & azteca + 1
                     hoja.Cell(sep + 7, 9).FormulaA1 = "=I" & sep + 6 & "*16%"
                     hoja.Cell(sep + 8, 9).FormulaA1 = "=I" & sep + 6 & "+I" & sep + 7
 
@@ -8665,7 +8672,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(sep + 4, 13).FormulaA1 = "=M" & sep + 3 & "*16%"
                     hoja.Cell(sep + 5, 13).FormulaA1 = "=M" & sep + 3 & "+M" & sep + 4
 
-                    hoja.Cell(sep + 6, 13).FormulaA1 = "=U" & cedros + 1 & "+Y" & cedros + 1
+                    hoja.Cell(sep + 6, 13).FormulaA1 = "=U" & cedros + 1 & "+Y" & cedros + 1 & "+O" & cedros + 1
                     hoja.Cell(sep + 7, 13).FormulaA1 = "=M" & sep + 6 & "*16%"
                     hoja.Cell(sep + 8, 13).FormulaA1 = "=M" & sep + 6 & "+M" & sep + 7
 
@@ -8707,11 +8714,11 @@ Public Class frmnominasmarinos
                     hoja.Cell("S" & sep + 4).FormulaA1 = "=S" & sep + 3 & "*16%"
                     hoja.Cell("S" & sep + 5).FormulaA1 = "=S" & sep + 3 & "+S" & sep + 4
 
-                    hoja.Cell("S" & sep + 6).FormulaA1 = "=S" & miramar + 1 & "+Y" & miramar + 1
+                    hoja.Cell("S" & sep + 6).FormulaA1 = "=U" & miramar + 1 & "+Y" & miramar + 1 & "+O" & miramar + 1
                     hoja.Cell("S" & sep + 7).FormulaA1 = "=S" & sep + 6 & "*16%"
                     hoja.Cell("S" & sep + 8).FormulaA1 = "=S" & sep + 6 & "+S" & sep + 7
 
-                    hoja.Cell("S" & sep + 10).FormulaA1 = "=U" & sep + 5 & "+Y" & sep + 8
+                    hoja.Cell("S" & sep + 10).FormulaA1 = "S" & sep + 5 & "+S" & sep + 8
                 Else
                     hoja.Cell("S" & sep + 3).FormulaA1 = "0"
                     hoja.Cell("S" & sep + 4).FormulaA1 = "=S" & sep + 3 & "*16%"
@@ -8746,7 +8753,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(sep + 4, 24).FormulaA1 = "=X" & sep + 3 & "*16%"
                     hoja.Cell(sep + 5, 24).FormulaA1 = "=X" & sep + 3 & "+X" & sep + 4
 
-                    hoja.Cell(sep + 6, 24).FormulaA1 = "=U" & verde + 1 & "+Y" & verde + 1
+                    hoja.Cell(sep + 6, 24).FormulaA1 = "=U" & verde + 1 & "+Y" & verde + 1 & "+O" & verde + 1
                     hoja.Cell(sep + 7, 24).FormulaA1 = "=X" & sep + 6 & "*16%"
                     hoja.Cell(sep + 8, 24).FormulaA1 = "=X" & sep + 6 & "+X" & sep + 7
 
@@ -8786,7 +8793,7 @@ Public Class frmnominasmarinos
                     hoja.Cell(sep + 4, 28).FormulaA1 = "=AB" & sep + 3 & "*16%"
                     hoja.Cell(sep + 5, 28).FormulaA1 = "=AB" & sep + 3 & "+AB" & sep + 4
 
-                    hoja.Cell(sep + 6, 28).FormulaA1 = "=U" & cruz + 1 & "+Y" & cruz + 1
+                    hoja.Cell(sep + 6, 28).FormulaA1 = "=U" & cruz + 1 & "+Y" & cruz + 1 & "+O" & cruz + 1
                     hoja.Cell(sep + 7, 28).FormulaA1 = "=AB" & sep + 6 & "*16%"
                     hoja.Cell(sep + 8, 28).FormulaA1 = "=AB" & sep + 6 & "+AB" & sep + 7
 
@@ -8846,7 +8853,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("E" & sep + 4).FormulaA1 = "=E" & sep + 3 & "*16%"
                     hoja.Cell("E" & sep + 5).FormulaA1 = "=E" & sep + 3 & "+E" & sep + 4
 
-                    hoja.Cell("E" & sep + 6).FormulaA1 = "=U" & amarrados + 1 & "+Y" & amarrados + 1
+                    hoja.Cell("E" & sep + 6).FormulaA1 = "=U" & amarrados + 1 & "+Y" & amarrados + 1 & "+O" & amarrados + 1
                     hoja.Cell("E" & sep + 7).FormulaA1 = "=E" & sep + 6 & "*16%"
                     hoja.Cell("E" & sep + 8).FormulaA1 = "=E" & sep + 6 & "+E" & sep + 7
 
@@ -8884,7 +8891,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("L" & sep + 4).FormulaA1 = "=L" & sep + 3 & "*16%"
                     hoja.Cell("L" & sep + 5).FormulaA1 = "=L" & sep + 3 & "+L" & sep + 4
 
-                    hoja.Cell("L" & sep + 6).FormulaA1 = "=U" & montserrat + 1 & "+Y" & montserrat + 1
+                    hoja.Cell("L" & sep + 6).FormulaA1 = "=U" & montserrat + 1 & "+Y" & montserrat + 1 & "+O" & montserrat + 1
                     hoja.Cell("L" & sep + 7).FormulaA1 = "=L" & sep + 6 & "*16%"
                     hoja.Cell("L" & sep + 8).FormulaA1 = "=L" & sep + 6 & "+L" & sep + 7
                     'hoja.Cell("L" & sep + 9).FormulaA1 = "L" & sep + 5 & "+L" & sep + 8
@@ -8922,7 +8929,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("R" & sep + 4).FormulaA1 = "=R" & sep + 3 & "*16%"
                     hoja.Cell("R" & sep + 5).FormulaA1 = "=R" & sep + 3 & "+R" & sep + 4
 
-                    hoja.Cell("R" & sep + 6).FormulaA1 = "=U" & blanca + 1 & "+Y" & blanca + 1
+                    hoja.Cell("R" & sep + 6).FormulaA1 = "=U" & blanca + 1 & "+Y" & blanca + 1 & "+O" & blanca + 1
                     hoja.Cell("R" & sep + 7).FormulaA1 = "=R" & sep + 6 & "*16%"
                     hoja.Cell("R" & sep + 8).FormulaA1 = "=R" & sep + 6 & "+R" & sep + 7
 
@@ -8960,7 +8967,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("V" & sep + 4).FormulaA1 = "=V" & sep + 3 & "*16%"
                     hoja.Cell("V" & sep + 5).FormulaA1 = "=V" & sep + 3 & "+Y" & sep + 4
 
-                    hoja.Cell("V" & sep + 6).FormulaA1 = "=U" & ciari + 1 & "+Y" & ciari + 1
+                    hoja.Cell("V" & sep + 6).FormulaA1 = "=U" & ciari + 1 & "+Y" & ciari + 1 & "+O" & ciari + 1
                     hoja.Cell("V" & sep + 7).FormulaA1 = "=V" & sep + 6 & "*16%"
                     hoja.Cell("V" & sep + 8).FormulaA1 = "=V" & sep + 6 & "+V" & sep + 7
                     hoja.Cell("V" & sep + 10).FormulaA1 = "=V" & sep + 5 & "+V" & sep + 8
@@ -8999,7 +9006,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("AA" & sep + 4).FormulaA1 = "=AA" & sep + 3 & "*16%"
                     hoja.Cell("AA" & sep + 5).FormulaA1 = "=AA" & sep + 3 & "+AA" & sep + 4
 
-                    hoja.Cell("AA" & sep + 6).FormulaA1 = "=U" & janitzio + 1 & "+Y" & janitzio + 1
+                    hoja.Cell("AA" & sep + 6).FormulaA1 = "=U" & janitzio + 1 & "+Y" & janitzio + 1 & "+O" & janitzio + 1
                     hoja.Cell("AA" & sep + 7).FormulaA1 = "=AA" & sep + 6 & "*16%"
                     hoja.Cell("AA" & sep + 8).FormulaA1 = "=AA" & sep + 6 & "+AA" & sep + 7
                     hoja.Cell("AA" & sep + 10).FormulaA1 = "=AA" & sep + 5 & "+AA" & sep + 8
@@ -9031,7 +9038,7 @@ Public Class frmnominasmarinos
                 hoja5.Cell("C42").FormulaA1 = IIf(ciari > 0, "='NOMINA TOTAL'!W" & sep + 6, "0.0")
                 hoja5.Cell("C43").FormulaA1 = IIf(janitzio > 0, "='NOMINA TOTAL'!AA" & sep + 6, "0.0")
 
-               
+
 
                 '<<<<<<<<<THIR>>>>>>>>>>>>
                 sep = sep + 12
@@ -9049,10 +9056,10 @@ Public Class frmnominasmarinos
                 If colorada > 0 Then
 
                     hoja.Cell("D" & sep + 3).FormulaA1 = "=T" & colorada + 1 & "+V" & colorada + 1 & "+X" & colorada + 1 & "+Z" & colorada + 1
-                    hoja.Cell("D" & sep + 4).FormulaA1 = "=h" & sep + 3 & "*16%"
-                    hoja.Cell("D" & sep + 5).FormulaA1 = "=h" & sep + 3 & "+h" & sep + 4
+                    hoja.Cell("D" & sep + 4).FormulaA1 = "=D" & sep + 3 & "*16%"
+                    hoja.Cell("D" & sep + 5).FormulaA1 = "=D" & sep + 3 & "+D" & sep + 4
 
-                    hoja.Cell("D" & sep + 6).FormulaA1 = "=U" & colorada + 1 & "+Y" & colorada + 1
+                    hoja.Cell("D" & sep + 6).FormulaA1 = "=U" & colorada + 1 & "+Y" & colorada + 1 & "+O" & colorada + 1
                     hoja.Cell("D" & sep + 7).FormulaA1 = "=D" & sep + 6 & "*16%"
                     hoja.Cell("D" & sep + 8).FormulaA1 = "=D" & sep + 6 & "+D" & sep + 7
                     hoja.Cell("D" & sep + 10).FormulaA1 = "D" & sep + 5 & "+D" & sep + 8
@@ -9091,7 +9098,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("H" & sep + 4).FormulaA1 = "=h" & sep + 3 & "*16%"
                     hoja.Cell("H" & sep + 5).FormulaA1 = "=h" & sep + 3 & "+h" & sep + 4
 
-                    hoja.Cell("H" & sep + 6).FormulaA1 = "=U" & luis + 1 & "+Y" & luis + 1
+                    hoja.Cell("H" & sep + 6).FormulaA1 = "=U" & luis + 1 & "+Y" & luis + 1 & "+O" & luis + 1
                     hoja.Cell("H" & sep + 7).FormulaA1 = "=H" & sep + 6 & "*16%"
                     hoja.Cell("H" & sep + 8).FormulaA1 = "=H" & sep + 6 & "+H" & sep + 7
                     hoja.Cell("H" & sep + 10).FormulaA1 = "H" & sep + 5 & "+H" & sep + 8
@@ -9131,7 +9138,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("L" & sep + 4).FormulaA1 = "=L" & sep + 3 & "*16%"
                     hoja.Cell("L" & sep + 5).FormulaA1 = "=L" & sep + 3 & "+L" & sep + 4
 
-                    hoja.Cell("L" & sep + 6).FormulaA1 = "=U" & ignacio + 1 & "+Y" & ignacio + 1
+                    hoja.Cell("L" & sep + 6).FormulaA1 = "=U" & ignacio + 1 & "+Y" & ignacio + 1 & "+O" & ignacio + 1
                     hoja.Cell("L" & sep + 7).FormulaA1 = "=L" & sep + 6 & "*16%"
                     hoja.Cell("L" & sep + 8).FormulaA1 = "=L" & sep + 6 & "+L" & sep + 7
                     hoja.Cell("L" & sep + 10).FormulaA1 = "L" & sep + 5 & "+L" & sep + 8
@@ -9168,7 +9175,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("P" & sep + 4).FormulaA1 = "=P" & sep + 3 & "*16%"
                     hoja.Cell("P" & sep + 5).FormulaA1 = "=P" & sep + 3 & "+P" & sep + 4
 
-                    hoja.Cell("P" & sep + 6).FormulaA1 = "=U" & gabriel + 1 & "+Y" & gabriel + 1
+                    hoja.Cell("P" & sep + 6).FormulaA1 = "=U" & gabriel + 1 & "+Y" & gabriel + 1 & "+O" & gabriel + 1
                     hoja.Cell("P" & sep + 7).FormulaA1 = "=P" & sep + 6 & "*16%"
                     hoja.Cell("P" & sep + 8).FormulaA1 = "=P" & sep + 6 & "+P" & sep + 7
                     hoja.Cell("P" & sep + 10).FormulaA1 = "P" & sep + 5 & "+P" & sep + 8
@@ -9205,7 +9212,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("T" & sep + 4).FormulaA1 = "=T" & sep + 3 & "*16%"
                     hoja.Cell("T" & sep + 5).FormulaA1 = "=T" & sep + 3 & "+T" & sep + 4
 
-                    hoja.Cell("T" & sep + 6).FormulaA1 = "=U" & diego + 1 & "+Y" & diego + 1
+                    hoja.Cell("T" & sep + 6).FormulaA1 = "=U" & diego + 1 & "+Y" & diego + 1 & "+O" & diego + 1
                     hoja.Cell("T" & sep + 7).FormulaA1 = "=T" & sep + 6 & "*16%"
                     hoja.Cell("T" & sep + 8).FormulaA1 = "=T" & sep + 6 & "+T" & sep + 7
 
@@ -9245,7 +9252,7 @@ Public Class frmnominasmarinos
                 hoja5.Cell("C46").FormulaA1 = IIf(gabriel > 0, "='NOMINA TOTAL'!P" & sep + 6, "0.00")
                 hoja5.Cell("C47").FormulaA1 = IIf(diego > 0, "='NOMINA TOTAL'!T" & sep + 6, "0.00")
                 hoja5.Cell("C48").FormulaA1 = IIf(colorada > 0, "='NOMINA TOTAL'!D" & sep + 6, "0.000") 'Colorada
-               
+
 
 
 
@@ -9265,10 +9272,10 @@ Public Class frmnominasmarinos
                 If subsea88 > 0 Then
 
                     hoja.Cell("D" & sep + 3).FormulaA1 = "=T" & subsea88 + 1 & "+V" & subsea88 + 1 & "+X" & subsea88 + 1 & "+Z" & subsea88 + 1
-                    hoja.Cell("D" & sep + 4).FormulaA1 = "=h" & sep + 3 & "*16%"
-                    hoja.Cell("D" & sep + 5).FormulaA1 = "=h" & sep + 3 & "+h" & sep + 4
+                    hoja.Cell("D" & sep + 4).FormulaA1 = "=D" & sep + 3 & "*16%"
+                    hoja.Cell("D" & sep + 5).FormulaA1 = "=D" & sep + 3 & "+D" & sep + 4
 
-                    hoja.Cell("D" & sep + 6).FormulaA1 = "=U" & subsea88 + 1 & "+Y" & subsea88 + 1
+                    hoja.Cell("D" & sep + 6).FormulaA1 = "=U" & subsea88 + 1 & "+Y" & subsea88 + 1 & "+O" & subsea88 + 1
                     hoja.Cell("D" & sep + 7).FormulaA1 = "=D" & sep + 6 & "*16%"
                     hoja.Cell("D" & sep + 8).FormulaA1 = "=D" & sep + 6 & "+D" & sep + 7
                     hoja.Cell("D" & sep + 10).FormulaA1 = "D" & sep + 5 & "+D" & sep + 8
@@ -9307,7 +9314,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("H" & sep + 4).FormulaA1 = "=H" & sep + 3 & "*16%"
                     hoja.Cell("H" & sep + 5).FormulaA1 = "=H" & sep + 3 & "+H" & sep + 4
 
-                    hoja.Cell("H" & sep + 6).FormulaA1 = "=S" & jose + 1 & "+W" & jose + 1
+                    hoja.Cell("H" & sep + 6).FormulaA1 = "=U" & jose + 1 & "+Y" & jose + 1 & "+O" & jose + 1
                     hoja.Cell("H" & sep + 7).FormulaA1 = "=H" & sep + 6 & "*16%"
                     hoja.Cell("H" & sep + 8).FormulaA1 = "=H" & sep + 6 & "+H" & sep + 7
 
@@ -9348,7 +9355,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("K" & sep + 4).FormulaA1 = "=K" & sep + 3 & "*16%"
                     hoja.Cell("K" & sep + 5).FormulaA1 = "=K" & sep + 3 & "+K" & sep + 4
 
-                    hoja.Cell("K" & sep + 6).FormulaA1 = "=S" & grande + 1 & "+W" & grande + 1
+                    hoja.Cell("K" & sep + 6).FormulaA1 = "=U" & grande + 1 & "+Y" & grande + 1 & "+O" & grande + 1
                     hoja.Cell("K" & sep + 7).FormulaA1 = "=K" & sep + 6 & "*16%"
                     hoja.Cell("K" & sep + 8).FormulaA1 = "=K" & sep + 6 & "+K" & sep + 7
 
@@ -9389,7 +9396,7 @@ Public Class frmnominasmarinos
                     hoja.Cell("P" & sep + 4).FormulaA1 = "=P" & sep + 3 & "*16%"
                     hoja.Cell("P" & sep + 5).FormulaA1 = "=P" & sep + 3 & "+P" & sep + 4
 
-                    hoja.Cell("P" & sep + 6).FormulaA1 = "=S" & creciente + 1 & "+W" & creciente + 1
+                    hoja.Cell("P" & sep + 6).FormulaA1 = "=U" & creciente + 1 & "+Y" & creciente + 1 & "+O" & creciente + 1
                     hoja.Cell("P" & sep + 7).FormulaA1 = "=P" & sep + 6 & "*16%"
                     hoja.Cell("P" & sep + 8).FormulaA1 = "=P" & sep + 6 & "+P" & sep + 7
 
@@ -9554,8 +9561,8 @@ Public Class frmnominasmarinos
                         ' pension = Double.Parse(IIf(dtgDatos.Rows(x).Cells(41).Value = "", "0", dtgDatos.Rows(x).Cells(41).Value))
                         prestamo = Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value))
                         fonacot = Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", "0", dtgDatos.Rows(x).Cells(43).Value))
-                         subsidioaplicado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(45).Value = "", "0", dtgDatos.Rows(x).Cells(45).Value))
-                      
+                        subsidioaplicado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(45).Value = "", "0", dtgDatos.Rows(x).Cells(45).Value))
+
                         Dim rwPension As DataRow() = nConsulta("SELECT * FROM PensionAlimenticia WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & "ORDER BY Nombrebeneficiario")
                         If rwPension Is Nothing = False Then
 
@@ -9573,7 +9580,7 @@ Public Class frmnominasmarinos
 
                                     filaExcel = filaExcel + 1
                                 Next
-                               
+
                             Else
                                 nombrebenficiario = rwPension(0).Item("Nombrebeneficiario")
                                 porcentaje = rwPension(0).Item("fPorcentaje")
@@ -9587,12 +9594,12 @@ Public Class frmnominasmarinos
 
                                 filaExcel = filaExcel + 1
                             End If
-                          
+
 
                         End If
 
 
-                     
+
 
                     End If
 
@@ -12303,9 +12310,36 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub pnlCatalogo_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles pnlCatalogo.Paint
+    Function getsueldoordinario(ByRef tiponomina As String, ByRef trabjador As String, ByRef dias As String, ByRef tipe As String) As Double
+        ' getsueldoordinario(tiponomina, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value)
+        Dim sueldoordinario As String = 0
+        Dim sql As String
+        If tiponomina = 1 Then
+            sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC"
+            sql &= " where Nomina.fkiIdEmpresa = 1 And fkiIdPeriodo = " & cboperiodo.SelectedValue
+            sql &= " and Nomina.iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
+            sql &= " and iTipoNomina=0"
+            sql &= " and EmpleadosC.cCodigoEmpleado=" & trabjador
+            sql &= " and Nomina.iDiasTrabajados=" & dias
+            sql &= " order by " & "Nomina.Buque, cNombreLargo"
 
-    End Sub
+            Dim rwNominaGuardada As DataRow() = nConsulta(sql)
+
+            'If rwNominaGuardadaFinal Is Nothing = False Then
+            If rwNominaGuardada Is Nothing = False Then
+
+                Select Case tipe
+                    Case "sueldoO"
+                        sueldoordinario = rwNominaGuardada(0)("fSalarioBase").ToString
+                    Case "prestamoA"
+                        sueldoordinario = rwNominaGuardada(0)("fPrestamoPerA").ToString
+                End Select
+
+
+            End If
+        End If
+        Return CDbl(sueldoordinario)
+    End Function
 End Class
 
 
