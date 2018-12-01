@@ -4576,10 +4576,10 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel + x, 18).Value = "0"
                         End If
                         hoja2.Cell(filaExcel + x, 19).Value = dtgDatos.Rows(x).Cells(45).Value 'Subsidio
-                        hoja2.Cell(filaExcel + x, 20).Value = dtgDatos.Rows(x).Cells(49).Value 'IMSS
-                        hoja2.Cell(filaExcel + x, 21).Value = dtgDatos.Rows(x).Cells(50).Value ' SAR
-                        hoja2.Cell(filaExcel + x, 22).Value = dtgDatos.Rows(x).Cells(51).Value 'INFONAVIT
-                        hoja2.Cell(filaExcel + x, 23).Value = dtgDatos.Rows(x).Cells(52).Value 'IMPTO S/NOMINA
+                        hoja2.Cell(filaExcel + x, 20).Value = dtgDatos.Rows(x).Cells(55).Value 'IMSS
+                        hoja2.Cell(filaExcel + x, 21).Value = dtgDatos.Rows(x).Cells(56).Value ' SAR
+                        hoja2.Cell(filaExcel + x, 22).Value = dtgDatos.Rows(x).Cells(57).Value 'INFONAVIT
+                        hoja2.Cell(filaExcel + x, 23).Value = dtgDatos.Rows(x).Cells(58).Value 'IMPTO S/NOMINA
 
                         hoja2.Cell(filaExcel + x, 24).FormulaA1 = "=SUM(O" & filaExcel + x & ":W" & filaExcel + x & ")" ' SUBTOTAL
                         hoja2.Cell(filaExcel + x, 25).FormulaA1 = "=X" & filaExcel + x & "*16%" 'IVA
@@ -9029,7 +9029,7 @@ Public Class frmnominasmarinos
 
                 hoja5.Cell("C15").FormulaA1 = IIf(montserrat > 0, "='NOMINA TOTAL'!L" & sep + 3, "0.0") 'Monserrat
                 hoja5.Cell("C16").FormulaA1 = IIf(blanca > 0, "='NOMINA TOTAL'!R" & sep + 3, "0.0") 'Blanca
-                hoja5.Cell("C17").FormulaA1 = IIf(ciari > 0, "='NOMINA TOTAL'!W" & sep + 3, "0.0") 'Ciari
+                hoja5.Cell("C17").FormulaA1 = IIf(ciari > 0, "='NOMINA TOTAL'!V" & sep + 3, "0.0") 'Ciari
                 hoja5.Cell("C18").FormulaA1 = IIf(janitzio > 0, "='NOMINA TOTAL'!AA" & sep + 3, "0.0") 'Janitzio
 
 
@@ -9490,7 +9490,7 @@ Public Class frmnominasmarinos
                     End If
                     If nombrebuque = dtgDatos.Rows(x).Cells(12).Value Then
 
-                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp2 + x
+                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!U" & filatmp2 + x
 
                     Else
                         contadorexcelbuquefinal = filatmp2 + x - 1
@@ -9500,7 +9500,7 @@ Public Class frmnominasmarinos
                         contadorexcelbuqueinicial = filatmp2 + x
                         contadorexcelbuquefinal = 0
 
-                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!S" & filatmp2 + x
+                        hoja4.Cell(filaExcel, 9).FormulaA1 = "='NOMINA TOTAL'!U" & filatmp2 + x
                     End If
 
 
