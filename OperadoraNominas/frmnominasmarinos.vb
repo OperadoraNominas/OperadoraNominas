@@ -12261,6 +12261,14 @@ Public Class frmnominasmarinos
                 hoja.Range(2, 1, dtgDatos.Rows.Count, 11).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
                 hoja.Range(2, 1, dtgDatos.Rows.Count, 11).Style.NumberFormat.Format = "@"
 
+                If cboTipoNomina.SelectedIndex = 1 Then
+                    TipoNomina = "0"
+                    llenargridD("0")
+                Else
+                    TipoNomina = "1"
+
+                End If
+
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
                     Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgDatos.Rows(x).Cells(3).Value)
@@ -12280,7 +12288,12 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 1).Value = app 'Paterno
                     hoja.Cell(filaExcel + x, 2).Value = apm 'Materno
                     hoja.Cell(filaExcel + x, 3).Value = nom 'Nombre
-                    hoja.Cell(filaExcel + x, 4).Value = dtgDatos.Rows(x).Cells(50).Value ' asimilados
+                    If dtgDatos.Rows(x).Cells(50).Value < 1 Then
+                        hoja.Cell(filaExcel + x, 4).Value = 0.0
+                    Else
+                        hoja.Cell(filaExcel + x, 4).Value = dtgDatos.Rows(x).Cells(50).Value + getsueldoordinario(1, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "Asimilado") ' asimilados
+                    End If
+
                     hoja.Cell(filaExcel + x, 5).Value = dtgDatos.Rows(x).Cells(8).Value
                     hoja.Cell(filaExcel + x, 6).Value = dtgDatos.Rows(x).Cells(18).Value ' Dias Trabjados
                     hoja.Cell(filaExcel + x, 7).Value = banco ' Banco
@@ -12333,6 +12346,9 @@ Public Class frmnominasmarinos
                         sueldoordinario = rwNominaGuardada(0)("fSalarioBase").ToString
                     Case "prestamoA"
                         sueldoordinario = rwNominaGuardada(0)("fPrestamoPerA").ToString
+                    Case "Asimilado"
+
+                        sueldoordinario = rwNominaGuardada(0)("fAsimilados").ToString
                 End Select
 
 
