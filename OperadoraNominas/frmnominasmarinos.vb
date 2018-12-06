@@ -8965,7 +8965,7 @@ Public Class frmnominasmarinos
 
                     hoja.Cell("V" & sep + 3).FormulaA1 = "=T" & ciari + 1 & "+V" & ciari + 1 & "+X" & ciari + 1 & "+Z" & ciari + 1
                     hoja.Cell("V" & sep + 4).FormulaA1 = "=V" & sep + 3 & "*16%"
-                    hoja.Cell("V" & sep + 5).FormulaA1 = "=V" & sep + 3 & "+Y" & sep + 4
+                    hoja.Cell("V" & sep + 5).FormulaA1 = "=V" & sep + 3 & "+V" & sep + 4
 
                     hoja.Cell("V" & sep + 6).FormulaA1 = "=U" & ciari + 1 & "+Y" & ciari + 1 & "+O" & ciari + 1
                     hoja.Cell("V" & sep + 7).FormulaA1 = "=V" & sep + 6 & "*16%"
@@ -9035,7 +9035,7 @@ Public Class frmnominasmarinos
 
                 hoja5.Cell("C40").FormulaA1 = IIf(montserrat > 0, "='NOMINA TOTAL'!L" & sep + 6, "0.0")
                 hoja5.Cell("C41").FormulaA1 = IIf(blanca > 0, "='NOMINA TOTAL'!R" & sep + 6, "0.0")
-                hoja5.Cell("C42").FormulaA1 = IIf(ciari > 0, "='NOMINA TOTAL'!W" & sep + 6, "0.0")
+                hoja5.Cell("C42").FormulaA1 = IIf(ciari > 0, "='NOMINA TOTAL'!V" & sep + 6, "0.0")
                 hoja5.Cell("C43").FormulaA1 = IIf(janitzio > 0, "='NOMINA TOTAL'!AA" & sep + 6, "0.0")
 
 
@@ -9244,14 +9244,14 @@ Public Class frmnominasmarinos
                 hoja5.Cell("C20").FormulaA1 = IIf(ignacio > 0, "='NOMINA TOTAL'!L" & sep + 3, "0.00") 'Ignacio
                 hoja5.Cell("C21").FormulaA1 = IIf(gabriel > 0, "='NOMINA TOTAL'!P" & sep + 3, "0.00") 'Gabriel
                 hoja5.Cell("C22").FormulaA1 = IIf(diego > 0, "='NOMINA TOTAL'!T" & sep + 3, "0.00") 'Diego
-                hoja5.Cell("C23").FormulaA1 = IIf(colorada > 0, "='NOMINA TOTAL'!D" & sep + 3, "0.000") 'Colorada
+                hoja5.Cell("D23").FormulaA1 = IIf(colorada > 0, "='NOMINA TOTAL'!D" & sep + 3, "0.000") 'Colorada
 
 
                 hoja5.Cell("C44").FormulaA1 = IIf(luis > 0, "='NOMINA TOTAL'!H" & sep + 6, "0.00") 'Luis
                 hoja5.Cell("C45").FormulaA1 = IIf(ignacio > 0, "='NOMINA TOTAL'!L" & sep + 6, "0.00")
                 hoja5.Cell("C46").FormulaA1 = IIf(gabriel > 0, "='NOMINA TOTAL'!P" & sep + 6, "0.00")
                 hoja5.Cell("C47").FormulaA1 = IIf(diego > 0, "='NOMINA TOTAL'!T" & sep + 6, "0.00")
-                hoja5.Cell("C48").FormulaA1 = IIf(colorada > 0, "='NOMINA TOTAL'!D" & sep + 6, "0.000") 'Colorada
+                hoja5.Cell("D48").FormulaA1 = IIf(colorada > 0, "='NOMINA TOTAL'!D" & sep + 6, "0.000") 'Colorada
 
 
 
@@ -9430,13 +9430,13 @@ Public Class frmnominasmarinos
                 hoja5.Cell("C10").FormulaA1 = IIf(jose > 0, "='NOMINA TOTAL'!H" & sep + 3, "0.00") 'Jose 
                 hoja5.Cell("C9").FormulaA1 = IIf(grande > 0, "='NOMINA TOTAL'!K" & sep + 3, "0.00") 'Grande   
                 hoja5.Cell("C8").FormulaA1 = IIf(creciente > 0, "='NOMINA TOTAL'!P" & sep + 3, "0.00") 'Creciente
-                hoja5.Cell("C26").FormulaA1 = IIf(subsea88 > 0, "='NOMINA TOTAL'!D" & sep + 3, "0.00") 'Subsea88
+                hoja5.Cell("D26").FormulaA1 = IIf(subsea88 > 0, "='NOMINA TOTAL'!D" & sep + 3, "0.00") 'Subsea88
 
 
                 hoja5.Cell("C35").FormulaA1 = IIf(jose > 0, "='NOMINA TOTAL'!H" & sep + 6, "0.00")
                 hoja5.Cell("C34").FormulaA1 = IIf(grande > 0, "='NOMINA TOTAL'!K" & sep + 6, "0.00")
                 hoja5.Cell("C33").FormulaA1 = IIf(creciente > 0, "='NOMINA TOTAL'!P" & sep + 6, "0.00")
-                hoja5.Cell("C51").FormulaA1 = IIf(subsea88 > 0, "='NOMINA TOTAL'!D" & sep + 6, "0.00") 'Subsea88
+                hoja5.Cell("D51").FormulaA1 = IIf(subsea88 > 0, "='NOMINA TOTAL'!D" & sep + 6, "0.00") 'Subsea88
 
                 '<<<<<<<<<<<<<<<Detalle>>>>>>>>>>>>>>>>>>
 
@@ -10371,16 +10371,17 @@ Public Class frmnominasmarinos
                         hoja3.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(4).Value 'Nombre
                         hoja3.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(37).Value ' IMSS
                         hoja3.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(36).Value 'ISR
-                        hoja3.Cell(filaExcel, 5).Value = "" 'INCAPACIDAD, DIAS
-                        hoja3.Cell(filaExcel, 6).Value = "" ' TIPO
-                        hoja3.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(35).Value 'IMPORTE
-                        hoja3.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(41).Value 'PENSION ALIMENTICIA IMPORTE
+                        hoja3.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(42).Value 'PRESTAMO
+                        hoja3.Cell(filaExcel, 6).Value = "" 'INCAPACIDAD, DIAS
+                        hoja3.Cell(filaExcel, 7).Value = "" ' TIPO
+                        hoja3.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(35).Value 'IMPORTE
+                        hoja3.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(41).Value 'PENSION ALIMENTICIA IMPORTE
                         If (dtgD.Rows(x).Cells(38).Value = "") Then
-                            hoja3.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(38).Value ' INFONAVIT IMPORTE
+                            hoja3.Cell(filaExcel, 10).Value = dtgD.Rows(x).Cells(38).Value ' INFONAVIT IMPORTE
                         Else
-                            hoja3.Cell(filaExcel, 9).Value = validateInfonavit(dtgD.Rows(x).Cells(39).Value, dtgD.Rows(x).Cells(38).Value)
+                            hoja3.Cell(filaExcel, 10).Value = validateInfonavit(dtgD.Rows(x).Cells(39).Value, dtgD.Rows(x).Cells(38).Value)
                         End If
-
+                        hoja3.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(43).Value 'Fonacot
 
                         ''Otros Pagos
                         hoja4.Columns("A").Width = 20
