@@ -57,3 +57,6 @@ C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x8
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPensionA.resources
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.Cache
 D:\Escritorio\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
+D:\Escritorio\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmFonacot.resources
+D:\Escritorio\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrestamo.resources
+D:\Escritorio\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmDeudaInfonavit.resources
