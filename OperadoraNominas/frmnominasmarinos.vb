@@ -7474,7 +7474,12 @@ Public Class frmnominasmarinos
 
                             fila.Item("Tipo_Infonavit") = rwDatosEmpleado(0)("cTipoFactor").ToString
                             fila.Item("Valor_Infonavit") = rwDatosEmpleado(0)("fFactor").ToString
-                            fila.Item("Sueldo_Base") = Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("SalarioTMM")) / 2
+                            If Forma.dsReporte.Tables(0).Rows(x)("CodigoPuesto") = 12 Or Forma.dsReporte.Tables(0).Rows(x)("CodigoPuesto") = 39 Then
+                                fila.Item("Sueldo_Base") = Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("SalarioTMM"))
+                            Else
+                                fila.Item("Sueldo_Base") = Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("SalarioTMM")) / 2
+                            End If
+
                             fila.Item("Salario_Diario") = rwDatosEmpleado(0)("fSueldoBase").ToString
                             fila.Item("Salario_Cotización") = rwDatosEmpleado(0)("fSueldoIntegrado").ToString
                             fila.Item("Dias_Trabajados") = Forma.dsReporte.Tables(0).Rows(x)("dias")
@@ -11514,7 +11519,7 @@ Public Class frmnominasmarinos
         Dim PrestamoPerSA As Double
         Dim AdeudoInfonavitA As Double
         Dim DiferenciaInfonavitA As Double
-
+        Dim Fonacot As Double
 
         Alter = True
         Try
@@ -11522,7 +11527,7 @@ Public Class frmnominasmarinos
             SQL = "select departamentos.cNombre,sum(fsalariobase) as salariobase, sum(fOperadora) as Operadora,"
             SQL &= " sum(fRetencionOperadora) as retencion, sum(fComisionOperadora) as Comoperadora,"
             SQL &= " sum(fInfonavit) as infonavit,sum(fInfonavitBanterior) as infonavitanterior, sum(fAjusteInfonavit) as ajusteinfonavit,"
-            SQL &= " sum(fPensionAlimenticia) as pensionalimenticia, sum(fIsr) as ISR,CostoSocial,"
+            SQL &= " sum(fPensionAlimenticia) as pensionalimenticia, sum(fFonacot) as Fonacot, sum(fIsr) as ISR,CostoSocial,"
             SQL &= " sum(fPrestamoPerA) as PrestamoPerSA, sum(fAdeudoInfonavitA) as AdeudoInfonavitA,sum(fDiferenciaInfonavitA) as DiferenciaInfonavitA"
             SQL &= " from (nomina inner join departamentos on nomina.fkiIdDepartamento=departamentos.iIdDepartamento)"
             SQL &= " inner join (select fkiIdDepartamento,sum(fTotalCostoSocial) as CostoSocial"
@@ -11606,9 +11611,11 @@ Public Class frmnominasmarinos
                     ISR = Double.Parse(rwFilas(x)("ISR"))
                     Infonavit = Double.Parse(rwFilas(x)("Infonavit")) + Double.Parse(rwFilas(x)("infonavitanterior")) + Double.Parse(rwFilas(x)("ajusteinfonavit"))
                     Pension = Double.Parse(rwFilas(x)("pensionalimenticia"))
+                    Fonacot = Double.Parse(rwFilas(x)("Fonacot"))
                     costo = Double.Parse(rwFilas(x)("CostoSocial"))
                     comision = Double.Parse(rwFilas(x)("Comoperadora"))
-                    retenciones = ISR + Infonavit + Pension
+                    retenciones = ISR + Infonavit + Pension + Fonacot
+
 
                     PrestamoPerSA = Double.Parse(rwFilas(x)("PrestamoPerSA"))
                     AdeudoInfonavitA = Double.Parse(rwFilas(x)("AdeudoInfonavitA"))
@@ -11617,7 +11624,7 @@ Public Class frmnominasmarinos
 
 
                     sueldoTMM = Double.Parse(rwFilas(x)("salariobase"))
-                    Asimilados = sueldoTMM - Infonavit - Pension - Operadora - PrestamoPerSA - AdeudoInfonavitA - DiferenciaInfonavitA
+                    Asimilados = sueldoTMM - Infonavit - Pension - Fonacot - Operadora - PrestamoPerSA - AdeudoInfonavitA - DiferenciaInfonavitA
                     comisionasimilados = (Asimilados + PrestamoPerSA + AdeudoInfonavitA + DiferenciaInfonavitA) * 0.02
                     
 
@@ -11649,9 +11656,9 @@ Public Class frmnominasmarinos
                     'Comision
                     hoja.Cell(filaExcel + x, 12).Value = comisionasimilados
                     'Subtotal
-                    hoja.Cell(filaExcel + x, 13).Value = Asimilados + comisionasimilados
+                    hoja.Cell(filaExcel + x, 13).Value = Asimilados + comisionasimilados + PrestamoPerSA + AdeudoInfonavitA + DiferenciaInfonavitA
                     'IVA
-                    hoja.Cell(filaExcel + x, 14).Value = Math.Round((Asimilados + comisionasimilados) * 0.16, 2)
+                    hoja.Cell(filaExcel + x, 14).Value = Math.Round((Asimilados + comisionasimilados + PrestamoPerSA + AdeudoInfonavitA + DiferenciaInfonavitA) * 0.16, 2)
                     'TOTAL
                     hoja.Cell(filaExcel + x, 15).FormulaA1 = "=SUM(M" & filaExcel + x & ":N" & filaExcel + x & ")"
 
