@@ -519,9 +519,9 @@ Partial Class frmnominasmarinos
         Me.layoutTimbrado.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.layoutTimbrado.Location = New System.Drawing.Point(12, 514)
         Me.layoutTimbrado.Name = "layoutTimbrado"
-        Me.layoutTimbrado.Size = New System.Drawing.Size(112, 27)
+        Me.layoutTimbrado.Size = New System.Drawing.Size(123, 27)
         Me.layoutTimbrado.TabIndex = 28
-        Me.layoutTimbrado.Text = "Layout Timbrado"
+        Me.layoutTimbrado.Text = "Layout Timbrado SA"
         Me.layoutTimbrado.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.layoutTimbrado.UseVisualStyleBackColor = True
         '
@@ -529,7 +529,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdInfonavit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdInfonavit.Location = New System.Drawing.Point(130, 514)
+        Me.cmdInfonavit.Location = New System.Drawing.Point(324, 514)
         Me.cmdInfonavit.Name = "cmdInfonavit"
         Me.cmdInfonavit.Size = New System.Drawing.Size(112, 27)
         Me.cmdInfonavit.TabIndex = 29
@@ -541,7 +541,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdReporteInfonavit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdReporteInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdReporteInfonavit.Location = New System.Drawing.Point(248, 514)
+        Me.cmdReporteInfonavit.Location = New System.Drawing.Point(442, 514)
         Me.cmdReporteInfonavit.Name = "cmdReporteInfonavit"
         Me.cmdReporteInfonavit.Size = New System.Drawing.Size(99, 27)
         Me.cmdReporteInfonavit.TabIndex = 30
@@ -552,7 +552,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdComision.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdComision.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdComision.Location = New System.Drawing.Point(353, 514)
+        Me.cmdComision.Location = New System.Drawing.Point(547, 514)
         Me.cmdComision.Name = "cmdComision"
         Me.cmdComision.Size = New System.Drawing.Size(99, 27)
         Me.cmdComision.TabIndex = 31
@@ -563,11 +563,11 @@ Partial Class frmnominasmarinos
         '
         Me.btnAsimilados.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnAsimilados.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAsimilados.Location = New System.Drawing.Point(458, 514)
+        Me.btnAsimilados.Location = New System.Drawing.Point(141, 514)
         Me.btnAsimilados.Name = "btnAsimilados"
-        Me.btnAsimilados.Size = New System.Drawing.Size(87, 27)
+        Me.btnAsimilados.Size = New System.Drawing.Size(176, 27)
         Me.btnAsimilados.TabIndex = 32
-        Me.btnAsimilados.Text = "Asimilados"
+        Me.btnAsimilados.Text = "Layout Timbrado Asimilados"
         Me.btnAsimilados.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.btnAsimilados.UseVisualStyleBackColor = True
         '
@@ -575,7 +575,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdInfonavitNominaSerie.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdInfonavitNominaSerie.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(551, 514)
+        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(655, 514)
         Me.cmdInfonavitNominaSerie.Name = "cmdInfonavitNominaSerie"
         Me.cmdInfonavitNominaSerie.Size = New System.Drawing.Size(203, 27)
         Me.cmdInfonavitNominaSerie.TabIndex = 32
