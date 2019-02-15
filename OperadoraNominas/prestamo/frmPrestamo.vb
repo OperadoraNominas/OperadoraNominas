@@ -33,11 +33,8 @@
             lsvHistorial.Items.Clear()
             SQL = "SELECT * FROM Prestamo"
             SQL &= " where fkiIdEmpleado=" & gIdEmpleado
-<<<<<<< HEAD
             SQL &= " ORDER BY iIdPrestamo"
-=======
-            SQL &= " order by iIdPrestamo"
->>>>>>> origin/master
+
             'SQL &= " AND iEstatus=1"
             Dim rwFilas As DataRow() = nConsulta(SQL)
             Dim item As ListViewItem
@@ -126,7 +123,7 @@
                     dtpInicioPago.Value = IIf(lsvHistorial.SelectedItems(0).SubItems(4).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(4).Text)
                     cboEstatus.SelectedIndex = IIf(lsvHistorial.SelectedItems(0).SubItems(1).Tag = "1", 1, 0)
 
-                   
+
                     txtMontoTotal.Enabled = True
                     txtDescuento.Enabled = True
                     cboEstatus.Enabled = True
