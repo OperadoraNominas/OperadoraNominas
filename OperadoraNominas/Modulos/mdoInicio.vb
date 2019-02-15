@@ -90,11 +90,12 @@ Module mdoInicio
             If Not Guardar Then
                 'Servidor.IP = "facturacion.elchingon.net"
                 Servidor.IP = "192.168.1.222"
-                'Servidor.IP = "localhost"            
+                'Servidor.IP = "localhost"
                 Servidor.Nombre = "Equipo1\sqlexpress"
                 Servidor.Base = "OperadoraNominas"
                 'Servidor.Base = "NavigatorNominas"
                 Servidor.User = "sa"
+                'Servidor.PWD = "1123581321"
                 Servidor.PWD = "kiosko2016"
 
             End If

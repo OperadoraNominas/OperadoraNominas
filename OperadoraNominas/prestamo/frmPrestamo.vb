@@ -33,7 +33,11 @@
             lsvHistorial.Items.Clear()
             SQL = "SELECT * FROM Prestamo"
             SQL &= " where fkiIdEmpleado=" & gIdEmpleado
+<<<<<<< HEAD
             SQL &= " ORDER BY iIdPrestamo"
+=======
+            SQL &= " order by iIdPrestamo"
+>>>>>>> origin/master
             'SQL &= " AND iEstatus=1"
             Dim rwFilas As DataRow() = nConsulta(SQL)
             Dim item As ListViewItem
@@ -44,11 +48,14 @@
                     idPrestamo = Fila.Item("iIdPrestamo")
                     iEstatus = Fila.Item("iEstatus")
                     item = lsvHistorial.Items.Add(Fila.Item("iIdPrestamo"))
+
                     item.Tag = Fila.Item("iIdPrestamo")
                     item.SubItems.Add("" & Fila.Item("fechaP restamo"))
                     item.SubItems.Add("" & Fila.Item("montototal"))
                     item.SubItems.Add("" & Fila.Item("descuento"))
                     item.SubItems.Add("" & Fila.Item("fechainiciopago"))
+                    item.SubItems(1).Tag = Fila.Item("iEstatus")
+
                     item.BackColor = IIf(Alter, Color.WhiteSmoke, Color.White)
                     Alter = Not Alter
                     blnNuevo = False
@@ -110,14 +117,14 @@
 
                     'Pasar los datos
 
-                    'idPrestamo = lsvHistorial.SelectedItems(0).Tag
+                    idPrestamo = lsvHistorial.SelectedItems(0).Tag
 
                     dtpFechaPrestamo.Value = lsvHistorial.SelectedItems(0).SubItems(1).Text
 
                     txtMontoTotal.Text = IIf(lsvHistorial.SelectedItems(0).SubItems(2).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(2).Text)
                     txtDescuento.Text = IIf(lsvHistorial.SelectedItems(0).SubItems(3).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(3).Text)
                     dtpInicioPago.Value = IIf(lsvHistorial.SelectedItems(0).SubItems(4).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(4).Text)
-                    cboEstatus.SelectedIndex = IIf(iEstatus = "1", 1, 0)
+                    cboEstatus.SelectedIndex = IIf(lsvHistorial.SelectedItems(0).SubItems(1).Tag = "1", 1, 0)
 
                    
                     txtMontoTotal.Enabled = True
@@ -240,5 +247,9 @@
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub lsvHistorial_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lsvHistorial.SelectedIndexChanged
+
     End Sub
 End Class

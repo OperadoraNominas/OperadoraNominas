@@ -36,18 +36,18 @@ Partial Class frmPrestamo
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.lsvHistorial = New System.Windows.Forms.ListView()
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.cmdDeleted = New System.Windows.Forms.Button()
         Me.cmdcancelar = New System.Windows.Forms.Button()
         Me.cmdnuevo = New System.Windows.Forms.Button()
         Me.cmdsalir = New System.Windows.Forms.Button()
         Me.cmdguardar = New System.Windows.Forms.Button()
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.cmdDeleted = New System.Windows.Forms.Button()
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -176,6 +176,10 @@ Partial Class frmPrestamo
         Me.lsvHistorial.UseCompatibleStateImageBehavior = False
         Me.lsvHistorial.View = System.Windows.Forms.View.Details
         '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "Id"
+        '
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Fecha Prestamo"
@@ -190,6 +194,11 @@ Partial Class frmPrestamo
         '
         Me.ColumnHeader3.Text = "Descuento"
         Me.ColumnHeader3.Width = 171
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Fecha Pago"
+        Me.ColumnHeader4.Width = 129
         '
         'Panel3
         '
@@ -214,6 +223,18 @@ Partial Class frmPrestamo
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(105, 449)
         Me.Panel4.TabIndex = 68
+        '
+        'cmdDeleted
+        '
+        Me.cmdDeleted.Image = CType(resources.GetObject("cmdDeleted.Image"), System.Drawing.Image)
+        Me.cmdDeleted.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.cmdDeleted.Location = New System.Drawing.Point(7, 221)
+        Me.cmdDeleted.Name = "cmdDeleted"
+        Me.cmdDeleted.Size = New System.Drawing.Size(87, 72)
+        Me.cmdDeleted.TabIndex = 41
+        Me.cmdDeleted.Text = "Eliminar"
+        Me.cmdDeleted.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.cmdDeleted.UseVisualStyleBackColor = True
         '
         'cmdcancelar
         '
@@ -263,27 +284,6 @@ Partial Class frmPrestamo
         Me.cmdguardar.Text = "Guardar"
         Me.cmdguardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.cmdguardar.UseVisualStyleBackColor = True
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "Fecha Pago"
-        Me.ColumnHeader4.Width = 129
-        '
-        'cmdDeleted
-        '
-        Me.cmdDeleted.Image = CType(resources.GetObject("cmdDeleted.Image"), System.Drawing.Image)
-        Me.cmdDeleted.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.cmdDeleted.Location = New System.Drawing.Point(7, 221)
-        Me.cmdDeleted.Name = "cmdDeleted"
-        Me.cmdDeleted.Size = New System.Drawing.Size(87, 72)
-        Me.cmdDeleted.TabIndex = 41
-        Me.cmdDeleted.Text = "Eliminar"
-        Me.cmdDeleted.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.cmdDeleted.UseVisualStyleBackColor = True
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Text = "Id"
         '
         'frmPrestamo
         '
