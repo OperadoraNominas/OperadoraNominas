@@ -1,4 +1,4 @@
-﻿Public Class frmPrestamo
+﻿Public Class frmPrestamoSA
     Public gIdEmpresa As String
     Public gIdCliente As String
     Public gIdEmpleado As String
@@ -9,7 +9,7 @@
     Dim blnNuevo As Boolean
     Dim SQL As String
 
-    Private Sub frmPrestamo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmPrestamoSA_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Cargarhistorial()
 
 
@@ -31,9 +31,9 @@
         Dim SQL As String, Alter As Boolean = False
         Try
             lsvHistorial.Items.Clear()
-            SQL = "SELECT * FROM Prestamo"
+            SQL = "SELECT * FROM PrestamoSA"
             SQL &= " where fkiIdEmpleado=" & gIdEmpleado
-            SQL &= " ORDER BY iIdPrestamo"
+            SQL &= " ORDER BY iIdPrestamoSA"
             'SQL &= " AND iEstatus=1"
             Dim rwFilas As DataRow() = nConsulta(SQL)
             Dim item As ListViewItem
@@ -41,11 +41,11 @@
             If rwFilas Is Nothing = False Then
 
                 For Each Fila In rwFilas
-                    idPrestamo = Fila.Item("iIdPrestamo")
+                    idPrestamo = Fila.Item("iIdPrestamoSA")
                     iEstatus = Fila.Item("iEstatus")
-                    item = lsvHistorial.Items.Add(Fila.Item("iIdPrestamo"))
-                    item.Tag = Fila.Item("iIdPrestamo")
-                    item.SubItems.Add("" & Fila.Item("fechaP restamo"))
+                    item = lsvHistorial.Items.Add(Fila.Item("iIdPrestamoSA"))
+                    item.Tag = Fila.Item("iIdPrestamoSA")
+                    item.SubItems.Add("" & Fila.Item("fechaPrestamo"))
                     item.SubItems.Add("" & Fila.Item("montototal"))
                     item.SubItems.Add("" & Fila.Item("descuento"))
                     item.SubItems.Add("" & Fila.Item("fechainiciopago"))
@@ -119,7 +119,7 @@
                     dtpInicioPago.Value = IIf(lsvHistorial.SelectedItems(0).SubItems(4).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(4).Text)
                     cboEstatus.SelectedIndex = IIf(iEstatus = "1", 1, 0)
 
-                   
+
                     txtMontoTotal.Enabled = True
                     txtDescuento.Enabled = True
                     cboEstatus.Enabled = True
@@ -151,7 +151,7 @@
             End If
 
             If blnNuevo = False Then
-                SQL = "EXEC setPrestamoSAActualizar "
+                SQL = "EXEC setPrestamoActualizar "
                 SQL &= idPrestamo & ","
                 SQL &= "'" & txtMontoTotal.Text & "',"
                 SQL &= "'" & txtDescuento.Text & "',"
@@ -162,7 +162,7 @@
 
 
             Else
-                SQL = "EXEC setPrestamoSAInsertar 0,"
+                SQL = "EXEC setPrestamoInsertar 0,"
                 SQL &= "'" & txtMontoTotal.Text & "',"
                 SQL &= "'" & txtDescuento.Text & "',"
                 SQL &= "'" & dtpFechaPrestamo.Value.ToShortDateString & "',"

@@ -141,7 +141,7 @@
             If blnNuevo = False Then
                 SQL = "UPDATE PensionAlimenticia SET "
                 SQL &= "fPorcentaje=" & nudPorcentaje.Value & ","
-                SQL &= "Nombrebeneficiario='" & txtBeneficiario.Text & "', fkiIdBanco=" & fkidbanco & ","
+                SQL &= "Nombrebeneficiario='" & txtBeneficiario.Text & "', fkiIdBanco=" & cbobanco.SelectedValue & ","
                 SQL &= "Clabe='" & txtClabe.Text & "', Cuenta='" & txtCuenta.Text & "',"
                 SQL &= "iEstatus=" & cboEstatus.SelectedIndex
                 SQL &= " WHERE iIdPensionAlimenticia=" & idPension
