@@ -73,6 +73,7 @@ Partial Class frmnominasmarinos
         Me.cmdComision = New System.Windows.Forms.Button()
         Me.btnAsimilados = New System.Windows.Forms.Button()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
+        Me.chkPrestamosAsi = New System.Windows.Forms.CheckBox()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -160,9 +161,10 @@ Partial Class frmnominasmarinos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.chkPrestamosAsi)
         Me.pnlCatalogo.Controls.Add(Me.chkInfonavit0)
         Me.pnlCatalogo.Controls.Add(Me.cmdResumenInfo)
         Me.pnlCatalogo.Controls.Add(Me.cmdSubirDatos)
@@ -198,7 +200,7 @@ Partial Class frmnominasmarinos
         Me.chkInfonavit0.AutoSize = True
         Me.chkInfonavit0.BackColor = System.Drawing.Color.Transparent
         Me.chkInfonavit0.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkInfonavit0.Location = New System.Drawing.Point(172, 36)
+        Me.chkInfonavit0.Location = New System.Drawing.Point(115, 36)
         Me.chkInfonavit0.Name = "chkInfonavit0"
         Me.chkInfonavit0.Size = New System.Drawing.Size(93, 22)
         Me.chkInfonavit0.TabIndex = 27
@@ -320,7 +322,7 @@ Partial Class frmnominasmarinos
         Me.chkAll.AutoSize = True
         Me.chkAll.BackColor = System.Drawing.Color.Transparent
         Me.chkAll.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkAll.Location = New System.Drawing.Point(59, 36)
+        Me.chkAll.Location = New System.Drawing.Point(6, 36)
         Me.chkAll.Name = "chkAll"
         Me.chkAll.Size = New System.Drawing.Size(107, 22)
         Me.chkAll.TabIndex = 15
@@ -413,8 +415,8 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.AllowUserToDeleteRows = False
         Me.dtgDatos.AllowUserToOrderColumns = True
         Me.dtgDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 65)
         Me.dtgDatos.Name = "dtgDatos"
@@ -580,6 +582,18 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavitNominaSerie.Text = "Concentrado INfonavit x nomina"
         Me.cmdInfonavitNominaSerie.UseVisualStyleBackColor = True
         '
+        'chkPrestamosAsi
+        '
+        Me.chkPrestamosAsi.AutoSize = True
+        Me.chkPrestamosAsi.BackColor = System.Drawing.Color.Transparent
+        Me.chkPrestamosAsi.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkPrestamosAsi.Location = New System.Drawing.Point(210, 37)
+        Me.chkPrestamosAsi.Name = "chkPrestamosAsi"
+        Me.chkPrestamosAsi.Size = New System.Drawing.Size(127, 22)
+        Me.chkPrestamosAsi.TabIndex = 28
+        Me.chkPrestamosAsi.Text = "No CAL PRES ASI"
+        Me.chkPrestamosAsi.UseVisualStyleBackColor = False
+        '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -665,5 +679,6 @@ Partial Class frmnominasmarinos
 
     Friend WithEvents chkInfonavit0 As System.Windows.Forms.CheckBox
     Friend WithEvents cmdInfonavitNominaSerie As System.Windows.Forms.Button
+    Friend WithEvents chkPrestamosAsi As System.Windows.Forms.CheckBox
 
 End Class
