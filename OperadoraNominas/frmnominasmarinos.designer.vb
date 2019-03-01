@@ -33,6 +33,7 @@ Partial Class frmnominasmarinos
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.chkPrestamosAsi = New System.Windows.Forms.CheckBox()
         Me.chkInfonavit0 = New System.Windows.Forms.CheckBox()
         Me.cmdResumenInfo = New System.Windows.Forms.Button()
         Me.cmdSubirDatos = New System.Windows.Forms.Button()
@@ -73,7 +74,10 @@ Partial Class frmnominasmarinos
         Me.cmdComision = New System.Windows.Forms.Button()
         Me.btnAsimilados = New System.Windows.Forms.Button()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
-        Me.chkPrestamosAsi = New System.Windows.Forms.CheckBox()
+        Me.NoCalcularPresAsiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ActivaCalculoPresAsiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NoCalcularPresSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ActivarCaluloPresSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -194,6 +198,18 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'chkPrestamosAsi
+        '
+        Me.chkPrestamosAsi.AutoSize = True
+        Me.chkPrestamosAsi.BackColor = System.Drawing.Color.Transparent
+        Me.chkPrestamosAsi.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkPrestamosAsi.Location = New System.Drawing.Point(210, 37)
+        Me.chkPrestamosAsi.Name = "chkPrestamosAsi"
+        Me.chkPrestamosAsi.Size = New System.Drawing.Size(127, 22)
+        Me.chkPrestamosAsi.TabIndex = 28
+        Me.chkPrestamosAsi.Text = "No CAL PRES ASI"
+        Me.chkPrestamosAsi.UseVisualStyleBackColor = False
         '
         'chkInfonavit0
         '
@@ -479,9 +495,9 @@ Partial Class frmnominasmarinos
         '
         'cMenu
         '
-        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem})
+        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPresAsiToolStripMenuItem, Me.ActivaCalculoPresAsiToolStripMenuItem, Me.NoCalcularPresSAToolStripMenuItem, Me.ActivarCaluloPresSAToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(205, 114)
+        Me.cMenu.Size = New System.Drawing.Size(205, 224)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
@@ -582,17 +598,29 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavitNominaSerie.Text = "Concentrado INfonavit x nomina"
         Me.cmdInfonavitNominaSerie.UseVisualStyleBackColor = True
         '
-        'chkPrestamosAsi
+        'NoCalcularPresAsiToolStripMenuItem
         '
-        Me.chkPrestamosAsi.AutoSize = True
-        Me.chkPrestamosAsi.BackColor = System.Drawing.Color.Transparent
-        Me.chkPrestamosAsi.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPrestamosAsi.Location = New System.Drawing.Point(210, 37)
-        Me.chkPrestamosAsi.Name = "chkPrestamosAsi"
-        Me.chkPrestamosAsi.Size = New System.Drawing.Size(127, 22)
-        Me.chkPrestamosAsi.TabIndex = 28
-        Me.chkPrestamosAsi.Text = "No CAL PRES ASI"
-        Me.chkPrestamosAsi.UseVisualStyleBackColor = False
+        Me.NoCalcularPresAsiToolStripMenuItem.Name = "NoCalcularPresAsiToolStripMenuItem"
+        Me.NoCalcularPresAsiToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.NoCalcularPresAsiToolStripMenuItem.Text = "No Calcular Pres Asi"
+        '
+        'ActivaCalculoPresAsiToolStripMenuItem
+        '
+        Me.ActivaCalculoPresAsiToolStripMenuItem.Name = "ActivaCalculoPresAsiToolStripMenuItem"
+        Me.ActivaCalculoPresAsiToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ActivaCalculoPresAsiToolStripMenuItem.Text = "Activa Calculo Pres Asi"
+        '
+        'NoCalcularPresSAToolStripMenuItem
+        '
+        Me.NoCalcularPresSAToolStripMenuItem.Name = "NoCalcularPresSAToolStripMenuItem"
+        Me.NoCalcularPresSAToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.NoCalcularPresSAToolStripMenuItem.Text = "No Calcular Pres SA"
+        '
+        'ActivarCaluloPresSAToolStripMenuItem
+        '
+        Me.ActivarCaluloPresSAToolStripMenuItem.Name = "ActivarCaluloPresSAToolStripMenuItem"
+        Me.ActivarCaluloPresSAToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ActivarCaluloPresSAToolStripMenuItem.Text = "Activar Calulo Pres SA"
         '
         'frmnominasmarinos
         '
@@ -680,5 +708,9 @@ Partial Class frmnominasmarinos
     Friend WithEvents chkInfonavit0 As System.Windows.Forms.CheckBox
     Friend WithEvents cmdInfonavitNominaSerie As System.Windows.Forms.Button
     Friend WithEvents chkPrestamosAsi As System.Windows.Forms.CheckBox
+    Friend WithEvents NoCalcularPresAsiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ActivaCalculoPresAsiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents NoCalcularPresSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ActivarCaluloPresSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

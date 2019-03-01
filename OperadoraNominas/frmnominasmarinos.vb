@@ -1572,6 +1572,20 @@ Public Class frmnominasmarinos
                     Exit Sub
                 End If
 
+
+                sql = " delete from PagoPrestamoSA"
+                sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                sql &= " and iSerie=" & cboserie.SelectedIndex
+                sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+                If nExecute(sql) = False Then
+                    MessageBox.Show("Ocurrio un error borrando fonacot. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    'pnlProgreso.Visible = False
+                    Exit Sub
+                End If
+
+
+
+
                 pnlProgreso.Visible = True
 
                 Application.DoEvents()
@@ -1993,6 +2007,44 @@ Public Class frmnominasmarinos
                     End If
 
 
+                    'GUARDAR PRESTAMO SA
+
+                    If Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value)) > 0 Then
+
+                        sql = "SELECT * FROM prestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
+
+                        Dim rwPrestamoAsiEmpleado As DataRow() = nConsulta(sql)
+                        If rwPrestamoAsiEmpleado Is Nothing = False Then
+                            sql = "EXEC setPagoPrestamoSAInsertar  0"
+                            'iIdPrestamo
+                            sql &= "," & rwPrestamoAsiEmpleado(0)("iIdPrestamoSA")
+                            'fk Periodo
+                            sql &= "," & cboperiodo.SelectedValue
+                            ' fk Empleado
+                            sql &= "," & dtgDatos.Rows(x).Cells(2).Value
+                            'Monto
+                            sql &= "," & dtgDatos.Rows(x).Cells(42).Value
+                            'Serie
+                            sql &= "," & cboserie.SelectedIndex
+                            'Tipo Nomina
+                            sql &= "," & cboTipoNomina.SelectedIndex
+                            'Tipo Pagadora
+                            sql &= ",501"
+                            'Fecha Calculo
+                            sql &= ",'" & Date.Now.ToShortDateString
+                            'iEstatu
+                            sql &= "',1"
+
+                            If nExecute(sql) = False Then
+                                MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                'pnlProgreso.Visible = False
+                                Exit Sub
+                            End If
+                        Else
+                            MessageBox.Show("Existe valor para prestamo asimilados, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End If
+
+                    End If
 
 
                     '########GUARDAR SEGURO INFONAVIT
@@ -2053,9 +2105,17 @@ Public Class frmnominasmarinos
                 pnlCatalogo.Enabled = True
 
                 If cboTipoNomina.SelectedIndex = 0 Then
-                    MessageBox.Show("Datos guardados correctamente, se generara la nomina descanso", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    MessageBox.Show("Datos guardados correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     NominaB()
-                    MessageBox.Show("Nomina Descanso generado, si no hay cambios proceda a guardar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Dim resultado As Integer = MessageBox.Show("¿Desea Calcular la nomina descanso?", "Pregunta", MessageBoxButtons.YesNo)
+                    If resultado = DialogResult.Yes Then
+                        calcular()
+                    End If
+
+
+
+                    'MessageBox.Show("Nomina Descanso generado, si no hay cambios proceda a guardar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Else
                     MessageBox.Show("Datos guardados correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
@@ -2149,21 +2209,25 @@ Public Class frmnominasmarinos
                 'dtgDatos.Rows(x).Cells(15).Value = "0.00"
                 'FONACOT
                 dtgDatos.Rows(x).Cells(43).Value = "0.00"
+                'PRESTAMO SA
+                dtgDatos.Rows(x).Cells(42).Value = "0.00"
                 'Prestamo Personal Asimilado
                 dtgDatos.Rows(x).Cells(47).Value = "0.00"
+
             End If
 
 
 
             
         Next
-        calcular()
+
 
     End Sub
     Private Sub cmdcalcular_Click(sender As Object, e As EventArgs) Handles cmdcalcular.Click
         Dim sql2 As String
         Dim sql3 As String
         Dim sql4 As String
+        Dim sql5 As String
         Try
             Dim sql As String
             sql = "select * from Nomina where fkiIdEmpresa=1 and fkiIdPeriodo=" & cboperiodo.SelectedValue
@@ -2201,7 +2265,9 @@ Public Class frmnominasmarinos
                     sql4 &= " and iSerie=" & cboserie.SelectedIndex
 
 
-
+                    sql5 = " delete from PagoPrestamoSA"
+                    sql5 &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql5 &= " and iSerie=" & cboserie.SelectedIndex
 
 
 
@@ -2246,6 +2312,11 @@ Public Class frmnominasmarinos
                     sql4 &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                     sql4 &= " and iSerie=" & cboserie.SelectedIndex
                     sql4 &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+
+                    sql5 = " delete from PagoPrestamoSA"
+                    sql5 &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql5 &= " and iSerie=" & cboserie.SelectedIndex
+                    sql5 &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
                 End If
 
 
@@ -2268,6 +2339,12 @@ Public Class frmnominasmarinos
                 End If
 
                 If nExecute(sql4) = False Then
+                    MessageBox.Show("Ocurrio un error borrando prestamo asimilados ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    'pnlProgreso.Visible = False
+                    Exit Sub
+                End If
+
+                If nExecute(sql5) = False Then
                     MessageBox.Show("Ocurrio un error borrando prestamo asimilados ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                     'pnlProgreso.Visible = False
                     Exit Sub
@@ -2303,6 +2380,7 @@ Public Class frmnominasmarinos
         Dim RetencionOperadora As Double
         Dim InfonavitNormal As Double
         Dim PrestamoPersonalAsimilados As Double
+        Dim PrestamoPersonalSA As Double
         Dim AdeudoINfonavitAsimilados As Double
         Dim DiferenciaInfonavitAsimilados As Double
         Dim PensionAlimenticia As Double
@@ -3048,7 +3126,7 @@ Public Class frmnominasmarinos
                         infonavitanterior = Double.Parse(IIf(dtgDatos.Rows(x).Cells(39).Value = "", "0", dtgDatos.Rows(x).Cells(39).Value))
                         ajusteinfonavit = Double.Parse(IIf(dtgDatos.Rows(x).Cells(40).Value = "", "0", dtgDatos.Rows(x).Cells(40).Value))
 
-                        prestamo = Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value))
+
 
                         'CALCULAR FONACOT
 
@@ -3065,7 +3143,7 @@ Public Class frmnominasmarinos
                                     Dim FaltanteFonacot As Double
                                     FaltanteFonacot = Double.Parse(rwFonacotEmpleado(0)("ImporteMensual")) - Double.Parse(rwExistePagofonacot(0)("monto"))
                                     'ver si se puede descontar todo o solo una parte
-                                    fonacot = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - prestamo
+                                    fonacot = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit
 
                                     If fonacot >= FaltanteFonacot Then
                                         dtgDatos.Rows(x).Cells(43).Value = Math.Round(FaltanteFonacot, 2)
@@ -3125,6 +3203,94 @@ Public Class frmnominasmarinos
 
                         'INFONAVIT BIMESTRE ANTERIOR
                         'AJUSTE INFONAVIT
+
+                        'PRESTAMO
+                        If dtgDatos.Rows(x).Cells(3).Tag = "" Then
+                            sql = "SELECT * FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
+
+                            Dim rwPrestamoSAEmpleado As DataRow() = nConsulta(sql)
+                            If rwPrestamoSAEmpleado Is Nothing = False Then
+                                'ya existe el pago
+                                sql = "select isnull(sum(monto),0) as monto from PagoPrestamoSA where fkiIdPrestamoSA=" & rwPrestamoSAEmpleado(0)("iIdPrestamoSA")
+                                Dim rwMontoPrestamoSA As DataRow() = nConsulta(sql)
+                                If rwMontoPrestamoSA Is Nothing = False Then
+                                    If Double.Parse(rwPrestamoSAEmpleado(0)("montototal")) > Double.Parse(rwMontoPrestamoSA(0)("monto")) Then
+                                        'falta general hay que verificar el pago en el mes
+
+                                        sql = "select isnull(sum(monto),0) as monto from PagoPrestamoSA where fkiIdPrestamoSA=" & rwPrestamoSAEmpleado(0)("iIdPrestamoSA") & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                        Dim rwMontoPrestamoMensualSA As DataRow() = nConsulta(sql)
+                                        If rwMontoPrestamoMensualSA Is Nothing = False Then
+                                            If Double.Parse(rwPrestamoSAEmpleado(0)("descuento")) > Double.Parse(rwMontoPrestamoMensualSA(0)("monto")) Then
+                                                Dim FaltantePagoMes As Double
+                                                FaltantePagoMes = Double.Parse(rwPrestamoSAEmpleado(0)("descuento")) - Double.Parse(rwMontoPrestamoMensualSA(0)("monto"))
+                                                'ver si se puede descontar todo o solo una parte
+                                                PrestamoPersonalSA = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - fonacot + subsidioaplicado, 2)
+
+                                                If PrestamoPersonalSA >= FaltantePagoMes Then
+                                                    dtgDatos.Rows(x).Cells(42).Value = Math.Round(FaltantePagoMes, 2)
+                                                Else
+                                                    dtgDatos.Rows(x).Cells(42).Value = Math.Round(PrestamoPersonalSA, 2)
+
+                                                End If
+                                                'guardar el detalle del pago para que no se duplique o solo se le reste lo faltante en un trbajador si es que aparece doble
+
+                                                If Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value)) > 0 Then
+
+                                                    'Dim MontoInfonavit As Double = MontoInfonavitF(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
+
+                                                    sql = "EXEC setPagoPrestamoSAInsertar  0"
+                                                    'iIdPrestamo
+                                                    sql &= "," & rwPrestamoSAEmpleado(0)("iIdPrestamoSA")
+                                                    'fk Periodo
+                                                    sql &= "," & cboperiodo.SelectedValue
+                                                    ' fk Empleado
+                                                    sql &= "," & dtgDatos.Rows(x).Cells(2).Value
+                                                    'Monto
+                                                    sql &= "," & dtgDatos.Rows(x).Cells(42).Value
+                                                    'Serie
+                                                    sql &= "," & cboserie.SelectedIndex
+                                                    'Tipo Nomina
+                                                    sql &= "," & cboTipoNomina.SelectedIndex
+                                                    'Tipo Pagadora
+                                                    sql &= ",501"
+                                                    'Fecha Calculo
+                                                    sql &= ",'" & Date.Now.ToShortDateString
+                                                    'iEstatu
+                                                    sql &= "',1"
+
+                                                    If nExecute(sql) = False Then
+                                                        MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                                        'pnlProgreso.Visible = False
+                                                        Exit Sub
+                                                    End If
+                                                End If
+                                            Else
+                                                dtgDatos.Rows(x).Cells(42).Value = "0.00"
+                                            End If
+                                        End If
+
+
+
+
+                                    Else
+                                        'Pago completo
+                                        'hay que volver el prestamo a Estatus=0 para inactivarlo
+
+
+                                        dtgDatos.Rows(x).Cells(42).Value = "0.00"
+                                    End If
+                                Else
+                                    dtgDatos.Rows(x).Cells(42).Value = "0.00"
+                                End If
+
+                            Else
+                                dtgDatos.Rows(x).Cells(42).Value = "0.00"
+                            End If
+                        End If
+                        
+
+                        prestamo = Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value))
+
                         'PENSION
                         PensionAlimenticia = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - prestamo - fonacot + subsidioaplicado
                         'Buscamos la Pension
@@ -3189,8 +3355,9 @@ Public Class frmnominasmarinos
                         End If
 
 
-                        'PRESTAMO
-                        'FONACOT
+                        
+
+
 
                         'NETO
 
@@ -3211,83 +3378,91 @@ Public Class frmnominasmarinos
 
                 'Prestamo Personal Asimilado
 
-                sql = "SELECT * FROM prestamo WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
+                If dtgDatos.Rows(x).Cells(2).Tag = "" Then
+                    sql = "SELECT * FROM prestamo WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
 
-                Dim rwPrestamoAsiEmpleado As DataRow() = nConsulta(sql)
-                If rwPrestamoAsiEmpleado Is Nothing = False Then
-                    'ya existe el pago
-                    sql = "select isnull(sum(monto),0) as monto from pagoprestamo where fkiIdPrestamo=" & rwPrestamoAsiEmpleado(0)("iIdPrestamo")
-                    Dim rwMontoPrestamo As DataRow() = nConsulta(sql)
-                    If rwMontoPrestamo Is Nothing = False Then
-                        If Double.Parse(rwPrestamoAsiEmpleado(0)("montototal")) > Double.Parse(rwMontoPrestamo(0)("monto")) Then
-                            'falta general hay que verificar el pago en el mes
+                    Dim rwPrestamoAsiEmpleado As DataRow() = nConsulta(sql)
+                    If rwPrestamoAsiEmpleado Is Nothing = False Then
+                        'ya existe el pago
+                        sql = "select isnull(sum(monto),0) as monto from pagoprestamo where fkiIdPrestamo=" & rwPrestamoAsiEmpleado(0)("iIdPrestamo")
+                        Dim rwMontoPrestamo As DataRow() = nConsulta(sql)
+                        If rwMontoPrestamo Is Nothing = False Then
+                            If Double.Parse(rwPrestamoAsiEmpleado(0)("montototal")) > Double.Parse(rwMontoPrestamo(0)("monto")) Then
+                                'falta general hay que verificar el pago en el mes
 
-                            sql = "select isnull(sum(monto),0) as monto from pagoprestamo where fkiIdPrestamo=" & rwPrestamoAsiEmpleado(0)("iIdPrestamo") & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
-                            Dim rwMontoPrestamoMensual As DataRow() = nConsulta(sql)
-                            If rwMontoPrestamoMensual Is Nothing = False Then
-                                If Double.Parse(rwPrestamoAsiEmpleado(0)("descuento")) > Double.Parse(rwMontoPrestamoMensual(0)("monto")) Then
-                                    Dim FaltantePagoMes As Double
-                                    FaltantePagoMes = Double.Parse(rwPrestamoAsiEmpleado(0)("descuento")) - Double.Parse(rwMontoPrestamoMensual(0)("monto"))
-                                    'ver si se puede descontar todo o solo una parte
-                                    PrestamoPersonalAsimilados = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot, 2)
+                                sql = "select isnull(sum(monto),0) as monto from pagoprestamo where fkiIdPrestamo=" & rwPrestamoAsiEmpleado(0)("iIdPrestamo") & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                Dim rwMontoPrestamoMensual As DataRow() = nConsulta(sql)
+                                If rwMontoPrestamoMensual Is Nothing = False Then
+                                    If Double.Parse(rwPrestamoAsiEmpleado(0)("descuento")) > Double.Parse(rwMontoPrestamoMensual(0)("monto")) Then
+                                        Dim FaltantePagoMes As Double
+                                        FaltantePagoMes = Double.Parse(rwPrestamoAsiEmpleado(0)("descuento")) - Double.Parse(rwMontoPrestamoMensual(0)("monto"))
+                                        'ver si se puede descontar todo o solo una parte
+                                        PrestamoPersonalAsimilados = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot, 2)
 
-                                    If PrestamoPersonalAsimilados >= FaltantePagoMes Then
-                                        dtgDatos.Rows(x).Cells(47).Value = Math.Round(FaltantePagoMes, 2)
-                                    Else
-                                        dtgDatos.Rows(x).Cells(47).Value = Math.Round(PrestamoPersonalAsimilados, 2)
+                                        If PrestamoPersonalAsimilados >= FaltantePagoMes Then
+                                            dtgDatos.Rows(x).Cells(47).Value = Math.Round(FaltantePagoMes, 2)
+                                        Else
+                                            dtgDatos.Rows(x).Cells(47).Value = Math.Round(PrestamoPersonalAsimilados, 2)
 
-                                    End If
-                                    'guardar el detalle del pago para que no se duplique o solo se le reste lo faltante en un trbajador si es que aparece doble
-
-                                    If Double.Parse(IIf(dtgDatos.Rows(x).Cells(47).Value = "", "0", dtgDatos.Rows(x).Cells(47).Value)) > 0 Then
-
-                                        'Dim MontoInfonavit As Double = MontoInfonavitF(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
-
-                                        sql = "EXEC setPagoPrestamoInsertar  0"
-                                        'iIdPrestamo
-                                        sql &= "," & rwPrestamoAsiEmpleado(0)("iIdPrestamo")
-                                        'fk Periodo
-                                        sql &= "," & cboperiodo.SelectedValue
-                                        ' fk Empleado
-                                        sql &= "," & dtgDatos.Rows(x).Cells(2).Value
-                                        'Monto
-                                        sql &= "," & dtgDatos.Rows(x).Cells(47).Value
-                                        'Serie
-                                        sql &= "," & cboserie.SelectedIndex
-                                        'Tipo Nomina
-                                        sql &= "," & cboTipoNomina.SelectedIndex
-                                        'Tipo Pagadora
-                                        sql &= ",501"
-                                        'Fecha Calculo
-                                        sql &= ",'" & Date.Now.ToShortDateString
-                                        'iEstatu
-                                        sql &= "',1"
-
-                                        If nExecute(sql) = False Then
-                                            MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                                            'pnlProgreso.Visible = False
-                                            Exit Sub
                                         End If
+                                        'guardar el detalle del pago para que no se duplique o solo se le reste lo faltante en un trbajador si es que aparece doble
+
+                                        If Double.Parse(IIf(dtgDatos.Rows(x).Cells(47).Value = "", "0", dtgDatos.Rows(x).Cells(47).Value)) > 0 Then
+
+                                            'Dim MontoInfonavit As Double = MontoInfonavitF(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
+
+                                            sql = "EXEC setPagoPrestamoInsertar  0"
+                                            'iIdPrestamo
+                                            sql &= "," & rwPrestamoAsiEmpleado(0)("iIdPrestamo")
+                                            'fk Periodo
+                                            sql &= "," & cboperiodo.SelectedValue
+                                            ' fk Empleado
+                                            sql &= "," & dtgDatos.Rows(x).Cells(2).Value
+                                            'Monto
+                                            sql &= "," & dtgDatos.Rows(x).Cells(47).Value
+                                            'Serie
+                                            sql &= "," & cboserie.SelectedIndex
+                                            'Tipo Nomina
+                                            sql &= "," & cboTipoNomina.SelectedIndex
+                                            'Tipo Pagadora
+                                            sql &= ",501"
+                                            'Fecha Calculo
+                                            sql &= ",'" & Date.Now.ToShortDateString
+                                            'iEstatu
+                                            sql &= "',1"
+
+                                            If nExecute(sql) = False Then
+                                                MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                                'pnlProgreso.Visible = False
+                                                Exit Sub
+                                            End If
+                                        End If
+                                    Else
+                                        dtgDatos.Rows(x).Cells(47).Value = "0.00"
                                     End If
-                                Else
-                                    dtgDatos.Rows(x).Cells(47).Value = "0.00"
                                 End If
+
+
+
+
+                            Else
+                                'Pago completo
+                                'hay que volver el prestamo a Estatus=0 para inactivarlo
+
+
+                                dtgDatos.Rows(x).Cells(47).Value = "0.00"
                             End If
-
-
-                            
-
                         Else
-                            'Pago completo
                             dtgDatos.Rows(x).Cells(47).Value = "0.00"
                         End If
+
                     Else
                         dtgDatos.Rows(x).Cells(47).Value = "0.00"
                     End If
-
-                Else
-                    dtgDatos.Rows(x).Cells(47).Value = "0.00"
                 End If
+
+
+                
 
 
                 PrestamoPersonalAsimilados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(47).Value = "", "0", dtgDatos.Rows(x).Cells(47).Value))
@@ -3367,7 +3542,7 @@ Public Class frmnominasmarinos
                     End If
                 End If
 
-                
+
 
                 'TOTAL COSTO SOCIAL
                 CostoSocialTotal = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
@@ -12314,6 +12489,37 @@ Public Class frmnominasmarinos
     End Function
     
    
+    Private Sub NoCalcularPresAsiToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles NoCalcularPresAsiToolStripMenuItem.Click
+        Try
+            Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
+            iFila.Cells(2).Tag = "1"
+            iFila.Cells(2).Style.BackColor = Color.Green
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub ActivaCalculoPresAsiToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ActivaCalculoPresAsiToolStripMenuItem.Click
+        Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
+        iFila.Cells(2).Tag = ""
+        iFila.Cells(2).Style.BackColor = Color.White
+    End Sub
+
+    Private Sub NoCalcularPresSAToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles NoCalcularPresSAToolStripMenuItem.Click
+        Try
+            Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
+            iFila.Cells(3).Tag = "1"
+            iFila.Cells(3).Style.BackColor = Color.Blue
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub ActivarCaluloPresSAToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ActivarCaluloPresSAToolStripMenuItem.Click
+        Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
+        iFila.Cells(3).Tag = ""
+        iFila.Cells(3).Style.BackColor = Color.White
+    End Sub
 End Class
 
 
