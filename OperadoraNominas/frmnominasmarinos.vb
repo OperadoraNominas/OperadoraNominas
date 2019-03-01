@@ -4644,7 +4644,7 @@ Public Class frmnominasmarinos
 
             Dim filaExcel As Integer = 0
             Dim dialogo As New SaveFileDialog()
-            Dim periodo, fechadepago As String
+            Dim periodo, fechadepago, iejercicio As String
             Dim mes As String
             Dim fechapagoletra() As String
             Dim cedros, jose, miramar, grande, montserrat, blanca, isla, ciari, janitzio, gabriel, amarrados, arboleda, azteca, diego, ignacio, luis, cruz, verde As Double
@@ -4654,7 +4654,8 @@ Public Class frmnominasmarinos
                 Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
                 If rwPeriodo0 Is Nothing = False Then
 
-                    periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper '& " DE " & (rwPeriodo0(0).Item("iEjercicio"))
+                    periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+                    iejercicio = (rwPeriodo0(0).Item("iEjercicio"))
                     mes = rwPeriodo0(0).Item("iMes")
                     fechapagoletra = rwPeriodo0(0).Item("dFechaFin").ToLongDateString().ToString.Split(" ")
                     fechadepago = rwPeriodo0(0).Item("dFechaFin")
@@ -4753,7 +4754,7 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel + x, 13).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value * 2) ' TOTAL AGUINALDO
                             hoja2.Cell(filaExcel + x, 14).Value = CDbl(dtgDatos.Rows(x).Cells(32).Value * 2) ' TOTAL P. VACACIONAL
                             hoja2.Cell(filaExcel + x, 15).Value = CDbl(dtgDatos.Rows(x).Cells(33).Value * 2) ' TOAL PERCEPCIONES
-
+                           
                             ' hoja2.Cell(filaExcel + x, 16).Value =IIf(CDbl(dtgDatos.Rows(x).Cells(50).Value) < 0, CDbl((dtgDatos.Rows(x).Cells(50).Value * 2) * -1), CDbl((dtgDatos.Rows(x).Cells(50).Value * 2))) ' COMPLEMENTO ASIM
                             Dim complementoAsim As Double = CDbl(dtgDatos.Rows(x).Cells(50).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "Asimilado")) ' COMPLEMENTO ASIM
                             hoja2.Cell(filaExcel + x, 16).Value = complementoAsim
@@ -4923,6 +4924,10 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel + x, 14).Value = CDbl(dtgDatos.Rows(x).Cells(32).Value * 2) ' TOTAL P. VACACIONAL
                             hoja2.Cell(filaExcel + x, 15).Value = CDbl(dtgDatos.Rows(x).Cells(33).Value * 2) ' TOAL PERCEPCIONES
                             ' hoja2.Cell(filaExcel + x, 16).Value =IIf(CDbl(dtgDatos.Rows(x).Cells(50).Value) < 0, CDbl((dtgDatos.Rows(x).Cells(50).Value * 2) * -1), CDbl((dtgDatos.Rows(x).Cells(50).Value * 2))) ' COMPLEMENTO ASIM
+                            'If dtgDatos.Rows(x).Cells(12).FormattedValue = "ISLA BLANCA" Then
+                            '    MessageBox.Show("ISLA BLANCA", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            'End If
+
                             Dim complementoAsim As Double = CDbl(dtgDatos.Rows(x).Cells(50).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "Asimilado")) ' COMPLEMENTO ASIM
                             hoja2.Cell(filaExcel + x, 16).Value = complementoAsim
                             If dtgDatos.Rows(x).Cells(53).Value <> "" Then
@@ -5400,8 +5405,12 @@ Public Class frmnominasmarinos
                 Dim month As Integer = moment.Month
                 Dim year As Integer = moment.Year
 
+                Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
 
-                dialogo.FileName = "Reporte " + periodo.ToUpper & " " & cboserie.SelectedItem
+
+
+
+                dialogo.FileName = "REPORTE " & rwUsuario(0).Item("Nombre").ToUpper & " " & periodo.ToUpper & " " & iejercicio & " SERIE " & cboserie.SelectedItem
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
 
@@ -8073,7 +8082,7 @@ Public Class frmnominasmarinos
                 Dim total As Integer = dtgDatos.Rows.Count - 1
                 Dim filatmp As Integer = 13 - 4
                 Dim filatmp2 As Integer = filaExcel
-                Dim fecha As String
+                Dim fecha, iejercicio As String
                 Dim descAsim As String
                 Dim amarrados, arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, luis, ignacio, gabriel, diego, jose, grande, creciente, colorada, subsea88 As Integer
                 Dim passavera, margot As Integer
@@ -8093,6 +8102,7 @@ Public Class frmnominasmarinos
                 If rwPeriodo0 Is Nothing = False Then
                     periodo = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " DE " & (rwPeriodo0(0).Item("iEjercicio"))
                     fecha = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+                    iejercicio = rwPeriodo0(0).Item("iEjercicio")
                     hoja.Cell(10, 2).Style.Font.SetBold(True)
                     hoja.Cell(10, 2).Style.NumberFormat.Format = "@"
                     hoja.Cell(10, 2).Value = periodo
@@ -9703,14 +9713,17 @@ Public Class frmnominasmarinos
 
 
                 'Titulo
-                Dim moment As Date = Date.Now()
-                Dim month As Integer = moment.Month
-                Dim year As Integer = moment.Year
+                'Dim moment As Date = Date.Now()
+                'Dim month As Integer = moment.Month
+                'Dim year As Integer = moment.Year
 
                 pnlProgreso.Visible = False
                 pnlCatalogo.Enabled = True
 
-                dialogo.FileName = "TMM " + fecha + " " + year.ToString
+                Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
+
+
+                dialogo.FileName = "TMM " & rwUsuario(0).Item("Nombre").ToUpper & " " & fecha & " " & iejercicio & " SERIE " & cboserie.SelectedItem
                 dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 ''  dialogo.ShowDialog()
 
@@ -12223,12 +12236,14 @@ Public Class frmnominasmarinos
                 'limpiar
                 recorrerFilasColumnas(hoja, filaExcel, dtgD.Rows.Count + 50, 50, "clear")
 
-                hoja.Range(2, 1, dtgD.Rows.Count, 11).Style.Font.FontSize = 10
-                hoja.Range(2, 1, dtgD.Rows.Count, 11).Style.Font.SetBold(True)
-                hoja.Range(2, 1, dtgD.Rows.Count, 11).Style.Alignment.WrapText = True
-                hoja.Range(2, 1, dtgD.Rows.Count, 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-                hoja.Range(2, 1, dtgD.Rows.Count, 11).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
-                hoja.Range(2, 1, dtgD.Rows.Count, 11).Style.NumberFormat.Format = "@"
+                hoja.Range(2, 1, dtgD.Rows.Count + 1, 11).Style.Font.FontSize = 10
+                hoja.Range(2, 1, dtgD.Rows.Count + 1, 11).Style.Font.SetBold(True)
+                hoja.Range(2, 1, dtgD.Rows.Count + 1, 11).Style.Alignment.WrapText = True
+                hoja.Range(2, 1, dtgD.Rows.Count + 1, 11).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+                hoja.Range(2, 1, dtgD.Rows.Count + 1, 11).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+                hoja.Range(2, 5, dtgD.Rows.Count + 1, 5).Style.NumberFormat.Format = "@"
+                hoja.Range(2, 7, dtgD.Rows.Count + 1, 11).Style.NumberFormat.Format = "@"
+
 
                 If cboTipoNomina.SelectedIndex = 1 Then
                     TipoNomina = "0"
@@ -12240,37 +12255,41 @@ Public Class frmnominasmarinos
 
                 For x As Integer = 0 To dtgD.Rows.Count - 1
 
-                    Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgD.Rows(x).Cells(3).Value)
-                    If empleado Is Nothing = False Then
-                        nombrecompleto = empleado(0).Item("cNombre") & " " & empleado(0).Item("cApellidoP") & " " & empleado(0).Item("cApellidoM")
-                        app = empleado(0).Item("cApellidoP")
-                        apm = empleado(0).Item("cApellidoM")
-                        nom = empleado(0).Item("cNombre")
-                        clabe = empleado(0).Item("Clabe")
-                        cuenta = empleado(0).Item("NumCuenta")
-                        Dim bank As DataRow() = nConsulta("select * from bancos where iIdBanco =" & empleado(0).Item("fkiIdBanco"))
-                        If bank Is Nothing = False Then
-                            banco = bank(0).Item("cBANCO")
+                    If (dtgD.Rows(x).Cells(3).Value Is Nothing = False) Then
+
+
+                        Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgD.Rows(x).Cells(3).Value)
+                        If empleado Is Nothing = False Then
+                            nombrecompleto = empleado(0).Item("cNombre") & " " & empleado(0).Item("cApellidoP") & " " & empleado(0).Item("cApellidoM")
+                            app = empleado(0).Item("cApellidoP")
+                            apm = empleado(0).Item("cApellidoM")
+                            nom = empleado(0).Item("cNombre")
+                            clabe = empleado(0).Item("Clabe")
+                            cuenta = empleado(0).Item("NumCuenta")
+                            Dim bank As DataRow() = nConsulta("select * from bancos where iIdBanco =" & empleado(0).Item("fkiIdBanco"))
+                            If bank Is Nothing = False Then
+                                banco = IIf(bank(0).Item("cBANCO") = "BBVA BANCOMER", "BANCOMER", IIf(bank(0).Item("cBANCO") = "AZTECA", "BANCO AZTECA", bank(0).Item("cBANCO")))
+                            End If
                         End If
+
+
+                        hoja.Cell(filaExcel + x, 1).Value = app 'Paterno
+                        hoja.Cell(filaExcel + x, 2).Value = apm 'Materno
+                        hoja.Cell(filaExcel + x, 3).Value = nom 'Nombre
+                        If dtgD.Rows(x).Cells(50).Value < 1 Then
+                            hoja.Cell(filaExcel + x, 4).Value = 0.0
+                        Else
+                            hoja.Cell(filaExcel + x, 4).Value = dtgD.Rows(x).Cells(50).Value + getsueldoordinario(cboTipoNomina.SelectedIndex, dtgD.Rows(x).Cells(3).Value, dtgD.Rows(x).Cells(18).Value, "Asimilado") ' asimilados
+                        End If
+
+                        hoja.Cell(filaExcel + x, 5).Value = dtgD.Rows(x).Cells(8).Value
+                        hoja.Cell(filaExcel + x, 6).Value = dtgD.Rows(x).Cells(18).Value ' Dias Trabjados
+                        hoja.Cell(filaExcel + x, 7).Value = banco ' Banco
+                        hoja.Cell(filaExcel + x, 8).Value = clabe ' Clabe
+                        hoja.Cell(filaExcel + x, 9).Value = cuenta ' Cuenta
+                        hoja.Cell(filaExcel + x, 10).Value = dtgD.Rows(x).Cells(7).Value 'Curp   
+                        hoja.Cell(filaExcel + x, 11).Value = dtgD.Rows(x).Cells(6).Value ' rfc
                     End If
-
-                    hoja.Cell(filaExcel + x, 1).Value = app 'Paterno
-                    hoja.Cell(filaExcel + x, 2).Value = apm 'Materno
-                    hoja.Cell(filaExcel + x, 3).Value = nom 'Nombre
-                    If dtgD.Rows(x).Cells(50).Value < 1 Then
-                        hoja.Cell(filaExcel + x, 4).Value = 0.0
-                    Else
-                        hoja.Cell(filaExcel + x, 4).Value = dtgD.Rows(x).Cells(50).Value + getsueldoordinario(cboTipoNomina.SelectedIndex, dtgD.Rows(x).Cells(3).Value, dtgD.Rows(x).Cells(18).Value, "Asimilado") ' asimilados
-                    End If
-
-                    hoja.Cell(filaExcel + x, 5).Value = dtgD.Rows(x).Cells(8).Value
-                    hoja.Cell(filaExcel + x, 6).Value = dtgD.Rows(x).Cells(18).Value ' Dias Trabjados
-                    hoja.Cell(filaExcel + x, 7).Value = banco ' Banco
-                    hoja.Cell(filaExcel + x, 8).Value = clabe ' Clabe
-                    hoja.Cell(filaExcel + x, 9).Value = cuenta ' Cuenta
-                    hoja.Cell(filaExcel + x, 10).Value = dtgD.Rows(x).Cells(7).Value 'Curp   
-                    hoja.Cell(filaExcel + x, 11).Value = dtgD.Rows(x).Cells(6).Value ' rfc
-
                 Next x
 
                 'dialogo.FileName = "ASIMILADOS SIMPLE "

@@ -47,7 +47,7 @@
                     item = lsvHistorial.Items.Add(Fila.Item("iIdPrestamo"))
 
                     item.Tag = Fila.Item("iIdPrestamo")
-                    item.SubItems.Add("" & Fila.Item("fechaP restamo"))
+                    item.SubItems.Add("" & Fila.Item("fechaPrestamo"))
                     item.SubItems.Add("" & Fila.Item("montototal"))
                     item.SubItems.Add("" & Fila.Item("descuento"))
                     item.SubItems.Add("" & Fila.Item("fechainiciopago"))
@@ -155,7 +155,7 @@
             End If
 
             If blnNuevo = False Then
-                SQL = "EXEC setPrestamoSAActualizar "
+                SQL = "EXEC setPrestamoActualizar "
                 SQL &= idPrestamo & ","
                 SQL &= "'" & txtMontoTotal.Text & "',"
                 SQL &= "'" & txtDescuento.Text & "',"
@@ -166,7 +166,7 @@
 
 
             Else
-                SQL = "EXEC setPrestamoSAInsertar 0,"
+                SQL = "EXEC setPrestamoInsertar 0,"
                 SQL &= "'" & txtMontoTotal.Text & "',"
                 SQL &= "'" & txtDescuento.Text & "',"
                 SQL &= "'" & dtpFechaPrestamo.Value.ToShortDateString & "',"
