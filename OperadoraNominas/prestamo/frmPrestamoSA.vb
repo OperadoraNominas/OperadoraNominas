@@ -151,7 +151,7 @@
             End If
 
             If blnNuevo = False Then
-                SQL = "EXEC setPrestamoActualizar "
+                SQL = "EXEC setPrestamoSAActualizar "
                 SQL &= idPrestamo & ","
                 SQL &= "'" & txtMontoTotal.Text & "',"
                 SQL &= "'" & txtDescuento.Text & "',"
@@ -162,7 +162,7 @@
 
 
             Else
-                SQL = "EXEC setPrestamoInsertar 0,"
+                SQL = "EXEC setPrestamoSAInsertar 0,"
                 SQL &= "'" & txtMontoTotal.Text & "',"
                 SQL &= "'" & txtDescuento.Text & "',"
                 SQL &= "'" & dtpFechaPrestamo.Value.ToShortDateString & "',"
