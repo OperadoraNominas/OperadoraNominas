@@ -68,16 +68,17 @@ Partial Class frmnominasmarinos
         Me.EditarEmpleadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NoCalcularInofnavitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ActicarCalculoInfonavitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NoCalcularPresAsiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ActivaCalculoPresAsiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NoCalcularPresSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ActivarCaluloPresSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.layoutTimbrado = New System.Windows.Forms.Button()
         Me.cmdInfonavit = New System.Windows.Forms.Button()
         Me.cmdReporteInfonavit = New System.Windows.Forms.Button()
         Me.cmdComision = New System.Windows.Forms.Button()
         Me.btnAsimilados = New System.Windows.Forms.Button()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
-        Me.NoCalcularPresAsiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ActivaCalculoPresAsiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NoCalcularPresSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ActivarCaluloPresSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -497,7 +498,7 @@ Partial Class frmnominasmarinos
         '
         Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPresAsiToolStripMenuItem, Me.ActivaCalculoPresAsiToolStripMenuItem, Me.NoCalcularPresSAToolStripMenuItem, Me.ActivarCaluloPresSAToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(205, 224)
+        Me.cMenu.Size = New System.Drawing.Size(205, 202)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
@@ -528,6 +529,30 @@ Partial Class frmnominasmarinos
         Me.ActicarCalculoInfonavitToolStripMenuItem.Name = "ActicarCalculoInfonavitToolStripMenuItem"
         Me.ActicarCalculoInfonavitToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
         Me.ActicarCalculoInfonavitToolStripMenuItem.Text = "Activar Calculo Infonavit"
+        '
+        'NoCalcularPresAsiToolStripMenuItem
+        '
+        Me.NoCalcularPresAsiToolStripMenuItem.Name = "NoCalcularPresAsiToolStripMenuItem"
+        Me.NoCalcularPresAsiToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.NoCalcularPresAsiToolStripMenuItem.Text = "No Calcular Pres Asi"
+        '
+        'ActivaCalculoPresAsiToolStripMenuItem
+        '
+        Me.ActivaCalculoPresAsiToolStripMenuItem.Name = "ActivaCalculoPresAsiToolStripMenuItem"
+        Me.ActivaCalculoPresAsiToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ActivaCalculoPresAsiToolStripMenuItem.Text = "Activa Calculo Pres Asi"
+        '
+        'NoCalcularPresSAToolStripMenuItem
+        '
+        Me.NoCalcularPresSAToolStripMenuItem.Name = "NoCalcularPresSAToolStripMenuItem"
+        Me.NoCalcularPresSAToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.NoCalcularPresSAToolStripMenuItem.Text = "No Calcular Pres SA"
+        '
+        'ActivarCaluloPresSAToolStripMenuItem
+        '
+        Me.ActivarCaluloPresSAToolStripMenuItem.Name = "ActivarCaluloPresSAToolStripMenuItem"
+        Me.ActivarCaluloPresSAToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ActivarCaluloPresSAToolStripMenuItem.Text = "Activar Calulo Pres SA"
         '
         'layoutTimbrado
         '
@@ -598,34 +623,24 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavitNominaSerie.Text = "Concentrado INfonavit x nomina"
         Me.cmdInfonavitNominaSerie.UseVisualStyleBackColor = True
         '
-        'NoCalcularPresAsiToolStripMenuItem
+        'chkNoinfonavit
         '
-        Me.NoCalcularPresAsiToolStripMenuItem.Name = "NoCalcularPresAsiToolStripMenuItem"
-        Me.NoCalcularPresAsiToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
-        Me.NoCalcularPresAsiToolStripMenuItem.Text = "No Calcular Pres Asi"
-        '
-        'ActivaCalculoPresAsiToolStripMenuItem
-        '
-        Me.ActivaCalculoPresAsiToolStripMenuItem.Name = "ActivaCalculoPresAsiToolStripMenuItem"
-        Me.ActivaCalculoPresAsiToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
-        Me.ActivaCalculoPresAsiToolStripMenuItem.Text = "Activa Calculo Pres Asi"
-        '
-        'NoCalcularPresSAToolStripMenuItem
-        '
-        Me.NoCalcularPresSAToolStripMenuItem.Name = "NoCalcularPresSAToolStripMenuItem"
-        Me.NoCalcularPresSAToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
-        Me.NoCalcularPresSAToolStripMenuItem.Text = "No Calcular Pres SA"
-        '
-        'ActivarCaluloPresSAToolStripMenuItem
-        '
-        Me.ActivarCaluloPresSAToolStripMenuItem.Name = "ActivarCaluloPresSAToolStripMenuItem"
-        Me.ActivarCaluloPresSAToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
-        Me.ActivarCaluloPresSAToolStripMenuItem.Text = "Activar Calulo Pres SA"
+        Me.chkNoinfonavit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkNoinfonavit.AutoSize = True
+        Me.chkNoinfonavit.BackColor = System.Drawing.Color.Transparent
+        Me.chkNoinfonavit.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkNoinfonavit.Location = New System.Drawing.Point(1203, 519)
+        Me.chkNoinfonavit.Name = "chkNoinfonavit"
+        Me.chkNoinfonavit.Size = New System.Drawing.Size(154, 22)
+        Me.chkNoinfonavit.TabIndex = 33
+        Me.chkNoinfonavit.Text = "No calcular infonavit"
+        Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1357, 553)
+        Me.Controls.Add(Me.chkNoinfonavit)
         Me.Controls.Add(Me.btnAsimilados)
         Me.Controls.Add(Me.cmdInfonavitNominaSerie)
         Me.Controls.Add(Me.cmdComision)
@@ -712,5 +727,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents ActivaCalculoPresAsiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NoCalcularPresSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ActivarCaluloPresSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents chkNoinfonavit As System.Windows.Forms.CheckBox
 
 End Class
