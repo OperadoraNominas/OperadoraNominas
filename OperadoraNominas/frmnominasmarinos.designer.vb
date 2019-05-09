@@ -71,7 +71,6 @@ Partial Class frmnominasmarinos
         Me.cmdComision = New System.Windows.Forms.Button()
         Me.btnAsimilados = New System.Windows.Forms.Button()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
-<<<<<<< HEAD
         Me.cmdImssNomina = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.tsbEmpleados = New System.Windows.Forms.ToolStripButton()
@@ -81,9 +80,7 @@ Partial Class frmnominasmarinos
         Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
-=======
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
->>>>>>> origin/master
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -562,7 +559,6 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavitNominaSerie.Text = "Concentrado INfonavit x nomina"
         Me.cmdInfonavitNominaSerie.UseVisualStyleBackColor = True
         '
-<<<<<<< HEAD
         'cmdImssNomina
         '
         Me.cmdImssNomina.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -650,7 +646,6 @@ Partial Class frmnominasmarinos
         Me.tsbIEmpleados.Size = New System.Drawing.Size(69, 51)
         Me.tsbIEmpleados.Text = "Empleados"
         Me.tsbIEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-=======
         'chkNoinfonavit
         '
         Me.chkNoinfonavit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -663,18 +658,15 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.TabIndex = 33
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
->>>>>>> origin/master
-        '
+
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1357, 553)
-<<<<<<< HEAD
+
         Me.Controls.Add(Me.cmdConcentradoFonacot)
         Me.Controls.Add(Me.cmdImssNomina)
-=======
         Me.Controls.Add(Me.chkNoinfonavit)
->>>>>>> origin/master
         Me.Controls.Add(Me.btnAsimilados)
         Me.Controls.Add(Me.cmdInfonavitNominaSerie)
         Me.Controls.Add(Me.cmdComision)
@@ -761,11 +753,8 @@ Partial Class frmnominasmarinos
     Friend WithEvents ActivaCalculoPresAsiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NoCalcularPresSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ActivarCaluloPresSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-<<<<<<< HEAD
     Friend WithEvents cmdImssNomina As System.Windows.Forms.Button
     Friend WithEvents cmdConcentradoFonacot As System.Windows.Forms.Button
-=======
     Friend WithEvents chkNoinfonavit As System.Windows.Forms.CheckBox
->>>>>>> origin/master
 
 End Class
