@@ -103,6 +103,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmConcentradoFonacot.Designer.vb">
+      <DependentUpon>frmConcentradoFonacot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConcentradoFonacot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAgregarEmpleado.Designer.vb">
       <DependentUpon>frmAgregarEmpleado.vb</DependentUpon>
     </Compile>
@@ -275,6 +281,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmConcentradoFonacot.resx">
+      <DependentUpon>frmConcentradoFonacot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAgregarEmpleado.resx">
       <DependentUpon>frmAgregarEmpleado.vb</DependentUpon>
     </EmbeddedResource>

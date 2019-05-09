@@ -2008,7 +2008,7 @@ Public Class frmnominasmarinos
 
 
                     'GUARDAR PRESTAMO SA
-
+                    '  If dtgDatos.Rows(x).Cells(3).Tag = "" Then
                     If Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value)) > 0 Then
 
                         sql = "SELECT * FROM prestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
@@ -2041,10 +2041,12 @@ Public Class frmnominasmarinos
                                 Exit Sub
                             End If
                         Else
-                            MessageBox.Show("Existe valor para prestamo asimilados, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            MessageBox.Show("Existe valor para prestamo sa, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                         End If
 
                     End If
+                    'End If
+
 
 
                     '########GUARDAR SEGURO INFONAVIT
@@ -2119,7 +2121,7 @@ Public Class frmnominasmarinos
                 Else
                     MessageBox.Show("Datos guardados correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
-                
+
 
             End If
         Catch ex As Exception
@@ -3205,6 +3207,9 @@ Public Class frmnominasmarinos
                         'AJUSTE INFONAVIT
 
                         'PRESTAMO
+                        If dtgDatos.Rows(x).Cells(2).Value = 94 Then
+                            MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        End If
                         If dtgDatos.Rows(x).Cells(3).Tag = "" Then
                             sql = "SELECT * FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
 
@@ -3294,7 +3299,9 @@ Public Class frmnominasmarinos
                         'PENSION
                         PensionAlimenticia = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - prestamo - fonacot + subsidioaplicado
                         'Buscamos la Pension
-
+                        If dtgDatos.Rows(x).Cells(2).Value = 94 Then
+                            MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(4).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        End If
                         sql = "select * from PensionAlimenticia where fkiIdEmpleadoC=" & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value) & " and iEstatus=1"
 
                         Dim rwPensionEmpleado As DataRow() = nConsulta(sql)
@@ -3355,7 +3362,7 @@ Public Class frmnominasmarinos
                         End If
 
 
-                        
+
 
 
 
@@ -6660,17 +6667,17 @@ Public Class frmnominasmarinos
                         fila.Item("IVA") = IIf(dtgDatos.Rows(y).Cells(61).Value = "", "0", dtgDatos.Rows(y).Cells(61).Value.ToString.Replace(",", ""))
                         fila.Item("TOTAL_DEPOSITO") = IIf(dtgDatos.Rows(y).Cells(62).Value = "", "0", dtgDatos.Rows(y).Cells(62).Value.ToString.Replace(",", ""))
 
-                        fila.Item("Neto_Pagar") = IIf(dtgDatos.Rows(y).Cells(46).Value = "", "0", dtgDatos.Rows(y).Cells(46).Value.ToString.Replace(",", ""))
-                        fila.Item("Excendente") = IIf(dtgDatos.Rows(y).Cells(47).Value = "", "0", dtgDatos.Rows(y).Cells(47).Value.ToString.Replace(",", ""))
-                        fila.Item("Total") = IIf(dtgDatos.Rows(y).Cells(48).Value = "", "0", dtgDatos.Rows(y).Cells(48).Value.ToString.Replace(",", ""))
-                        fila.Item("IMSS_CS") = IIf(dtgDatos.Rows(y).Cells(49).Value = "", "0", dtgDatos.Rows(y).Cells(49).Value.ToString.Replace(",", ""))
-                        fila.Item("RCV_CS") = IIf(dtgDatos.Rows(y).Cells(50).Value = "", "0", dtgDatos.Rows(y).Cells(50).Value.ToString.Replace(",", ""))
-                        fila.Item("Infonavit_CS") = IIf(dtgDatos.Rows(y).Cells(51).Value = "", "0", dtgDatos.Rows(y).Cells(51).Value.ToString.Replace(",", ""))
-                        fila.Item("ISN_CS") = IIf(dtgDatos.Rows(y).Cells(52).Value = "", "0", dtgDatos.Rows(y).Cells(52).Value.ToString.Replace(",", ""))
-                        fila.Item("Prestamo_Personal") = IIf(dtgDatos.Rows(y).Cells(53).Value = "", "0", dtgDatos.Rows(y).Cells(53).Value.ToString.Replace(",", ""))
-                        fila.Item("Adeudo_Infonavit") = IIf(dtgDatos.Rows(y).Cells(54).Value = "", "0", dtgDatos.Rows(y).Cells(54).Value.ToString.Replace(",", ""))
-                        fila.Item("Diferencia_Infonavit") = IIf(dtgDatos.Rows(y).Cells(55).Value = "", "0", dtgDatos.Rows(y).Cells(55).Value.ToString.Replace(",", ""))
-                        fila.Item("Complemento_Asimilados") = IIf(dtgDatos.Rows(y).Cells(56).Value = "", "0", dtgDatos.Rows(y).Cells(56).Value.ToString.Replace(",", ""))
+                        'fila.Item("Neto_Pagar") = IIf(dtgDatos.Rows(y).Cells(46).Value = "", "0", dtgDatos.Rows(y).Cells(46).Value.ToString.Replace(",", ""))
+                        'fila.Item("Excendente") = IIf(dtgDatos.Rows(y).Cells(47).Value = "", "0", dtgDatos.Rows(y).Cells(47).Value.ToString.Replace(",", ""))
+                        'fila.Item("Total") = IIf(dtgDatos.Rows(y).Cells(48).Value = "", "0", dtgDatos.Rows(y).Cells(48).Value.ToString.Replace(",", ""))
+                        'fila.Item("IMSS_CS") = IIf(dtgDatos.Rows(y).Cells(49).Value = "", "0", dtgDatos.Rows(y).Cells(49).Value.ToString.Replace(",", ""))
+                        'fila.Item("RCV_CS") = IIf(dtgDatos.Rows(y).Cells(50).Value = "", "0", dtgDatos.Rows(y).Cells(50).Value.ToString.Replace(",", ""))
+                        'fila.Item("Infonavit_CS") = IIf(dtgDatos.Rows(y).Cells(51).Value = "", "0", dtgDatos.Rows(y).Cells(51).Value.ToString.Replace(",", ""))
+                        'fila.Item("ISN_CS") = IIf(dtgDatos.Rows(y).Cells(52).Value = "", "0", dtgDatos.Rows(y).Cells(52).Value.ToString.Replace(",", ""))
+                        'fila.Item("Prestamo_Personal") = IIf(dtgDatos.Rows(y).Cells(53).Value = "", "0", dtgDatos.Rows(y).Cells(53).Value.ToString.Replace(",", ""))
+                        'fila.Item("Adeudo_Infonavit") = IIf(dtgDatos.Rows(y).Cells(54).Value = "", "0", dtgDatos.Rows(y).Cells(54).Value.ToString.Replace(",", ""))
+                        'fila.Item("Diferencia_Infonavit") = IIf(dtgDatos.Rows(y).Cells(55).Value = "", "0", dtgDatos.Rows(y).Cells(55).Value.ToString.Replace(",", ""))
+                        'fila.Item("Complemento_Asimilados") = IIf(dtgDatos.Rows(y).Cells(56).Value = "", "0", dtgDatos.Rows(y).Cells(56).Value.ToString.Replace(",", ""))
 
 
                         dsPeriodo.Tables("Tabla").Rows.Add(fila)
@@ -8259,7 +8266,7 @@ Public Class frmnominasmarinos
                 Dim filatmp2 As Integer = filaExcel
                 Dim fecha, iejercicio As String
                 Dim descAsim As String
-                Dim amarrados, arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, luis, ignacio, gabriel, diego, jose, grande, creciente, colorada, subsea88 As Integer
+                Dim amarrados, arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, luis, ignacio, gabriel, diego, jose, grande, creciente, colorada, subsea88, leon As Integer
                 Dim passavera, margot As Integer
                 Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB, AC As String
 
@@ -8377,6 +8384,8 @@ Public Class frmnominasmarinos
                                 colorada = contadorexcelbuquefinal
                             Case "SUBSEA 88"
                                 subsea88 = contadorexcelbuquefinal
+                            Case "ISLA LEON"
+                                leon = contadorexcelbuquefinal
 
                         End Select
 
@@ -8539,6 +8548,8 @@ Public Class frmnominasmarinos
                         colorada = contadorexcelbuquefinal
                     Case "SUBSEA 88"
                         subsea88 = contadorexcelbuquefinal
+                    Case "ISLA LEON"
+                        leon = contadorexcelbuquefinal
                 End Select
 
 
@@ -8847,12 +8858,12 @@ Public Class frmnominasmarinos
                 hoja5.Cell("C14").FormulaA1 = IIf(cruz > 0, "='NOMINA TOTAL'!AB" & sep + 3, "0.0") 'SANTA CRUZ
 
 
-                hoja5.Cell("C31").FormulaA1 = IIf(arboleda > 0, "='NOMINA TOTAL'!E" & sep + 6, "0.0")
-                hoja5.Cell("C32").FormulaA1 = IIf(azteca > 0, "='NOMINA TOTAL'!I" & sep + 6, "0.0")
-                hoja5.Cell("C36").FormulaA1 = IIf(cedros > 0, "='NOMINA TOTAL'!M" & sep + 6, "0.0")
-                hoja5.Cell("C37").FormulaA1 = IIf(miramar > 0, "='NOMINA TOTAL'!S" & sep + 6, "0.0")
-                hoja5.Cell("C38").FormulaA1 = IIf(verde > 0, "='NOMINA TOTAL'!X" & sep + 6, "0.0")
-                hoja5.Cell("C39").FormulaA1 = IIf(cruz > 0, "='NOMINA TOTAL'!AB" & sep + 6, "0.0") 'SANTA CRUZ
+                hoja5.Cell("C32").FormulaA1 = IIf(arboleda > 0, "='NOMINA TOTAL'!E" & sep + 6, "0.0")
+                hoja5.Cell("C33").FormulaA1 = IIf(azteca > 0, "='NOMINA TOTAL'!I" & sep + 6, "0.0")
+                hoja5.Cell("C37").FormulaA1 = IIf(cedros > 0, "='NOMINA TOTAL'!M" & sep + 6, "0.0")
+                hoja5.Cell("C38").FormulaA1 = IIf(miramar > 0, "='NOMINA TOTAL'!S" & sep + 6, "0.0")
+                hoja5.Cell("C39").FormulaA1 = IIf(verde > 0, "='NOMINA TOTAL'!X" & sep + 6, "0.0")
+                hoja5.Cell("C40").FormulaA1 = IIf(cruz > 0, "='NOMINA TOTAL'!AB" & sep + 6, "0.0") 'SANTA CRUZ
 
 
 
@@ -9052,13 +9063,13 @@ Public Class frmnominasmarinos
                 hoja5.Cell("C15").FormulaA1 = IIf(montserrat > 0, "='NOMINA TOTAL'!L" & sep + 3, "0.0") 'Monserrat
                 hoja5.Cell("C16").FormulaA1 = IIf(blanca > 0, "='NOMINA TOTAL'!R" & sep + 3, "0.0") 'Blanca
                 hoja5.Cell("C17").FormulaA1 = IIf(ciari > 0, "='NOMINA TOTAL'!V" & sep + 3, "0.0") 'Ciari
-                hoja5.Cell("C18").FormulaA1 = IIf(janitzio > 0, "='NOMINA TOTAL'!AA" & sep + 3, "0.0") 'Janitzio
+                hoja5.Cell("C19").FormulaA1 = IIf(janitzio > 0, "='NOMINA TOTAL'!AA" & sep + 3, "0.0") 'Janitzio
 
 
-                hoja5.Cell("C40").FormulaA1 = IIf(montserrat > 0, "='NOMINA TOTAL'!L" & sep + 6, "0.0")
-                hoja5.Cell("C41").FormulaA1 = IIf(blanca > 0, "='NOMINA TOTAL'!R" & sep + 6, "0.0")
-                hoja5.Cell("C42").FormulaA1 = IIf(ciari > 0, "='NOMINA TOTAL'!V" & sep + 6, "0.0")
-                hoja5.Cell("C43").FormulaA1 = IIf(janitzio > 0, "='NOMINA TOTAL'!AA" & sep + 6, "0.0")
+                hoja5.Cell("C41").FormulaA1 = IIf(montserrat > 0, "='NOMINA TOTAL'!L" & sep + 6, "0.0")
+                hoja5.Cell("C42").FormulaA1 = IIf(blanca > 0, "='NOMINA TOTAL'!R" & sep + 6, "0.0")
+                hoja5.Cell("C43").FormulaA1 = IIf(ciari > 0, "='NOMINA TOTAL'!V" & sep + 6, "0.0")
+                hoja5.Cell("C45").FormulaA1 = IIf(janitzio > 0, "='NOMINA TOTAL'!AA" & sep + 6, "0.0")
 
 
 
@@ -9262,18 +9273,18 @@ Public Class frmnominasmarinos
                 '<<<<<<<<<<<<<<<<<<<<<<<<<<FACT>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
                 hoja5.Cell("C3").Value = periodo
-                hoja5.Cell("C19").FormulaA1 = IIf(luis > 0, "='NOMINA TOTAL'!H" & sep + 3, "0.00") 'Luis
-                hoja5.Cell("C20").FormulaA1 = IIf(ignacio > 0, "='NOMINA TOTAL'!L" & sep + 3, "0.00") 'Ignacio
-                hoja5.Cell("C21").FormulaA1 = IIf(gabriel > 0, "='NOMINA TOTAL'!P" & sep + 3, "0.00") 'Gabriel
-                hoja5.Cell("C22").FormulaA1 = IIf(diego > 0, "='NOMINA TOTAL'!T" & sep + 3, "0.00") 'Diego
-                hoja5.Cell("D23").FormulaA1 = IIf(colorada > 0, "='NOMINA TOTAL'!D" & sep + 3, "0.000") 'Colorada
+                hoja5.Cell("C20").FormulaA1 = IIf(luis > 0, "='NOMINA TOTAL'!H" & sep + 3, "0.00") 'Luis
+                hoja5.Cell("C21").FormulaA1 = IIf(ignacio > 0, "='NOMINA TOTAL'!L" & sep + 3, "0.00") 'Ignacio
+                hoja5.Cell("C22").FormulaA1 = IIf(gabriel > 0, "='NOMINA TOTAL'!P" & sep + 3, "0.00") 'Gabriel
+                hoja5.Cell("C23").FormulaA1 = IIf(diego > 0, "='NOMINA TOTAL'!T" & sep + 3, "0.00") 'Diego
+                hoja5.Cell("D24").FormulaA1 = IIf(colorada > 0, "='NOMINA TOTAL'!D" & sep + 3, "0.000") 'Colorada
 
 
-                hoja5.Cell("C44").FormulaA1 = IIf(luis > 0, "='NOMINA TOTAL'!H" & sep + 6, "0.00") 'Luis
-                hoja5.Cell("C45").FormulaA1 = IIf(ignacio > 0, "='NOMINA TOTAL'!L" & sep + 6, "0.00")
-                hoja5.Cell("C46").FormulaA1 = IIf(gabriel > 0, "='NOMINA TOTAL'!P" & sep + 6, "0.00")
-                hoja5.Cell("C47").FormulaA1 = IIf(diego > 0, "='NOMINA TOTAL'!T" & sep + 6, "0.00")
-                hoja5.Cell("D48").FormulaA1 = IIf(colorada > 0, "='NOMINA TOTAL'!D" & sep + 6, "0.000") 'Colorada
+                hoja5.Cell("C46").FormulaA1 = IIf(luis > 0, "='NOMINA TOTAL'!H" & sep + 6, "0.00") 'Luis
+                hoja5.Cell("C47").FormulaA1 = IIf(ignacio > 0, "='NOMINA TOTAL'!L" & sep + 6, "0.00")
+                hoja5.Cell("C48").FormulaA1 = IIf(gabriel > 0, "='NOMINA TOTAL'!P" & sep + 6, "0.00")
+                hoja5.Cell("C49").FormulaA1 = IIf(diego > 0, "='NOMINA TOTAL'!T" & sep + 6, "0.00")
+                hoja5.Cell("D50").FormulaA1 = IIf(colorada > 0, "='NOMINA TOTAL'!D" & sep + 6, "0.000") 'Colorada
 
 
 
@@ -9405,10 +9416,10 @@ Public Class frmnominasmarinos
                 'ISLA CRECIENTE
                 hoja.Cell("N" & sep).Value = "ISLA CRECIENTE"
                 hoja.Cell("N" & sep + 1).Value = "TMM DIVISION"
-                hoja.Cell("N" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANP"
+                hoja.Cell("N" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
                 hoja.Cell("N" & sep + 4).Value = "IVA"
                 hoja.Cell("N" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
-                hoja.Cell("N" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANP"
+                hoja.Cell("N" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
                 hoja.Cell("N" & sep + 7).Value = "IVA"
                 hoja.Cell("N" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
 
@@ -9442,23 +9453,63 @@ Public Class frmnominasmarinos
                 hoja.Range("N" & sep + 8, "P" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Cell("N" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
-                'hoja.Cell("AA12").Value = "TOTAL"
+                'hoja.Range("N" & sep + 5, "P" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                'hoja.Range("N" & sep + 8, "P" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                'hoja.Cell("N" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
-                'hoja.Cell("AB11").Clear()
-                'hoja.Cell("AB12").Clear()
+                'ISLA LEON
+                hoja.Cell("R" & sep).Value = "ISLA LEON"
+                hoja.Cell("R" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("R" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("R" & sep + 4).Value = "IVA"
+                hoja.Cell("R" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("R" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("R" & sep + 7).Value = "IVA"
+                hoja.Cell("R" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
 
+                If leon > 0 Then
+
+                    hoja.Cell("T" & sep + 3).FormulaA1 = "=T" & leon + 1 & "+V" & leon + 1 & "+X" & leon + 1 & "+Z" & leon + 1
+                    hoja.Cell("T" & sep + 4).FormulaA1 = "=T" & sep + 3 & "*16%"
+                    hoja.Cell("T" & sep + 5).FormulaA1 = "=T" & sep + 3 & "+T" & sep + 4
+
+                    hoja.Cell("T" & sep + 6).FormulaA1 = "=U" & leon + 1 & "+Y" & leon + 1 & "+O" & leon + 1
+                    hoja.Cell("T" & sep + 7).FormulaA1 = "=T" & sep + 6 & "*16%"
+                    hoja.Cell("T" & sep + 8).FormulaA1 = "=T" & sep + 6 & "+T" & sep + 7
+
+                    hoja.Cell("T" & sep + 10).FormulaA1 = "=T" & sep + 5 & "+T" & sep + 8
+
+                Else
+                    hoja.Cell("T" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("T" & sep + 4).FormulaA1 = "=T" & sep + 3 & "*16%"
+                    hoja.Cell("T" & sep + 5).FormulaA1 = "=T" & sep + 3 & "+T" & sep + 4
+
+                    hoja.Cell("T" & sep + 6).FormulaA1 = "0"
+                    hoja.Cell("T" & sep + 7).FormulaA1 = "=T" & sep + 6 & "*16%"
+                    hoja.Cell("T" & sep + 8).FormulaA1 = "=T" & sep + 6 & "+T" & sep + 7
+
+                    hoja.Cell("T" & sep + 10).FormulaA1 = "=T" & sep + 5 & "+T" & sep + 8
+
+
+                End If
+
+                hoja.Range("R" & sep + 5, "T" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("R" & sep + 8, "T" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("R" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
                 '<<<<<<Facturacion>>>>
                 hoja5.Cell("C10").FormulaA1 = IIf(jose > 0, "='NOMINA TOTAL'!H" & sep + 3, "0.00") 'Jose 
                 hoja5.Cell("C9").FormulaA1 = IIf(grande > 0, "='NOMINA TOTAL'!K" & sep + 3, "0.00") 'Grande   
                 hoja5.Cell("C8").FormulaA1 = IIf(creciente > 0, "='NOMINA TOTAL'!P" & sep + 3, "0.00") 'Creciente
-                hoja5.Cell("D26").FormulaA1 = IIf(subsea88 > 0, "='NOMINA TOTAL'!D" & sep + 3, "0.00") 'Subsea88
+                hoja5.Cell("C18").FormulaA1 = IIf(leon > 0, "='NOMINA TOTAL'!T" & sep + 3, "0.00") 'Leon
+                hoja5.Cell("D27").FormulaA1 = IIf(subsea88 > 0, "='NOMINA TOTAL'!D" & sep + 3, "0.00") 'Subsea88
 
 
-                hoja5.Cell("C35").FormulaA1 = IIf(jose > 0, "='NOMINA TOTAL'!H" & sep + 6, "0.00")
-                hoja5.Cell("C34").FormulaA1 = IIf(grande > 0, "='NOMINA TOTAL'!K" & sep + 6, "0.00")
-                hoja5.Cell("C33").FormulaA1 = IIf(creciente > 0, "='NOMINA TOTAL'!P" & sep + 6, "0.00")
-                hoja5.Cell("D51").FormulaA1 = IIf(subsea88 > 0, "='NOMINA TOTAL'!D" & sep + 6, "0.00") 'Subsea88
+                hoja5.Cell("C36").FormulaA1 = IIf(jose > 0, "='NOMINA TOTAL'!H" & sep + 6, "0.00")
+                hoja5.Cell("C35").FormulaA1 = IIf(grande > 0, "='NOMINA TOTAL'!K" & sep + 6, "0.00")
+                hoja5.Cell("C34").FormulaA1 = IIf(creciente > 0, "='NOMINA TOTAL'!P" & sep + 6, "0.00")
+                hoja5.Cell("C44").FormulaA1 = IIf(leon > 0, "='NOMINA TOTAL'!T" & sep + 6, "0.00") 'Leon
+                hoja5.Cell("D53").FormulaA1 = IIf(subsea88 > 0, "='NOMINA TOTAL'!D" & sep + 6, "0.00") 'Subsea88
 
                 '<<<<<<<<<<<<<<<Detalle>>>>>>>>>>>>>>>>>>
 
@@ -10383,49 +10434,46 @@ Public Class frmnominasmarinos
 
 
                         If dtgD.Rows(x).Cells(3).Value <> "" Then
-                            'If dtgD.Rows(x).Cells(4).Value = "SEGURA DE LA CRUZ ALBERTO" Then
-                            '    MessageBox.Show("SEGURA DE LA CRUZ ALBERTO ES PILOTIN=" & pilotin, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                            'End If
                           
-
-                                ''Generales
-                                hoja.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(3).Value 'No Empleado
-                                hoja.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(6).Value 'RFC
-                                hoja.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(4).Value 'Nombre
-                                hoja.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(7).Value 'CURP
-                                hoja.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(8).Value 'SSA
-                                hoja.Cell(filaExcel, 6).Value = cuenta ' Cuenta Bancaria
-                                hoja.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(17).Value 'SBC //O 17 SALARIO_COTIZACION
-                                hoja.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(16).Value 'SDI
-                                hoja.Cell(filaExcel, 9).Value = "A1131077105" 'Reg. Patronal 
-                                hoja.Cell(filaExcel, 10).Value = "CAM" 'Ent. Federativa  
-                                hoja.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(18).Value 'Días Pagados
-                                hoja.Cell(filaExcel, 12).Value = fechainiciorelaboral 'FechaInicioRelaboral
-                                hoja.Cell(filaExcel, 13).Value = "3" 'Tipo Contrato 
-                                hoja.Cell(filaExcel, 14).Value = ""
-                                hoja.Cell(filaExcel, 15).Value = ""  'Sndicalizado
-                                hoja.Cell(filaExcel, 16).Value = "1"  'Tipo Jornada
-                                hoja.Cell(filaExcel, 17).Value = ""
-                                hoja.Cell(filaExcel, 18).Value = "2"  'Tipo Regimen
-                                hoja.Cell(filaExcel, 19).Value = ""
-                                hoja.Cell(filaExcel, 20).Value = ""
-                                hoja.Cell(filaExcel, 21).Value = dtgD.Rows(x).Cells(11).FormattedValue   'Puesto
-                                hoja.Cell(filaExcel, 22).Value = "4"  'Riesgo Puesto
-                                hoja.Cell(filaExcel, 23).Value = ""
-                                hoja.Cell(filaExcel, 24).Value = "5"  'Periodicidad Pago
-                                hoja.Cell(filaExcel, 25).Value = ""
-                                hoja.Cell(filaExcel, 26).Value = clavebanco  'Banco
-                                hoja.Cell(filaExcel, 27).Value = ""
-                                hoja.Cell(filaExcel, 28).Value = "" 'Subcontratacion
-                                hoja.Cell(filaExcel, 29).Value = IIf(cboTipoNomina.SelectedIndex = 0, "NA", "ND") 'Tipo de Recibo
-                                hoja.Cell(filaExcel, 30).Value = mesid ' Mes Pago
-                                hoja.Cell(filaExcel, 31).Value = dtgD.Rows(x).Cells(12).FormattedValue ' Buque
-                                filaExcel = filaExcel + 1
-                            End If
-
+                            ''Generales
+                           
+                            hoja.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(3).Value 'No Empleado
+                            hoja.Cell(filaExcel, 2).Value = dtgD.Rows(x).Cells(6).Value 'RFC
+                            hoja.Cell(filaExcel, 3).Value = dtgD.Rows(x).Cells(4).Value 'Nombre
+                            hoja.Cell(filaExcel, 4).Value = dtgD.Rows(x).Cells(7).Value 'CURP
+                            hoja.Cell(filaExcel, 5).Value = dtgD.Rows(x).Cells(8).Value 'SSA
+                            hoja.Cell(filaExcel, 6).Value = cuenta ' Cuenta Bancaria
+                            hoja.Cell(filaExcel, 7).Value = dtgD.Rows(x).Cells(17).Value 'SBC //O 17 SALARIO_COTIZACION
+                            hoja.Cell(filaExcel, 8).Value = dtgD.Rows(x).Cells(16).Value 'SDI
+                            hoja.Cell(filaExcel, 9).Value = "A1131077105" 'Reg. Patronal 
+                            hoja.Cell(filaExcel, 10).Value = "CAM" 'Ent. Federativa  
+                            hoja.Cell(filaExcel, 11).Value = dtgD.Rows(x).Cells(18).Value 'Días Pagados
+                            hoja.Cell(filaExcel, 12).Value = fechainiciorelaboral 'FechaInicioRelaboral
+                            hoja.Cell(filaExcel, 13).Value = "3" 'Tipo Contrato 
+                            hoja.Cell(filaExcel, 14).Value = ""
+                            hoja.Cell(filaExcel, 15).Value = ""  'Sndicalizado
+                            hoja.Cell(filaExcel, 16).Value = "1"  'Tipo Jornada
+                            hoja.Cell(filaExcel, 17).Value = ""
+                            hoja.Cell(filaExcel, 18).Value = "2"  'Tipo Regimen
+                            hoja.Cell(filaExcel, 19).Value = ""
+                            hoja.Cell(filaExcel, 20).Value = ""
+                            hoja.Cell(filaExcel, 21).Value = dtgD.Rows(x).Cells(11).FormattedValue   'Puesto
+                            hoja.Cell(filaExcel, 22).Value = "4"  'Riesgo Puesto
+                            hoja.Cell(filaExcel, 23).Value = ""
+                            hoja.Cell(filaExcel, 24).Value = "5"  'Periodicidad Pago
+                            hoja.Cell(filaExcel, 25).Value = ""
+                            hoja.Cell(filaExcel, 26).Value = clavebanco  'Banco
+                            hoja.Cell(filaExcel, 27).Value = ""
+                            hoja.Cell(filaExcel, 28).Value = "" 'Subcontratacion
+                            hoja.Cell(filaExcel, 29).Value = IIf(cboTipoNomina.SelectedIndex = 0, "NA", "ND") 'Tipo de Recibo
+                            hoja.Cell(filaExcel, 30).Value = mesid ' Mes Pago
+                            hoja.Cell(filaExcel, 31).Value = dtgD.Rows(x).Cells(12).FormattedValue ' Buque
+                            filaExcel = filaExcel + 1
                         End If
-                        pgbProgreso.Value += 1
-                        Application.DoEvents()
+
+                    End If
+                    pgbProgreso.Value += 1
+                    Application.DoEvents()
                 Next
 
 
@@ -12338,7 +12386,7 @@ Public Class frmnominasmarinos
        
     End Sub
 
-    Function getsueldoordinario(ByRef tiponomina As String, ByRef trabjador As String, ByRef dias As String, ByRef tipe As String, Optional ByRef buque As String = "") As Double
+    Function getsueldoordinario(ByRef tiponomina As String, ByRef trabjador As String, ByRef dias As String, ByRef tipe As String, Optional ByRef buque As String = "", Optional ByRef serie As String = "", Optional ByRef periodo As String = "") As Double
         ' getsueldoordinario(tiponomina, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value)
         Dim valor As String = 0
         Dim tiponom As String
@@ -12350,8 +12398,8 @@ Public Class frmnominasmarinos
             tiponom = 1
         End If
         sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC"
-        sql &= " where Nomina.fkiIdEmpresa = 1 And fkiIdPeriodo = " & cboperiodo.SelectedValue
-        sql &= " and Nomina.iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
+        sql &= " where Nomina.fkiIdEmpresa = 1 And fkiIdPeriodo = " & IIf(periodo = "", cboperiodo.SelectedValue, periodo)
+        sql &= " and Nomina.iEstatus=1 and iEstatusEmpleado=" & IIf(serie = "", cboserie.SelectedIndex, serie)
         sql &= " and iTipoNomina=" & tiponom
         sql &= " and EmpleadosC.cCodigoEmpleado=" & trabjador
         sql &= " and Nomina.iDiasTrabajados=" & dias
@@ -12379,6 +12427,8 @@ Public Class frmnominasmarinos
                     valor = rwNominaGuardada(0)("fAsimilados").ToString
                 Case "subsidio"
                     valor = rwNominaGuardada(0)("fSubsidioAplicado").ToString
+                Case "fFonacot"
+                    valor = rwNominaGuardada(0)("fFonacot").ToString
             End Select
 
 
@@ -12432,6 +12482,9 @@ Public Class frmnominasmarinos
 
                     If (dtgD.Rows(x).Cells(3).Value Is Nothing = False) Then
 
+                        If dtgD.Rows(x).Cells(3).Value = "0130" Then
+                            MessageBox.Show("ESTE CUATE" & dtgD.Rows(x).Cells(4).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        End If
 
                         Dim empleado As DataRow() = nConsulta("Select * from empleadosC where cCodigoEmpleado=" & dtgD.Rows(x).Cells(3).Value)
                         If empleado Is Nothing = False Then
@@ -12520,6 +12573,235 @@ Public Class frmnominasmarinos
         iFila.Cells(3).Tag = ""
         iFila.Cells(3).Style.BackColor = Color.White
     End Sub
+
+   
+    Private Sub cmdImssNomina_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdImssNomina.Click
+        Dim filaExcel As Integer = 5
+        Dim contador As Integer
+        Dim dialogo As New SaveFileDialog()
+        Dim sql As String
+        
+        Try
+            Dim libro As New ClosedXML.Excel.XLWorkbook
+            Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
+
+            sql = "EXEC getNominaCargada "
+            sql &= cboperiodo.SelectedValue & " , "
+            sql &= cboserie.SelectedIndex & " , "
+            sql &= cboTipoNomina.SelectedIndex
+
+            hoja.Column("B").Width = 15
+            hoja.Column("C").Width = 40
+            hoja.Column("D").Width = 10
+            hoja.Column("E").Width = 15
+            hoja.Column("F").Width = 15
+            hoja.Column("G").Width = 30
+            hoja.Column("H").Width = 15
+
+
+            hoja.Cell(1, 2).Value = "Concentrado IMSS activos en nomina"
+            hoja.Range(1, 2, 1, 2).Style.Font.SetBold(True)
+            hoja.Cell(2, 2).Value = "Fecha:" & Date.Now.ToShortDateString & " " & Date.Now.ToShortTimeString
+            hoja.Cell(3, 2).Value = "PERIODO: " & cboperiodo.Text
+            hoja.Range(3, 2, 3, 2).Style.Font.SetBold(True)
+
+            hoja.Range(4, 2, 4, 15).Style.Font.FontSize = 10
+            hoja.Range(4, 2, 4, 15).Style.Font.SetBold(True)
+            hoja.Range(4, 2, 4, 15).Style.Alignment.WrapText = True
+            hoja.Range(4, 2, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+            hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+            'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
+            hoja.Range(4, 2, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+            hoja.Range(4, 2, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+
+            hoja.Cell(4, 2).Value = "iIdEmpleado"
+            hoja.Cell(4, 3).Value = "Nombre"
+            hoja.Cell(4, 4).Value = "Clave"
+            hoja.Cell(4, 5).Value = "Fecha"
+            hoja.Cell(4, 6).Value = "Fecha Baja"
+            hoja.Cell(4, 7).Value = "Acuse"
+            hoja.Cell(4, 8).Value = "--"
+
+            Dim rwNominaGuardada As DataRow() = nConsulta(sql)
+            If rwNominaGuardada Is Nothing = False Then
+              
+                For x As Integer = 0 To rwNominaGuardada.Count - 1
+
+                    'Trae los registros activos y mas recientes
+                    sql = "EXEC getImssActivos "
+                    sql &= rwNominaGuardada(x)("fkiIdEmpleadoC").ToString
+
+                    Dim rwActivos As DataRow() = nConsulta(sql)
+                    If rwActivos Is Nothing = False Then
+                        hoja.Cell(filaExcel + x, 2).Value = rwActivos(0)("fkiIdEmpleado")
+                        hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(4).Value
+                        hoja.Cell(filaExcel + x, 4).Value = rwActivos(0)("Clave")
+                        hoja.Cell(filaExcel + x, 5).Value = rwActivos(0)("fecha")
+                        hoja.Cell(filaExcel + x, 6).Value = rwActivos(0)("fechabajaimss")
+                        hoja.Cell(filaExcel + x, 7).Value = rwActivos(0)("acuse")
+                    End If
+                Next
+            End If
+
+
+
+
+            dialogo.DefaultExt = "*.xlsx"
+            dialogo.FileName = "RESUMEN IMSS EN NOMINAS "
+            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            dialogo.ShowDialog()
+            libro.SaveAs(dialogo.FileName)
+            'libro.SaveAs("c:\temp\control.xlsx")
+            'libro.SaveAs(dialogo.FileName)
+            'apExcel.Quit()
+            libro = Nothing
+
+            MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End Try
+        
+
+
+    End Sub
+
+   
+    Private Sub cmdConcentradoFonacot_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdConcentradoFonacot.Click
+        Dim filaExcel As Integer = 5
+        Dim contador As Integer
+        Dim dialogo As New SaveFileDialog()
+        Dim sql As String
+        Dim serietmp, serie, mes, iejercicio, periodo As String
+        Dim Forma As New frmConcentradoFonacot
+
+        If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+
+            Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & Forma.cbobimestre.SelectedValue)
+            If rwPeriodo0 Is Nothing = False Then
+
+                mes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+                iejercicio = rwPeriodo0(0).Item("iEjercicio")
+
+            End If
+            rwPeriodo0 = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' - ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio,iIdPeriodo  from periodos where iIdPeriodo=" & Forma.cbobimestre.SelectedValue)
+            If rwPeriodo0 Is Nothing = False Then
+                periodo = rwPeriodo0(0).Item("dFechainicio")
+            End If
+
+            Try
+                Dim libro As New ClosedXML.Excel.XLWorkbook
+                Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
+
+               
+
+                hoja.Column("B").Width = 15
+                hoja.Column("C").Width = 15
+                hoja.Column("D").Width = 40
+                hoja.Column("E").Width = 15
+                hoja.Column("F").Width = 15
+                hoja.Column("G").Width = 15
+                hoja.Column("H").Width = 15
+
+
+                hoja.Cell(1, 2).Value = "Concentrado FONACOT mensual"
+                hoja.Range(1, 2, 1, 2).Style.Font.SetBold(True)
+                hoja.Cell(2, 2).Value = "Fecha:" & Date.Now.ToShortDateString & " " & Date.Now.ToShortTimeString
+                hoja.Cell(3, 2).Value = "PERIODO: " & periodo
+                hoja.Range(3, 2, 3, 2).Style.Font.SetBold(True)
+
+                hoja.Range(4, 2, 4, 15).Style.Font.FontSize = 10
+                hoja.Range(4, 2, 4, 15).Style.Font.SetBold(True)
+                hoja.Range(4, 2, 4, 15).Style.Alignment.WrapText = True
+                hoja.Range(4, 2, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+                hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+                hoja.Range(4, 6, 50, 6).Style.NumberFormat.NumberFormatId = 4
+                hoja.Range(4, 2, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+                hoja.Range(4, 2, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+
+                hoja.Cell(4, 2).Value = "iIdEmpleado"
+                hoja.Cell(4, 3).Value = "Codigo"
+                hoja.Cell(4, 4).Value = "Nombre"
+                hoja.Cell(4, 5).Value = "Nomina"
+                hoja.Cell(4, 6).Value = "Fonacot"
+                hoja.Cell(4, 7).Value = "Mes"
+                hoja.Cell(4, 8).Value = "--"
+
+               
+
+
+                For y As Integer = 0 To cboserie.Items.Count
+
+                    sql = "EXEC getNominaCargada "
+                    sql &= Forma.cbobimestre.SelectedValue & " , "
+                    sql &= y & " , "
+                    sql &= cboTipoNomina.SelectedIndex
+
+                    Dim rwNominaGuardada As DataRow() = nConsulta(sql)
+                    If rwNominaGuardada Is Nothing = False Then
+                        'Trae los registros activos y mas recientes
+                        sql = "EXEC getFonacotMensual "
+                        sql &= Forma.cbobimestre.SelectedValue & " , "
+                        sql &= y & " , "
+                        sql &= cboTipoNomina.SelectedIndex
+
+                        serietmp = y
+                        Select Case serietmp
+                            Case 0 : serie = "A"
+                            Case 1 : serie = "B"
+                            Case 2 : serie = "C"
+                            Case 3 : serie = "D"
+                            Case 4 : serie = "E"
+
+                        End Select
+                        Dim rwActivos As DataRow() = nConsulta(sql)
+
+                        If rwActivos Is Nothing = False Then
+                            For x As Integer = 0 To rwActivos.Count - 1
+
+
+                                hoja.Cell(filaExcel + x, 2).Value = rwActivos(x)("fkiIdEmpleadoC")
+                                hoja.Cell(filaExcel + x, 3).Value = rwActivos(x)("cCodigoEmpleado")
+                                hoja.Cell(filaExcel + x, 4).Value = rwActivos(x)("cNombreLargo")
+                                hoja.Cell(filaExcel + x, 5).Value = serie
+                                hoja.Cell(filaExcel + x, 6).Value = CDbl(rwActivos(x)("fFonacot")) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, rwActivos(x)("cCodigoEmpleado"), rwActivos(x)("iDiasTrabajados"), "fFonacot", "", serietmp, Forma.cbobimestre.SelectedValue))
+                                hoja.Cell(filaExcel + x, 7).Value = mes
+                            Next x
+                        End If
+
+
+                    Else
+                        'y = cboserie.Items.Count
+                        Exit For
+                    End If
+                Next y
+
+
+
+
+
+                dialogo.DefaultExt = "*.xlsx"
+                dialogo.FileName = "RESUMEN FONACOT " & mes & " " & iejercicio
+                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                dialogo.ShowDialog()
+                libro.SaveAs(dialogo.FileName)
+                'libro.SaveAs("c:\temp\control.xlsx")
+                'libro.SaveAs(dialogo.FileName)
+                'apExcel.Quit()
+                libro = Nothing
+
+                MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End Try
+        End If
+
+    End Sub
+
+    
 End Class
 
 
