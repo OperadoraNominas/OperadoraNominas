@@ -103,6 +103,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmBuscar.Designer.vb">
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmConcentradoFonacot.Designer.vb">
       <DependentUpon>frmConcentradoFonacot.vb</DependentUpon>
     </Compile>
@@ -281,6 +287,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmBuscar.resx">
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmConcentradoFonacot.resx">
       <DependentUpon>frmConcentradoFonacot.vb</DependentUpon>
     </EmbeddedResource>
