@@ -21,4 +21,14 @@
 
         End Try
     End Sub
+
+
+    
+   
+    Private Sub txtbuscar_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtbuscar.KeyDown
+        Select Case e.KeyData
+            Case Keys.Enter
+                cmdAceptar_Click(sender, e)
+        End Select
+    End Sub
 End Class

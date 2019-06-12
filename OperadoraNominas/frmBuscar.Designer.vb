@@ -54,7 +54,7 @@ Partial Class frmBuscar
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmBuscar"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Concentrado Infonavit"
+        Me.Text = "Busqueda de empleado"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
