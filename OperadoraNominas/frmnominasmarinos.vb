@@ -4976,7 +4976,7 @@ Public Class frmnominasmarinos
                         hoja2.Cell(filaExcel + x, 25).Value = dtgDatos.Rows(x).Cells(43).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "fonacot")) 'FONACOT  
 
                         hoja2.Cell(filaExcel + x, 26).Value = dtgDatos.Rows(x).Cells(55).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "IMSSCS")) 'IMSS
-                        hoja2.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(56).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "IRCVCS")) ' SAR
+                        hoja2.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(56).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "RCVCS")) ' SAR
                         hoja2.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(57).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "INFONAVITCS")) 'INFONAVIT
                         hoja2.Cell(filaExcel + x, 29).Value = dtgDatos.Rows(x).Cells(58).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "INSCS")) 'IMPTO S/NOMINA
                         hoja2.Cell(filaExcel + x, 30).FormulaA1 = "=SUM(O" & filaExcel + x & ":T" & filaExcel + x & ")+ SUM(Z" & filaExcel + x & ":AC" & filaExcel + x & ")" ' SUBTOTAL
@@ -12631,7 +12631,7 @@ Public Class frmnominasmarinos
                     valor = rwNominaGuardada(0)("fRcvCS").ToString
                 Case "INFONAVITCS"
                     valor = rwNominaGuardada(0)("fInfonavitCS").ToString
-                Case "INSS"
+                Case "INSCS"
                     valor = rwNominaGuardada(0)("fInsCS").ToString
             End Select
 
