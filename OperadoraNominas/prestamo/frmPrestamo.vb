@@ -246,6 +246,9 @@
         End Try
     End Sub
 
+    
+
+
     Private Sub lsvHistorial_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lsvHistorial.SelectedIndexChanged
 
     End Sub

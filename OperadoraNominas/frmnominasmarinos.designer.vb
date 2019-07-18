@@ -30,10 +30,10 @@ Partial Class frmnominasmarinos
         Me.tsbpuestos = New System.Windows.Forms.ToolStripButton()
         Me.tsbdeptos = New System.Windows.Forms.ToolStripButton()
         Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.tsbIEmpleados = New System.Windows.Forms.ToolStripButton()
+        Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
-        Me.chkCalSoloMarcados = New System.Windows.Forms.CheckBox()
         Me.chkPrestamosAsi = New System.Windows.Forms.CheckBox()
         Me.chkInfonavit0 = New System.Windows.Forms.CheckBox()
         Me.cmdResumenInfo = New System.Windows.Forms.Button()
@@ -82,8 +82,6 @@ Partial Class frmnominasmarinos
         Me.cmdImssNomina = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-        Me.UnicosRegistrosACalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DesactivarUnicosRegistrosACalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -95,7 +93,7 @@ Partial Class frmnominasmarinos
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbEmpleados, Me.tsbPeriodos, Me.tsbpuestos, Me.tsbdeptos, Me.tsbImportar, Me.tsbLayout, Me.tsbIEmpleados})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbEmpleados, Me.tsbPeriodos, Me.tsbpuestos, Me.tsbdeptos, Me.tsbImportar, Me.tsbIEmpleados, Me.tsbbuscar, Me.tsbLayout})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1357, 54)
@@ -148,6 +146,24 @@ Partial Class frmnominasmarinos
         Me.tsbImportar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsbImportar.ToolTipText = "Importar incidencias"
         '
+        'tsbIEmpleados
+        '
+        Me.tsbIEmpleados.Image = CType(resources.GetObject("tsbIEmpleados.Image"), System.Drawing.Image)
+        Me.tsbIEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbIEmpleados.Name = "tsbIEmpleados"
+        Me.tsbIEmpleados.Size = New System.Drawing.Size(69, 51)
+        Me.tsbIEmpleados.Text = "Empleados"
+        Me.tsbIEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbbuscar
+        '
+        Me.tsbbuscar.Image = CType(resources.GetObject("tsbbuscar.Image"), System.Drawing.Image)
+        Me.tsbbuscar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbbuscar.Name = "tsbbuscar"
+        Me.tsbbuscar.Size = New System.Drawing.Size(46, 51)
+        Me.tsbbuscar.Text = "Buscar"
+        Me.tsbbuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
         'tsbLayout
         '
         Me.tsbLayout.AutoSize = False
@@ -159,22 +175,12 @@ Partial Class frmnominasmarinos
         Me.tsbLayout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsbLayout.Visible = False
         '
-        'tsbIEmpleados
-        '
-        Me.tsbIEmpleados.Image = CType(resources.GetObject("tsbIEmpleados.Image"), System.Drawing.Image)
-        Me.tsbIEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbIEmpleados.Name = "tsbIEmpleados"
-        Me.tsbIEmpleados.Size = New System.Drawing.Size(69, 51)
-        Me.tsbIEmpleados.Text = "Empleados"
-        Me.tsbIEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.pnlCatalogo.Controls.Add(Me.chkCalSoloMarcados)
         Me.pnlCatalogo.Controls.Add(Me.chkPrestamosAsi)
         Me.pnlCatalogo.Controls.Add(Me.chkInfonavit0)
         Me.pnlCatalogo.Controls.Add(Me.cmdResumenInfo)
@@ -206,24 +212,12 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
         '
-        'chkCalSoloMarcados
-        '
-        Me.chkCalSoloMarcados.AutoSize = True
-        Me.chkCalSoloMarcados.BackColor = System.Drawing.Color.Transparent
-        Me.chkCalSoloMarcados.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkCalSoloMarcados.Location = New System.Drawing.Point(7, 36)
-        Me.chkCalSoloMarcados.Name = "chkCalSoloMarcados"
-        Me.chkCalSoloMarcados.Size = New System.Drawing.Size(116, 22)
-        Me.chkCalSoloMarcados.TabIndex = 29
-        Me.chkCalSoloMarcados.Text = "Solo marcados"
-        Me.chkCalSoloMarcados.UseVisualStyleBackColor = False
-        '
         'chkPrestamosAsi
         '
         Me.chkPrestamosAsi.AutoSize = True
         Me.chkPrestamosAsi.BackColor = System.Drawing.Color.Transparent
         Me.chkPrestamosAsi.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPrestamosAsi.Location = New System.Drawing.Point(247, 37)
+        Me.chkPrestamosAsi.Location = New System.Drawing.Point(210, 37)
         Me.chkPrestamosAsi.Name = "chkPrestamosAsi"
         Me.chkPrestamosAsi.Size = New System.Drawing.Size(127, 22)
         Me.chkPrestamosAsi.TabIndex = 28
@@ -235,7 +229,7 @@ Partial Class frmnominasmarinos
         Me.chkInfonavit0.AutoSize = True
         Me.chkInfonavit0.BackColor = System.Drawing.Color.Transparent
         Me.chkInfonavit0.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkInfonavit0.Location = New System.Drawing.Point(148, 36)
+        Me.chkInfonavit0.Location = New System.Drawing.Point(115, 36)
         Me.chkInfonavit0.Name = "chkInfonavit0"
         Me.chkInfonavit0.Size = New System.Drawing.Size(93, 22)
         Me.chkInfonavit0.TabIndex = 27
@@ -325,7 +319,7 @@ Partial Class frmnominasmarinos
         Me.chkinter.AutoSize = True
         Me.chkinter.BackColor = System.Drawing.Color.Transparent
         Me.chkinter.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkinter.Location = New System.Drawing.Point(469, 37)
+        Me.chkinter.Location = New System.Drawing.Point(433, 37)
         Me.chkinter.Name = "chkinter"
         Me.chkinter.Size = New System.Drawing.Size(110, 22)
         Me.chkinter.TabIndex = 18
@@ -335,9 +329,9 @@ Partial Class frmnominasmarinos
         'cbobancos
         '
         Me.cbobancos.FormattingEnabled = True
-        Me.cbobancos.Location = New System.Drawing.Point(586, 33)
+        Me.cbobancos.Location = New System.Drawing.Point(541, 33)
         Me.cbobancos.Name = "cbobancos"
-        Me.cbobancos.Size = New System.Drawing.Size(205, 27)
+        Me.cbobancos.Size = New System.Drawing.Size(252, 27)
         Me.cbobancos.TabIndex = 17
         '
         'chkSindicato
@@ -345,7 +339,7 @@ Partial Class frmnominasmarinos
         Me.chkSindicato.AutoSize = True
         Me.chkSindicato.BackColor = System.Drawing.Color.Transparent
         Me.chkSindicato.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkSindicato.Location = New System.Drawing.Point(380, 37)
+        Me.chkSindicato.Location = New System.Drawing.Point(343, 37)
         Me.chkSindicato.Name = "chkSindicato"
         Me.chkSindicato.Size = New System.Drawing.Size(84, 22)
         Me.chkSindicato.TabIndex = 16
@@ -357,7 +351,7 @@ Partial Class frmnominasmarinos
         Me.chkAll.AutoSize = True
         Me.chkAll.BackColor = System.Drawing.Color.Transparent
         Me.chkAll.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkAll.Location = New System.Drawing.Point(6, 64)
+        Me.chkAll.Location = New System.Drawing.Point(6, 36)
         Me.chkAll.Name = "chkAll"
         Me.chkAll.Size = New System.Drawing.Size(107, 22)
         Me.chkAll.TabIndex = 15
@@ -450,12 +444,12 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.AllowUserToDeleteRows = False
         Me.dtgDatos.AllowUserToOrderColumns = True
         Me.dtgDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dtgDatos.Location = New System.Drawing.Point(1, 123)
+        Me.dtgDatos.Location = New System.Drawing.Point(1, 65)
         Me.dtgDatos.Name = "dtgDatos"
-        Me.dtgDatos.Size = New System.Drawing.Size(1349, 321)
+        Me.dtgDatos.Size = New System.Drawing.Size(1349, 379)
         Me.dtgDatos.TabIndex = 6
         '
         'cmdverdatos
@@ -514,9 +508,9 @@ Partial Class frmnominasmarinos
         '
         'cMenu
         '
-        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPresAsiToolStripMenuItem, Me.ActivaCalculoPresAsiToolStripMenuItem, Me.NoCalcularPresSAToolStripMenuItem, Me.ActivarCaluloPresSAToolStripMenuItem, Me.UnicosRegistrosACalcularToolStripMenuItem, Me.DesactivarUnicosRegistrosACalcularToolStripMenuItem})
+        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPresAsiToolStripMenuItem, Me.ActivaCalculoPresAsiToolStripMenuItem, Me.NoCalcularPresSAToolStripMenuItem, Me.ActivarCaluloPresSAToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(268, 268)
+        Me.cMenu.Size = New System.Drawing.Size(205, 202)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
@@ -651,6 +645,7 @@ Partial Class frmnominasmarinos
         Me.cmdImssNomina.TabIndex = 33
         Me.cmdImssNomina.Text = "IMSS/Nomina"
         Me.cmdImssNomina.UseVisualStyleBackColor = True
+        Me.cmdImssNomina.Visible = False
         '
         'cmdConcentradoFonacot
         '
@@ -675,18 +670,6 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.TabIndex = 33
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
-        '
-        'UnicosRegistrosACalcularToolStripMenuItem
-        '
-        Me.UnicosRegistrosACalcularToolStripMenuItem.Name = "UnicosRegistrosACalcularToolStripMenuItem"
-        Me.UnicosRegistrosACalcularToolStripMenuItem.Size = New System.Drawing.Size(211, 22)
-        Me.UnicosRegistrosACalcularToolStripMenuItem.Text = "Unicos registros a calcular"
-        '
-        'DesactivarUnicosRegistrosACalcularToolStripMenuItem
-        '
-        Me.DesactivarUnicosRegistrosACalcularToolStripMenuItem.Name = "DesactivarUnicosRegistrosACalcularToolStripMenuItem"
-        Me.DesactivarUnicosRegistrosACalcularToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
-        Me.DesactivarUnicosRegistrosACalcularToolStripMenuItem.Text = "Desactivar unicos registros a calcular"
         '
         'frmnominasmarinos
         '
@@ -784,8 +767,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents cmdImssNomina As System.Windows.Forms.Button
     Friend WithEvents cmdConcentradoFonacot As System.Windows.Forms.Button
     Friend WithEvents chkNoinfonavit As System.Windows.Forms.CheckBox
-    Friend WithEvents chkCalSoloMarcados As System.Windows.Forms.CheckBox
-    Friend WithEvents UnicosRegistrosACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DesactivarUnicosRegistrosACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsbbuscar As System.Windows.Forms.ToolStripButton
 
 End Class
