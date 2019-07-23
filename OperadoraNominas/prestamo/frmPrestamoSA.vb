@@ -11,7 +11,7 @@
 
     Private Sub frmPrestamoSA_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Cargarhistorial()
-
+        TabIndex()
 
 
         blnNuevo = True
@@ -71,7 +71,15 @@
 
         End Try
     End Sub
-
+    Private Sub TabIndex()
+        cboEstatus.Focus()
+        cboEstatus.TabIndex = 1
+        dtpFechaPrestamo.TabIndex = 2
+        txtMontoTotal.TabIndex = 3
+        txtDescuento.TabIndex = 4
+        dtpInicioPago.TabIndex = 5
+        cmdguardar.TabIndex = 6
+    End Sub
 
     Private Sub Limpiar(ByVal Contenedor As Object)
 
@@ -193,6 +201,7 @@
         dtpFechaPrestamo.Enabled = True
         dtpInicioPago.Enabled = True
         cboEstatus.Enabled = True
+        TabIndex()
     End Sub
 
     Private Sub cmdsalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdsalir.Click
