@@ -165,7 +165,7 @@ Public Class frmnominasmarinos
 
     End Sub
 
-    Private Sub llenargrid()
+    Private Sub llenargrid(Optional ByRef tiponom As String = "")
         'Cargar grid
         Try
             Dim sql As String
@@ -296,13 +296,13 @@ Public Class frmnominasmarinos
             dsPeriodo.Tables("Tabla").Columns.Add("IVA")
             dsPeriodo.Tables("Tabla").Columns.Add("TOTAL_DEPOSITO")
 
-           
+
 
             'verificamos que no sea una nomina ya guardada como final
             sql = "select * from Nomina inner join EmpleadosC on fkiIdEmpleadoC=iIdEmpleadoC"
             sql &= " where Nomina.fkiIdEmpresa = 1 And fkiIdPeriodo = " & cboperiodo.SelectedValue
             sql &= " and Nomina.iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
-            sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+            sql &= " and iTipoNomina=" & IIf(tiponom = "", cboTipoNomina.SelectedIndex, tiponom)
             sql &= " order by " & campoordenamiento 'cNombreLargo"
             'sql = "EXEC getNominaXEmpresaXPeriodo " & gIdEmpresa & "," & cboperiodo.SelectedValue & ",1"
 
@@ -843,9 +843,11 @@ Public Class frmnominasmarinos
 
 
                 'Next
+                If tiponom = "" Then
+                    MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
+                End If
+               
 
             Else
 
@@ -1308,11 +1310,13 @@ Public Class frmnominasmarinos
 
                         'Next
 
-
-                        MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Else
-                        MessageBox.Show("No hay datos en este período", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        If tiponom = "" Then
+                            MessageBox.Show("Datos cargados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Else
+                            MessageBox.Show("No hay datos en este período", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End If
                     End If
+                     
 
 
 
@@ -1323,7 +1327,7 @@ Public Class frmnominasmarinos
                 End If
 
 
-                
+
 
             End If
         Catch ex As Exception
@@ -5379,9 +5383,9 @@ Public Class frmnominasmarinos
             Dim periodo, fechadepago, iejercicio As String
             Dim mes As String
             Dim fechapagoletra() As String
-            Dim cedros, jose, miramar, grande, montserrat, blanca, ciari, janitzio, gabriel, amarrados, arboleda, azteca, diego, ignacio, luis, cruz, verde, leon As Double
+            Dim cedros, jose, miramar, grande, montserrat, blanca, ciari, janitzio, gabriel, amarrados, arboleda, azteca, diego, ignacio, luis, cruz, verde, leon, nevado As Double
             Dim creciente, colorada, subsea88 As Integer
-            Dim cedrospasim, josepasim, miramarpasim, grandepasim, montserratpasim, blancapasim, ciaripasim, janitziopasim, gabrielpasim, amarradospasim, arboledapasim, aztecapasim, diegopasim, ignaciopasim, luispasim, cruzpasim, verdepasim, leonpasim As Double
+            Dim cedrospasim, josepasim, miramarpasim, grandepasim, montserratpasim, blancapasim, ciaripasim, janitziopasim, gabrielpasim, amarradospasim, arboledapasim, aztecapasim, diegopasim, ignaciopasim, luispasim, cruzpasim, verdepasim, leonpasim, nevadoasim As Double
             Dim crecientepasim, coloradapasim, subsea88pasim As Integer
 
             pnlProgreso.Visible = True
@@ -5592,6 +5596,10 @@ Public Class frmnominasmarinos
                             Case "ISLA LEON"
                                 leon += CDbl(dtgDatos.Rows(x).Cells(36).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "isr"))
                                 leonpasim += CDbl(dtgDatos.Rows(x).Cells(47).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "prestamoA"))
+                            Case "NEVADO DE COLIMA"
+                                nevado += CDbl(dtgDatos.Rows(x).Cells(36).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "isr"))
+                                nevadoasim += CDbl(dtgDatos.Rows(x).Cells(47).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "prestamoA"))
+
                         End Select
 
                     Else
@@ -5791,6 +5799,10 @@ Public Class frmnominasmarinos
                             Case "ISLA LEON"
                                 leon += CDbl(dtgDatos.Rows(x).Cells(36).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "isr"))
                                 leonpasim += CDbl(dtgDatos.Rows(x).Cells(47).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "prestamoA"))
+                            Case "NEVADO DE COLIMA"
+                                nevado += CDbl(dtgDatos.Rows(x).Cells(36).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "isr"))
+                                nevadoasim += CDbl(dtgDatos.Rows(x).Cells(47).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "prestamoA"))
+
                         End Select
 
 
@@ -6228,6 +6240,25 @@ Public Class frmnominasmarinos
                 hoja3.Cell(32, 24).FormulaA1 = "=" & periodo & "!R25"
                 hoja3.Cell(33, 24).FormulaA1 = "=" & periodo & "!S25"
                 hoja3.Cell(34, 24).FormulaA1 = "=" & periodo & "!T25"
+
+                'NEVADO DE COLIMA
+                hoja3.Cell(6, 25).FormulaA1 = "=" & periodo & "!D26"
+                hoja3.Cell(7, 25).FormulaA1 = "=" & periodo & "!E26"
+                hoja3.Cell(8, 25).FormulaA1 = "=" & periodo & "!F26"
+                hoja3.Cell(9, 25).FormulaA1 = "=" & periodo & "!G26"
+                'hoja3.Cell(10,25).FormulaA1 = "=" & periodo & "!H26"
+                hoja3.Cell(11, 25).FormulaA1 = "=" & periodo & "!I26"
+                hoja3.Cell(12, 25).FormulaA1 = "=" & periodo & "!H25"
+                hoja3.Cell(13, 25).FormulaA1 = "=" & periodo & "!J25"
+                hoja3.Cell(15, 25).Value = nevado
+                hoja3.Cell(18, 25).Value = nevadoasim
+                hoja3.Cell(16, 25).FormulaA1 = "=" & periodo & "!Q26"
+                hoja3.Cell(19, 25).FormulaA1 = "=" & periodo & "!O26"
+                hoja3.Cell(20, 25).FormulaA1 = "=" & periodo & "!L26"
+                hoja3.Cell(31, 25).FormulaA1 = "=" & periodo & "!Q26"
+                hoja3.Cell(32, 25).FormulaA1 = "=" & periodo & "!R26"
+                hoja3.Cell(33, 25).FormulaA1 = "=" & periodo & "!S26"
+                hoja3.Cell(34, 25).FormulaA1 = "=" & periodo & "!T26"
                 
                 'Titulo
                 Dim moment As Date = Date.Now()
@@ -8906,7 +8937,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub cmdexcel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdexcel.Click
+   Private Sub cmdexcel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdexcel.Click
         Try
 
             Dim filaExcel As Integer = 0
@@ -8963,13 +8994,13 @@ Public Class frmnominasmarinos
                 Dim filatmp2 As Integer = filaExcel
                 Dim fecha, iejercicio As String
                 Dim descAsim As String
-                Dim amarrados, arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, luis, ignacio, gabriel, diego, jose, grande, creciente, colorada, subsea88, leon As Integer
+                Dim amarrados, arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, luis, ignacio, gabriel, diego, jose, grande, creciente, colorada, subsea88, leon, nevado As Integer
                 Dim passavera, margot As Integer
                 Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB, AC As String
 
                 If cboTipoNomina.SelectedIndex = 1 Then
                     tiponomina = "0"
-                    llenargridD("0")
+                    llenargrid("0")
                 Else
                     tiponomina = "1"
 
@@ -9030,7 +9061,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 23).FormulaA1 = ""
                         hoja.Cell(filaExcel + x, 24).FormulaA1 = "=(T" & filaExcel + x & "+V" & filaExcel + x & ")*2%"
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = "=(O" & filaExcel + x & "+U" & filaExcel + x & ")*2%"
-                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "='OPERADORA ABORDO'!AV" & filatmp + x & "+'OPERADORA DESCANSO'!AV" & filatmp + x 'AV Costo social
+                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "='OPERADORA ABORDO'!AV" & filatmp + x & "+'OPERADORA DESCANSO'!AV" & filatmp + x 'V
                         hoja.Cell(filaExcel + x, 27).FormulaA1 = "=T" & filaExcel + x & "+U" & filaExcel + x & "+V" & filaExcel + x & "+X" & filaExcel + x & "+Y" & filaExcel + x & "+Z" & filaExcel + x & "+O" & filaExcel + x
                         hoja.Cell(filaExcel + x, 28).FormulaA1 = "=AA" & filaExcel + x & "*16%"
                         hoja.Cell(filaExcel + x, 29).FormulaA1 = "=AA" & filaExcel + x & "+AB" & filaExcel + x 'total
@@ -9038,7 +9069,7 @@ Public Class frmnominasmarinos
 
 
                     Else
-
+                        contadorexcelbuquefinal = filaExcel + x - 1
 
                         Select Case nombrebuque
                             Case "ISLA ARBOLEDA"
@@ -9083,7 +9114,8 @@ Public Class frmnominasmarinos
                                 subsea88 = contadorexcelbuquefinal
                             Case "ISLA LEON"
                                 leon = contadorexcelbuquefinal
-
+                            Case "NEVADO DE COLIMA", "NEVADO COLIMA"
+                                nevado = contadorexcelbuquefinal
                         End Select
 
                         hoja.Cell(filaExcel + x, 12).FormulaA1 = "=SUM(L" & contadorexcelbuqueinicial & ":L" & contadorexcelbuquefinal & ")"
@@ -9247,6 +9279,8 @@ Public Class frmnominasmarinos
                         subsea88 = contadorexcelbuquefinal
                     Case "ISLA LEON"
                         leon = contadorexcelbuquefinal
+                    Case "NEVADO DE COLIMA", "NEVADO COLIMA"
+                        nevado = contadorexcelbuquefinal
                 End Select
 
 
@@ -9300,6 +9334,8 @@ Public Class frmnominasmarinos
                 hoja.Cell(filaExcel + total + 4, 27).FormulaA1 = "=" & AA
                 hoja.Cell(filaExcel + total + 4, 28).FormulaA1 = "=" & AB
                 hoja.Cell(filaExcel + total + 4, 29).FormulaA1 = "=" & AC
+
+
 
                 ''Nomina(Tottal)
 
@@ -9966,6 +10002,45 @@ Public Class frmnominasmarinos
                 hoja.Range("S" & sep + 8, "T" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Cell("S" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
+                'NEVADO DE COLIMA
+                hoja.Cell("V" & sep).Value = "NEVADO DE COLIMA"
+                hoja.Cell("V" & sep + 1).Value = "TMM DIVISION"
+                hoja.Cell("V" & sep + 3).Value = "DEPOSITO ROUTES SCOTIABANK"
+                hoja.Cell("V" & sep + 4).Value = "IVA"
+                hoja.Cell("V" & sep + 5).Value = "TOTAL DEPOSITO ROUTES"
+                hoja.Cell("V" & sep + 6).Value = "DEPOSITO BIRYUSA SCOTIABANK"
+                hoja.Cell("V" & sep + 7).Value = "IVA"
+                hoja.Cell("V" & sep + 8).Value = "TOTAL DEPOSITO BIRYUSA"
+
+                If nevado > 0 Then
+
+                    hoja.Cell("X" & sep + 3).FormulaA1 = "=T" & nevado + 1 & "+V" & nevado + 1 & "+X" & nevado + 1 & "+Z" & nevado + 1
+                    hoja.Cell("X" & sep + 4).FormulaA1 = "=X" & sep + 3 & "*16%"
+                    hoja.Cell("X" & sep + 5).FormulaA1 = "=X" & sep + 3 & "+X" & sep + 4
+
+                    hoja.Cell("X" & sep + 6).FormulaA1 = "=U" & nevado + 1 & "+Y" & nevado + 1 & "+O" & nevado + 1
+                    hoja.Cell("X" & sep + 7).FormulaA1 = "=X" & sep + 6 & "*16%"
+                    hoja.Cell("X" & sep + 8).FormulaA1 = "=X" & sep + 6 & "+X" & sep + 7
+
+                    hoja.Cell("X" & sep + 10).FormulaA1 = "X" & sep + 5 & "+X" & sep + 8
+
+                Else
+                    hoja.Cell("X" & sep + 3).FormulaA1 = "0"
+                    hoja.Cell("X" & sep + 4).FormulaA1 = "=X" & sep + 3 & "*16%"
+                    hoja.Cell("X" & sep + 5).FormulaA1 = "=X" & sep + 3 & "+X" & sep + 4
+
+                    hoja.Cell("X" & sep + 6).FormulaA1 = "0"
+                    hoja.Cell("X" & sep + 7).FormulaA1 = "=X" & sep + 6 & "*16%"
+                    hoja.Cell("X" & sep + 8).FormulaA1 = "=X" & sep + 6 & "+X" & sep + 7
+
+                    hoja.Cell("X" & sep + 10).FormulaA1 = "X" & sep + 5 & "+X" & sep + 8
+
+
+                End If
+
+                hoja.Range("V" & sep + 5, "X" & sep + 5).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Range("V" & sep + 8, "X" & sep + 8).Style.Fill.BackgroundColor = XLColor.YellowProcess
+                hoja.Cell("V" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
                 '<<<<<<<<<<<<<<<<<<<<<<<<<<FACT>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -10528,7 +10603,7 @@ Public Class frmnominasmarinos
 
                 '<<<<<<<<<<<<<<<Operadora Descanso>>>>>>>>>>>>>>>>>>
 
-                llenargridD("1")
+                llenargrid("1")
 
                 ''Operadora Descanso
                 filaExcel = 9
@@ -10596,9 +10671,9 @@ Public Class frmnominasmarinos
                     hoja3.Cell(filaExcel, 41).Value = dtgDatos.Rows(x).Cells(43).Value ' FONACOT
                     hoja3.Cell(filaExcel, 42).Value = dtgDatos.Rows(x).Cells(46).Value ' NETO A PAGAR
 
-                    hoja3.Cell(filaExcel, 43).Value = 0 'dtgDatos.Rows(x).Cells(55).Value 'IMSS CS (AQ)
-                    hoja3.Cell(filaExcel, 44).Value = 0 'dtgDatos.Rows(x).Cells(56).Value 'AR
-                    hoja3.Cell(filaExcel, 45).Value = 0 'dtgDatos.Rows(x).Cells(57).Value 'AS
+                    hoja3.Cell(filaExcel, 43).Value = "0" 'dtgDatos.Rows(x).Cells(55).Value 'IMSS CS (AQ)
+                    hoja3.Cell(filaExcel, 44).Value = "0" 'dtgDatos.Rows(x).Cells(56).Value 'AR
+                    hoja3.Cell(filaExcel, 45).Value = "0" 'dtgDatos.Rows(x).Cells(57).Value 'AS
                     hoja3.Cell(filaExcel, 46).Value = dtgDatos.Rows(x).Cells(58).Value 'AT
                     hoja3.Cell(filaExcel, 47).FormulaA1 = "=SUM(AQ" & filaExcel & ":AT" & filaExcel & ")"
                     hoja3.Cell(filaExcel, 48).Value = dtgDatos.Rows(x).Cells(59).Value
@@ -10677,9 +10752,9 @@ Public Class frmnominasmarinos
                     MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                     If cboTipoNomina.SelectedIndex = "0" Then
-                        llenargridD("0")
+                        llenargrid("0")
                     Else
-                        llenargridD("1")
+                        llenargrid("1")
                     End If
 
                 Else
@@ -10696,6 +10771,7 @@ Public Class frmnominasmarinos
 
 
     End Sub
+
 
     'Private Function ExisteEmpleado(ByVal empleado As String) As Boolean
 
