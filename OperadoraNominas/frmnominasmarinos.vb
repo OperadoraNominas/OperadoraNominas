@@ -325,7 +325,7 @@ Public Class frmnominasmarinos
 
                     fila.Item("CodigoEmpleado") = rwNominaGuardada(x)("cCodigoEmpleado").ToString
                     fila.Item("Nombre") = rwNominaGuardada(x)("cNombreLargo").ToString.ToUpper()
-                    fila.Item("Status") = IIf(rwNominaGuardada(x)("iOrigen").ToString = "1", "INTERINO", "PLANTA")
+                    fila.Item("Status") = rwNominaGuardada(x)("iConsecutivo").ToString & "+" & IIf(rwNominaGuardada(x)("iOrigen").ToString = "1", "INTERINO", "PLANTA")
                     fila.Item("RFC") = rwNominaGuardada(x)("cRFC").ToString
                     fila.Item("CURP") = rwNominaGuardada(x)("cCURP").ToString
                     fila.Item("Num_IMSS") = rwNominaGuardada(x)("cIMSS").ToString
@@ -1511,6 +1511,7 @@ Public Class frmnominasmarinos
             Dim sql As String
             Dim sql2 As String
             Dim NOCALCULAR As Boolean
+            Dim consecutivo1 As String
 
             sql = "select * from Nomina where fkiIdEmpresa=1 and fkiIdPeriodo=" & cboperiodo.SelectedValue
             sql &= " and iEstatusNomina=1 and iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
@@ -1599,7 +1600,15 @@ Public Class frmnominasmarinos
                 pgbProgreso.Maximum = dtgDatos.Rows.Count
 
                 For x As Integer = 0 To dtgDatos.Rows.Count - 1
-                    NOCALCULAR = True
+
+                    If InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text) > 0 Then
+                        consecutivo1 = dtgDatos.Rows(x).Cells(5).Value.ToString.Substring(0, InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text) - 1)
+
+                    Else
+                        consecutivo1 = IIf(dtgDatos.Rows(x).Cells(1).Value = "", "0", dtgDatos.Rows(x).Cells(1).Value.ToString.Replace(",", ""))
+                    End If
+
+                    NOCALCULAR = False
                     'If dtgDatos.Rows(x).Cells(2).Value = "321" Then
                     '    MessageBox.Show(dtgDatos.Rows(x).Cells(2).Value = "4090")
                     'End If
@@ -1614,6 +1623,8 @@ Public Class frmnominasmarinos
                         sql &= " and iEstatusNomina=0 and iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
                         sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
                         sql &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql &= " and iConsecutivo=" & consecutivo1
+
                         If nExecute(sql) = False Then
                             MessageBox.Show("Ocurrio un error ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             'pnlProgreso.Visible = False
@@ -1626,6 +1637,7 @@ Public Class frmnominasmarinos
                         'sql &= " and iSerie=" & cboserie.SelectedIndex
                         sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
                         sql &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql &= " and iConsecutivo=" & consecutivo1
 
                         If nExecute(sql) = False Then
                             MessageBox.Show("Ocurrio un error ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -1638,7 +1650,7 @@ Public Class frmnominasmarinos
                         sql &= " and iSerie=" & cboserie.SelectedIndex
                         sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
                         sql &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
-
+                        sql &= " and iConsecutivo=" & consecutivo1
                         If nExecute(sql) = False Then
                             MessageBox.Show("Ocurrio un error borrando fonacot. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             'pnlProgreso.Visible = False
@@ -1651,6 +1663,7 @@ Public Class frmnominasmarinos
                         sql &= " and iSerie=" & cboserie.SelectedIndex
                         sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
                         sql &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql &= " and iConsecutivo=" & consecutivo1
                         If nExecute(sql) = False Then
                             MessageBox.Show("Ocurrio un error borrando fonacot. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             'pnlProgreso.Visible = False
@@ -1663,11 +1676,15 @@ Public Class frmnominasmarinos
                         sql &= " and iSerie=" & cboserie.SelectedIndex
                         sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
                         sql &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql &= " and iConsecutivo=" & consecutivo1
+
                         If nExecute(sql) = False Then
                             MessageBox.Show("Ocurrio un error borrando fonacot. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             'pnlProgreso.Visible = False
                             Exit Sub
                         End If
+
+                        NOCALCULAR = True
 
 
 
@@ -1677,6 +1694,7 @@ Public Class frmnominasmarinos
                         'No calcular
                         NOCALCULAR = False
                     ElseIf chkCalSoloMarcados.Checked = False Then
+                        NOCALCULAR = True
                         'si calcular
                     End If
 
@@ -1819,7 +1837,8 @@ Public Class frmnominasmarinos
                         sql &= ",0"
                         'Tipo Nomina
                         sql &= "," & cboTipoNomina.SelectedIndex
-
+                        'tipo consecutivo
+                        sql &= "," & consecutivo1
 
 
 
@@ -1866,6 +1885,8 @@ Public Class frmnominasmarinos
                             sql &= ",101"
                             'iEstatu
                             sql &= ",1"
+                            'tipo consecutivo
+                            sql &= "," & consecutivo1
 
                             If nExecute(sql) = False Then
                                 MessageBox.Show("Ocurrio un error insertar detalle infonavit ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -1901,6 +1922,8 @@ Public Class frmnominasmarinos
                             sql &= ",102"
                             'iEstatu
                             sql &= ",1"
+                            'tipo consecutivo
+                            sql &= "," & consecutivo1
 
                             If nExecute(sql) = False Then
                                 MessageBox.Show("Ocurrio un error insertar detalle infonavit ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -1935,6 +1958,8 @@ Public Class frmnominasmarinos
                             sql &= ",103"
                             'iEstatu
                             sql &= ",1"
+                            'tipo consecutivo
+                            sql &= "," & consecutivo1
 
                             If nExecute(sql) = False Then
                                 MessageBox.Show("Ocurrio un error insertar detalle infonavit ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -1969,6 +1994,8 @@ Public Class frmnominasmarinos
                             sql &= ",201"
                             'iEstatu
                             sql &= ",1"
+                            'tipo consecutivo
+                            sql &= "," & consecutivo1
 
                             If nExecute(sql) = False Then
                                 MessageBox.Show("Ocurrio un error insertar detalle infonavit ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -2002,6 +2029,8 @@ Public Class frmnominasmarinos
                             sql &= ",202"
                             'iEstatu
                             sql &= ",1"
+                            'tipo consecutivo
+                            sql &= "," & consecutivo1
 
                             If nExecute(sql) = False Then
                                 MessageBox.Show("Ocurrio un error insertar detalle infonavit ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -2033,6 +2062,8 @@ Public Class frmnominasmarinos
                                 sql &= ",301"
                                 'iEstatu
                                 sql &= ",1"
+                                'tipo consecutivo
+                                sql &= "," & consecutivo1
 
                                 If nExecute(sql) = False Then
                                     MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -2075,6 +2106,8 @@ Public Class frmnominasmarinos
                                 sql &= ",'" & Date.Now.ToShortDateString
                                 'iEstatu
                                 sql &= "',1"
+                                'tipo consecutivo
+                                sql &= "," & consecutivo1
 
                                 If nExecute(sql) = False Then
                                     MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -2115,6 +2148,8 @@ Public Class frmnominasmarinos
                                 sql &= ",'" & Date.Now.ToShortDateString
                                 'iEstatu
                                 sql &= "',1"
+                                'tipo consecutivo
+                                sql &= "," & consecutivo1
 
                                 If nExecute(sql) = False Then
                                     MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -2506,6 +2541,8 @@ Public Class frmnominasmarinos
         Dim VACAPRO As Double
         Dim numbimestre As Integer
         Dim NOCALCULAR As Boolean
+        Dim consecutivo1 As String
+        Dim plantaoNO As String
 
         Try
             'verificamos que tenga dias a calcular
@@ -2544,6 +2581,15 @@ Public Class frmnominasmarinos
             For x As Integer = 0 To dtgDatos.Rows.Count - 1
                 NOCALCULAR = True
 
+                If InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text) > 0 Then
+                    consecutivo1 = dtgDatos.Rows(x).Cells(5).Value.ToString.Substring(0, InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text) - 1)
+                    plantaoNO = dtgDatos.Rows(x).Cells(5).Value.ToString.Substring(InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text))
+
+                Else
+                    consecutivo1 = IIf(dtgDatos.Rows(x).Cells(1).Value = "", "0", dtgDatos.Rows(x).Cells(1).Value.ToString.Replace(",", ""))
+                    plantaoNO = dtgDatos.Rows(x).Cells(5).Value
+                End If
+
                 'verificamos los sueldos
                 sql = "Select salariod,sbc,salariodTopado,sbcTopado from costosocial inner join puestos on costosocial.fkiIdPuesto=puestos.iIdPuesto "
                 sql &= " where cNombre = '" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
@@ -2572,27 +2618,32 @@ Public Class frmnominasmarinos
                         sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                         sql &= " and iSerie=" & cboserie.SelectedIndex
                         sql &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql &= " and iConsecutivo=" & consecutivo1
                         'sql &= " and iSerie=" & cboserie.SelectedIndex
                         'sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
                         sql2 = " delete from DetallePensionAlimenticia"
                         sql2 &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                         sql2 &= " and iSerie=" & cboserie.SelectedIndex
                         sql2 &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql2 &= " and iConsecutivo=" & consecutivo1
 
                         sql3 = " delete from DetalleFonacot"
                         sql3 &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                         sql3 &= " and iSerie=" & cboserie.SelectedIndex
                         sql3 &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql3 &= " and iConsecutivo=" & consecutivo1
 
                         sql4 = " delete from PagoPrestamo"
                         sql4 &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                         sql4 &= " and iSerie=" & cboserie.SelectedIndex
                         sql4 &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql4 &= " and iConsecutivo=" & consecutivo1
 
                         sql5 = " delete from PagoPrestamoSA"
                         sql5 &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                         sql5 &= " and iSerie=" & cboserie.SelectedIndex
                         sql5 &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql5 &= " and iConsecutivo=" & consecutivo1
 
 
                         '' borrar el seguro si solo tiene un registro
@@ -2622,30 +2673,35 @@ Public Class frmnominasmarinos
                         'sql &= " and iSerie=" & cboserie.SelectedIndex
                         sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
                         sql &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql &= " and iConsecutivo=" & consecutivo1
 
                         sql2 = " delete from DetallePensionAlimenticia"
                         sql2 &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                         sql2 &= " and iSerie=" & cboserie.SelectedIndex
                         sql2 &= " and iTipo=" & cboTipoNomina.SelectedIndex
                         sql2 &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql2 &= " and iConsecutivo=" & consecutivo1
 
                         sql3 = " delete from DetalleFonacot"
                         sql3 &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                         sql3 &= " and iSerie=" & cboserie.SelectedIndex
                         sql3 &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
                         sql3 &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql3 &= " and iConsecutivo=" & consecutivo1
 
                         sql4 = " delete from PagoPrestamo"
                         sql4 &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                         sql4 &= " and iSerie=" & cboserie.SelectedIndex
                         sql4 &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
                         sql4 &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql4 &= " and iConsecutivo=" & consecutivo1
 
                         sql5 = " delete from PagoPrestamoSA"
                         sql5 &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
                         sql5 &= " and iSerie=" & cboserie.SelectedIndex
                         sql5 &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
                         sql5 &= " and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        sql5 &= " and iConsecutivo=" & consecutivo1
                     End If
 
 
@@ -3229,7 +3285,7 @@ Public Class frmnominasmarinos
                                                         If rwMontoInfonavit Is Nothing = False Then
                                                             'Verificamos el monto del infonavit a calcular
 
-                                                            InfonavitNormal = Math.Round(infonavit(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Double.Parse(dtgDatos.Rows(x).Cells(18).Value), Integer.Parse(dtgDatos.Rows(x).Cells(2).Value), Integer.Parse(dtgDatos.Rows(x).Cells(1).Value)) - 1, 2).ToString("###,##0.00")
+                                                            InfonavitNormal = Math.Round(infonavit(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Double.Parse(dtgDatos.Rows(x).Cells(18).Value), Integer.Parse(dtgDatos.Rows(x).Cells(2).Value), Integer.Parse(dtgDatos.Rows(x).Cells(1).Value) - 1), 2).ToString("###,##0.00")
 
                                                             '########
                                                             If Double.Parse(rwMontoInfonavit(0)("monto").ToString) < MontoInfonavit Then
@@ -3323,6 +3379,7 @@ Public Class frmnominasmarinos
                                 sql &= ",101"
                                 'iEstatu
                                 sql &= ",1"
+                                sql &= "," & consecutivo1
 
                                 If nExecute(sql) = False Then
                                     MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -3360,70 +3417,74 @@ Public Class frmnominasmarinos
 
 
                             'CALCULAR FONACOT
+                            If chkNofonacot.Checked = False Then
 
-                            sql = "SELECT * FROM FONACOT WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                                sql = "SELECT * FROM FONACOT WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
 
-                            Dim rwFonacotEmpleado As DataRow() = nConsulta(sql)
-                            If rwFonacotEmpleado Is Nothing = False Then
-                                'ya existe el pago
-                                sql = "select isnull( sum (Monto),0) as monto from detallefonacot where fkiIdFonacot=" & rwFonacotEmpleado(0)("iIdFonacot") & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
-                                Dim rwExistePagofonacot As DataRow() = nConsulta(sql)
-                                If rwExistePagofonacot Is Nothing = False Then
-                                    If Double.Parse(rwFonacotEmpleado(0)("ImporteMensual")) > Double.Parse(rwExistePagofonacot(0)("monto")) Then
-                                        'falta pago
-                                        Dim FaltanteFonacot As Double
-                                        FaltanteFonacot = Double.Parse(rwFonacotEmpleado(0)("ImporteMensual")) - Double.Parse(rwExistePagofonacot(0)("monto"))
-                                        'ver si se puede descontar todo o solo una parte
-                                        fonacot = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit
+                                Dim rwFonacotEmpleado As DataRow() = nConsulta(sql)
+                                If rwFonacotEmpleado Is Nothing = False Then
+                                    'ya existe el pago
+                                    sql = "select isnull( sum (Monto),0) as monto from detallefonacot where fkiIdFonacot=" & rwFonacotEmpleado(0)("iIdFonacot") & " and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                                    Dim rwExistePagofonacot As DataRow() = nConsulta(sql)
+                                    If rwExistePagofonacot Is Nothing = False Then
+                                        If Double.Parse(rwFonacotEmpleado(0)("ImporteMensual")) > Double.Parse(rwExistePagofonacot(0)("monto")) Then
+                                            'falta pago
+                                            Dim FaltanteFonacot As Double
+                                            FaltanteFonacot = Double.Parse(rwFonacotEmpleado(0)("ImporteMensual")) - Double.Parse(rwExistePagofonacot(0)("monto"))
+                                            'ver si se puede descontar todo o solo una parte
+                                            fonacot = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit
 
-                                        If fonacot >= FaltanteFonacot Then
-                                            dtgDatos.Rows(x).Cells(43).Value = Math.Round(FaltanteFonacot, 2)
-                                        Else
-                                            dtgDatos.Rows(x).Cells(43).Value = Math.Round(fonacot, 2)
+                                            If fonacot >= FaltanteFonacot Then
+                                                dtgDatos.Rows(x).Cells(43).Value = Math.Round(FaltanteFonacot, 2)
+                                            Else
+                                                dtgDatos.Rows(x).Cells(43).Value = Math.Round(fonacot, 2)
 
-                                        End If
-                                        'guardar el detalle del pago para que no se duplique o solo se le reste lo faltante en un trbajador si es que aparece doble
-
-                                        If Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", "0", dtgDatos.Rows(x).Cells(43).Value)) > 0 Then
-
-                                            'Dim MontoInfonavit As Double = MontoInfonavitF(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
-
-                                            sql = "EXEC setDetalleFonacotInsertar  0"
-                                            'fk Calculo infonavit
-                                            sql &= "," & rwFonacotEmpleado(0)("iIdFonacot")
-                                            ' fk Empleado
-                                            sql &= "," & dtgDatos.Rows(x).Cells(2).Value
-                                            'fk Periodo
-                                            sql &= "," & cboperiodo.SelectedValue
-                                            'Monto
-                                            sql &= "," & dtgDatos.Rows(x).Cells(43).Value
-                                            'Serie
-                                            sql &= "," & cboserie.SelectedIndex
-                                            'Tipo Nomina
-                                            sql &= "," & cboTipoNomina.SelectedIndex
-                                            'Tipo Pagadora
-                                            sql &= ",301"
-                                            'iEstatu
-                                            sql &= ",1"
-
-                                            If nExecute(sql) = False Then
-                                                MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                                                'pnlProgreso.Visible = False
-                                                Exit Sub
                                             End If
-                                        End If
+                                            'guardar el detalle del pago para que no se duplique o solo se le reste lo faltante en un trbajador si es que aparece doble
 
+                                            If Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", "0", dtgDatos.Rows(x).Cells(43).Value)) > 0 Then
+
+                                                'Dim MontoInfonavit As Double = MontoInfonavitF(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
+
+                                                sql = "EXEC setDetalleFonacotInsertar  0"
+                                                'fk Calculo infonavit
+                                                sql &= "," & rwFonacotEmpleado(0)("iIdFonacot")
+                                                ' fk Empleado
+                                                sql &= "," & dtgDatos.Rows(x).Cells(2).Value
+                                                'fk Periodo
+                                                sql &= "," & cboperiodo.SelectedValue
+                                                'Monto
+                                                sql &= "," & dtgDatos.Rows(x).Cells(43).Value
+                                                'Serie
+                                                sql &= "," & cboserie.SelectedIndex
+                                                'Tipo Nomina
+                                                sql &= "," & cboTipoNomina.SelectedIndex
+                                                'Tipo Pagadora
+                                                sql &= ",301"
+                                                'iEstatu
+                                                sql &= ",1"
+                                                sql &= "," & consecutivo1
+
+                                                If nExecute(sql) = False Then
+                                                    MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                                    'pnlProgreso.Visible = False
+                                                    Exit Sub
+                                                End If
+                                            End If
+
+                                        Else
+                                            'Pago completo
+                                            dtgDatos.Rows(x).Cells(43).Value = "0.00"
+                                        End If
                                     Else
-                                        'Pago completo
                                         dtgDatos.Rows(x).Cells(43).Value = "0.00"
                                     End If
+
                                 Else
                                     dtgDatos.Rows(x).Cells(43).Value = "0.00"
                                 End If
-
-                            Else
-                                dtgDatos.Rows(x).Cells(43).Value = "0.00"
                             End If
+                            
 
 
                             fonacot = Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", "0", dtgDatos.Rows(x).Cells(43).Value))
@@ -3491,6 +3552,7 @@ Public Class frmnominasmarinos
                                                         sql &= ",'" & Date.Now.ToShortDateString
                                                         'iEstatu
                                                         sql &= "',1"
+                                                        sql &= "," & consecutivo1
 
                                                         If nExecute(sql) = False Then
                                                             MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -3531,6 +3593,7 @@ Public Class frmnominasmarinos
                             If dtgDatos.Rows(x).Cells(2).Value = 94 Then
                                 MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(4).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             End If
+
                             sql = "select * from PensionAlimenticia where fkiIdEmpleadoC=" & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value) & " and iEstatus=1"
 
                             Dim rwPensionEmpleado As DataRow() = nConsulta(sql)
@@ -3564,6 +3627,7 @@ Public Class frmnominasmarinos
                                     sql &= "," & Math.Round(PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100), 2)
                                     'Estatus
                                     sql &= ",1"
+                                    sql &= "," & consecutivo1
 
 
 
@@ -3666,6 +3730,7 @@ Public Class frmnominasmarinos
                                                 sql &= ",'" & Date.Now.ToShortDateString
                                                 'iEstatu
                                                 sql &= "',1"
+                                                sql &= "," & consecutivo1
 
                                                 If nExecute(sql) = False Then
                                                     MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -3729,6 +3794,13 @@ Public Class frmnominasmarinos
 
                     'Obtenemos los datos del empleado,id puesto
                     'de acuerdo a la edad y el status
+
+                    '############################################################################
+                    '#######################################################################
+                    '###########################################################
+                    '#############################################
+
+
                     If diastrabajados = 0 Then
                         dtgDatos.Rows(x).Cells(55).Value = "0.00"
                         dtgDatos.Rows(x).Cells(56).Value = "0.00"
@@ -3742,32 +3814,33 @@ Public Class frmnominasmarinos
                             Dim rwCostoSocial As DataRow() = nConsulta(sql)
                             If rwCostoSocial Is Nothing = False Then
                                 If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
-                                    If dtgDatos.Rows(x).Cells(5).Value = "PLANTA" Then
-                                        dtgDatos.Rows(x).Cells(55).Value = rwCostoSocial(0)("imsstopado")
-                                        dtgDatos.Rows(x).Cells(56).Value = rwCostoSocial(0)("RCVtopado")
-                                        dtgDatos.Rows(x).Cells(57).Value = rwCostoSocial(0)("infonavittopado")
-                                        dtgDatos.Rows(x).Cells(58).Value = rwCostoSocial(0)("ISNtopado")
+
+                                    If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                                        'verificar los dias del mes
+                                        dtgDatos.Rows(x).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03, 2)
                                         dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
                                     Else
                                         dtgDatos.Rows(x).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
                                         dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
                                         dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(rwCostoSocial(0)("ISNtopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03, 2)
                                         dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
                                     End If
-
                                 Else
-                                    If dtgDatos.Rows(x).Cells(5).Value = "PLANTA" Then
-                                        dtgDatos.Rows(x).Cells(55).Value = rwCostoSocial(0)("imss")
-                                        dtgDatos.Rows(x).Cells(56).Value = rwCostoSocial(0)("RCV")
-                                        dtgDatos.Rows(x).Cells(57).Value = rwCostoSocial(0)("Infonavit")
-                                        dtgDatos.Rows(x).Cells(58).Value = rwCostoSocial(0)("ISN")
+                                    If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                                        dtgDatos.Rows(x).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03, 2)
                                         dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
                                     Else
                                         dtgDatos.Rows(x).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
                                         dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
                                         dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
-                                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(rwCostoSocial(0)("ISN")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03, 2)
                                         dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
                                     End If
                                 End If
@@ -3778,6 +3851,64 @@ Public Class frmnominasmarinos
                         End If
                     End If
 
+
+                    'If diastrabajados = 0 Then
+                    '    dtgDatos.Rows(x).Cells(55).Value = "0.00"
+                    '    dtgDatos.Rows(x).Cells(56).Value = "0.00"
+                    '    dtgDatos.Rows(x).Cells(57).Value = "0.00"
+                    '    dtgDatos.Rows(x).Cells(58).Value = "0.00"
+                    'Else
+                    '    sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                    '    Dim rwEmpleado As DataRow() = nConsulta(sql)
+                    '    If rwEmpleado Is Nothing = False Then
+                    '        sql = "select * from puestos inner join costosocial on puestos.iidPuesto= costosocial.fkiIdPuesto where puestos.cnombre='" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
+                    '        Dim rwCostoSocial As DataRow() = nConsulta(sql)
+                    '        If rwCostoSocial Is Nothing = False Then
+                    '            If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
+
+
+
+                    '                If plantaoNO = "PLANTA" Then
+                    '                    dtgDatos.Rows(x).Cells(55).Value = rwCostoSocial(0)("imsstopado")
+                    '                    dtgDatos.Rows(x).Cells(56).Value = rwCostoSocial(0)("RCVtopado")
+                    '                    dtgDatos.Rows(x).Cells(57).Value = rwCostoSocial(0)("infonavittopado")
+                    '                    dtgDatos.Rows(x).Cells(58).Value = rwCostoSocial(0)("ISNtopado")
+                    '                    dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
+                    '                Else
+                    '                    dtgDatos.Rows(x).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                    '                    dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                    '                    dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                    '                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(rwCostoSocial(0)("ISNtopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                    '                    dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
+                    '                End If
+
+                    '            Else
+                    '                If plantaoNO = "PLANTA" Then
+                    '                    dtgDatos.Rows(x).Cells(55).Value = rwCostoSocial(0)("imss")
+                    '                    dtgDatos.Rows(x).Cells(56).Value = rwCostoSocial(0)("RCV")
+                    '                    dtgDatos.Rows(x).Cells(57).Value = rwCostoSocial(0)("Infonavit")
+                    '                    dtgDatos.Rows(x).Cells(58).Value = rwCostoSocial(0)("ISN")
+                    '                    dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
+                    '                Else
+                    '                    dtgDatos.Rows(x).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                    '                    dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                    '                    dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                    '                    dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(rwCostoSocial(0)("ISN")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                    '                    dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
+                    '                End If
+                    '            End If
+                    '        End If
+
+
+
+                    '    End If
+                    'End If
+
+
+                    '############################################################
+                    '###################################################################
+                    '################################################################################
+                    '#############################################################################################
 
 
                     'TOTAL COSTO SOCIAL
@@ -3813,74 +3944,219 @@ Public Class frmnominasmarinos
 
 
             For x As Integer = 0 To dtgDatos.Rows.Count - 1
-                contador = 0
 
-                For y As Integer = 0 To dtgDatos.Rows.Count - 1
-                    If dtgDatos.Rows(x).Cells(2).Value = dtgDatos.Rows(y).Cells(2).Value Then
-                        contador = contador + 1
-                        If contador = 2 Then
-                            Posicion2 = y
+                If chkSoloCostoSocial.Checked = True Then
+                    diastrabajados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(18).Value = "", "0", dtgDatos.Rows(x).Cells(18).Value))
+
+                    If diastrabajados = 0 Then
+                        dtgDatos.Rows(x).Cells(55).Value = "0.00"
+                        dtgDatos.Rows(x).Cells(56).Value = "0.00"
+                        dtgDatos.Rows(x).Cells(57).Value = "0.00"
+                        dtgDatos.Rows(x).Cells(58).Value = "0.00"
+                    Else
+                        sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                        Dim rwEmpleado As DataRow() = nConsulta(sql)
+                        If rwEmpleado Is Nothing = False Then
+                            sql = "select * from puestos inner join costosocial on puestos.iidPuesto= costosocial.fkiIdPuesto where puestos.cnombre='" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
+                            Dim rwCostoSocial As DataRow() = nConsulta(sql)
+                            If rwCostoSocial Is Nothing = False Then
+                                If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
+
+                                    If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                                        'verificar los dias del mes
+                                        dtgDatos.Rows(x).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03, 2)
+                                        dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
+                                    Else
+                                        dtgDatos.Rows(x).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                        dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                        dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03, 2)
+                                        dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
+                                    End If
+                                Else
+                                    If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                                        dtgDatos.Rows(x).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * DiasMes(cboperiodo.SelectedValue), 2)
+                                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03, 2)
+                                        dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
+                                    Else
+                                        dtgDatos.Rows(x).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                        dtgDatos.Rows(x).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                        dtgDatos.Rows(x).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(x).Cells(18).Value, 2)
+                                        dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03, 2)
+                                        dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
+                                    End If
+                                End If
+                            End If
+
+
+
                         End If
-                        If contador = 3 Then
-                            Posicion3 = y
+                    End If
+
+                    If InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text) > 0 Then
+                        consecutivo1 = dtgDatos.Rows(x).Cells(5).Value.ToString.Substring(0, InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text) - 1)
+                        plantaoNO = dtgDatos.Rows(x).Cells(5).Value.ToString.Substring(InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text))
+
+                    Else
+                        consecutivo1 = IIf(dtgDatos.Rows(x).Cells(1).Value = "", "0", dtgDatos.Rows(x).Cells(1).Value.ToString.Replace(",", ""))
+                        plantaoNO = dtgDatos.Rows(x).Cells(5).Value
+                    End If
+
+                    contador = 0
+
+                    For y As Integer = 0 To dtgDatos.Rows.Count - 1
+                        If dtgDatos.Rows(x).Cells(2).Value = dtgDatos.Rows(y).Cells(2).Value Then
+                            contador = contador + 1
+                            If contador = 2 Then
+                                Posicion2 = y
+                            End If
+                            If contador = 3 Then
+                                Posicion3 = y
+                            End If
+                            If contador = 4 Then
+                                Posicion4 = y
+                            End If
                         End If
-                        If contador = 4 Then
-                            Posicion4 = y
+
+
+
+                    Next
+
+
+
+                    If contador = 2 Then
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion2).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
+
+                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                        End If
+
+                    End If
+                    If contador = 3 Then
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion2).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                        End If
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion3).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(57).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion3).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(58).Value), 2)
+                        End If
+                    End If
+                    If contador = 4 Then
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion2).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                        End If
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion3).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(57).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion3).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(58).Value), 2)
+                        End If
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion4).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion4).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion4).Cells(57).Value = "0.00"
+                            dtgDatos.Rows(Posicion4).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion4).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion4).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion4).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion4).Cells(58).Value), 2)
                         End If
                     End If
 
 
+                Else
 
-                Next
-                If contador = 2 Then
-                    If dtgDatos.Rows(Posicion2).Cells(5).Value = "PLANTA" Then
-                        dtgDatos.Rows(Posicion2).Cells(55).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(58).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(59).Value = "0.00"
+                    If InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text) > 0 Then
+                        consecutivo1 = dtgDatos.Rows(x).Cells(5).Value.ToString.Substring(0, InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text) - 1)
+                        plantaoNO = dtgDatos.Rows(x).Cells(5).Value.ToString.Substring(InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text))
+
+                    Else
+                        consecutivo1 = IIf(dtgDatos.Rows(x).Cells(1).Value = "", "0", dtgDatos.Rows(x).Cells(1).Value.ToString.Replace(",", ""))
+                        plantaoNO = dtgDatos.Rows(x).Cells(5).Value
                     End If
 
+                    contador = 0
+
+                    For y As Integer = 0 To dtgDatos.Rows.Count - 1
+                        If dtgDatos.Rows(x).Cells(2).Value = dtgDatos.Rows(y).Cells(2).Value Then
+                            contador = contador + 1
+                            If contador = 2 Then
+                                Posicion2 = y
+                            End If
+                            If contador = 3 Then
+                                Posicion3 = y
+                            End If
+                            If contador = 4 Then
+                                Posicion4 = y
+                            End If
+                        End If
+
+
+
+                    Next
+
+
+
+                    If contador = 2 Then
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion2).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
+
+                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                        End If
+
+                    End If
+                    If contador = 3 Then
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion2).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                        End If
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion3).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(57).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion3).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(58).Value), 2)
+                        End If
+                    End If
+                    If contador = 4 Then
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion2).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
+                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                        End If
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion3).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(57).Value = "0.00"
+                            dtgDatos.Rows(Posicion3).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion3).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion3).Cells(58).Value), 2)
+                        End If
+                        If dtgDatos.Rows(x).Cells(5).Tag = "" Then
+                            dtgDatos.Rows(Posicion4).Cells(55).Value = "0.00"
+                            dtgDatos.Rows(Posicion4).Cells(56).Value = "0.00"
+                            dtgDatos.Rows(Posicion4).Cells(57).Value = "0.00"
+                            dtgDatos.Rows(Posicion4).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion4).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion4).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion4).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion4).Cells(58).Value), 2)
+                        End If
+                    End If
                 End If
-                If contador = 3 Then
-                    If dtgDatos.Rows(Posicion2).Cells(5).Value = "PLANTA" Then
-                        dtgDatos.Rows(Posicion2).Cells(55).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(58).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(59).Value = "0.00"
-                    End If
-                    If dtgDatos.Rows(Posicion3).Cells(5).Value = "PLANTA" Then
-                        dtgDatos.Rows(Posicion3).Cells(55).Value = "0.00"
-                        dtgDatos.Rows(Posicion3).Cells(56).Value = "0.00"
-                        dtgDatos.Rows(Posicion3).Cells(57).Value = "0.00"
-                        dtgDatos.Rows(Posicion3).Cells(58).Value = "0.00"
-                        dtgDatos.Rows(Posicion3).Cells(59).Value = "0.00"
-                    End If
-                End If
-                If contador = 4 Then
-                    If dtgDatos.Rows(Posicion2).Cells(5).Value = "PLANTA" Then
-                        dtgDatos.Rows(Posicion2).Cells(55).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(56).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(57).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(58).Value = "0.00"
-                        dtgDatos.Rows(Posicion2).Cells(59).Value = "0.00"
-                    End If
-                    If dtgDatos.Rows(Posicion3).Cells(5).Value = "PLANTA" Then
-                        dtgDatos.Rows(Posicion3).Cells(55).Value = "0.00"
-                        dtgDatos.Rows(Posicion3).Cells(56).Value = "0.00"
-                        dtgDatos.Rows(Posicion3).Cells(57).Value = "0.00"
-                        dtgDatos.Rows(Posicion3).Cells(58).Value = "0.00"
-                        dtgDatos.Rows(Posicion3).Cells(59).Value = "0.00"
-                    End If
-                    If dtgDatos.Rows(Posicion4).Cells(5).Value = "PLANTA" Then
-                        dtgDatos.Rows(Posicion4).Cells(55).Value = "0.00"
-                        dtgDatos.Rows(Posicion4).Cells(56).Value = "0.00"
-                        dtgDatos.Rows(Posicion4).Cells(57).Value = "0.00"
-                        dtgDatos.Rows(Posicion4).Cells(58).Value = "0.00"
-                        dtgDatos.Rows(Posicion3).Cells(59).Value = "0.00"
-                    End If
-                End If
+
+
+
+                
 
             Next
 
@@ -3898,7 +4174,32 @@ Public Class frmnominasmarinos
             Bisiesto = False
         End If
     End Function
+    Function DiasMes(NumPeriodo As Integer) As Integer
+        Try
+            Dim sql As String
 
+            Dim FechaInicioPeriodo1 As Date
+            Dim dias As Integer
+            sql = "select * from periodos where iIdPeriodo= " & NumPeriodo
+            Dim rwPeriodo As DataRow() = nConsulta(Sql)
+            dias = 0
+            If rwPeriodo Is Nothing = False Then
+                FechaInicioPeriodo1 = Date.Parse(rwPeriodo(0)("dFechaInicio"))
+                
+                dias = DateTime.DaysInMonth(Year(FechaInicioPeriodo1), Month(FechaInicioPeriodo1))
+
+                
+
+
+
+            End If
+            Return dias
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+            Return 0
+        End Try
+    End Function
 
     Private Function infonavit(tipo As String, valor As Double, sdi As Double, fechapago As Date, periodo As String, diastrabajados As Integer, idempleado As Integer, consecutivo As Integer) As Double
         Try
@@ -13300,6 +13601,136 @@ Public Class frmnominasmarinos
         Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
         iFila.Cells(4).Tag = ""
         iFila.Cells(4).Style.BackColor = Color.White
+    End Sub
+
+    Private Sub RegistroTotalDiasToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RegistroTotalDiasToolStripMenuItem.Click
+        Try
+            Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
+            iFila.Cells(5).Tag = "1"
+            iFila.Cells(5).Style.BackColor = Color.Purple
+            chkCalSoloMarcados.Checked = True
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub DesactivarRegistroTotalDiasToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DesactivarRegistroTotalDiasToolStripMenuItem.Click
+        Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
+        iFila.Cells(5).Tag = ""
+        iFila.Cells(5).Style.BackColor = Color.White
+    End Sub
+
+    Private Sub chkSoloCostoSocial_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkSoloCostoSocial.CheckedChanged
+
+    End Sub
+
+    Private Sub EliminarDeLaBaseToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles EliminarDeLaBaseToolStripMenuItem.Click
+        'borramos el registro completamente
+        
+        Try
+            Dim consecutivo1 As String
+            Dim sql As String
+            Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
+
+            If dtgDatos.CurrentRow Is Nothing = False Then
+                Dim resultado As Integer = MessageBox.Show("¿Desea eliminar a este trabajador de la lista y base?", "Pregunta", MessageBoxButtons.YesNo)
+                If resultado = DialogResult.Yes Then
+
+                    If InStr(1, iFila.Cells(5).Value, "+", CompareMethod.Text) > 0 Then
+                        consecutivo1 = iFila.Cells(5).Value.ToString.Substring(0, InStr(1, iFila.Cells(5).Value, "+", CompareMethod.Text) - 1)
+
+                    Else
+                        consecutivo1 = IIf(iFila.Cells(1).Value = "", "0", iFila.Cells(1).Value.ToString.Replace(",", ""))
+                    End If
+
+                    sql = "delete from Nomina"
+                    sql &= " where fkiIdEmpresa=1 and fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iEstatusNomina=0 and iEstatus=1 and iEstatusEmpleado=" & cboserie.SelectedIndex
+                    sql &= " and fkiIdEmpleadoC=" & iFila.Cells(2).Value
+                    sql &= " and iConsecutivo=" & consecutivo1
+                    'sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+                    If nExecute(sql) = False Then
+                        MessageBox.Show("Ocurrio un error nomina ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'pnlProgreso.Visible = False
+                        Exit Sub
+                    End If
+
+                    
+    
+
+                    sql = "delete from DetalleDescInfonavit"
+                    sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iSerie=" & cboserie.SelectedIndex
+                    sql &= " and fkiIdEmpleadoC=" & iFila.Cells(2).Value
+                    sql &= " and iConsecutivo=" & consecutivo1
+
+                    If nExecute(sql) = False Then
+                        MessageBox.Show("Ocurrio un error det infonavit ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'pnlProgreso.Visible = False
+                        Exit Sub
+                    End If
+
+                    sql = " delete from DetalleFonacot"
+                    sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iSerie=" & cboserie.SelectedIndex
+                    sql &= " and fkiIdEmpleadoC=" & iFila.Cells(2).Value
+                    sql &= " and iConsecutivo=" & consecutivo1
+                    If nExecute(sql) = False Then
+                        MessageBox.Show("Ocurrio un error borrando fonacot. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'pnlProgreso.Visible = False
+                        Exit Sub
+                    End If
+
+
+                    sql = " delete from PagoPrestamo"
+                    sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iSerie=" & cboserie.SelectedIndex
+                    sql &= " and fkiIdEmpleadoC=" & iFila.Cells(2).Value
+                    sql &= " and iConsecutivo=" & consecutivo1
+
+                    If nExecute(sql) = False Then
+                        MessageBox.Show("Ocurrio un error borrando Prestamo Asimilados. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'pnlProgreso.Visible = False
+                        Exit Sub
+                    End If
+
+
+
+                    sql = " delete from PagoPrestamoSA"
+                    sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iSerie=" & cboserie.SelectedIndex
+                    sql &= " and fkiIdEmpleadoC=" & iFila.Cells(2).Value
+                    sql &= " and iConsecutivo=" & consecutivo1
+                    If nExecute(sql) = False Then
+                        MessageBox.Show("Ocurrio un error borrando Prestamo Sa. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'pnlProgreso.Visible = False
+                        Exit Sub
+                    End If
+
+
+                    sql = " delete from DetallePensionAlimenticia"
+                    sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iSerie=" & cboserie.SelectedIndex
+                    sql &= " and fkiIdEmpleadoC=" & iFila.Cells(2).Value
+                    sql &= " and iConsecutivo=" & consecutivo1
+                    If nExecute(sql) = False Then
+                        MessageBox.Show("Ocurrio un error borrando Pension. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'pnlProgreso.Visible = False
+                        Exit Sub
+                    End If
+
+
+                    dtgDatos.Rows.Remove(dtgDatos.CurrentRow)
+                End If
+            End If
+
+
+            
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 End Class
 

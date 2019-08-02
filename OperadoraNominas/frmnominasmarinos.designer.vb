@@ -34,6 +34,9 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.chkSoloCostoSocial = New System.Windows.Forms.CheckBox()
+        Me.chkNofonacot = New System.Windows.Forms.CheckBox()
+        Me.chkCalSoloMarcados = New System.Windows.Forms.CheckBox()
         Me.chkPrestamosAsi = New System.Windows.Forms.CheckBox()
         Me.chkInfonavit0 = New System.Windows.Forms.CheckBox()
         Me.cmdResumenInfo = New System.Windows.Forms.Button()
@@ -73,6 +76,10 @@ Partial Class frmnominasmarinos
         Me.ActivaCalculoPresAsiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NoCalcularPresSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ActivarCaluloPresSAToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SoloRegistroACalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DesactivarSoloRegistroACalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RegistroTotalDiasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DesactivarRegistroTotalDiasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.layoutTimbrado = New System.Windows.Forms.Button()
         Me.cmdInfonavit = New System.Windows.Forms.Button()
         Me.cmdReporteInfonavit = New System.Windows.Forms.Button()
@@ -82,9 +89,7 @@ Partial Class frmnominasmarinos
         Me.cmdImssNomina = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-        Me.chkCalSoloMarcados = New System.Windows.Forms.CheckBox()
-        Me.SoloRegistroACalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DesactivarSoloRegistroACalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EliminarDeLaBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -184,6 +189,8 @@ Partial Class frmnominasmarinos
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.chkSoloCostoSocial)
+        Me.pnlCatalogo.Controls.Add(Me.chkNofonacot)
         Me.pnlCatalogo.Controls.Add(Me.chkCalSoloMarcados)
         Me.pnlCatalogo.Controls.Add(Me.chkPrestamosAsi)
         Me.pnlCatalogo.Controls.Add(Me.chkInfonavit0)
@@ -215,6 +222,42 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'chkSoloCostoSocial
+        '
+        Me.chkSoloCostoSocial.AutoSize = True
+        Me.chkSoloCostoSocial.BackColor = System.Drawing.Color.Transparent
+        Me.chkSoloCostoSocial.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkSoloCostoSocial.Location = New System.Drawing.Point(223, 64)
+        Me.chkSoloCostoSocial.Name = "chkSoloCostoSocial"
+        Me.chkSoloCostoSocial.Size = New System.Drawing.Size(128, 22)
+        Me.chkSoloCostoSocial.TabIndex = 31
+        Me.chkSoloCostoSocial.Text = "Solo costo social"
+        Me.chkSoloCostoSocial.UseVisualStyleBackColor = False
+        '
+        'chkNofonacot
+        '
+        Me.chkNofonacot.AutoSize = True
+        Me.chkNofonacot.BackColor = System.Drawing.Color.Transparent
+        Me.chkNofonacot.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkNofonacot.Location = New System.Drawing.Point(128, 64)
+        Me.chkNofonacot.Name = "chkNofonacot"
+        Me.chkNofonacot.Size = New System.Drawing.Size(95, 22)
+        Me.chkNofonacot.TabIndex = 30
+        Me.chkNofonacot.Text = "No fonacot"
+        Me.chkNofonacot.UseVisualStyleBackColor = False
+        '
+        'chkCalSoloMarcados
+        '
+        Me.chkCalSoloMarcados.AutoSize = True
+        Me.chkCalSoloMarcados.BackColor = System.Drawing.Color.Transparent
+        Me.chkCalSoloMarcados.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkCalSoloMarcados.Location = New System.Drawing.Point(7, 36)
+        Me.chkCalSoloMarcados.Name = "chkCalSoloMarcados"
+        Me.chkCalSoloMarcados.Size = New System.Drawing.Size(116, 22)
+        Me.chkCalSoloMarcados.TabIndex = 29
+        Me.chkCalSoloMarcados.Text = "Solo marcados"
+        Me.chkCalSoloMarcados.UseVisualStyleBackColor = False
         '
         'chkPrestamosAsi
         '
@@ -512,63 +555,87 @@ Partial Class frmnominasmarinos
         '
         'cMenu
         '
-        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPresAsiToolStripMenuItem, Me.ActivaCalculoPresAsiToolStripMenuItem, Me.NoCalcularPresSAToolStripMenuItem, Me.ActivarCaluloPresSAToolStripMenuItem, Me.SoloRegistroACalcularToolStripMenuItem, Me.DesactivarSoloRegistroACalcularToolStripMenuItem})
+        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPresAsiToolStripMenuItem, Me.ActivaCalculoPresAsiToolStripMenuItem, Me.NoCalcularPresSAToolStripMenuItem, Me.ActivarCaluloPresSAToolStripMenuItem, Me.SoloRegistroACalcularToolStripMenuItem, Me.DesactivarSoloRegistroACalcularToolStripMenuItem, Me.RegistroTotalDiasToolStripMenuItem, Me.DesactivarRegistroTotalDiasToolStripMenuItem, Me.EliminarDeLaBaseToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(250, 268)
+        Me.cMenu.Size = New System.Drawing.Size(250, 334)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
         Me.EliminarDeLaListaToolStripMenuItem.Name = "EliminarDeLaListaToolStripMenuItem"
-        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.EliminarDeLaListaToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.EliminarDeLaListaToolStripMenuItem.Text = "Eliminar de la Lista"
         '
         'AgregarTrabajadoresToolStripMenuItem
         '
         Me.AgregarTrabajadoresToolStripMenuItem.Name = "AgregarTrabajadoresToolStripMenuItem"
-        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.AgregarTrabajadoresToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.AgregarTrabajadoresToolStripMenuItem.Text = "Agregar Trabajadores"
         '
         'EditarEmpleadoToolStripMenuItem
         '
         Me.EditarEmpleadoToolStripMenuItem.Name = "EditarEmpleadoToolStripMenuItem"
-        Me.EditarEmpleadoToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.EditarEmpleadoToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.EditarEmpleadoToolStripMenuItem.Text = "Editar Empleado"
         '
         'NoCalcularInofnavitToolStripMenuItem
         '
         Me.NoCalcularInofnavitToolStripMenuItem.Name = "NoCalcularInofnavitToolStripMenuItem"
-        Me.NoCalcularInofnavitToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.NoCalcularInofnavitToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.NoCalcularInofnavitToolStripMenuItem.Text = "No Calcular inofnavit"
         '
         'ActicarCalculoInfonavitToolStripMenuItem
         '
         Me.ActicarCalculoInfonavitToolStripMenuItem.Name = "ActicarCalculoInfonavitToolStripMenuItem"
-        Me.ActicarCalculoInfonavitToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ActicarCalculoInfonavitToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.ActicarCalculoInfonavitToolStripMenuItem.Text = "Activar Calculo Infonavit"
         '
         'NoCalcularPresAsiToolStripMenuItem
         '
         Me.NoCalcularPresAsiToolStripMenuItem.Name = "NoCalcularPresAsiToolStripMenuItem"
-        Me.NoCalcularPresAsiToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.NoCalcularPresAsiToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.NoCalcularPresAsiToolStripMenuItem.Text = "No Calcular Pres Asi"
         '
         'ActivaCalculoPresAsiToolStripMenuItem
         '
         Me.ActivaCalculoPresAsiToolStripMenuItem.Name = "ActivaCalculoPresAsiToolStripMenuItem"
-        Me.ActivaCalculoPresAsiToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ActivaCalculoPresAsiToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.ActivaCalculoPresAsiToolStripMenuItem.Text = "Activa Calculo Pres Asi"
         '
         'NoCalcularPresSAToolStripMenuItem
         '
         Me.NoCalcularPresSAToolStripMenuItem.Name = "NoCalcularPresSAToolStripMenuItem"
-        Me.NoCalcularPresSAToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.NoCalcularPresSAToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.NoCalcularPresSAToolStripMenuItem.Text = "No Calcular Pres SA"
         '
         'ActivarCaluloPresSAToolStripMenuItem
         '
         Me.ActivarCaluloPresSAToolStripMenuItem.Name = "ActivarCaluloPresSAToolStripMenuItem"
-        Me.ActivarCaluloPresSAToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ActivarCaluloPresSAToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.ActivarCaluloPresSAToolStripMenuItem.Text = "Activar Calulo Pres SA"
+        '
+        'SoloRegistroACalcularToolStripMenuItem
+        '
+        Me.SoloRegistroACalcularToolStripMenuItem.Name = "SoloRegistroACalcularToolStripMenuItem"
+        Me.SoloRegistroACalcularToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.SoloRegistroACalcularToolStripMenuItem.Text = "Solo registro a calcular"
+        '
+        'DesactivarSoloRegistroACalcularToolStripMenuItem
+        '
+        Me.DesactivarSoloRegistroACalcularToolStripMenuItem.Name = "DesactivarSoloRegistroACalcularToolStripMenuItem"
+        Me.DesactivarSoloRegistroACalcularToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.DesactivarSoloRegistroACalcularToolStripMenuItem.Text = "Desactivar solo registro a calcular"
+        '
+        'RegistroTotalDiasToolStripMenuItem
+        '
+        Me.RegistroTotalDiasToolStripMenuItem.Name = "RegistroTotalDiasToolStripMenuItem"
+        Me.RegistroTotalDiasToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.RegistroTotalDiasToolStripMenuItem.Text = "Registro Total dias"
+        '
+        'DesactivarRegistroTotalDiasToolStripMenuItem
+        '
+        Me.DesactivarRegistroTotalDiasToolStripMenuItem.Name = "DesactivarRegistroTotalDiasToolStripMenuItem"
+        Me.DesactivarRegistroTotalDiasToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.DesactivarRegistroTotalDiasToolStripMenuItem.Text = "Desactivar registro total dias"
         '
         'layoutTimbrado
         '
@@ -675,29 +742,11 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
-        'chkCalSoloMarcados
+        'EliminarDeLaBaseToolStripMenuItem
         '
-        Me.chkCalSoloMarcados.AutoSize = True
-        Me.chkCalSoloMarcados.BackColor = System.Drawing.Color.Transparent
-        Me.chkCalSoloMarcados.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkCalSoloMarcados.Location = New System.Drawing.Point(7, 36)
-        Me.chkCalSoloMarcados.Name = "chkCalSoloMarcados"
-        Me.chkCalSoloMarcados.Size = New System.Drawing.Size(116, 22)
-        Me.chkCalSoloMarcados.TabIndex = 29
-        Me.chkCalSoloMarcados.Text = "Solo marcados"
-        Me.chkCalSoloMarcados.UseVisualStyleBackColor = False
-        '
-        'SoloRegistroACalcularToolStripMenuItem
-        '
-        Me.SoloRegistroACalcularToolStripMenuItem.Name = "SoloRegistroACalcularToolStripMenuItem"
-        Me.SoloRegistroACalcularToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.SoloRegistroACalcularToolStripMenuItem.Text = "Solo registro a calcular"
-        '
-        'DesactivarSoloRegistroACalcularToolStripMenuItem
-        '
-        Me.DesactivarSoloRegistroACalcularToolStripMenuItem.Name = "DesactivarSoloRegistroACalcularToolStripMenuItem"
-        Me.DesactivarSoloRegistroACalcularToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.DesactivarSoloRegistroACalcularToolStripMenuItem.Text = "Desactivar solo registro a calcular"
+        Me.EliminarDeLaBaseToolStripMenuItem.Name = "EliminarDeLaBaseToolStripMenuItem"
+        Me.EliminarDeLaBaseToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.EliminarDeLaBaseToolStripMenuItem.Text = "Eliminar de la base"
         '
         'frmnominasmarinos
         '
@@ -799,5 +848,10 @@ Partial Class frmnominasmarinos
     Friend WithEvents chkCalSoloMarcados As System.Windows.Forms.CheckBox
     Friend WithEvents SoloRegistroACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DesactivarSoloRegistroACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents chkNofonacot As System.Windows.Forms.CheckBox
+    Friend WithEvents RegistroTotalDiasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DesactivarRegistroTotalDiasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents chkSoloCostoSocial As System.Windows.Forms.CheckBox
+    Friend WithEvents EliminarDeLaBaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
