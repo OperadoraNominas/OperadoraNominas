@@ -5218,9 +5218,9 @@ Public Class frmnominasmarinos
                         hoja2.Cell(filaExcel + x, 24).Value = dtgDatos.Rows(x).Cells(42).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "prestamo")) 'PRESTAMO
                         hoja2.Cell(filaExcel + x, 25).Value = dtgDatos.Rows(x).Cells(43).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "fonacot")) 'FONACOT  
 
-                        hoja2.Cell(filaExcel + x, 26).Value = dtgDatos.Rows(x).Cells(55).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "IMSSCS")) 'IMSS
-                        hoja2.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(56).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "RCVCS")) ' SAR
-                        hoja2.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(57).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "INFONAVITCS")) 'INFONAVIT
+                        hoja2.Cell(filaExcel + x, 26).Value = dtgDatos.Rows(x).Cells(55).Value ' + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "IMSSCS")) 'IMSS
+                        hoja2.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(56).Value '+ CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "RCVCS")) ' SAR
+                        hoja2.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(57).Value '+ CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "INFONAVITCS")) 'INFONAVIT
                         hoja2.Cell(filaExcel + x, 29).Value = dtgDatos.Rows(x).Cells(58).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "INSCS")) 'IMPTO S/NOMINA
                         hoja2.Cell(filaExcel + x, 30).FormulaA1 = "=SUM(O" & filaExcel + x & ":T" & filaExcel + x & ")+ SUM(Z" & filaExcel + x & ":AC" & filaExcel + x & ")" ' SUBTOTAL
                         hoja2.Cell(filaExcel + x, 31).FormulaA1 = "=AD" & filaExcel + x & "*16%" 'IVA
@@ -5418,9 +5418,9 @@ Public Class frmnominasmarinos
                         hoja2.Cell(filaExcel + x, 24).Value = dtgDatos.Rows(x).Cells(42).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "prestamo")) 'PRESTAMO
                         hoja2.Cell(filaExcel + x, 25).Value = dtgDatos.Rows(x).Cells(43).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "fonacot")) 'FONACOT  
 
-                        hoja2.Cell(filaExcel + x, 26).Value = dtgDatos.Rows(x).Cells(55).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "IMSSCS")) 'IMSS
-                        hoja2.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(56).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "IRCVCS")) ' SAR
-                        hoja2.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(57).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "INFONAVITCS")) 'INFONAVIT
+                        hoja2.Cell(filaExcel + x, 26).Value = dtgDatos.Rows(x).Cells(55).Value ' + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "IMSSCS")) 'IMSS
+                        hoja2.Cell(filaExcel + x, 27).Value = dtgDatos.Rows(x).Cells(56).Value '+ CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "RCVCS")) ' SAR
+                        hoja2.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(57).Value '+ CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "INFONAVITCS")) 'INFONAVIT
                         hoja2.Cell(filaExcel + x, 29).Value = dtgDatos.Rows(x).Cells(58).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "INSCS")) 'IMPTO S/NOMINA
                         hoja2.Cell(filaExcel + x, 30).FormulaA1 = "=SUM(O" & filaExcel + x & ":T" & filaExcel + x & ")+ SUM(Z" & filaExcel + x & ":AC" & filaExcel + x & ")" ' SUBTOTAL
                         hoja2.Cell(filaExcel + x, 31).FormulaA1 = "=AD" & filaExcel + x & "*16%" 'IVA
@@ -8729,7 +8729,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 23).FormulaA1 = ""
                         hoja.Cell(filaExcel + x, 24).FormulaA1 = "=(T" & filaExcel + x & "+V" & filaExcel + x & ")*2%"
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = "=(O" & filaExcel + x & "+U" & filaExcel + x & ")*2%"
-                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "='OPERADORA ABORDO'!AV" & filatmp + x & "+'OPERADORA DESCANSO'!AV" & filatmp + x 'V
+                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "='OPERADORA ABORDO'!AV" & filatmp + x & "+'OPERADORA DESCANSO'!AV" & filatmp + x 'AV Costo social
                         hoja.Cell(filaExcel + x, 27).FormulaA1 = "=T" & filaExcel + x & "+U" & filaExcel + x & "+V" & filaExcel + x & "+X" & filaExcel + x & "+Y" & filaExcel + x & "+Z" & filaExcel + x & "+O" & filaExcel + x
                         hoja.Cell(filaExcel + x, 28).FormulaA1 = "=AA" & filaExcel + x & "*16%"
                         hoja.Cell(filaExcel + x, 29).FormulaA1 = "=AA" & filaExcel + x & "+AB" & filaExcel + x 'total
@@ -8737,7 +8737,7 @@ Public Class frmnominasmarinos
 
 
                     Else
-                        contadorexcelbuquefinal = filaExcel + x - 1
+
 
                         Select Case nombrebuque
                             Case "ISLA ARBOLEDA"
@@ -10295,10 +10295,10 @@ Public Class frmnominasmarinos
                     hoja3.Cell(filaExcel, 41).Value = dtgDatos.Rows(x).Cells(43).Value ' FONACOT
                     hoja3.Cell(filaExcel, 42).Value = dtgDatos.Rows(x).Cells(46).Value ' NETO A PAGAR
 
-                    hoja3.Cell(filaExcel, 43).Value = dtgDatos.Rows(x).Cells(55).Value 'IMSS CS (AP)
-                    hoja3.Cell(filaExcel, 44).Value = dtgDatos.Rows(x).Cells(56).Value
-                    hoja3.Cell(filaExcel, 45).Value = dtgDatos.Rows(x).Cells(57).Value
-                    hoja3.Cell(filaExcel, 46).Value = dtgDatos.Rows(x).Cells(58).Value
+                    hoja3.Cell(filaExcel, 43).Value = 0 'dtgDatos.Rows(x).Cells(55).Value 'IMSS CS (AQ)
+                    hoja3.Cell(filaExcel, 44).Value = 0 'dtgDatos.Rows(x).Cells(56).Value 'AR
+                    hoja3.Cell(filaExcel, 45).Value = 0 'dtgDatos.Rows(x).Cells(57).Value 'AS
+                    hoja3.Cell(filaExcel, 46).Value = dtgDatos.Rows(x).Cells(58).Value 'AT
                     hoja3.Cell(filaExcel, 47).FormulaA1 = "=SUM(AQ" & filaExcel & ":AT" & filaExcel & ")"
                     hoja3.Cell(filaExcel, 48).Value = dtgDatos.Rows(x).Cells(59).Value
 
