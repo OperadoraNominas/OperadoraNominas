@@ -6747,11 +6747,61 @@ Public Class frmnominasmarinos
                     'sql &= " and iSerie=" & cboserie.SelectedIndex
                     'sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
 
+
+
+
                     If nExecute(sql) = False Then
                         MessageBox.Show("Ocurrio un error ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                         'pnlProgreso.Visible = False
                         Exit Sub
                     End If
+
+
+                    sql = " delete from DetalleFonacot"
+                    sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iSerie=" & cboserie.SelectedIndex
+                    
+                    If nExecute(sql) = False Then
+                        MessageBox.Show("Ocurrio un error borrando fonacot. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'pnlProgreso.Visible = False
+                        Exit Sub
+                    End If
+
+
+                    sql = " delete from PagoPrestamo"
+                    sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iSerie=" & cboserie.SelectedIndex
+
+
+                    If nExecute(sql) = False Then
+                        MessageBox.Show("Ocurrio un error borrando Prestamo Asimilados. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'pnlProgreso.Visible = False
+                        Exit Sub
+                    End If
+
+
+
+                    sql = " delete from PagoPrestamoSA"
+                    sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iSerie=" & cboserie.SelectedIndex
+                    
+                    If nExecute(sql) = False Then
+                        MessageBox.Show("Ocurrio un error borrando Prestamo Sa. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'pnlProgreso.Visible = False
+                        Exit Sub
+                    End If
+
+
+                    sql = " delete from DetallePensionAlimenticia"
+                    sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iSerie=" & cboserie.SelectedIndex
+                    
+                    If nExecute(sql) = False Then
+                        MessageBox.Show("Ocurrio un error borrando Pension. Guardar ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'pnlProgreso.Visible = False
+                        Exit Sub
+                    End If
+
 
                     MessageBox.Show("Nomina reiniciada correctamente, vuelva a cargar los datos", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                     dtgDatos.DataSource = ""
