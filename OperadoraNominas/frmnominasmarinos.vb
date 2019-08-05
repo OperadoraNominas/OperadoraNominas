@@ -10676,7 +10676,7 @@ Public Class frmnominasmarinos
                     hoja3.Cell(filaExcel, 45).Value = "0" 'dtgDatos.Rows(x).Cells(57).Value 'AS
                     hoja3.Cell(filaExcel, 46).Value = dtgDatos.Rows(x).Cells(58).Value 'AT
                     hoja3.Cell(filaExcel, 47).FormulaA1 = "=SUM(AQ" & filaExcel & ":AT" & filaExcel & ")"
-                    hoja3.Cell(filaExcel, 48).Value = dtgDatos.Rows(x).Cells(59).Value
+                    hoja3.Cell(filaExcel, 48).FormulaA1 = "=AU"
 
                     hoja3.Cell(filaExcel, 49).Value = dtgDatos.Rows(x).Cells(47).Value
                     hoja3.Cell(filaExcel, 50).Value = dtgDatos.Rows(x).Cells(48).Value
