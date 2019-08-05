@@ -12,7 +12,7 @@
     Private Sub frmPensionA_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Cargarhistorial()
         MostrarBancos()
-
+        TabIndex()
         ' cmdAgregar.Enabled = False
         blnNuevo = True
         'txtBeneficiario.Enabled = False
@@ -70,7 +70,14 @@
         End Try
     End Sub
 
-
+    Private Sub TabIndex()
+        txtBeneficiario.Focus()
+        txtBeneficiario.TabIndex = 1
+        nudPorcentaje.TabIndex = 2
+        cbobanco.TabIndex = 3
+        txtClabe.TabIndex = 4
+        cboEstatus.TabIndex = 5
+    End Sub
     Private Sub MostrarBancos()
         SQL = "Select * from bancos order by cBanco"
         nCargaCBO(cbobanco, SQL, "cBanco", "iIdBanco")
