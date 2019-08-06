@@ -80,6 +80,7 @@ Partial Class frmnominasmarinos
         Me.DesactivarSoloRegistroACalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroTotalDiasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DesactivarRegistroTotalDiasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EliminarDeLaBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.layoutTimbrado = New System.Windows.Forms.Button()
         Me.cmdInfonavit = New System.Windows.Forms.Button()
         Me.cmdReporteInfonavit = New System.Windows.Forms.Button()
@@ -89,7 +90,9 @@ Partial Class frmnominasmarinos
         Me.cmdImssNomina = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-        Me.EliminarDeLaBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CostoCeroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DesactivarCostoCeroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdBuscarOtraNom = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -189,6 +192,7 @@ Partial Class frmnominasmarinos
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.cmdBuscarOtraNom)
         Me.pnlCatalogo.Controls.Add(Me.chkSoloCostoSocial)
         Me.pnlCatalogo.Controls.Add(Me.chkNofonacot)
         Me.pnlCatalogo.Controls.Add(Me.chkCalSoloMarcados)
@@ -555,9 +559,9 @@ Partial Class frmnominasmarinos
         '
         'cMenu
         '
-        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPresAsiToolStripMenuItem, Me.ActivaCalculoPresAsiToolStripMenuItem, Me.NoCalcularPresSAToolStripMenuItem, Me.ActivarCaluloPresSAToolStripMenuItem, Me.SoloRegistroACalcularToolStripMenuItem, Me.DesactivarSoloRegistroACalcularToolStripMenuItem, Me.RegistroTotalDiasToolStripMenuItem, Me.DesactivarRegistroTotalDiasToolStripMenuItem, Me.EliminarDeLaBaseToolStripMenuItem})
+        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPresAsiToolStripMenuItem, Me.ActivaCalculoPresAsiToolStripMenuItem, Me.NoCalcularPresSAToolStripMenuItem, Me.ActivarCaluloPresSAToolStripMenuItem, Me.SoloRegistroACalcularToolStripMenuItem, Me.DesactivarSoloRegistroACalcularToolStripMenuItem, Me.RegistroTotalDiasToolStripMenuItem, Me.DesactivarRegistroTotalDiasToolStripMenuItem, Me.EliminarDeLaBaseToolStripMenuItem, Me.CostoCeroToolStripMenuItem, Me.DesactivarCostoCeroToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(250, 334)
+        Me.cMenu.Size = New System.Drawing.Size(250, 356)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
@@ -636,6 +640,12 @@ Partial Class frmnominasmarinos
         Me.DesactivarRegistroTotalDiasToolStripMenuItem.Name = "DesactivarRegistroTotalDiasToolStripMenuItem"
         Me.DesactivarRegistroTotalDiasToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.DesactivarRegistroTotalDiasToolStripMenuItem.Text = "Desactivar registro total dias"
+        '
+        'EliminarDeLaBaseToolStripMenuItem
+        '
+        Me.EliminarDeLaBaseToolStripMenuItem.Name = "EliminarDeLaBaseToolStripMenuItem"
+        Me.EliminarDeLaBaseToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.EliminarDeLaBaseToolStripMenuItem.Text = "Eliminar de la base"
         '
         'layoutTimbrado
         '
@@ -742,11 +752,27 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
-        'EliminarDeLaBaseToolStripMenuItem
+        'CostoCeroToolStripMenuItem
         '
-        Me.EliminarDeLaBaseToolStripMenuItem.Name = "EliminarDeLaBaseToolStripMenuItem"
-        Me.EliminarDeLaBaseToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.EliminarDeLaBaseToolStripMenuItem.Text = "Eliminar de la base"
+        Me.CostoCeroToolStripMenuItem.Name = "CostoCeroToolStripMenuItem"
+        Me.CostoCeroToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.CostoCeroToolStripMenuItem.Text = "Costo cero"
+        '
+        'DesactivarCostoCeroToolStripMenuItem
+        '
+        Me.DesactivarCostoCeroToolStripMenuItem.Name = "DesactivarCostoCeroToolStripMenuItem"
+        Me.DesactivarCostoCeroToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.DesactivarCostoCeroToolStripMenuItem.Text = "Desactivar costo cero"
+        '
+        'cmdBuscarOtraNom
+        '
+        Me.cmdBuscarOtraNom.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdBuscarOtraNom.Location = New System.Drawing.Point(943, 66)
+        Me.cmdBuscarOtraNom.Name = "cmdBuscarOtraNom"
+        Me.cmdBuscarOtraNom.Size = New System.Drawing.Size(180, 28)
+        Me.cmdBuscarOtraNom.TabIndex = 32
+        Me.cmdBuscarOtraNom.Text = "Buscar en otra nomina"
+        Me.cmdBuscarOtraNom.UseVisualStyleBackColor = True
         '
         'frmnominasmarinos
         '
@@ -853,5 +879,8 @@ Partial Class frmnominasmarinos
     Friend WithEvents DesactivarRegistroTotalDiasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents chkSoloCostoSocial As System.Windows.Forms.CheckBox
     Friend WithEvents EliminarDeLaBaseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CostoCeroToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DesactivarCostoCeroToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents cmdBuscarOtraNom As System.Windows.Forms.Button
 
 End Class
