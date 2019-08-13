@@ -25,7 +25,6 @@ Partial Class frmPrestamoSA
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPrestamoSA))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.dtpInicioPago = New System.Windows.Forms.DateTimePicker()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.dtpFechaPrestamo = New System.Windows.Forms.DateTimePicker()
         Me.txtDescuento = New System.Windows.Forms.TextBox()
@@ -48,6 +47,10 @@ Partial Class frmPrestamoSA
         Me.cmdnuevo = New System.Windows.Forms.Button()
         Me.cmdsalir = New System.Windows.Forms.Button()
         Me.cmdguardar = New System.Windows.Forms.Button()
+        Me.dtpInicioPago = New System.Windows.Forms.DateTimePicker()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cbotipoprestamo = New System.Windows.Forms.ComboBox()
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -56,8 +59,10 @@ Partial Class frmPrestamoSA
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.cbotipoprestamo)
+        Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.dtpInicioPago)
+        Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.dtpFechaPrestamo)
         Me.Panel1.Controls.Add(Me.txtDescuento)
@@ -68,24 +73,17 @@ Partial Class frmPrestamoSA
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Location = New System.Drawing.Point(3, 17)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(538, 145)
+        Me.Panel1.Size = New System.Drawing.Size(552, 145)
         Me.Panel1.TabIndex = 7
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(11, 112)
+        Me.Label3.Location = New System.Drawing.Point(6, 112)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(114, 18)
         Me.Label3.TabIndex = 196
         Me.Label3.Text = "Fecha Inicio Pago"
-        '
-        'dtpInicioPago
-        '
-        Me.dtpInicioPago.Location = New System.Drawing.Point(131, 109)
-        Me.dtpInicioPago.Name = "dtpInicioPago"
-        Me.dtpInicioPago.Size = New System.Drawing.Size(260, 26)
-        Me.dtpInicioPago.TabIndex = 195
         '
         'Label4
         '
@@ -164,7 +162,7 @@ Partial Class frmPrestamoSA
         '
         'lsvHistorial
         '
-        Me.lsvHistorial.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader5, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4})
+        Me.lsvHistorial.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader5, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader6, Me.ColumnHeader4})
         Me.lsvHistorial.FullRowSelect = True
         Me.lsvHistorial.GridLines = True
         Me.lsvHistorial.HideSelection = False
@@ -285,14 +283,44 @@ Partial Class frmPrestamoSA
         Me.cmdguardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.cmdguardar.UseVisualStyleBackColor = True
         '
-        'frmPrestamo
+        'dtpInicioPago
+        '
+        Me.dtpInicioPago.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpInicioPago.Location = New System.Drawing.Point(126, 109)
+        Me.dtpInicioPago.Name = "dtpInicioPago"
+        Me.dtpInicioPago.Size = New System.Drawing.Size(109, 26)
+        Me.dtpInicioPago.TabIndex = 197
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(269, 115)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(39, 18)
+        Me.Label5.TabIndex = 198
+        Me.Label5.Text = "Tipo:"
+        '
+        'cbotipoprestamo
+        '
+        Me.cbotipoprestamo.FormattingEnabled = True
+        Me.cbotipoprestamo.Location = New System.Drawing.Point(305, 109)
+        Me.cbotipoprestamo.Name = "cbotipoprestamo"
+        Me.cbotipoprestamo.Size = New System.Drawing.Size(214, 26)
+        Me.cbotipoprestamo.TabIndex = 199
+        '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.DisplayIndex = 4
+        Me.ColumnHeader6.Text = "Tipo"
+        '
+        'frmPrestamoSA
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(737, 499)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Name = "frmPrestamo"
+        Me.Name = "frmPrestamoSA"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Prestamo SA"
         Me.Panel1.ResumeLayout(False)
@@ -322,10 +350,13 @@ Partial Class frmPrestamoSA
     Friend WithEvents txtDescuento As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents dtpInicioPago As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents dtpFechaPrestamo As System.Windows.Forms.DateTimePicker
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents cmdDeleted As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents dtpInicioPago As System.Windows.Forms.DateTimePicker
+    Friend WithEvents cbotipoprestamo As System.Windows.Forms.ComboBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
 End Class

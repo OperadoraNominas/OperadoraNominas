@@ -12,6 +12,8 @@
     Private Sub frmPrestamoSA_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Cargarhistorial()
         TabIndex()
+        cargartipoprestamo()
+
 
 
         blnNuevo = True
@@ -22,7 +24,7 @@
         dtpFechaPrestamo.Enabled = False
         dtpInicioPago.Enabled = False
         cboEstatus.Enabled = False
-
+        cbotipoprestamo.Enabled = False
         cmdDeleted.Enabled = False
 
     End Sub
@@ -37,10 +39,13 @@
             'SQL &= " AND iEstatus=1"
             Dim rwFilas As DataRow() = nConsulta(SQL)
             Dim item As ListViewItem
-
+            Dim tipoprestamo As DataRow()
             If rwFilas Is Nothing = False Then
 
                 For Each Fila In rwFilas
+
+                    tipoprestamo = nConsulta("select * from TipoPrestamo where iIdTipoPrestamo =" & Fila.Item("fkIidTipoPrestamo"))
+
                     idPrestamo = Fila.Item("iIdPrestamoSA")
                     iEstatus = Fila.Item("iEstatus")
                     item = lsvHistorial.Items.Add(Fila.Item("iIdPrestamoSA"))
@@ -48,6 +53,7 @@
                     item.SubItems.Add("" & Fila.Item("fechaPrestamo"))
                     item.SubItems.Add("" & Fila.Item("montototal"))
                     item.SubItems.Add("" & Fila.Item("descuento"))
+                    item.SubItems.Add("" & tipoprestamo(0).Item("TipoPrestamo"))
                     item.SubItems.Add("" & Fila.Item("fechainiciopago"))
                     item.BackColor = IIf(Alter, Color.WhiteSmoke, Color.White)
                     Alter = Not Alter
@@ -78,7 +84,9 @@
         txtMontoTotal.TabIndex = 3
         txtDescuento.TabIndex = 4
         dtpInicioPago.TabIndex = 5
-        cmdguardar.TabIndex = 6
+        cbotipoprestamo.TabIndex = 6
+        cmdguardar.TabIndex = 7
+
     End Sub
 
     Private Sub Limpiar(ByVal Contenedor As Object)
@@ -95,6 +103,7 @@
         cboEstatus.Enabled = False
         dtpFechaPrestamo.Enabled = False
         dtpInicioPago.Enabled = False
+        cbotipoprestamo.Enabled = False
         cmdDeleted.Enabled = False
     End Sub
 
@@ -124,7 +133,8 @@
 
                     txtMontoTotal.Text = IIf(lsvHistorial.SelectedItems(0).SubItems(2).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(2).Text)
                     txtDescuento.Text = IIf(lsvHistorial.SelectedItems(0).SubItems(3).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(3).Text)
-                    dtpInicioPago.Value = IIf(lsvHistorial.SelectedItems(0).SubItems(4).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(4).Text)
+                    cbotipoprestamo.SelectedItem = IIf(lsvHistorial.SelectedItems(0).SubItems(4).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(4).Text)
+                    dtpInicioPago.Value = IIf(lsvHistorial.SelectedItems(0).SubItems(4).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(5).Text)
                     cboEstatus.SelectedIndex = IIf(iEstatus = "1", 1, 0)
 
 
@@ -133,6 +143,7 @@
                     cboEstatus.Enabled = True
                     dtpFechaPrestamo.Enabled = True
                     dtpInicioPago.Enabled = True
+                    cbotipoprestamo.Enabled = True
                     cmdguardar.Enabled = True
                     cmdcancelar.Enabled = True
                     cmdDeleted.Enabled = True
@@ -165,7 +176,8 @@
                 SQL &= "'" & txtDescuento.Text & "',"
                 SQL &= "'" & dtpFechaPrestamo.Value.ToShortDateString & "',"
                 SQL &= "'" & dtpInicioPago.Value.ToShortDateString & "',"
-                SQL &= cboEstatus.SelectedIndex
+                SQL &= cboEstatus.SelectedIndex & ", "
+                SQL &= cbotipoprestamo.SelectedIndex
 
 
 
@@ -176,7 +188,8 @@
                 SQL &= "'" & dtpFechaPrestamo.Value.ToShortDateString & "',"
                 SQL &= "'" & dtpInicioPago.Value.ToShortDateString & "',"
                 SQL &= cboEstatus.SelectedIndex & ","
-                SQL &= gIdEmpleado
+                SQL &= gIdEmpleado & ", "
+                SQL &= cbotipoprestamo.SelectedIndex
             End If
 
             If nExecute(SQL) = False Then
@@ -201,6 +214,7 @@
         dtpFechaPrestamo.Enabled = True
         dtpInicioPago.Enabled = True
         cboEstatus.Enabled = True
+        cbotipoprestamo.Enabled = True
         TabIndex()
     End Sub
 
@@ -249,5 +263,17 @@
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub cargartipoprestamo()
+        'Verificar si se tienen permisos
+        Dim sql As String
+        Try
+            sql = "Select tipoPrestamo,iIdTipoPrestamo  from tipoPrestamo order by tipoPrestamo"
+            nCargaCBO(cbotipoprestamo, sql, "tipoPrestamo", "iIdTipoPrestamo")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+
     End Sub
 End Class
