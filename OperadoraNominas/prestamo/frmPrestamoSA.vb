@@ -112,7 +112,7 @@
 
 
     Private Sub lsvHistorial_ItemActivate_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lsvHistorial.ItemActivate
-
+        Dim tipoprestamo As DataRow()
         'Verificar si se tienen permisos
         Dim Sql As String
         Sql = "select * from usuarios where idUsuario = " & idUsuario
@@ -127,7 +127,7 @@
 
                     'Pasar los datos
 
-                    'idPrestamo = lsvHistorial.SelectedItems(0).Tag
+                    ' tipoprestamo = nConsulta("select * from TipoPrestamo where TipoPrestamo =" & IIf(lsvHistorial.SelectedItems(0).SubItems(4).Text = "", "OTRAS DEDUCCIONES", lsvHistorial.SelectedItems(0).SubItems(4).Text))
 
                     dtpFechaPrestamo.Value = lsvHistorial.SelectedItems(0).SubItems(1).Text
 
@@ -177,7 +177,7 @@
                 SQL &= "'" & dtpFechaPrestamo.Value.ToShortDateString & "',"
                 SQL &= "'" & dtpInicioPago.Value.ToShortDateString & "',"
                 SQL &= cboEstatus.SelectedIndex & ", "
-                SQL &= cbotipoprestamo.SelectedIndex
+                SQL &= cbotipoprestamo.SelectedIndex + 1
 
 
 
@@ -189,7 +189,7 @@
                 SQL &= "'" & dtpInicioPago.Value.ToShortDateString & "',"
                 SQL &= cboEstatus.SelectedIndex & ","
                 SQL &= gIdEmpleado & ", "
-                SQL &= cbotipoprestamo.SelectedIndex
+                SQL &= cbotipoprestamo.SelectedIndex + 1
             End If
 
             If nExecute(SQL) = False Then

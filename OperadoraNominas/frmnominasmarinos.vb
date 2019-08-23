@@ -82,8 +82,9 @@ Public Class frmnominasmarinos
     Private Sub frmcontpaqnominas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             Dim sql As String
+            Dim frm As Form = Me
+            frm.Text = "Nominas " & Usuario.Nombre
             cargarperiodos()
-        
             Me.dtgDatos.ContextMenuStrip = Me.cMenu
             cboserie.SelectedIndex = 0
             cboTipoNomina.SelectedIndex = 0
@@ -3595,9 +3596,9 @@ Public Class frmnominasmarinos
                             'PENSION
                             PensionAlimenticia = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - prestamo - fonacot + subsidioaplicado
                             'Buscamos la Pension
-                            If dtgDatos.Rows(x).Cells(2).Value = 94 Then
-                                MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(4).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                            End If
+                            'If dtgDatos.Rows(x).Cells(2).Value = 94 Then
+                            '    MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(4).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            'End If
 
                             sql = "select * from PensionAlimenticia where fkiIdEmpleadoC=" & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value) & " and iEstatus=1"
 
@@ -3812,11 +3813,11 @@ Public Class frmnominasmarinos
                         dtgDatos.Rows(x).Cells(57).Value = "0.00"
                         dtgDatos.Rows(x).Cells(58).Value = "0.00"
                     Else
-                        If dtgDatos.Rows(x).Cells(6).Tag = "" Then
-                            dtgDatos.Rows(x).Cells(55).Value = Math.Round(0, 2)
+                        If dtgDatos.Rows(x).Cells(6).Tag = "1" Then
+                          dtgDatos.Rows(x).Cells(55).Value = Math.Round(0, 2)
                             dtgDatos.Rows(x).Cells(56).Value = Math.Round(0, 2)
                             dtgDatos.Rows(x).Cells(57).Value = Math.Round(0, 2)
-                            Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03 * 0.33), 2)
+                            dtgDatos.Rows(x).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(x).Cells(33).Value) * 0.03 * 0.33), 2)
                             dtgDatos.Rows(x).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
                         Else
                             sql = "select * from empleadosC where iIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value

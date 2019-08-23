@@ -30,6 +30,7 @@ Public Class frmPrincipal
     Private Sub frmPrincipal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         lblUsuario.Text = Usuario.Nombre
         clsConfiguracion.Actualizar()
+        lsvPanel.Items.Item(0).Text = "Nomina " & Usuario.Nombre
     End Sub
 
     Private Sub CatálogoDeClientesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -96,7 +97,7 @@ Public Class frmPrincipal
                 '    chkCFDI.Checked = True
                 'End If
 
-                Case "Nomina Operadora"
+                Case "Nomina " & Usuario.Nombre
                     Try
                         Dim Forma As New frmnominasmarinos
                         Forma.ShowDialog()

@@ -178,7 +178,7 @@
                 SQL &= "'" & dtpFechaPrestamo.Value.ToShortDateString & "',"
                 SQL &= "'" & dtpInicioPago.Value.ToShortDateString & "',"
                 SQL &= cboEstatus.SelectedIndex & ", "
-                SQL &= cbotipoprestamo.SelectedIndex
+                SQL &= cbotipoprestamo.SelectedIndex + 1
 
 
 
@@ -190,7 +190,7 @@
                 SQL &= "'" & dtpInicioPago.Value.ToShortDateString & "',"
                 SQL &= cboEstatus.SelectedIndex & ","
                 SQL &= gIdEmpleado & ", "
-                SQL &= cbotipoprestamo.SelectedIndex
+                SQL &= cbotipoprestamo.SelectedIndex + 1
             End If
 
             If nExecute(SQL) = False Then
