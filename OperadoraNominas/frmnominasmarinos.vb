@@ -4284,8 +4284,12 @@ Public Class frmnominasmarinos
                     'Complemento Asimilado
                     ComplementoAsimilados = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot - PrestamoPersonalAsimilados - AdeudoINfonavitAsimilados - DiferenciaInfonavitAsimilados - Operadora, 2)
                     If ComplementoAsimilados < 0 And subsidioaplicado > 0 And (dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN") Then
-                        ComplementoAsimilados = 0
+                        SueldoBaseTMM = (Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value))) - ComplementoAsimilados
+                        dtgDatos.Rows(x).Cells(15).Value = SueldoBaseTMM ' / 2
+
+                        ComplementoAsimilados = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot - PrestamoPersonalAsimilados - AdeudoINfonavitAsimilados - DiferenciaInfonavitAsimilados - Operadora, 2)
                     End If
+
 
                     dtgDatos.Rows(x).Cells(50).Value = ComplementoAsimilados
                     'Retenciones_Operadora
