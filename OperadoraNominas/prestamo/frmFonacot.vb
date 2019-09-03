@@ -70,7 +70,7 @@
     Private Sub Limpiar(ByVal Contenedor As Object)
 
         txtCredito.Text = ""
-        nudImporte.Value = "0.0"
+        nudImporte.Text = "0.0"
         cboEstatus.SelectedIndex = 0
         cmdguardar.Enabled = False
         cmdcancelar.Enabled = False
@@ -88,6 +88,7 @@
 
         'Verificar si se tienen permisos
         Dim Sql As String
+        Dim importefonacot As Int32
         Sql = "select * from usuarios where idUsuario = " & idUsuario
         Dim rwFilas As DataRow() = nConsulta(Sql)
         ' Dim Forma As New frmTipoEmpresa
@@ -104,7 +105,8 @@
 
 
                     txtCredito.Text = lsvHistorial.SelectedItems(0).SubItems(1).Text
-                    nudImporte.Value = lsvHistorial.SelectedItems(0).SubItems(2).Text
+
+                    nudImporte.Text = lsvHistorial.SelectedItems(0).SubItems(2).Text
                     cboEstatus.SelectedIndex = IIf(iEstatus = "1", 1, 0)
 
 
@@ -139,7 +141,7 @@
                 SQL = "EXEC setFonacotActualizar "
                 SQL &= idFonacot & ","
                 SQL &= "'" & txtCredito.Text & "',"
-                SQL &= "'" & nudImporte.Value & "',"
+                SQL &= "'" & nudImporte.Text & "',"
                 SQL &= cboEstatus.SelectedIndex
 
 
@@ -147,7 +149,7 @@
             Else
                 SQL = "EXEC setFonacotInsertar 0,"
                 SQL &= gIdEmpleado & ", '" & txtCredito.Text & "',"
-                SQL &= "'" & nudImporte.Value & "', "
+                SQL &= "'" & nudImporte.Text & "', "
                 SQL &= cboEstatus.SelectedIndex
 
             End If
