@@ -4283,13 +4283,8 @@ Public Class frmnominasmarinos
                     DiferenciaInfonavitAsimilados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(49).Value = "", "0", dtgDatos.Rows(x).Cells(49).Value))
                     'Complemento Asimilado
                     ComplementoAsimilados = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot - PrestamoPersonalAsimilados - AdeudoINfonavitAsimilados - DiferenciaInfonavitAsimilados - Operadora, 2)
-
                     If ComplementoAsimilados < 0 And subsidioaplicado > 0 And (dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN") Then
-<<<<<<< HEAD
-                        SueldoBaseTMM = (Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value))) - ComisionAsimilados
-=======
                         SueldoBaseTMM = (Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value))) - ComplementoAsimilados
->>>>>>> origin
                         dtgDatos.Rows(x).Cells(15).Value = SueldoBaseTMM ' / 2
 
                         ComplementoAsimilados = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot - PrestamoPersonalAsimilados - AdeudoINfonavitAsimilados - DiferenciaInfonavitAsimilados - Operadora, 2)
@@ -9630,7 +9625,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-   Private Sub cmdexcel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdexcel.Click
+    Private Sub cmdexcel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdexcel.Click
         Try
 
             Dim filaExcel As Integer = 0
@@ -11189,12 +11184,11 @@ Public Class frmnominasmarinos
                     If dtgDatos.Rows(x).Cells(42).Value > 0 Then
 
                         'Revisa si hay repetidos
-                        ' listadeprestamos.Add(dtgDatos.Rows(x).Cells(2).Value)
 
                         Dim rwPrestamoSa As DataRow() = nConsulta("SELECT * FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & "AND  iESTATUS=1")
                         If rwPrestamoSa Is Nothing = False Then
 
-                            'Solo 1
+                            '> 1
                             If rwPrestamoSa.Length > 1 Then
 
                                 For Each prestado In rwPrestamoSa
@@ -11205,15 +11199,13 @@ Public Class frmnominasmarinos
                                         tipo = tipoprestamo(0).Item("TipoPrestamo")
                                         totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamoSA  WHERE fkiIdPrestamoSA=" & prestado.Item("iIdPrestamoSA"))
 
-                                        If totalcobrado(0).Item("TotalCobrado").ToString <> "" Then
-                                            hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
-                                            hoja7.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
-                                            hoja7.Cell("D" & filaExcel).Value = prestado.Item("montoTotal") 'Monto
-                                            hoja7.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
-                                            hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
-                                            hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
-                                        End If
-                                       
+
+                                        hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
+                                        hoja7.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
+                                        hoja7.Cell("D" & filaExcel).Value = prestado.Item("montoTotal") 'Monto
+                                        hoja7.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
+                                        hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
+                                        hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
 
                                     End If
 
@@ -11222,34 +11214,24 @@ Public Class frmnominasmarinos
                                 Next
 
                             Else ' Mas de uno
-                                'For Each prestado In rwPrestamoSa
-                                '    hoja7.Range(filaExcel, 3, filaExcel, 7).Style.NumberFormat.NumberFormatId = 4
-                                '    Dim tipoprestamo As DataRow() = nConsulta("select * from TipoPrestamo where iIdTipoPrestamo =" & prestado.Item("fkiIdTipoPrestamo"))
+                                hoja7.Range(filaExcel, 3, filaExcel, 7).Style.NumberFormat.NumberFormatId = 4
+                                totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamoSA  WHERE fkiIdPrestamoSA=" & rwPrestamoSa(0).Item("iIdPrestamoSA"))
 
-                                '    If tipoprestamo Is Nothing = False Then
-                                '        tipo = tipoprestamo(0).Item("TipoPrestamo")
-                                '        totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamoSA  WHERE fkiIdPrestamoSA=" & prestado.Item("iIdPrestamoSA"))
+                                hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
+                                hoja7.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
+                                hoja7.Cell("D" & filaExcel).Value = rwPrestamoSa(0).Item("montoTotal") 'Monto
+                                hoja7.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
+                                hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
+                                hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
 
-                                '        If totalcobrado(0).Item("TotalCobrado").ToString <> "" Then
-                                '            hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
-                                '            hoja7.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
-                                '            hoja7.Cell("D" & filaExcel).Value = prestado.Item("montoTotal") 'Monto
-                                '            hoja7.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
-                                '            hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
-                                '            hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
-                                '        End If
+                                filaExcel = filaExcel + 1
 
-
-                                '    End If
-
-                                '    filaExcel = filaExcel + 1
-                                'Next
                             End If
 
                         End If
                     End If
 
-            filatmp = filatmp + 1
+                    filatmp = filatmp + 1
 
                 Next
 
@@ -11276,6 +11258,7 @@ Public Class frmnominasmarinos
                         ''Revisa si hay repetidos
 
                         Dim rwPrestamoSa As DataRow() = nConsulta("SELECT * FROM Prestamo WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & "AND  iESTATUS=1")
+                     
 
                         If rwPrestamoSa Is Nothing = False Then
 
@@ -11301,7 +11284,17 @@ Public Class frmnominasmarinos
                                     filaExcel = filaExcel + 1
                                 Next
                             Else ' mas de uno
+                                hoja8.Range(filaExcel, 3, filaExcel, 7).Style.NumberFormat.NumberFormatId = 4
+                                totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamo  WHERE fkiIdPrestamo=" & rwPrestamoSa(0).Item("iIdPrestamo"))
 
+                                hoja8.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
+                                hoja8.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
+                                hoja8.Cell("D" & filaExcel).Value = rwPrestamoSa(0).Item("montoTotal") 'Monto
+                                hoja8.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
+                                hoja8.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
+                                hoja8.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
+
+                                filaExcel = filaExcel + 1
                             End If
 
 
@@ -11616,6 +11609,8 @@ Public Class frmnominasmarinos
 
 
     End Sub
+
+
 
 
     'Private Function ExisteEmpleado(ByVal empleado As String) As Boolean
