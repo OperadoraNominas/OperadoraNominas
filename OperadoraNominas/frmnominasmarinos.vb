@@ -3157,7 +3157,7 @@ Public Class frmnominasmarinos
                         'CALCULAR FONACOT
                         If chkNofonacot.Checked = False Then
 
-                            sql = "SELECT * FROM FONACOT WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                            sql = "SELECT * FROM FONACOT WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & "and iEstatus=1"
 
                             Dim rwFonacotEmpleado As DataRow() = nConsulta(sql)
                             If rwFonacotEmpleado Is Nothing = False Then

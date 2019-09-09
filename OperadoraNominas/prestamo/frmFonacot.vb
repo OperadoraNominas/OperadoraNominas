@@ -29,7 +29,7 @@
             lsvHistorial.Items.Clear()
             SQL = "SELECT * FROM Fonacot"
             SQL &= " where fkiIdEmpleadoC=" & gIdEmpleado
-            SQL &= " AND iEstatus=1"
+            'SQL &= " AND iEstatus=1"
             Dim rwFilas As DataRow() = nConsulta(SQL)
             Dim item As ListViewItem
 
