@@ -3157,7 +3157,7 @@ Public Class frmnominasmarinos
                         'CALCULAR FONACOT
                         If chkNofonacot.Checked = False Then
 
-                            sql = "SELECT * FROM FONACOT WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                            sql = "SELECT * FROM FONACOT WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & "and iEstatus=1"
 
                             Dim rwFonacotEmpleado As DataRow() = nConsulta(sql)
                             If rwFonacotEmpleado Is Nothing = False Then
@@ -9625,12 +9625,13 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-   Private Sub cmdexcel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdexcel.Click
+    Private Sub cmdexcel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdexcel.Click
         Try
 
             Dim filaExcel As Integer = 0
             Dim dialogo As New SaveFileDialog()
             Dim periodo As String
+            Dim pilotin As Boolean
 
             Dim tiponomina, sueldodescanso As String
 
@@ -9733,6 +9734,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel + x, 9).Value = "0.0" 'DIAS DESCANSO
                             hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L" & filaExcel + x 'ABORDO
                             hoja.Cell(filaExcel + x, 11).FormulaA1 = "0.0" ' DESCANSO
+                            pilotin = True
                         Else
                             hoja.Cell(filaExcel + x, 9).Value = dtgDatos.Rows(x).Cells(18).Value  ' DIAS DESCANSO
                             hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L" & filaExcel + x & "/2" 'ABORDO 
@@ -9748,7 +9750,7 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 18).FormulaA1 = "='OPERADORA ABORDO'!AO" & filatmp + x & "+'OPERADORA DESCANSO'!AO" & filatmp + x 'Fonacot
                         hoja.Cell(filaExcel + x, 19).FormulaA1 = "=L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x & "-O" & filaExcel + x & "-P" & filaExcel + x & "-Q" & filaExcel + x & "-R" & filaExcel + x ' sueldo ordinario real
                         hoja.Cell(filaExcel + x, 20).FormulaA1 = "='OPERADORA ABORDO'!AP" & filatmp + x & "+'OPERADORA DESCANSO'!AP" & filatmp + x 'Operadora mx
-                        hoja.Cell(filaExcel + x, 21).FormulaA1 = "=S" & filaExcel + x & "-T" & filaExcel + x '& "-O" & filaExcel + x ' asimilados
+                        hoja.Cell(filaExcel + x, 21).FormulaA1 = "=S" & filaExcel + x & "-T" & filaExcel + x  ' asimilados
                         hoja.Cell(filaExcel + x, 22).FormulaA1 = "='OPERADORA ABORDO'!AG" & filatmp + x & "+'OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA ABORDO'!AK" & filatmp + x & "+'OPERADORA ABORDO'!AL" & filatmp + x & "+'OPERADORA ABORDO'!AN" & filatmp + x & "+'OPERADORA ABORDO'!AO" & filatmp + x & "+'OPERADORA DESCANSO'!AG" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AK" & filatmp + x & "+'OPERADORA DESCANSO'!AL" & filatmp + x & "+'OPERADORA DESCANSO'!AN" & filatmp + x & "+'OPERADORA DESCANSO'!AO" & filatmp + x ' retenciones
                         hoja.Cell(filaExcel + x, 23).FormulaA1 = ""
                         hoja.Cell(filaExcel + x, 24).FormulaA1 = "=(T" & filaExcel + x & "+V" & filaExcel + x & ")*2%"
@@ -11107,6 +11109,7 @@ Public Class frmnominasmarinos
                             If rwPension.Length > 1 Then
 
                                 For Each pensionado In rwPension
+
                                     PensionAlimenticia = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - prestamo - fonacot + subsidioaplicado
                                     pension = Math.Round(PensionAlimenticia * (Double.Parse(pensionado.Item("fPorcentaje")) / 100), 2)
                                     Dim bank As DataRow() = nConsulta("select * from bancos where iIdBanco =" & pensionado.Item("fkiIdBanco"))
@@ -11165,7 +11168,8 @@ Public Class frmnominasmarinos
                 filaExcel = 2
                 filatmp = 9
                 inicio = 0
-              
+
+                Dim listadeprestamos As New List(Of String)
 
                 'limpiar
                 recorrerFilasColumnas(hoja7, filaExcel, dtgDatos.Rows.Count + 50, 50, "clear")
@@ -11175,49 +11179,59 @@ Public Class frmnominasmarinos
                     Dim nombre As String
                     Dim tipo As String
                     Dim totalcobrado As DataRow()
-                    'If dtgDatos.Rows(x).Cells(4).Value = "ZAMBRANO FLORES JORGE" Then
-                    '    MsgBox(dtgDatos.Rows(x).Cells(4).Value)
-                    'End If
+                    Dim trabajadorprestamo As String = ""
 
                     If dtgDatos.Rows(x).Cells(42).Value > 0 Then
 
-                        ''Revisa si hay repetidos
-                        Dim rwPrestamoSa As DataRow() = nConsulta("SELECT * FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & "AND  iESTATUS=1")
+                        'Revisa si hay repetidos
 
+                        Dim rwPrestamoSa As DataRow() = nConsulta("SELECT * FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & "AND  iESTATUS=1")
                         If rwPrestamoSa Is Nothing = False Then
 
-                            ' If rwPrestamoSa.Length > 1 Then
+                            '> 1
+                            If rwPrestamoSa.Length > 1 Then
 
-                            For Each prestado In rwPrestamoSa
+                                For Each prestado In rwPrestamoSa
+                                    hoja7.Range(filaExcel, 3, filaExcel, 7).Style.NumberFormat.NumberFormatId = 4
+                                    Dim tipoprestamo As DataRow() = nConsulta("select * from TipoPrestamo where iIdTipoPrestamo =" & prestado.Item("fkiIdTipoPrestamo"))
 
+                                    If tipoprestamo Is Nothing = False Then
+                                        tipo = tipoprestamo(0).Item("TipoPrestamo")
+                                        totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamoSA  WHERE fkiIdPrestamoSA=" & prestado.Item("iIdPrestamoSA"))
+
+
+                                        hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
+                                        hoja7.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
+                                        hoja7.Cell("D" & filaExcel).Value = prestado.Item("montoTotal") 'Monto
+                                        hoja7.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
+                                        hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
+                                        hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
+
+                                    End If
+
+                                    filaExcel = filaExcel + 1
+
+                                Next
+
+                            Else ' Mas de uno
                                 hoja7.Range(filaExcel, 3, filaExcel, 7).Style.NumberFormat.NumberFormatId = 4
-                                Dim tipoprestamo As DataRow() = nConsulta("select * from TipoPrestamo where iIdTipoPrestamo =" & prestado.Item("fkiIdTipoPrestamo"))
+                                totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamoSA  WHERE fkiIdPrestamoSA=" & rwPrestamoSa(0).Item("iIdPrestamoSA"))
 
-                                If tipoprestamo Is Nothing = False Then
-                                    tipo = tipoprestamo(0).Item("TipoPrestamo")
-                                    totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamoSA  WHERE fkiIdPrestamoSA=" & prestado.Item("iIdPrestamoSA"))
-
-                                    hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
-                                    hoja7.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
-                                    hoja7.Cell("D" & filaExcel).Value = prestado.Item("montoTotal") 'Monto
-                                    hoja7.Cell("E" & filaExcel).Value = prestado.Item("descuento")
-                                    hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
-                                    hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
-
-                                End If
-
+                                hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
+                                hoja7.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
+                                hoja7.Cell("D" & filaExcel).Value = rwPrestamoSa(0).Item("montoTotal") 'Monto
+                                hoja7.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
+                                hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
+                                hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
 
                                 filaExcel = filaExcel + 1
-                            Next
 
-
-                            'End If
+                            End If
 
                         End If
-
                     End If
 
-            filatmp = filatmp + 1
+                    filatmp = filatmp + 1
 
                 Next
 
@@ -11237,44 +11251,58 @@ Public Class frmnominasmarinos
                     Dim nombre As String
                     Dim tipo As String
                     Dim totalcobrado As DataRow()
+
+
                     If dtgDatos.Rows(x).Cells(47).Value > 0 Then
 
                         ''Revisa si hay repetidos
 
                         Dim rwPrestamoSa As DataRow() = nConsulta("SELECT * FROM Prestamo WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & "AND  iESTATUS=1")
+                     
 
                         If rwPrestamoSa Is Nothing = False Then
 
-                            ' If rwPrestamoSa.Length > 1 Then
+                            If rwPrestamoSa.Length > 1 Then
 
-                            For Each prestado In rwPrestamoSa
+                                For Each prestado In rwPrestamoSa
+                                    hoja8.Range(filaExcel, 3, filaExcel, 7).Style.NumberFormat.NumberFormatId = 4
+                                    Dim tipoprestamo As DataRow() = nConsulta("select * from TipoPrestamo where iIdTipoPrestamo =" & prestado.Item("fkiIdTipoPrestamo"))
+                                    If tipoprestamo Is Nothing = False Then
+                                        tipo = tipoprestamo(0).Item("TipoPrestamo")
+                                        totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamo WHERE fkiIdPrestamo=" & prestado.Item("iIdPrestamo"))
+
+                                        hoja8.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
+                                        hoja8.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
+                                        hoja8.Cell("D" & filaExcel).Value = prestado.Item("montoTotal") 'Monto
+                                        hoja8.Cell("E" & filaExcel).Value = prestado.Item("descuento")
+                                        hoja8.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
+                                        hoja8.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
+
+                                    End If
+
+
+                                    filaExcel = filaExcel + 1
+                                Next
+                            Else ' mas de uno
                                 hoja8.Range(filaExcel, 3, filaExcel, 7).Style.NumberFormat.NumberFormatId = 4
-                                Dim tipoprestamo As DataRow() = nConsulta("select * from TipoPrestamo where iIdTipoPrestamo =" & prestado.Item("fkiIdTipoPrestamo"))
-                                If tipoprestamo Is Nothing = False Then
-                                    tipo = tipoprestamo(0).Item("TipoPrestamo")
-                                    totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamo WHERE fkiIdPrestamo=" & prestado.Item("iIdPrestamo"))
+                                totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamo  WHERE fkiIdPrestamo=" & rwPrestamoSa(0).Item("iIdPrestamo"))
 
-                                    hoja8.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
-                                    hoja8.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
-                                    hoja8.Cell("D" & filaExcel).Value = prestado.Item("montoTotal") 'Monto
-                                    hoja8.Cell("E" & filaExcel).Value = prestado.Item("descuento")
-                                    hoja8.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
-                                    hoja8.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
-
-                                End If
-
+                                hoja8.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
+                                hoja8.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
+                                hoja8.Cell("D" & filaExcel).Value = rwPrestamoSa(0).Item("montoTotal") 'Monto
+                                hoja8.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
+                                hoja8.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
+                                hoja8.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
 
                                 filaExcel = filaExcel + 1
-                            Next
+                            End If
 
-
-                            ' End If
 
                         End If
 
                     End If
 
-            filatmp = filatmp + 1
+                    filatmp = filatmp + 1
 
                 Next
 
@@ -11581,6 +11609,8 @@ Public Class frmnominasmarinos
 
 
     End Sub
+
+
 
 
     'Private Function ExisteEmpleado(ByVal empleado As String) As Boolean
