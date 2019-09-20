@@ -2162,9 +2162,32 @@ Public Class frmnominasmarinos
                                     'pnlProgreso.Visible = False
                                     Exit Sub
                                 End If
+
+
+                                'sql = "select isnull(sum(monto),0) as monto from pagoprestamoSA where fkiIdPrestamo=" & rwPrestamoAsiEmpleado(0)("iIdPrestamoSA")
+                                'Dim rwMontoPrestamo As DataRow() = nConsulta(sql)
+                                'If rwMontoPrestamo Is Nothing = False Then
+
+                                '    If Double.Parse(rwMontoPrestamo(0)("monto").ToString) >= Double.Parse(rwPrestamoAsiEmpleado(0)("montototal").ToString) Then
+                                '        'Actualizamos el status
+                                '        sql = "update PrestamoSA set iEstatus=0 where iIdPrestamo=" & rwPrestamoAsiEmpleado(0)("iIdPrestamoSA")
+                                '        If nExecute(sql) = False Then
+                                '            MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                '            'pnlProgreso.Visible = False
+                                '            Exit Sub
+                                '        End If
+                                '    End If
+
+
+                                'End If
+
                             Else
                                 MessageBox.Show("Existe valor para prestamo sa, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End If
+
+
+
+                           
 
                         End If
                         'End If
@@ -3239,7 +3262,9 @@ Public Class frmnominasmarinos
                         '    MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                         'End If
                         If dtgDatos.Rows(x).Cells(3).Tag = "" Then
-                            sql = "SELECT * FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
+
+                            sql = "SELECT  * FROM PrestamoSA WHERE iidPrestamosa =("
+                            sql &= "SELECT max(iidPrestamosa) FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1)"
 
                             Dim rwPrestamoSAEmpleado As DataRow() = nConsulta(sql)
                             If rwPrestamoSAEmpleado Is Nothing = False Then
@@ -4010,7 +4035,8 @@ Public Class frmnominasmarinos
                                 MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             End If
                             If dtgDatos.Rows(x).Cells(3).Tag = "" Then
-                                sql = "SELECT * FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
+                                sql = "SELECT  * FROM PrestamoSA WHERE iidPrestamosa =("
+                                sql &= "SELECT max(iidPrestamosa) FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1)"
 
                                 Dim rwPrestamoSAEmpleado As DataRow() = nConsulta(sql)
                                 If rwPrestamoSAEmpleado Is Nothing = False Then
@@ -4188,7 +4214,9 @@ Public Class frmnominasmarinos
                     'Prestamo Personal Asimilado
 
                     If dtgDatos.Rows(x).Cells(2).Tag = "" Then
-                        sql = "SELECT * FROM prestamo WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
+                        'sql = "SELECT * FROM prestamo WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
+                        sql = "SELECT  * FROM prestamo WHERE iidPrestamo =("
+                        sql &= "SELECT max(iidPrestamo) FROM Prestamo WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1)"
 
                         Dim rwPrestamoAsiEmpleado As DataRow() = nConsulta(sql)
                         If rwPrestamoAsiEmpleado Is Nothing = False Then
