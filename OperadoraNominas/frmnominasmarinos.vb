@@ -2047,7 +2047,7 @@ Public Class frmnominasmarinos
 
                         'GUARDAR FONACOT
                         If Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", "0", dtgDatos.Rows(x).Cells(43).Value)) > 0 Then
-                            sql = "SELECT * FROM FONACOT WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                            sql = "SELECT * FROM FONACOT WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & "and iEstatus=1"
 
                             Dim rwFonacotEmpleado As DataRow() = nConsulta(sql)
                             If rwFonacotEmpleado Is Nothing = False Then
@@ -3235,9 +3235,9 @@ Public Class frmnominasmarinos
                         'AJUSTE INFONAVIT
 
                         'PRESTAMO
-                        If dtgDatos.Rows(x).Cells(2).Value = 94 Then
-                            MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                        End If
+                        'If dtgDatos.Rows(x).Cells(2).Value = 94 Then
+                        '    MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'End If
                         If dtgDatos.Rows(x).Cells(3).Tag = "" Then
                             sql = "SELECT * FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
 
@@ -3928,7 +3928,7 @@ Public Class frmnominasmarinos
                             'CALCULAR FONACOT
                             If chkNofonacot.Checked = False Then
 
-                                sql = "SELECT * FROM FONACOT WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value
+                                sql = "SELECT * FROM FONACOT WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & "and iEstatus=1"
 
                                 Dim rwFonacotEmpleado As DataRow() = nConsulta(sql)
                                 If rwFonacotEmpleado Is Nothing = False Then
