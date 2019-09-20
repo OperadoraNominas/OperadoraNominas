@@ -134,7 +134,7 @@
                     txtMontoTotal.Text = IIf(lsvHistorial.SelectedItems(0).SubItems(2).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(2).Text)
                     txtDescuento.Text = IIf(lsvHistorial.SelectedItems(0).SubItems(3).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(3).Text)
                     cbotipoprestamo.SelectedItem = IIf(lsvHistorial.SelectedItems(0).SubItems(4).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(4).Text)
-                    dtpInicioPago.Value = IIf(lsvHistorial.SelectedItems(0).SubItems(4).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(5).Text)
+                    dtpInicioPago.Value = IIf(lsvHistorial.SelectedItems(0).SubItems(5).Text = "", "0", lsvHistorial.SelectedItems(0).SubItems(5).Text)
                     cboEstatus.SelectedIndex = IIf(iEstatus = "1", 1, 0)
 
 
@@ -241,7 +241,7 @@
 
                 'If resultado = DialogResult.Yes Then
 
-                SQL = "DELETE FROM Prestamo where iIdPrestamo =" & datos(0).SubItems(0).Text & ""
+                SQL = "DELETE FROM PrestamoSA where iIdPrestamoSA =" & datos(0).SubItems(0).Text & ""
 
                 If nExecute(SQL) = False Then
                     MessageBox.Show("Hubo un problema al borrar, revise sus datos", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)

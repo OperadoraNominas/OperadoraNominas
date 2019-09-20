@@ -3235,9 +3235,9 @@ Public Class frmnominasmarinos
                         'AJUSTE INFONAVIT
 
                         'PRESTAMO
-                        If dtgDatos.Rows(x).Cells(2).Value = 94 Then
-                            MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                        End If
+                        'If dtgDatos.Rows(x).Cells(2).Value = 94 Then
+                        '    MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        'End If
                         If dtgDatos.Rows(x).Cells(3).Tag = "" Then
                             sql = "SELECT * FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
 
