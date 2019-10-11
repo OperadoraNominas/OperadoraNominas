@@ -9621,7 +9621,7 @@ Public Class frmnominasmarinos
             'Forma.gIdTipoPuesto = 1
             'Forma.ShowDialog()
         Catch ex As Exception
-
+            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End Try
     End Sub
 
@@ -11290,7 +11290,7 @@ Public Class frmnominasmarinos
                                 hoja8.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
                                 hoja8.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
                                 hoja8.Cell("D" & filaExcel).Value = rwPrestamoSa(0).Item("montoTotal") 'Monto
-                                hoja8.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
+                                hoja8.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AW" & filatmp & "+'OPERADORA DESCANSO'!AW" & filatmp  ' prestado.Item("descuento")
                                 hoja8.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
                                 hoja8.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
 
