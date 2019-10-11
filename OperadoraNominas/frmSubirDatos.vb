@@ -321,6 +321,9 @@ Public Class frmSubirDatos
                     dsReporte.Tables("Tabla").Columns.Add("SalarioTMM")
                     dsReporte.Tables("Tabla").Columns.Add("CodigoPuesto")
                     dsReporte.Tables("Tabla").Columns.Add("CodigoBuque")
+
+                    dsReporte.Tables("Tabla").Columns.Add("Fechainicio")
+                    dsReporte.Tables("Tabla").Columns.Add("Fechafin")
                     Dim mensaje As String
 
                     pnlProgreso.Visible = True
@@ -353,6 +356,8 @@ Public Class frmSubirDatos
                                 fila.Item("SalarioTMM") = Trim(producto.SubItems(17).Text)
                                 fila.Item("CodigoPuesto") = Trim(producto.SubItems(4).Text)
                                 fila.Item("CodigoBuque") = Trim(producto.SubItems(10).Text)
+                                fila.Item("Fechainicio") = (Date.Parse(Trim(producto.SubItems(7).Text))).ToShortDateString
+                                fila.Item("Fechafin") = (Date.Parse(Trim(producto.SubItems(8).Text))).ToShortDateString
                                 dsReporte.Tables("Tabla").Rows.Add(fila)
 
                             End If
@@ -382,7 +387,7 @@ Public Class frmSubirDatos
                 pnlCatalogo.Enabled = True
             End If
         Catch ex As Exception
-
+            MessageBox.Show(ex.Message.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End Try
     End Sub
 
