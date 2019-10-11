@@ -261,6 +261,12 @@
     <Compile Include="pension\frmPensionA.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="prestamo\frmEstatusPres.Designer.vb">
+      <DependentUpon>frmEstatusPres.vb</DependentUpon>
+    </Compile>
+    <Compile Include="prestamo\frmEstatusPres.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="prestamo\frmPrestamoSA.Designer.vb">
       <DependentUpon>frmPrestamoSA.vb</DependentUpon>
     </Compile>
@@ -362,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pension\frmPensionA.resx">
       <DependentUpon>frmPensionA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prestamo\frmEstatusPres.resx">
+      <DependentUpon>frmEstatusPres.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="prestamo\frmPrestamoSA.resx">
       <DependentUpon>frmPrestamoSA.vb</DependentUpon>

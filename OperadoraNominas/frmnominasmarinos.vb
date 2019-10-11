@@ -13753,8 +13753,8 @@ Public Class frmnominasmarinos
         Dim contador As Integer
         Dim dialogo As New SaveFileDialog()
 
-        Dim Forma As New frmConcentradoInfonavit
-        
+        Dim Forma As New frmEstatusPrestamo
+
         If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
             SQL = "select iBimestre,iAnio,Calculoinfonavit.fkiIdEmpleadoC,cNombreLargo,Calculoinfonavit.cTipoFactor,Calculoinfonavit.fFactor,Monto,retenido from (calculoinfonavit "
             SQL &= " inner join empleadosC on calculoinfonavit.fkiIdEmpleadoC=empleadosC.iIdEmpleadoC)"
@@ -13779,7 +13779,7 @@ Public Class frmnominasmarinos
                 hoja.Column("F").Width = 15
                 hoja.Column("G").Width = 15
                 hoja.Column("H").Width = 15
-                
+
 
 
                 hoja.Cell(1, 2).Value = "Concentrado Infonavit"
@@ -13812,7 +13812,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(4, 6).Value = "Factor"
                 hoja.Cell(4, 7).Value = "Monto Bimestre"
                 hoja.Cell(4, 8).Value = "Retenido"
-                
+
 
 
                 filaExcel = 5
@@ -13820,7 +13820,7 @@ Public Class frmnominasmarinos
 
                 For x As Integer = 0 To rwFilas.Length - 1
 
-                   
+
 
 
 
@@ -13839,12 +13839,12 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 7).Value = rwFilas(x)("Monto")
                     'Retenido
                     hoja.Cell(filaExcel + x, 8).Value = rwFilas(x)("retenido")
-                    
+
 
                 Next
 
 
-                
+
 
                 '##### HOJA NUMERO 2 RESUMEN PAGO
 
@@ -13869,7 +13869,7 @@ Public Class frmnominasmarinos
         End If
     End Sub
 
-    Private Sub NoCalcularInofnavitToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles NoCalcularInofnavitToolStripMenuItem.Click
+    Private Sub NoCalcularInofnavitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NoCalcularInofnavitToolStripMenuItem.Click
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Tag = "1"
@@ -13879,7 +13879,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub ActicarCalculoInfonavitToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ActicarCalculoInfonavitToolStripMenuItem.Click
+    Private Sub ActicarCalculoInfonavitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ActicarCalculoInfonavitToolStripMenuItem.Click
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Tag = ""
@@ -13889,13 +13889,13 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub cmdInfonavitNominaSerie_Click(sender As System.Object, e As System.EventArgs) Handles cmdInfonavitNominaSerie.Click
+    Private Sub cmdInfonavitNominaSerie_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdInfonavitNominaSerie.Click
         Dim SQL As String
         Dim filaExcel As Integer = 5
         Dim contador As Integer
         Dim dialogo As New SaveFileDialog()
 
-        Dim Forma As New frmConcentradoInfonavit
+        Dim Forma As New frmEstatusPrestamo
 
         If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
             SQL = "select iBimestre,iAnio,Calculoinfonavit.fkiIdEmpleadoC,cNombreLargo,Calculoinfonavit.cTipoFactor,Calculoinfonavit.fFactor,Monto,retenido from (calculoinfonavit "

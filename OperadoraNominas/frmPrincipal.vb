@@ -121,8 +121,14 @@ Public Class frmPrincipal
                     End Try
                 Case "Prestamos"
                     Try
-                        'MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        reporteprestamo()
+                        Dim dialogo As New SaveFileDialog()
+
+                        Dim Forma As New frmEstatusPres
+
+                        If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+                            reporteprestamo(Forma.gEstatus)
+                        End If
+
                     Catch ex As Exception
                     End Try
                 Case "Reporte trabajadores"
@@ -472,7 +478,7 @@ Public Class frmPrincipal
 
     End Sub
 
-    Private Sub reporteprestamo()
+    Private Sub reporteprestamo(ByRef status As Integer)
         Try
             Dim filaExcel As Integer = 0
             Dim dialogo As New SaveFileDialog()
@@ -495,22 +501,28 @@ Public Class frmPrincipal
 
             Dim hoja As IXLWorksheet = libro.Worksheets(0)
             Dim hoja2 As IXLWorksheet = libro.Worksheets(1)
-           
-         
+
+
             '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Prestamo SA>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             filaExcel = 2
             Dim nombre As String
             Dim tipo As String
             Dim totalcobrado As DataRow()
+            Dim rwPrestamoSa As DataRow()
 
-            Dim rwPrestamoSa As DataRow() = nConsulta("select * from PrestamoSA a left join empleadosC b on a.fkiIdEmpleado=b.iIdEmpleadoC ORDER BY iIdPrestamoSA")
+            If status = 1 Then
+                rwPrestamoSa = nConsulta("select * from PrestamoSA a left join empleadosC b on a.fkiIdEmpleado=b.iIdEmpleadoC where a.iEstatus=1 ORDER BY iIdPrestamoSA")
+            Else
+
+                rwPrestamoSa = nConsulta("select * from PrestamoSA a left join empleadosC b on a.fkiIdEmpleado=b.iIdEmpleadoC  ORDER BY iIdPrestamoSA")
+            End If
 
             If rwPrestamoSa Is Nothing = False Then
                 If rwPrestamoSa.Length > 1 Then
 
                     For Each prestado In rwPrestamoSa
 
-                        hoja.Range(filaExcel, 6, filaExcel, 7).Style.NumberFormat.NumberFormatId = 4
+                        hoja.Range(filaExcel, 6, filaExcel, 10).Style.NumberFormat.NumberFormatId = 4
 
                         Dim tipoprestamo As DataRow() = nConsulta("select * from TipoPrestamo where iIdTipoPrestamo =" & prestado.Item("fkiIdTipoPrestamo"))
                         If tipoprestamo Is Nothing = False Then
@@ -522,7 +534,7 @@ Public Class frmPrincipal
                                 hoja.Range(filaExcel, 1, filaExcel, 10).Style.Fill.BackgroundColor = XLColor.RedPigment
                             End If
 
-                          
+
                             hoja.Cell("A" & filaExcel).Value = prestado.Item("iIdPrestamoSA") ' codigo
                             hoja.Cell("B" & filaExcel).Value = IIf(prestado.Item("iEstatus") = 1, "ACTIVO", "INACTIVO") ' Estatus
                             hoja.Cell("C" & filaExcel).Value = prestado.Item("fechaprestamo") ' alta
@@ -552,14 +564,19 @@ Public Class frmPrincipal
 
             '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Prestamo asim>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             filaExcel = 2
-            Dim rwPrestamoASIM As DataRow() = nConsulta("select * from Prestamo a left join empleadosC b on a.fkiIdEmpleado=b.iIdEmpleadoC ORDER BY iIdPrestamo")
-
+            Dim rwPrestamoASIM As DataRow()
+            If status = 1 Then
+                rwPrestamoASIM = nConsulta("select * from Prestamo a left join empleadosC b on a.fkiIdEmpleado=b.iIdEmpleadoC where a.iEstatus=1 ORDER BY iIdPrestamo")
+            Else
+                rwPrestamoASIM = nConsulta("select * from Prestamo a left join empleadosC b on a.fkiIdEmpleado=b.iIdEmpleadoC ORDER BY iIdPrestamo")
+            End If
+            
             If rwPrestamoASIM Is Nothing = False Then
                 If rwPrestamoASIM.Length > 1 Then
 
                     For Each prestado In rwPrestamoASIM
 
-                        hoja2.Range(filaExcel, 6, filaExcel, 7).Style.NumberFormat.NumberFormatId = 4
+                        hoja2.Range(filaExcel, 6, filaExcel, 10).Style.NumberFormat.NumberFormatId = 4
 
                         Dim tipoprestamo As DataRow() = nConsulta("select * from TipoPrestamo where iIdTipoPrestamo =" & prestado.Item("fkiIdTipoPrestamo"))
                         If tipoprestamo Is Nothing = False Then
@@ -608,13 +625,13 @@ Public Class frmPrincipal
                 libro = Nothing
                 MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-             
+
 
             Else
                 MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             End If
-           
+
 
         Catch ex As Exception
             MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
