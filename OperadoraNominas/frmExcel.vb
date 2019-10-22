@@ -343,7 +343,7 @@ Public Class frmExcel
 
 
 
-               
+
                 '' filaExcel = 6
                 For Each dato As ListViewItem In lsvLista.CheckedItems
                     hoja.Range(2, 1, filaExcel, 1).Style.NumberFormat.Format = "@"

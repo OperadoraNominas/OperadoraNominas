@@ -133,10 +133,17 @@ Public Class frmPrincipal
                     End Try
                 Case "Reporte trabajadores"
                     Try
-                        
-                            generarreporte()
+                        generarreporte()
+                    Catch ex As Exception
+                    End Try
+
+                Case "Buscar Datos"
+                    Try
+                        Dim Forma As New frmExcelO
+                        Forma.ShowDialog()
 
                     Catch ex As Exception
+
                     End Try
             End Select
 

@@ -32,18 +32,13 @@ Partial Class frmExcelO
         Me.tsbNuevo = New System.Windows.Forms.ToolStripButton()
         Me.tsbImportar = New System.Windows.Forms.ToolStripButton()
         Me.tsbGuardar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbGuardar2 = New System.Windows.Forms.ToolStripButton()
-        Me.cmdNN = New System.Windows.Forms.ToolStripButton()
         Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
         Me.tsbProcesar = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
         Me.chkAll = New System.Windows.Forms.CheckBox()
         Me.lsvLista = New System.Windows.Forms.ListView()
         Me.cmdVerificar = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cboMes = New System.Windows.Forms.ComboBox()
-        Me.cboTipoR = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.tsbEnviar = New System.Windows.Forms.ToolStripButton()
         Me.pnlProgreso.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
@@ -102,7 +97,7 @@ Partial Class frmExcelO
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbImportar, Me.tsbGuardar, Me.tsbGuardar2, Me.cmdNN, Me.tsbCancelar, Me.tsbProcesar})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbImportar, Me.tsbGuardar, Me.tsbEnviar, Me.tsbCancelar, Me.tsbProcesar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1056, 54)
@@ -132,35 +127,12 @@ Partial Class frmExcelO
         '
         Me.tsbGuardar.AutoSize = False
         Me.tsbGuardar.Enabled = False
-        Me.tsbGuardar.Image = CType(resources.GetObject("tsbGuardar.Image"), System.Drawing.Image)
+        Me.tsbGuardar.Image = Global.OperadoraNominas.My.Resources.Resources.if_magnifier_data_532758
         Me.tsbGuardar.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbGuardar.Name = "tsbGuardar"
         Me.tsbGuardar.Size = New System.Drawing.Size(90, 51)
-        Me.tsbGuardar.Text = "Nominas"
+        Me.tsbGuardar.Text = "Buscar"
         Me.tsbGuardar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'tsbGuardar2
-        '
-        Me.tsbGuardar2.AutoSize = False
-        Me.tsbGuardar2.Enabled = False
-        Me.tsbGuardar2.Image = CType(resources.GetObject("tsbGuardar2.Image"), System.Drawing.Image)
-        Me.tsbGuardar2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbGuardar2.Name = "tsbGuardar2"
-        Me.tsbGuardar2.Size = New System.Drawing.Size(90, 51)
-        Me.tsbGuardar2.Text = "N. Descanso"
-        Me.tsbGuardar2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsbGuardar2.Visible = False
-        '
-        'cmdNN
-        '
-        Me.cmdNN.AutoSize = False
-        Me.cmdNN.Enabled = False
-        Me.cmdNN.Image = CType(resources.GetObject("cmdNN.Image"), System.Drawing.Image)
-        Me.cmdNN.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.cmdNN.Name = "cmdNN"
-        Me.cmdNN.Size = New System.Drawing.Size(90, 51)
-        Me.cmdNN.Text = "Marinos"
-        Me.cmdNN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'tsbCancelar
         '
@@ -187,8 +159,8 @@ Partial Class frmExcelO
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlCatalogo.Controls.Add(Me.chkAll)
         Me.pnlCatalogo.Controls.Add(Me.lsvLista)
@@ -213,8 +185,8 @@ Partial Class frmExcelO
         'lsvLista
         '
         Me.lsvLista.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lsvLista.CheckBoxes = True
         Me.lsvLista.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lsvLista.FullRowSelect = True
@@ -238,50 +210,21 @@ Partial Class frmExcelO
         Me.cmdVerificar.Text = "Verificar"
         Me.cmdVerificar.UseVisualStyleBackColor = True
         '
-        'Label1
+        'tsbEnviar
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(558, 20)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(93, 19)
-        Me.Label1.TabIndex = 38
-        Me.Label1.Text = "Mes de Pago"
-        '
-        'cboMes
-        '
-        Me.cboMes.FormattingEnabled = True
-        Me.cboMes.Items.AddRange(New Object() {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"})
-        Me.cboMes.Location = New System.Drawing.Point(657, 17)
-        Me.cboMes.Name = "cboMes"
-        Me.cboMes.Size = New System.Drawing.Size(142, 27)
-        Me.cboMes.TabIndex = 39
-        '
-        'cboTipoR
-        '
-        Me.cboTipoR.FormattingEnabled = True
-        Me.cboTipoR.Items.AddRange(New Object() {"NA", "ND", "NN"})
-        Me.cboTipoR.Location = New System.Drawing.Point(864, 17)
-        Me.cboTipoR.Name = "cboTipoR"
-        Me.cboTipoR.Size = New System.Drawing.Size(142, 27)
-        Me.cboTipoR.TabIndex = 40
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(805, 20)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(53, 19)
-        Me.Label3.TabIndex = 41
-        Me.Label3.Text = "Recibo"
+        Me.tsbEnviar.AutoSize = False
+        Me.tsbEnviar.Enabled = False
+        Me.tsbEnviar.Image = CType(resources.GetObject("tsbEnviar.Image"), System.Drawing.Image)
+        Me.tsbEnviar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbEnviar.Name = "tsbEnviar"
+        Me.tsbEnviar.Size = New System.Drawing.Size(90, 51)
+        Me.tsbEnviar.Text = "Layout"
+        Me.tsbEnviar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'frmExcelO
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1056, 533)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.cboTipoR)
-        Me.Controls.Add(Me.cboMes)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cmdVerificar)
         Me.Controls.Add(Me.lblRuta)
         Me.Controls.Add(Me.cmdCerrar)
@@ -318,11 +261,6 @@ Partial Class frmExcelO
     Friend WithEvents pnlCatalogo As Panel
     Friend WithEvents chkAll As CheckBox
     Friend WithEvents lsvLista As ListView
-    Friend WithEvents tsbGuardar2 As System.Windows.Forms.ToolStripButton
     Friend WithEvents cmdVerificar As System.Windows.Forms.Button
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents cboMes As System.Windows.Forms.ComboBox
-    Friend WithEvents cmdNN As System.Windows.Forms.ToolStripButton
-    Friend WithEvents cboTipoR As System.Windows.Forms.ComboBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents tsbEnviar As System.Windows.Forms.ToolStripButton
 End Class
