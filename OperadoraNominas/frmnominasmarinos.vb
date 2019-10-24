@@ -5057,6 +5057,16 @@ Public Class frmnominasmarinos
                                         'dsarreglo.Tables(0).Rows
                                     Next
                                 End If
+                            Else
+                                Dim iniciomes As Date = "01/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year
+                                'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                Dim final1 As Date = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).AddDays(-1)
+                                Dim dias As Integer = (DateDiff("y", iniciomes, final1)) + 1
+                                iniciomes = "01/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year
+                                'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                final1 = Date.Parse(DiasMes(cboperiodo.SelectedValue) & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value).Year)
+                                dias = (DateDiff("y", iniciomes, final1)) + 1
+                                calcularcostosocial(Posicion1, dias)
                             End If
                             '#### ordenamiento de los repetidos interno
 
@@ -5590,6 +5600,16 @@ Public Class frmnominasmarinos
                                     'dsarreglo.Tables(0).Rows
                                 Next
                             End If
+                        Else
+                            Dim iniciomes As Date = "01/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year
+                            'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                            Dim final1 As Date = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).AddDays(-1)
+                            Dim dias As Integer = (DateDiff("y", iniciomes, final1)) + 1
+                            iniciomes = "01/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year
+                            'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                            final1 = Date.Parse(DiasMes(cboperiodo.SelectedValue) & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value).Year)
+                            dias = (DateDiff("y", iniciomes, final1)) + 1
+                            calcularcostosocial(Posicion1, dias)
                         End If
                         '#### ordenamiento de los repetidos interno
                         
