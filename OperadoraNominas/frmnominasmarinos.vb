@@ -394,8 +394,8 @@ Public Class frmnominasmarinos
                     fila.Item("Subtotal") = rwNominaGuardada(x)("fSubtotal").ToString
                     fila.Item("IVA") = rwNominaGuardada(x)("fIVA").ToString
                     fila.Item("TOTAL_DEPOSITO") = rwNominaGuardada(x)("fTotalDeposito").ToString
-                    fila.Item("fecha_inicio") = Date.Parse(rwNominaGuardada(x)("dFechaInicial").ToString).ToShortDateString
-                    fila.Item("fecha_fin") = Date.Parse(rwNominaGuardada(x)("dFechaFinal").ToString).ToShortDateString
+                    fila.Item("fecha_inicio") = Date.Parse(IIf(rwNominaGuardada(x)("dFechaInicial").ToString = "", "01/01/2019", rwNominaGuardada(x)("dFechaInicial").ToString)).ToShortDateString
+                    fila.Item("fecha_fin") = Date.Parse(IIf(rwNominaGuardada(x)("dFechaFinal").ToString = "", "01/01/2019", rwNominaGuardada(x)("dFechaFinal").ToString)).ToShortDateString
 
                     dsPeriodo.Tables("Tabla").Rows.Add(fila)
                 Next
@@ -731,12 +731,12 @@ Public Class frmnominasmarinos
 
                 'FECHA INICIAL
                 dtgDatos.Columns(63).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(63).ReadOnly = True
+                'dtgDatos.Columns(63).ReadOnly = True
                 dtgDatos.Columns(63).Width = 150
 
                 'FECHA FINAL
                 dtgDatos.Columns(64).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(64).ReadOnly = True
+                'dtgDatos.Columns(64).ReadOnly = True
                 dtgDatos.Columns(64).Width = 150
                 'calcular()
 
@@ -1301,12 +1301,12 @@ Public Class frmnominasmarinos
 
                         'FECHA INICIAL
                         dtgDatos.Columns(63).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(63).ReadOnly = True
+                        'dtgDatos.Columns(63).ReadOnly = True
                         dtgDatos.Columns(63).Width = 150
 
                         'FECHA FINAL
                         dtgDatos.Columns(64).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        dtgDatos.Columns(64).ReadOnly = True
+                        'dtgDatos.Columns(64).ReadOnly = True
                         dtgDatos.Columns(64).Width = 150
 
                         'calcular()
@@ -8954,7 +8954,8 @@ Public Class frmnominasmarinos
                 dsPeriodo.Tables("Tabla").Columns.Add("Subtotal")
                 dsPeriodo.Tables("Tabla").Columns.Add("IVA")
                 dsPeriodo.Tables("Tabla").Columns.Add("TOTAL_DEPOSITO")
-
+                dsPeriodo.Tables("Tabla").Columns.Add("fecha_inicio")
+                dsPeriodo.Tables("Tabla").Columns.Add("fecha_fin")
 
                 ids = Forma.gidEmpleados.Split(",")
                 If dtgDatos.Rows.Count > 0 Then
@@ -9039,7 +9040,8 @@ Public Class frmnominasmarinos
                         fila.Item("Subtotal") = IIf(dtgDatos.Rows(y).Cells(60).Value = "", "0", dtgDatos.Rows(y).Cells(60).Value.ToString.Replace(",", ""))
                         fila.Item("IVA") = IIf(dtgDatos.Rows(y).Cells(61).Value = "", "0", dtgDatos.Rows(y).Cells(61).Value.ToString.Replace(",", ""))
                         fila.Item("TOTAL_DEPOSITO") = IIf(dtgDatos.Rows(y).Cells(62).Value = "", "0", dtgDatos.Rows(y).Cells(62).Value.ToString.Replace(",", ""))
-
+                        fila.Item("fecha_inicio") = IIf(dtgDatos.Rows(y).Cells(63).Value = "", "0", dtgDatos.Rows(y).Cells(62).Value.ToString.Replace(",", ""))
+                        fila.Item("fecha_fin") = IIf(dtgDatos.Rows(y).Cells(64).Value = "", "0", dtgDatos.Rows(y).Cells(62).Value.ToString.Replace(",", ""))
                         'fila.Item("Neto_Pagar") = IIf(dtgDatos.Rows(y).Cells(46).Value = "", "0", dtgDatos.Rows(y).Cells(46).Value.ToString.Replace(",", ""))
                         'fila.Item("Excendente") = IIf(dtgDatos.Rows(y).Cells(47).Value = "", "0", dtgDatos.Rows(y).Cells(47).Value.ToString.Replace(",", ""))
                         'fila.Item("Total") = IIf(dtgDatos.Rows(y).Cells(48).Value = "", "0", dtgDatos.Rows(y).Cells(48).Value.ToString.Replace(",", ""))
@@ -9133,7 +9135,8 @@ Public Class frmnominasmarinos
                             fila.Item("Subtotal") = ""
                             fila.Item("IVA") = ""
                             fila.Item("TOTAL_DEPOSITO") = ""
-
+                            fila.Item("fecha_inicio") = ""
+                            fila.Item("fecha_fin") = ""
 
                             dsPeriodo.Tables("Tabla").Rows.Add(fila)
                             'dt.Rows.Add(fila)
@@ -9477,6 +9480,15 @@ Public Class frmnominasmarinos
                     dtgDatos.Columns(62).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     dtgDatos.Columns(62).ReadOnly = True
                     dtgDatos.Columns(62).Width = 150
+
+                    'fecha inicio
+                    dtgDatos.Columns(63).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    'dtgDatos.Columns(63).ReadOnly = True
+                    dtgDatos.Columns(63).Width = 150
+                    'fecha fin
+                    dtgDatos.Columns(64).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    'dtgDatos.Columns(64).ReadOnly = True
+                    dtgDatos.Columns(64).Width = 150
                     'calcular()
 
                     'calcular()
@@ -9608,7 +9620,8 @@ Public Class frmnominasmarinos
                             fila.Item("Subtotal") = ""
                             fila.Item("IVA") = ""
                             fila.Item("TOTAL_DEPOSITO") = ""
-
+                            fila.Item("fecha_inicio") = ""
+                            fila.Item("fecha_fin") = ""
 
                             dsPeriodo.Tables("Tabla").Rows.Add(fila)
 
@@ -9950,6 +9963,16 @@ Public Class frmnominasmarinos
                         dtgDatos.Columns(62).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                         dtgDatos.Columns(62).ReadOnly = True
                         dtgDatos.Columns(62).Width = 150
+
+
+                        'fecha inicio
+                        dtgDatos.Columns(63).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                        'dtgDatos.Columns(63).ReadOnly = True
+                        dtgDatos.Columns(63).Width = 150
+                        'fecha fin
+                        dtgDatos.Columns(64).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                        'dtgDatos.Columns(64).ReadOnly = True
+                        dtgDatos.Columns(64).Width = 150
 
                         'calcular()
 
