@@ -28,6 +28,8 @@ Partial Class frmPrincipal
         Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Importar Excel"}, 19, System.Drawing.Color.Black, System.Drawing.Color.Empty, Nothing)
         Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Empleados"}, 9, System.Drawing.Color.Black, System.Drawing.Color.Empty, Nothing)
         Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Reporte trabajadores"}, 15, System.Drawing.Color.Black, System.Drawing.Color.Empty, Nothing)
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Prestamos"}, 13, System.Drawing.Color.Black, System.Drawing.Color.Empty, Nothing)
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Buscar Datos"}, 14, System.Drawing.Color.Empty, System.Drawing.Color.Black, Nothing)
         Me.pnlBar = New System.Windows.Forms.Panel()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.chkCBB = New System.Windows.Forms.CheckBox()
@@ -135,13 +137,15 @@ Partial Class frmPrincipal
         Me.lsvPanel.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lsvPanel.ForeColor = System.Drawing.Color.White
         Me.lsvPanel.FullRowSelect = True
+        Me.lsvPanel.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lsvPanel.HideSelection = False
         Me.lsvPanel.HoverSelection = True
         ListViewItem1.ToolTipText = "Calculo de Operadora"
         ListViewItem2.ToolTipText = "Exportar Excel  Nominas"
         ListViewItem3.ToolTipText = "Empleados"
         ListViewItem4.ToolTipText = "Reporte trabajadores"
-        Me.lsvPanel.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4})
+        ListViewItem5.Tag = "Prestamos"
+        Me.lsvPanel.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6})
         Me.lsvPanel.LargeImageList = Me.ImageList1
         Me.lsvPanel.Location = New System.Drawing.Point(0, 0)
         Me.lsvPanel.Name = "lsvPanel"

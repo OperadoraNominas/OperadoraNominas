@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cmdBuscarOtraNom = New System.Windows.Forms.Button()
         Me.chkSoloCostoSocial = New System.Windows.Forms.CheckBox()
         Me.chkNofonacot = New System.Windows.Forms.CheckBox()
         Me.chkCalSoloMarcados = New System.Windows.Forms.CheckBox()
@@ -81,6 +82,8 @@ Partial Class frmnominasmarinos
         Me.RegistroTotalDiasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DesactivarRegistroTotalDiasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EliminarDeLaBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CostoCeroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DesactivarCostoCeroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.layoutTimbrado = New System.Windows.Forms.Button()
         Me.cmdInfonavit = New System.Windows.Forms.Button()
         Me.cmdReporteInfonavit = New System.Windows.Forms.Button()
@@ -90,9 +93,7 @@ Partial Class frmnominasmarinos
         Me.cmdImssNomina = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-        Me.CostoCeroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DesactivarCostoCeroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdBuscarOtraNom = New System.Windows.Forms.Button()
+        Me.cmdAcumuladoOperadora = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -189,9 +190,10 @@ Partial Class frmnominasmarinos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.cmdAcumuladoOperadora)
         Me.pnlCatalogo.Controls.Add(Me.cmdBuscarOtraNom)
         Me.pnlCatalogo.Controls.Add(Me.chkSoloCostoSocial)
         Me.pnlCatalogo.Controls.Add(Me.chkNofonacot)
@@ -226,6 +228,16 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'cmdBuscarOtraNom
+        '
+        Me.cmdBuscarOtraNom.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdBuscarOtraNom.Location = New System.Drawing.Point(943, 66)
+        Me.cmdBuscarOtraNom.Name = "cmdBuscarOtraNom"
+        Me.cmdBuscarOtraNom.Size = New System.Drawing.Size(180, 28)
+        Me.cmdBuscarOtraNom.TabIndex = 32
+        Me.cmdBuscarOtraNom.Text = "Buscar en otra nomina"
+        Me.cmdBuscarOtraNom.UseVisualStyleBackColor = True
         '
         'chkSoloCostoSocial
         '
@@ -495,8 +507,8 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.AllowUserToDeleteRows = False
         Me.dtgDatos.AllowUserToOrderColumns = True
         Me.dtgDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 104)
         Me.dtgDatos.Name = "dtgDatos"
@@ -647,6 +659,18 @@ Partial Class frmnominasmarinos
         Me.EliminarDeLaBaseToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.EliminarDeLaBaseToolStripMenuItem.Text = "Eliminar de la base"
         '
+        'CostoCeroToolStripMenuItem
+        '
+        Me.CostoCeroToolStripMenuItem.Name = "CostoCeroToolStripMenuItem"
+        Me.CostoCeroToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.CostoCeroToolStripMenuItem.Text = "Costo cero"
+        '
+        'DesactivarCostoCeroToolStripMenuItem
+        '
+        Me.DesactivarCostoCeroToolStripMenuItem.Name = "DesactivarCostoCeroToolStripMenuItem"
+        Me.DesactivarCostoCeroToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.DesactivarCostoCeroToolStripMenuItem.Text = "Desactivar costo cero"
+        '
         'layoutTimbrado
         '
         Me.layoutTimbrado.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -752,27 +776,15 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
-        'CostoCeroToolStripMenuItem
+        'cmdAcumuladoOperadora
         '
-        Me.CostoCeroToolStripMenuItem.Name = "CostoCeroToolStripMenuItem"
-        Me.CostoCeroToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.CostoCeroToolStripMenuItem.Text = "Costo cero"
-        '
-        'DesactivarCostoCeroToolStripMenuItem
-        '
-        Me.DesactivarCostoCeroToolStripMenuItem.Name = "DesactivarCostoCeroToolStripMenuItem"
-        Me.DesactivarCostoCeroToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.DesactivarCostoCeroToolStripMenuItem.Text = "Desactivar costo cero"
-        '
-        'cmdBuscarOtraNom
-        '
-        Me.cmdBuscarOtraNom.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdBuscarOtraNom.Location = New System.Drawing.Point(943, 66)
-        Me.cmdBuscarOtraNom.Name = "cmdBuscarOtraNom"
-        Me.cmdBuscarOtraNom.Size = New System.Drawing.Size(180, 28)
-        Me.cmdBuscarOtraNom.TabIndex = 32
-        Me.cmdBuscarOtraNom.Text = "Buscar en otra nomina"
-        Me.cmdBuscarOtraNom.UseVisualStyleBackColor = True
+        Me.cmdAcumuladoOperadora.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdAcumuladoOperadora.Location = New System.Drawing.Point(1129, 68)
+        Me.cmdAcumuladoOperadora.Name = "cmdAcumuladoOperadora"
+        Me.cmdAcumuladoOperadora.Size = New System.Drawing.Size(129, 26)
+        Me.cmdAcumuladoOperadora.TabIndex = 33
+        Me.cmdAcumuladoOperadora.Text = "Acumulado Mary"
+        Me.cmdAcumuladoOperadora.UseVisualStyleBackColor = True
         '
         'frmnominasmarinos
         '
@@ -882,5 +894,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents CostoCeroToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DesactivarCostoCeroToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmdBuscarOtraNom As System.Windows.Forms.Button
+    Friend WithEvents cmdAcumuladoOperadora As System.Windows.Forms.Button
 
 End Class

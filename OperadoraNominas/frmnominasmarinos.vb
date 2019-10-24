@@ -297,7 +297,8 @@ Public Class frmnominasmarinos
             dsPeriodo.Tables("Tabla").Columns.Add("Subtotal")
             dsPeriodo.Tables("Tabla").Columns.Add("IVA")
             dsPeriodo.Tables("Tabla").Columns.Add("TOTAL_DEPOSITO")
-
+            dsPeriodo.Tables("Tabla").Columns.Add("fecha_inicio")
+            dsPeriodo.Tables("Tabla").Columns.Add("fecha_fin")
 
 
             'verificamos que no sea una nomina ya guardada como final
@@ -393,7 +394,8 @@ Public Class frmnominasmarinos
                     fila.Item("Subtotal") = rwNominaGuardada(x)("fSubtotal").ToString
                     fila.Item("IVA") = rwNominaGuardada(x)("fIVA").ToString
                     fila.Item("TOTAL_DEPOSITO") = rwNominaGuardada(x)("fTotalDeposito").ToString
-
+                    fila.Item("fecha_inicio") = Date.Parse(rwNominaGuardada(x)("dFechaInicial").ToString).ToShortDateString
+                    fila.Item("fecha_fin") = Date.Parse(rwNominaGuardada(x)("dFechaFinal").ToString).ToShortDateString
 
                     dsPeriodo.Tables("Tabla").Rows.Add(fila)
                 Next
@@ -727,6 +729,15 @@ Public Class frmnominasmarinos
                 dtgDatos.Columns(62).ReadOnly = True
                 dtgDatos.Columns(62).Width = 150
 
+                'FECHA INICIAL
+                dtgDatos.Columns(63).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                dtgDatos.Columns(63).ReadOnly = True
+                dtgDatos.Columns(63).Width = 150
+
+                'FECHA FINAL
+                dtgDatos.Columns(64).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                dtgDatos.Columns(64).ReadOnly = True
+                dtgDatos.Columns(64).Width = 150
                 'calcular()
 
                 'Cambiamos index del combo en el grid
@@ -944,7 +955,10 @@ Public Class frmnominasmarinos
                             fila.Item("Subtotal") = ""
                             fila.Item("IVA") = ""
                             fila.Item("TOTAL_DEPOSITO") = ""
-
+                            fila.Item("IVA") = ""
+                            fila.Item("TOTAL_DEPOSITO") = ""
+                            fila.Item("fecha_inicio") = ""
+                            fila.Item("fecha_fin") = ""
 
                             dsPeriodo.Tables("Tabla").Rows.Add(fila)
 
@@ -1284,6 +1298,17 @@ Public Class frmnominasmarinos
                         dtgDatos.Columns(62).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                         dtgDatos.Columns(62).ReadOnly = True
                         dtgDatos.Columns(62).Width = 150
+
+                        'FECHA INICIAL
+                        dtgDatos.Columns(63).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                        dtgDatos.Columns(63).ReadOnly = True
+                        dtgDatos.Columns(63).Width = 150
+
+                        'FECHA FINAL
+                        dtgDatos.Columns(64).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                        dtgDatos.Columns(64).ReadOnly = True
+                        dtgDatos.Columns(64).Width = 150
+
                         'calcular()
 
                         'Cambiamos index del combo en el grid
@@ -1845,6 +1870,10 @@ Public Class frmnominasmarinos
                         sql &= "," & cboTipoNomina.SelectedIndex
                         'tipo consecutivo
                         sql &= "," & consecutivo1
+                        'fechainicial
+                        sql &= ",'" & IIf(dtgDatos.Rows(x).Cells(63).Value = "", "0", dtgDatos.Rows(x).Cells(63).Value.ToString.Replace(",", ""))
+                        'fechafinal
+                        sql &= "','" & IIf(dtgDatos.Rows(x).Cells(64).Value = "", "0", dtgDatos.Rows(x).Cells(64).Value.ToString.Replace(",", "")) & "'"
 
 
 
@@ -4031,7 +4060,7 @@ Public Class frmnominasmarinos
                             'AJUSTE INFONAVIT
 
                             'PRESTAMO
-                            If dtgDatos.Rows(x).Cells(2).Value = 94 Then
+                            If dtgDatos.Rows(x).Cells(2).Value = 204 Then
                                 MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             End If
                             If dtgDatos.Rows(x).Cells(3).Tag = "" Then
@@ -4473,6 +4502,7 @@ Public Class frmnominasmarinos
                     subtotal = Math.Round(ComplementoAsimilados + PrestamoPersonalAsimilados + AdeudoINfonavitAsimilados + DiferenciaInfonavitAsimilados + Operadora + RetencionOperadora + ComisionOperadora + ComisionAsimilados + CostoSocialTotal, 2)
                     dtgDatos.Rows(x).Cells(60).Value = subtotal
 
+
                     'IVA
                     iva = Math.Round(subtotal * 0.16)
                     dtgDatos.Rows(x).Cells(61).Value = iva
@@ -4677,420 +4707,496 @@ Public Class frmnominasmarinos
 
 
                         Next
+                        If contador > 1 Then
+                            If contador = 2 Then
+                                'If Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) > Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) Then
+                                '    'Este es el mas alto
+                                '    Dim iniciomes As Date = "01/" & Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).Year
+                                '    'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                '    Dim final1 As Date = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).AddDays(-1)
+                                '    Dim dias As Integer = (DateDiff("y", iniciomes, final1)) + 1
+                                '    sql = "select * from puestos inner join costosocial on puestos.iidPuesto= costosocial.fkiIdPuesto where puestos.cnombre='" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
+                                '    Dim rwCostoSocial As DataRow() = nConsulta(sql)
+                                '    If rwCostoSocial Is Nothing = False Then
+                                '        If dtgDatos.Rows(Posicion2).Cells(10).Value >= 55 Then
 
-                        '#### ordenamiento de los repetidos interno
-                        If contador = 2 Then
-                            If Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) > Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) Then
-                                'Este es el mas alto
-                                Dim iniciomes As Date = "01/" & Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).Year
-                                'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                                Dim final1 As Date = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).AddDays(-1)
-                                Dim dias As Integer = (DateDiff("y", iniciomes, final1)) + 1
-                                sql = "select * from puestos inner join costosocial on puestos.iidPuesto= costosocial.fkiIdPuesto where puestos.cnombre='" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
-                                Dim rwCostoSocial As DataRow() = nConsulta(sql)
-                                If rwCostoSocial Is Nothing = False Then
-                                    If dtgDatos.Rows(Posicion2).Cells(10).Value >= 55 Then
-
-                                        If dtgDatos.Rows(Posicion2).Cells(5).Tag = "" Then
-                                            'verificar los dias del mes
-                                            dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
-                                        Else
-                                            dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
-                                        End If
-                                    Else
-                                        If dtgDatos.Rows(Posicion2).Cells(5).Tag = "" Then
-                                            dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
-                                        Else
-                                            dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
-                                        End If
-                                    End If
-                                    dtgDatos.Rows(Posicion2).Cells(59).Style.BackColor = Color.Chocolate
-                                    dtgDatos.Rows(Posicion2).Cells(59).Tag = "1"
-                                End If
+                                '            If dtgDatos.Rows(Posicion2).Cells(5).Tag = "" Then
+                                '                'verificar los dias del mes
+                                '                dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                                '            Else
+                                '                dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                                '            End If
+                                '        Else
+                                '            If dtgDatos.Rows(Posicion2).Cells(5).Tag = "" Then
+                                '                dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                                '            Else
+                                '                dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                                '            End If
+                                '        End If
+                                '        dtgDatos.Rows(Posicion2).Cells(59).Style.BackColor = Color.Chocolate
+                                '        dtgDatos.Rows(Posicion2).Cells(59).Tag = "1"
+                                '    End If
 
 
-                                iniciomes = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value)
-                                'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                                final1 = Date.Parse(DiasMes(cboperiodo.SelectedValue) & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year)
-                                dias = (DateDiff("y", iniciomes, final1)) + 1
-                                sql = "select * from puestos inner join costosocial on puestos.iidPuesto= costosocial.fkiIdPuesto where puestos.cnombre='" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
+                                '    iniciomes = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value)
+                                '    'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                '    final1 = Date.Parse(DiasMes(cboperiodo.SelectedValue) & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year)
+                                '    dias = (DateDiff("y", iniciomes, final1)) + 1
+                                '    sql = "select * from puestos inner join costosocial on puestos.iidPuesto= costosocial.fkiIdPuesto where puestos.cnombre='" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
 
-                                If rwCostoSocial Is Nothing = False Then
-                                    If dtgDatos.Rows(Posicion1).Cells(10).Value >= 55 Then
+                                '    If rwCostoSocial Is Nothing = False Then
+                                '        If dtgDatos.Rows(Posicion1).Cells(10).Value >= 55 Then
 
-                                        If dtgDatos.Rows(Posicion1).Cells(5).Tag = "" Then
-                                            'verificar los dias del mes
-                                            dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
-                                        Else
-                                            dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
-                                        End If
-                                    Else
-                                        If dtgDatos.Rows(Posicion1).Cells(5).Tag = "" Then
-                                            dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
-                                        Else
-                                            dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
-                                        End If
-                                    End If
-                                    dtgDatos.Rows(Posicion1).Cells(59).Style.BackColor = Color.Chocolate
-                                    dtgDatos.Rows(Posicion1).Cells(59).Tag = "1"
-                                End If
-                            Else
-                                'Mas bajo
-                                'sacar los dias
+                                '            If dtgDatos.Rows(Posicion1).Cells(5).Tag = "" Then
+                                '                'verificar los dias del mes
+                                '                dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
+                                '            Else
+                                '                dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
+                                '            End If
+                                '        Else
+                                '            If dtgDatos.Rows(Posicion1).Cells(5).Tag = "" Then
+                                '                dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
+                                '            Else
+                                '                dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
+                                '            End If
+                                '        End If
+                                '        dtgDatos.Rows(Posicion1).Cells(59).Style.BackColor = Color.Chocolate
+                                '        dtgDatos.Rows(Posicion1).Cells(59).Tag = "1"
+                                '    End If
+                                'Else
+                                '    'Mas bajo
+                                '    'sacar los dias
+                                '    Dim iniciomes As Date = "01/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year
+                                '    'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                '    Dim final1 As Date = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).AddDays(-1)
+                                '    Dim dias As Integer = (DateDiff("y", iniciomes, final1)) + 1
+                                '    sql = "select * from puestos inner join costosocial on puestos.iidPuesto= costosocial.fkiIdPuesto where puestos.cnombre='" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
+                                '    Dim rwCostoSocial As DataRow() = nConsulta(sql)
+                                '    If rwCostoSocial Is Nothing = False Then
+                                '        If dtgDatos.Rows(Posicion1).Cells(10).Value >= 55 Then
+
+                                '            If dtgDatos.Rows(Posicion1).Cells(5).Tag = "" Then
+                                '                'verificar los dias del mes
+                                '                dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
+                                '            Else
+                                '                dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
+                                '            End If
+                                '        Else
+                                '            If dtgDatos.Rows(Posicion1).Cells(5).Tag = "" Then
+                                '                dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
+                                '            Else
+                                '                dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
+                                '            End If
+                                '        End If
+                                '        dtgDatos.Rows(Posicion1).Cells(59).Style.BackColor = Color.Chocolate
+                                '        dtgDatos.Rows(Posicion1).Cells(59).Tag = "1"
+                                '    End If
+
+
+                                '    iniciomes = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value)
+                                '    'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                '    final1 = Date.Parse(DiasMes(cboperiodo.SelectedValue) & "/" & Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).Year)
+                                '    dias = (DateDiff("y", iniciomes, final1)) + 1
+                                '    sql = "select * from puestos inner join costosocial on puestos.iidPuesto= costosocial.fkiIdPuesto where puestos.cnombre='" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
+
+                                '    If rwCostoSocial Is Nothing = False Then
+                                '        If dtgDatos.Rows(Posicion2).Cells(10).Value >= 55 Then
+
+                                '            If dtgDatos.Rows(Posicion2).Cells(5).Tag = "" Then
+                                '                'verificar los dias del mes
+                                '                dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                                '            Else
+                                '                dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                                '            End If
+                                '        Else
+                                '            If dtgDatos.Rows(Posicion2).Cells(5).Tag = "" Then
+                                '                dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dias, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                                '            Else
+                                '                dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
+                                '                dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
+                                '            End If
+                                '        End If
+                                '        dtgDatos.Rows(Posicion2).Cells(59).Style.BackColor = Color.Chocolate
+                                '        dtgDatos.Rows(Posicion2).Cells(59).Tag = "1"
+                                '    End If
+
+                                'End If
+
+                                Dim Valores() As Date = New Date(1) {Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value), Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value)}
+                                'Dim Auxiliar As Date
+                                Dim Longitud As Integer = Valores.Length - 1
+                                Array.Sort(Valores)
                                 Dim iniciomes As Date = "01/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year
                                 'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
                                 Dim final1 As Date = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).AddDays(-1)
                                 Dim dias As Integer = (DateDiff("y", iniciomes, final1)) + 1
-                                sql = "select * from puestos inner join costosocial on puestos.iidPuesto= costosocial.fkiIdPuesto where puestos.cnombre='" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
-                                Dim rwCostoSocial As DataRow() = nConsulta(sql)
-                                If rwCostoSocial Is Nothing = False Then
-                                    If dtgDatos.Rows(Posicion1).Cells(10).Value >= 55 Then
 
-                                        If dtgDatos.Rows(Posicion1).Cells(5).Tag = "" Then
-                                            'verificar los dias del mes
-                                            dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
-                                        Else
-                                            dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
-                                        End If
-                                    Else
-                                        If dtgDatos.Rows(Posicion1).Cells(5).Tag = "" Then
-                                            dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
-                                        Else
-                                            dtgDatos.Rows(Posicion1).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(Posicion1).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion1).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion1).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion1).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion1).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion1).Cells(58).Value), 2)
-                                        End If
+                                'MessageBox.Show(Valores(2))
+
+                                dtgDatos.Rows(Posicion1).Cells(59).Style.BackColor = Color.Chocolate
+                                dtgDatos.Rows(Posicion1).Cells(59).Tag = "1"
+                                dtgDatos.Rows(Posicion2).Cells(59).Style.BackColor = Color.Chocolate
+                                dtgDatos.Rows(Posicion2).Cells(59).Tag = "1"
+
+
+                                Dim dsarreglo As New DataSet
+                                dsarreglo.Tables.Add("Tabla")
+                                dsarreglo.Tables("Tabla").Columns.Add("Posicion")
+                                dsarreglo.Tables("Tabla").Columns.Add("fechainicial")
+                                dsarreglo.Tables("Tabla").Columns.Add("fechafina")
+                                'dsarreglo.Tables("Tabla").Columns.Add("Nombre")
+                                For z = 0 To Longitud
+                                    Dim fila As DataRow = dsarreglo.Tables("Tabla").NewRow
+
+                                    fila.Item("Posicion") = ""
+                                    fila.Item("fechainicial") = Valores(z)
+                                    fila.Item("fechafina") = ""
+                                    dsarreglo.Tables("Tabla").Rows.Add(fila)
+                                Next
+                                For z = 0 To Longitud
+
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 0 Then
+                                        dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion1
+                                        dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
                                     End If
-                                    dtgDatos.Rows(Posicion1).Cells(59).Style.BackColor = Color.Chocolate
-                                    dtgDatos.Rows(Posicion1).Cells(59).Tag = "1"
-                                End If
-
-
-                                iniciomes = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value)
-                                'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                                final1 = Date.Parse(DiasMes(cboperiodo.SelectedValue) & "/" & Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).Year)
-                                dias = (DateDiff("y", iniciomes, final1)) + 1
-                                sql = "select * from puestos inner join costosocial on puestos.iidPuesto= costosocial.fkiIdPuesto where puestos.cnombre='" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
-
-                                If rwCostoSocial Is Nothing = False Then
-                                    If dtgDatos.Rows(Posicion2).Cells(10).Value >= 55 Then
-
-                                        If dtgDatos.Rows(Posicion2).Cells(5).Tag = "" Then
-                                            'verificar los dias del mes
-                                            dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
-                                        Else
-                                            dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imsstopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCVtopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("infonavittopado")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
-                                        End If
-                                    Else
-                                        If dtgDatos.Rows(Posicion2).Cells(5).Tag = "" Then
-                                            dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dias, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
-                                        Else
-                                            dtgDatos.Rows(Posicion2).Cells(55).Value = Math.Round(Double.Parse(rwCostoSocial(0)("imss")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(56).Value = Math.Round(Double.Parse(rwCostoSocial(0)("RCV")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(57).Value = Math.Round(Double.Parse(rwCostoSocial(0)("Infonavit")) / 30 * dtgDatos.Rows(Posicion2).Cells(18).Value, 2)
-                                            dtgDatos.Rows(Posicion2).Cells(58).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 + (Double.Parse(dtgDatos.Rows(Posicion2).Cells(33).Value) * 0.03 * 0.33), 2)
-                                            dtgDatos.Rows(Posicion2).Cells(59).Value = Math.Round(Double.Parse(dtgDatos.Rows(Posicion2).Cells(55).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(56).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(57).Value) + Double.Parse(dtgDatos.Rows(Posicion2).Cells(58).Value), 2)
-                                        End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 0 Then
+                                        dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion2
+                                        dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
                                     End If
-                                    dtgDatos.Rows(Posicion2).Cells(59).Style.BackColor = Color.Chocolate
-                                    dtgDatos.Rows(Posicion2).Cells(59).Tag = "1"
-                                End If
+
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 1 Then
+                                        dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion1
+                                        dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 1 Then
+                                        dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion2
+                                        dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
+                                    End If
+
+                                    'If  = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) Then
+
+                                Next
+                                'recorrer el ds
+
+                                For q = 0 To dsarreglo.Tables(0).Rows.Count - 1
+                                    If q = 0 Then
+                                        iniciomes = "01/" & Date.Parse(dsarreglo.Tables(0).Rows(0)("fechainicial")).Month & "/" & Date.Parse(dsarreglo.Tables(0).Rows(0)("fechainicial")).Year
+                                        'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                        final1 = Date.Parse(dsarreglo.Tables(0).Rows(1)("fechainicial")).AddDays(-1)
+                                        dias = (DateDiff("y", iniciomes, final1)) + 1
+                                        calcularcostosocial(dsarreglo.Tables(0).Rows(0)("Posicion"), dias)
+                                    End If
+                                    If q = 1 Then
+                                        iniciomes = Date.Parse(dsarreglo.Tables(0).Rows(1)("fechainicial"))
+                                        'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                        final1 = Date.Parse(DiasMes(cboperiodo.SelectedValue) & "/" & Date.Parse(dsarreglo.Tables(0).Rows(1)("fechafina")).Month & "/" & Date.Parse(dsarreglo.Tables(0).Rows(1)("fechafina")).Year)
+                                        dias = (DateDiff("y", iniciomes, final1)) + 1
+                                        calcularcostosocial(dsarreglo.Tables(0).Rows(1)("Posicion"), dias)
+                                    End If
+
+                                    'dsarreglo.Tables(0).Rows
+                                Next
+
+
 
                             End If
 
 
+                            If contador = 3 Then
+
+                                Dim Valores() As Date = New Date(2) {Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value), Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value), Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value)}
+                                'Dim Auxiliar As Date
+                                Dim Longitud As Integer = Valores.Length - 1
+                                Array.Sort(Valores)
+                                Dim iniciomes As Date = "01/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year
+                                'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                Dim final1 As Date = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).AddDays(-1)
+                                Dim dias As Integer = (DateDiff("y", iniciomes, final1)) + 1
+
+                                'MessageBox.Show(Valores(2))
+
+                                dtgDatos.Rows(Posicion1).Cells(59).Style.BackColor = Color.Chocolate
+                                dtgDatos.Rows(Posicion1).Cells(59).Tag = "1"
+                                dtgDatos.Rows(Posicion2).Cells(59).Style.BackColor = Color.Chocolate
+                                dtgDatos.Rows(Posicion2).Cells(59).Tag = "1"
+                                dtgDatos.Rows(Posicion3).Cells(59).Style.BackColor = Color.Chocolate
+                                dtgDatos.Rows(Posicion3).Cells(59).Tag = "1"
+
+                                Dim dsarreglo As New DataSet
+                                dsarreglo.Tables.Add("Tabla")
+                                dsarreglo.Tables("Tabla").Columns.Add("Posicion")
+                                dsarreglo.Tables("Tabla").Columns.Add("fechainicial")
+                                dsarreglo.Tables("Tabla").Columns.Add("fechafina")
+                                'dsarreglo.Tables("Tabla").Columns.Add("Nombre")
+                                For z = 0 To Longitud
+                                    Dim fila As DataRow = dsarreglo.Tables("Tabla").NewRow
+
+                                    fila.Item("Posicion") = ""
+                                    fila.Item("fechainicial") = Valores(z)
+                                    fila.Item("fechafina") = ""
+                                    dsarreglo.Tables("Tabla").Rows.Add(fila)
+                                Next
+                                For z = 0 To Longitud
+
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 0 Then
+                                        dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion1
+                                        dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 0 Then
+                                        dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion2
+                                        dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 0 Then
+                                        dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion3
+                                        dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 1 Then
+                                        dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion1
+                                        dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 1 Then
+                                        dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion2
+                                        dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 1 Then
+                                        dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion3
+                                        dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 2 Then
+                                        dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion1
+                                        dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 2 Then
+                                        dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion2
+                                        dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 2 Then
+                                        dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion3
+                                        dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
+                                    End If
+
+                                    'If  = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) Then
+
+                                Next
+                                'recorrer el ds
+
+                                For q = 0 To dsarreglo.Tables(0).Rows.Count - 1
+                                    If q = 0 Then
+                                        iniciomes = "01/" & Date.Parse(dsarreglo.Tables(0).Rows(0)("fechainicial")).Month & "/" & Date.Parse(dsarreglo.Tables(0).Rows(0)("fechainicial")).Year
+                                        'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                        final1 = Date.Parse(dsarreglo.Tables(0).Rows(1)("fechainicial")).AddDays(-1)
+                                        dias = (DateDiff("y", iniciomes, final1)) + 1
+                                        calcularcostosocial(dsarreglo.Tables(0).Rows(0)("Posicion"), dias)
+                                    End If
+                                    If q = 1 Then
+                                        iniciomes = Date.Parse(dsarreglo.Tables(0).Rows(1)("fechainicial"))
+                                        'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                        final1 = Date.Parse(dsarreglo.Tables(0).Rows(2)("fechainicial")).AddDays(-1)
+                                        dias = (DateDiff("y", iniciomes, final1)) + 1
+                                        calcularcostosocial(dsarreglo.Tables(0).Rows(1)("Posicion"), dias)
+                                    End If
+                                    If q = 2 Then
+                                        iniciomes = Date.Parse(dsarreglo.Tables(0).Rows(2)("fechainicial"))
+                                        'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                        final1 = Date.Parse(DiasMes(cboperiodo.SelectedValue) & "/" & Date.Parse(dsarreglo.Tables(0).Rows(2)("fechafina")).Month & "/" & Date.Parse(dsarreglo.Tables(0).Rows(2)("fechafina")).Year)
+                                        dias = (DateDiff("y", iniciomes, final1)) + 1
+                                        calcularcostosocial(dsarreglo.Tables(0).Rows(2)("Posicion"), dias)
+                                    End If
+                                    'dsarreglo.Tables(0).Rows
+                                Next
+
+                            End If
+                            If contador = 4 Then
+                                Dim Valores() As Date = New Date(3) {Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value), Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value), Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value), Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value)}
+                                'Dim Auxiliar As Date
+                                Dim Longitud As Integer = Valores.Length - 1
+                                Array.Sort(Valores)
+                                Dim iniciomes As Date = "01/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year
+                                'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                Dim final1 As Date = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).AddDays(-1)
+                                Dim dias As Integer = (DateDiff("y", iniciomes, final1)) + 1
+
+                                'MessageBox.Show(Valores(2))
+
+                                'dtgDatos.Rows(Posicion1).Cells(59).Style.BackColor = Color.Chocolate
+                                'dtgDatos.Rows(Posicion1).Cells(59).Tag = "1"
+                                'dtgDatos.Rows(Posicion2).Cells(59).Style.BackColor = Color.Chocolate
+                                'dtgDatos.Rows(Posicion2).Cells(59).Tag = "1"
+                                'dtgDatos.Rows(Posicion3).Cells(59).Style.BackColor = Color.Chocolate
+                                'dtgDatos.Rows(Posicion3).Cells(59).Tag = "1"
+
+                                Dim dsarreglo As New DataSet
+                                dsarreglo.Tables.Add("Tabla")
+                                dsarreglo.Tables("Tabla").Columns.Add("Posicion")
+                                dsarreglo.Tables("Tabla").Columns.Add("fechainicial")
+                                dsarreglo.Tables("Tabla").Columns.Add("fechafina")
+                                'dsarreglo.Tables("Tabla").Columns.Add("Nombre")
+                                For z = 0 To Longitud
+                                    Dim fila As DataRow = dsarreglo.Tables("Tabla").NewRow
+
+                                    fila.Item("Posicion") = ""
+                                    fila.Item("fechainicial") = Valores(z)
+                                    fila.Item("fechafina") = ""
+                                    dsarreglo.Tables("Tabla").Rows.Add(fila)
+                                Next
+                                For z = 0 To Longitud
+
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 0 Then
+                                        dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion1
+                                        dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 0 Then
+                                        dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion2
+                                        dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 0 Then
+                                        dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion3
+                                        dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion4).Cells(63).Value) And z = 0 Then
+                                        dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion4
+                                        dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion4).Cells(64).Value)
+                                    End If
+
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 1 Then
+                                        dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion1
+                                        dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 1 Then
+                                        dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion2
+                                        dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 1 Then
+                                        dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion3
+                                        dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion4).Cells(63).Value) And z = 1 Then
+                                        dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion4
+                                        dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion4).Cells(64).Value)
+                                    End If
+
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 2 Then
+                                        dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion1
+                                        dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 2 Then
+                                        dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion2
+                                        dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 2 Then
+                                        dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion3
+                                        dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
+                                    End If
+                                    If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion4).Cells(63).Value) And z = 2 Then
+                                        dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion4
+                                        dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion4).Cells(64).Value)
+                                    End If
 
 
+                                    'If  = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) Then
+
+                                Next
+                                'recorrer el ds
+
+                                For q = 0 To dsarreglo.Tables(0).Rows.Count - 1
+                                    If q = 0 Then
+                                        iniciomes = "01/" & Date.Parse(dsarreglo.Tables(0).Rows(0)("fechainicial")).Month & "/" & Date.Parse(dsarreglo.Tables(0).Rows(0)("fechainicial")).Year
+                                        'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                        final1 = Date.Parse(dsarreglo.Tables(0).Rows(1)("fechainicial")).AddDays(-1)
+                                        dias = (DateDiff("y", iniciomes, final1)) + 1
+                                        calcularcostosocial(dsarreglo.Tables(0).Rows(0)("Posicion"), dias)
+                                    End If
+                                    If q = 1 Then
+                                        iniciomes = Date.Parse(dsarreglo.Tables(0).Rows(1)("fechainicial"))
+                                        'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                        final1 = Date.Parse(dsarreglo.Tables(0).Rows(2)("fechainicial")).AddDays(-1)
+                                        dias = (DateDiff("y", iniciomes, final1)) + 1
+                                        calcularcostosocial(dsarreglo.Tables(0).Rows(1)("Posicion"), dias)
+                                    End If
+
+                                    If q = 2 Then
+                                        iniciomes = Date.Parse(dsarreglo.Tables(0).Rows(2)("fechainicial"))
+                                        'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                        final1 = Date.Parse(dsarreglo.Tables(0).Rows(3)("fechainicial")).AddDays(-1)
+                                        dias = (DateDiff("y", iniciomes, final1)) + 1
+                                        calcularcostosocial(dsarreglo.Tables(0).Rows(2)("Posicion"), dias)
+                                    End If
+                                    If q = 3 Then
+                                        iniciomes = Date.Parse(dsarreglo.Tables(0).Rows(3)("fechainicial"))
+                                        'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
+                                        final1 = Date.Parse(DiasMes(cboperiodo.SelectedValue) & "/" & Date.Parse(dsarreglo.Tables(0).Rows(3)("fechafina")).Month & "/" & Date.Parse(dsarreglo.Tables(0).Rows(3)("fechafina")).Year)
+                                        dias = (DateDiff("y", iniciomes, final1)) + 1
+                                        calcularcostosocial(dsarreglo.Tables(0).Rows(3)("Posicion"), dias)
+                                    End If
+                                    'dsarreglo.Tables(0).Rows
+                                Next
+                            End If
                         End If
-
-
-                        If contador = 3 Then
-
-                            Dim Valores() As Date = New Date(2) {Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value), Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value), Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value)}
-                            'Dim Auxiliar As Date
-                            Dim Longitud As Integer = Valores.Length - 1
-                            Array.Sort(Valores)
-                            Dim iniciomes As Date = "01/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year
-                            'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                            Dim final1 As Date = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).AddDays(-1)
-                            Dim dias As Integer = (DateDiff("y", iniciomes, final1)) + 1
-
-                            'MessageBox.Show(Valores(2))
-
-                            dtgDatos.Rows(Posicion1).Cells(59).Style.BackColor = Color.Chocolate
-                            dtgDatos.Rows(Posicion1).Cells(59).Tag = "1"
-                            dtgDatos.Rows(Posicion2).Cells(59).Style.BackColor = Color.Chocolate
-                            dtgDatos.Rows(Posicion2).Cells(59).Tag = "1"
-                            dtgDatos.Rows(Posicion3).Cells(59).Style.BackColor = Color.Chocolate
-                            dtgDatos.Rows(Posicion3).Cells(59).Tag = "1"
-
-                            Dim dsarreglo As New DataSet
-                            dsarreglo.Tables.Add("Tabla")
-                            dsarreglo.Tables("Tabla").Columns.Add("Posicion")
-                            dsarreglo.Tables("Tabla").Columns.Add("fechainicial")
-                            dsarreglo.Tables("Tabla").Columns.Add("fechafina")
-                            'dsarreglo.Tables("Tabla").Columns.Add("Nombre")
-                            For z = 0 To Longitud
-                                Dim fila As DataRow = dsarreglo.Tables("Tabla").NewRow
-
-                                fila.Item("Posicion") = ""
-                                fila.Item("fechainicial") = Valores(z)
-                                fila.Item("fechafina") = ""
-                                dsarreglo.Tables("Tabla").Rows.Add(fila)
-                            Next
-                            For z = 0 To Longitud
-
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 0 Then
-                                    dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion1
-                                    dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 0 Then
-                                    dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion2
-                                    dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 0 Then
-                                    dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion3
-                                    dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 1 Then
-                                    dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion1
-                                    dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 1 Then
-                                    dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion2
-                                    dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 1 Then
-                                    dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion3
-                                    dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 2 Then
-                                    dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion1
-                                    dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 2 Then
-                                    dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion2
-                                    dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 2 Then
-                                    dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion3
-                                    dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
-                                End If
-                                
-                                'If  = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) Then
-
-                            Next
-                            'recorrer el ds
-
-                            For q = 0 To dsarreglo.Tables(0).Rows.Count - 1
-                                If q = 0 Then
-                                    iniciomes = "01/" & Date.Parse(dsarreglo.Tables(0).Rows(0)("fechainicial")).Month & "/" & Date.Parse(dsarreglo.Tables(0).Rows(0)("fechainicial")).Year
-                                    'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                                    final1 = Date.Parse(dsarreglo.Tables(0).Rows(1)("fechainicial")).AddDays(-1)
-                                    dias = (DateDiff("y", iniciomes, final1)) + 1
-                                    calcularcostosocial(dsarreglo.Tables(0).Rows(0)("Posicion"), dias)
-                                End If
-                                If q = 1 Then
-                                    iniciomes = Date.Parse(dsarreglo.Tables(0).Rows(1)("fechainicial"))
-                                    'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                                    final1 = Date.Parse(dsarreglo.Tables(0).Rows(2)("fechainicial")).AddDays(-1)
-                                    dias = (DateDiff("y", iniciomes, final1)) + 1
-                                    calcularcostosocial(dsarreglo.Tables(0).Rows(1)("Posicion"), dias)
-                                End If
-                                If q = 2 Then
-                                    iniciomes = Date.Parse(dsarreglo.Tables(0).Rows(2)("fechainicial"))
-                                    'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                                    final1 = Date.Parse(DiasMes(cboperiodo.SelectedValue) & "/" & Date.Parse(dsarreglo.Tables(0).Rows(2)("fechafina")).Month & "/" & Date.Parse(dsarreglo.Tables(0).Rows(2)("fechafina")).Year)
-                                    dias = (DateDiff("y", iniciomes, final1)) + 1
-                                    calcularcostosocial(dsarreglo.Tables(0).Rows(2)("Posicion"), dias)
-                                End If
-                                'dsarreglo.Tables(0).Rows
-                            Next
-                            
-                        End If
-                        If contador = 4 Then
-                            Dim Valores() As Date = New Date(3) {Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value), Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value), Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value), Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value)}
-                            'Dim Auxiliar As Date
-                            Dim Longitud As Integer = Valores.Length - 1
-                            Array.Sort(Valores)
-                            Dim iniciomes As Date = "01/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Month & "/" & Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value).Year
-                            'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                            Dim final1 As Date = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value).AddDays(-1)
-                            Dim dias As Integer = (DateDiff("y", iniciomes, final1)) + 1
-
-                            'MessageBox.Show(Valores(2))
-
-                            'dtgDatos.Rows(Posicion1).Cells(59).Style.BackColor = Color.Chocolate
-                            'dtgDatos.Rows(Posicion1).Cells(59).Tag = "1"
-                            'dtgDatos.Rows(Posicion2).Cells(59).Style.BackColor = Color.Chocolate
-                            'dtgDatos.Rows(Posicion2).Cells(59).Tag = "1"
-                            'dtgDatos.Rows(Posicion3).Cells(59).Style.BackColor = Color.Chocolate
-                            'dtgDatos.Rows(Posicion3).Cells(59).Tag = "1"
-
-                            Dim dsarreglo As New DataSet
-                            dsarreglo.Tables.Add("Tabla")
-                            dsarreglo.Tables("Tabla").Columns.Add("Posicion")
-                            dsarreglo.Tables("Tabla").Columns.Add("fechainicial")
-                            dsarreglo.Tables("Tabla").Columns.Add("fechafina")
-                            'dsarreglo.Tables("Tabla").Columns.Add("Nombre")
-                            For z = 0 To Longitud
-                                Dim fila As DataRow = dsarreglo.Tables("Tabla").NewRow
-
-                                fila.Item("Posicion") = ""
-                                fila.Item("fechainicial") = Valores(z)
-                                fila.Item("fechafina") = ""
-                                dsarreglo.Tables("Tabla").Rows.Add(fila)
-                            Next
-                            For z = 0 To Longitud
-
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 0 Then
-                                    dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion1
-                                    dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 0 Then
-                                    dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion2
-                                    dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 0 Then
-                                    dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion3
-                                    dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion4).Cells(63).Value) And z = 0 Then
-                                    dsarreglo.Tables(0).Rows(0)("Posicion") = Posicion4
-                                    dsarreglo.Tables(0).Rows(0)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion4).Cells(64).Value)
-                                End If
-
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 1 Then
-                                    dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion1
-                                    dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 1 Then
-                                    dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion2
-                                    dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 1 Then
-                                    dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion3
-                                    dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion4).Cells(63).Value) And z = 1 Then
-                                    dsarreglo.Tables(0).Rows(1)("Posicion") = Posicion4
-                                    dsarreglo.Tables(0).Rows(1)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion4).Cells(64).Value)
-                                End If
-
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) And z = 2 Then
-                                    dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion1
-                                    dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion1).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion2).Cells(63).Value) And z = 2 Then
-                                    dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion2
-                                    dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion2).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion3).Cells(63).Value) And z = 2 Then
-                                    dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion3
-                                    dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion3).Cells(64).Value)
-                                End If
-                                If Valores(z) = Date.Parse(dtgDatos.Rows(Posicion4).Cells(63).Value) And z = 2 Then
-                                    dsarreglo.Tables(0).Rows(2)("Posicion") = Posicion4
-                                    dsarreglo.Tables(0).Rows(2)("fechafina") = Date.Parse(dtgDatos.Rows(Posicion4).Cells(64).Value)
-                                End If
-
-
-                                'If  = Date.Parse(dtgDatos.Rows(Posicion1).Cells(63).Value) Then
-
-                            Next
-                            'recorrer el ds
-
-                            For q = 0 To dsarreglo.Tables(0).Rows.Count - 1
-                                If q = 0 Then
-                                    iniciomes = "01/" & Date.Parse(dsarreglo.Tables(0).Rows(0)("fechainicial")).Month & "/" & Date.Parse(dsarreglo.Tables(0).Rows(0)("fechainicial")).Year
-                                    'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                                    final1 = Date.Parse(dsarreglo.Tables(0).Rows(1)("fechainicial")).AddDays(-1)
-                                    dias = (DateDiff("y", iniciomes, final1)) + 1
-                                    calcularcostosocial(dsarreglo.Tables(0).Rows(0)("Posicion"), dias)
-                                End If
-                                If q = 1 Then
-                                    iniciomes = Date.Parse(dsarreglo.Tables(0).Rows(1)("fechainicial"))
-                                    'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                                    final1 = Date.Parse(dsarreglo.Tables(0).Rows(2)("fechainicial")).AddDays(-1)
-                                    dias = (DateDiff("y", iniciomes, final1)) + 1
-                                    calcularcostosocial(dsarreglo.Tables(0).Rows(1)("Posicion"), dias)
-                                End If
-
-                                If q = 2 Then
-                                    iniciomes = Date.Parse(dsarreglo.Tables(0).Rows(2)("fechainicial"))
-                                    'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                                    final1 = Date.Parse(dsarreglo.Tables(0).Rows(3)("fechainicial")).AddDays(-1)
-                                    dias = (DateDiff("y", iniciomes, final1)) + 1
-                                    calcularcostosocial(dsarreglo.Tables(0).Rows(2)("Posicion"), dias)
-                                End If
-                                If q = 3 Then
-                                    iniciomes = Date.Parse(dsarreglo.Tables(0).Rows(3)("fechainicial"))
-                                    'aqui a la fecha inicial del segundo le restamos uno para saber asegurar cobrar correctamente
-                                    final1 = Date.Parse(DiasMes(cboperiodo.SelectedValue) & "/" & Date.Parse(dsarreglo.Tables(0).Rows(3)("fechafina")).Month & "/" & Date.Parse(dsarreglo.Tables(0).Rows(3)("fechafina")).Year)
-                                    dias = (DateDiff("y", iniciomes, final1)) + 1
-                                    calcularcostosocial(dsarreglo.Tables(0).Rows(3)("Posicion"), dias)
-                                End If
-                                'dsarreglo.Tables(0).Rows
-                            Next
-                        End If
+                        '#### ordenamiento de los repetidos interno
+                        
 
 
                         '######
@@ -5112,6 +5218,8 @@ Public Class frmnominasmarinos
             MessageBox.Show("Datos calculados ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
             MessageBox.Show(ex.Message)
+            pnlCatalogo.Enabled = True
+
         End Try
     End Sub
 
@@ -10091,7 +10199,10 @@ Public Class frmnominasmarinos
             'Forma.gIdTipoPuesto = 1
             'Forma.ShowDialog()
         Catch ex As Exception
+
+
             MessageBox.Show(ex.Message.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
         End Try
     End Sub
 
@@ -11760,7 +11871,7 @@ Public Class frmnominasmarinos
                                 hoja8.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
                                 hoja8.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
                                 hoja8.Cell("D" & filaExcel).Value = rwPrestamoSa(0).Item("montoTotal") 'Monto
-                                hoja8.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
+                                hoja8.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AW" & filatmp & "+'OPERADORA DESCANSO'!AW" & filatmp  ' prestado.Item("descuento")
                                 hoja8.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
                                 hoja8.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
 
@@ -14223,8 +14334,8 @@ Public Class frmnominasmarinos
         Dim contador As Integer
         Dim dialogo As New SaveFileDialog()
 
-        Dim Forma As New frmConcentradoInfonavit
-        
+        Dim Forma As New frmEstatusPrestamo
+
         If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
             SQL = "select iBimestre,iAnio,Calculoinfonavit.fkiIdEmpleadoC,cNombreLargo,Calculoinfonavit.cTipoFactor,Calculoinfonavit.fFactor,Monto,retenido from (calculoinfonavit "
             SQL &= " inner join empleadosC on calculoinfonavit.fkiIdEmpleadoC=empleadosC.iIdEmpleadoC)"
@@ -14249,7 +14360,7 @@ Public Class frmnominasmarinos
                 hoja.Column("F").Width = 15
                 hoja.Column("G").Width = 15
                 hoja.Column("H").Width = 15
-                
+
 
 
                 hoja.Cell(1, 2).Value = "Concentrado Infonavit"
@@ -14282,7 +14393,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(4, 6).Value = "Factor"
                 hoja.Cell(4, 7).Value = "Monto Bimestre"
                 hoja.Cell(4, 8).Value = "Retenido"
-                
+
 
 
                 filaExcel = 5
@@ -14290,7 +14401,7 @@ Public Class frmnominasmarinos
 
                 For x As Integer = 0 To rwFilas.Length - 1
 
-                   
+
 
 
 
@@ -14309,12 +14420,12 @@ Public Class frmnominasmarinos
                     hoja.Cell(filaExcel + x, 7).Value = rwFilas(x)("Monto")
                     'Retenido
                     hoja.Cell(filaExcel + x, 8).Value = rwFilas(x)("retenido")
-                    
+
 
                 Next
 
 
-                
+
 
                 '##### HOJA NUMERO 2 RESUMEN PAGO
 
@@ -14339,7 +14450,7 @@ Public Class frmnominasmarinos
         End If
     End Sub
 
-    Private Sub NoCalcularInofnavitToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles NoCalcularInofnavitToolStripMenuItem.Click
+    Private Sub NoCalcularInofnavitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NoCalcularInofnavitToolStripMenuItem.Click
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Tag = "1"
@@ -14349,7 +14460,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub ActicarCalculoInfonavitToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ActicarCalculoInfonavitToolStripMenuItem.Click
+    Private Sub ActicarCalculoInfonavitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ActicarCalculoInfonavitToolStripMenuItem.Click
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
             iFila.Tag = ""
@@ -14359,13 +14470,13 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub cmdInfonavitNominaSerie_Click(sender As System.Object, e As System.EventArgs) Handles cmdInfonavitNominaSerie.Click
+    Private Sub cmdInfonavitNominaSerie_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdInfonavitNominaSerie.Click
         Dim SQL As String
         Dim filaExcel As Integer = 5
         Dim contador As Integer
         Dim dialogo As New SaveFileDialog()
 
-        Dim Forma As New frmConcentradoInfonavit
+        Dim Forma As New frmEstatusPrestamo
 
         If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
             SQL = "select iBimestre,iAnio,Calculoinfonavit.fkiIdEmpleadoC,cNombreLargo,Calculoinfonavit.cTipoFactor,Calculoinfonavit.fFactor,Monto,retenido from (calculoinfonavit "
@@ -15178,6 +15289,116 @@ Public Class frmnominasmarinos
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub cmdAcumuladoOperadora_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAcumuladoOperadora.Click
+        Try
+            Dim SQL As String
+            Dim filaExcel As Integer = 0
+            Dim filatmp As Integer = 0
+            Dim dialogo As New SaveFileDialog()
+            Dim periodo, iejercicio, iMes As String
+
+            Dim ruta As String
+
+            Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
+            If rwPeriodo0 Is Nothing = False Then
+                Dim Fechafin As Date = rwPeriodo0(0).Item("dFechaFin")
+                periodo = "1 " & MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " AL " & Fechafin.Day & " " & MonthString(rwPeriodo0(0).Item("iMes")).ToUpper & " " & rwPeriodo0(0).Item("iEjercicio")
+                iejercicio = (rwPeriodo0(0).Item("iEjercicio"))
+                iMes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+            End If
+            If Usuario.Nombre = "Operadora" Then
+                ruta = My.Application.Info.DirectoryPath() & "\Archivos\acumuladosoperadora19.xlsx"
+                SQL = "EXEC getAcumuladosOperadora " & cboperiodo.SelectedValue
+            Else
+                ruta = My.Application.Info.DirectoryPath() & "\Archivos\acumuladosnavigator19.xlsx"
+                SQL = "EXEC getAcumuladosNavigator " & cboperiodo.SelectedValue
+            End If
+            
+            Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+            Dim libro As New ClosedXML.Excel.XLWorkbook
+
+            book.Worksheet(1).CopyTo(libro, iMes)
+
+            Dim hoja As IXLWorksheet = libro.Worksheets(0)
+
+
+            filaExcel = 2
+            Dim nombrebuque As String
+            Dim inicio As Integer = 0
+            Dim contadorexcelbuqueinicial As Integer = 0
+            Dim contadorexcelbuquefinal As Integer = 0
+            Dim total As Integer = dtgDatos.Rows.Count - 1
+
+            Dim fecha As String
+
+            '<<<<<<<<<<<<<<<<<<<<<<<<<<operadora>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            recorrerFilasColumnas(hoja, 2, dtgDatos.Rows.Count + 10, 40, "clear")
+
+
+
+            Dim rwFilas As DataRow() = nConsulta(SQL)
+
+            If rwFilas.Length > 0 Then
+
+                For x As Integer = 0 To rwFilas.Length - 1
+                    hoja.Range(1, 5, filaExcel + x, 33).Style.NumberFormat.NumberFormatId = 4
+                    hoja.Range(1, 1, filaExcel + x, 4).Style.NumberFormat.Format = "@"
+
+
+                    hoja.Cell(filaExcel + x, 1).Value = rwFilas(x)("cCodigoEmpleado")
+                    hoja.Cell(filaExcel + x, 2).Value = rwFilas(x)("cNombreLargo")
+                    hoja.Cell(filaExcel + x, 3).Value = rwFilas(x)("cRFC")
+                    hoja.Cell(filaExcel + x, 4).Value = rwFilas(x)("ccurp")
+                    hoja.Cell(filaExcel + x, 5).Value = rwFilas(x)("fSalarioBase")
+                    hoja.Cell(filaExcel + x, 6).Value = rwFilas(x)("fSueldoBruto")
+                    hoja.Cell(filaExcel + x, 7).Value = rwFilas(x)("fTExtraFijoGravado")
+                    hoja.Cell(filaExcel + x, 8).Value = rwFilas(x)("fTExtraFijoExento")
+                    hoja.Cell(filaExcel + x, 9).Value = rwFilas(x)("fTExtraOcasional")
+                    hoja.Cell(filaExcel + x, 10).Value = rwFilas(x)("fDescSemObligatorio")
+                    hoja.Cell(filaExcel + x, 11).Value = rwFilas(x)("fVacacionesProporcionales")
+                    hoja.Cell(filaExcel + x, 12).Value = rwFilas(x)("fAguinaldoGravado")
+                    hoja.Cell(filaExcel + x, 13).Value = rwFilas(x)("fAguinaldoExento")
+                    hoja.Cell(filaExcel + x, 14).Value = rwFilas(x)("fPrimaVacacionalGravado")
+                    hoja.Cell(filaExcel + x, 15).Value = rwFilas(x)("fPrimaVacacionalExento")
+                    hoja.Cell(filaExcel + x, 16).Value = rwFilas(x)("fTotalPercepciones")
+                    hoja.Cell(filaExcel + x, 17).Value = rwFilas(x)("fTotalPercepcionesISR")
+                    hoja.Cell(filaExcel + x, 18).Value = rwFilas(x)("fIncapacidad")
+                    hoja.Cell(filaExcel + x, 19).Value = rwFilas(x)("fIsr")
+                    hoja.Cell(filaExcel + x, 20).Value = rwFilas(x)("fImss")
+                    hoja.Cell(filaExcel + x, 21).Value = rwFilas(x)("fInfonavit")
+                    hoja.Cell(filaExcel + x, 22).Value = rwFilas(x)("fInfonavitBanterior")
+                    hoja.Cell(filaExcel + x, 23).Value = rwFilas(x)("fAjusteInfonavit")
+                    hoja.Cell(filaExcel + x, 24).Value = rwFilas(x)("fPensionAlimenticia")
+                    hoja.Cell(filaExcel + x, 25).Value = rwFilas(x)("fPrestamo")
+                    hoja.Cell(filaExcel + x, 26).Value = rwFilas(x)("fFonacot")
+                    hoja.Cell(filaExcel + x, 27).Value = rwFilas(x)("fSubsidioGenerado")
+                    hoja.Cell(filaExcel + x, 28).Value = rwFilas(x)("fSubsidioAplicado")
+                    hoja.Cell(filaExcel + x, 29).Value = rwFilas(x)("fOperadora")
+                    hoja.Cell(filaExcel + x, 30).Value = rwFilas(x)("fPrestamoPerA")
+                    hoja.Cell(filaExcel + x, 31).Value = rwFilas(x)("fAdeudoInfonavitA")
+                    hoja.Cell(filaExcel + x, 32).Value = rwFilas(x)("fDiferenciaInfonavitA")
+                    hoja.Cell(filaExcel + x, 33).Value = rwFilas(x)("fAsimilados")
+
+                    ' hoja.Cell(filaExcel + x, 33).FormulaA1 = "=E" & filaExcel + x & "-(U" & filaExcel + x & "+V" & filaExcel + x & "+W" & filaExcel + x & "+X" & filaExcel + x & "+Y" & filaExcel + x & "+Z" & filaExcel + x & ")-AC" & filaExcel + x & "-AD" & filaExcel + x & "-AE" & filaExcel + x & "-AF" & filaExcel + x & ""
+
+                Next
+            End If
+
+            dialogo.DefaultExt = "*.xlsx"
+            dialogo.FileName = "Reporte Acumulados " & Usuario.Nombre
+            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            dialogo.ShowDialog()
+            libro.SaveAs(dialogo.FileName)
+            libro = Nothing
+
+            MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Catch ex As Exception
+            'MessageBox.Show(ex.Message.ToString())
+        End Try
+
     End Sub
 End Class
 

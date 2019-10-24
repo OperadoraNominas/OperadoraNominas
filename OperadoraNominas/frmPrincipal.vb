@@ -119,11 +119,31 @@ Public Class frmPrincipal
 
                     Catch ex As Exception
                     End Try
+                Case "Prestamos"
+                    Try
+                        Dim dialogo As New SaveFileDialog()
+
+                        Dim Forma As New frmEstatusPres
+
+                        If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+                            reporteprestamo(Forma.gEstatus)
+                        End If
+
+                    Catch ex As Exception
+                    End Try
                 Case "Reporte trabajadores"
                     Try
                         generarreporte()
+                    Catch ex As Exception
+                    End Try
+
+                Case "Buscar Datos"
+                    Try
+                        Dim Forma As New frmExcelO
+                        Forma.ShowDialog()
 
                     Catch ex As Exception
+
                     End Try
             End Select
 
@@ -416,6 +436,7 @@ Public Class frmPrincipal
 
     End Sub
 
+
     Private Sub lsvPanel_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lsvPanel.SizeChanged
         Dim sRuta As String
         sRuta = System.IO.Path.GetTempPath
@@ -463,5 +484,166 @@ Public Class frmPrincipal
     Private Sub lsvPanel_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lsvPanel.SelectedIndexChanged
 
     End Sub
+
+    Private Sub reporteprestamo(ByRef status As Integer)
+        Try
+            Dim filaExcel As Integer = 0
+            Dim dialogo As New SaveFileDialog()
+            Dim periodo As String
+            Dim pilotin As Boolean
+
+            Dim tiponomina, sueldodescanso As String
+
+            Dim ruta As String
+            ruta = My.Application.Info.DirectoryPath() & "\Archivos\reporteprestamos.xlsx"
+
+            Dim book As New ClosedXML.Excel.XLWorkbook(ruta)
+
+
+            Dim libro As New ClosedXML.Excel.XLWorkbook
+
+            book.Worksheets(1).CopyTo(libro, "PRESTAMO SA")
+            book.Worksheets(2).CopyTo(libro, "PRESTAMO ASIM")
+
+
+            Dim hoja As IXLWorksheet = libro.Worksheets(0)
+            Dim hoja2 As IXLWorksheet = libro.Worksheets(1)
+
+
+            '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Prestamo SA>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            filaExcel = 2
+            Dim nombre As String
+            Dim tipo As String
+            Dim totalcobrado As DataRow()
+            Dim rwPrestamoSa As DataRow()
+
+            If status = 1 Then
+                rwPrestamoSa = nConsulta("select * from PrestamoSA a left join empleadosC b on a.fkiIdEmpleado=b.iIdEmpleadoC where a.iEstatus=1 ORDER BY iIdPrestamoSA")
+            Else
+
+                rwPrestamoSa = nConsulta("select * from PrestamoSA a left join empleadosC b on a.fkiIdEmpleado=b.iIdEmpleadoC  ORDER BY iIdPrestamoSA")
+            End If
+
+            If rwPrestamoSa Is Nothing = False Then
+                If rwPrestamoSa.Length > 1 Then
+
+                    For Each prestado In rwPrestamoSa
+
+                        hoja.Range(filaExcel, 6, filaExcel, 10).Style.NumberFormat.NumberFormatId = 4
+
+                        Dim tipoprestamo As DataRow() = nConsulta("select * from TipoPrestamo where iIdTipoPrestamo =" & prestado.Item("fkiIdTipoPrestamo"))
+                        If tipoprestamo Is Nothing = False Then
+
+                            tipo = tipoprestamo(0).Item("TipoPrestamo")
+                            totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamoSA WHERE fkiIdPrestamoSA=" & prestado.Item("iIdPrestamoSA"))
+                            'Colores estatus
+                            If prestado.Item("iEstatus") = 0 Then
+                                hoja.Range(filaExcel, 1, filaExcel, 10).Style.Fill.BackgroundColor = XLColor.RedPigment
+                            End If
+
+
+                            hoja.Cell("A" & filaExcel).Value = prestado.Item("iIdPrestamoSA") ' codigo
+                            hoja.Cell("B" & filaExcel).Value = IIf(prestado.Item("iEstatus") = 1, "ACTIVO", "INACTIVO") ' Estatus
+                            hoja.Cell("C" & filaExcel).Value = prestado.Item("fechaprestamo") ' alta
+                            hoja.Cell("D" & filaExcel).Value = prestado.Item("cNombreLargo") ' Nombre
+                            hoja.Cell("E" & filaExcel).Value = tipo 'tipo 'Tipo de prestamo
+                            hoja.Cell("F" & filaExcel).Value = prestado.Item("montoTotal") 'Monto
+                            hoja.Cell("G" & filaExcel).Value = prestado.Item("descuento")
+
+                            Dim dif As Double = prestado.Item("montoTotal") - prestado.Item("descuento")
+                            If dif <= 1 Then
+                                hoja.Cell("H" & filaExcel).Value = prestado.Item("descuento")
+
+                            Else
+                                hoja.Cell("H" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
+
+                            End If
+
+
+                            hoja.Cell("I" & filaExcel).FormulaA1 = "=F" & filaExcel & "-H" & filaExcel 'FALTANTE
+                        End If
+
+
+                        filaExcel = filaExcel + 1
+                    Next
+                End If
+            End If
+
+            '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Prestamo asim>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            filaExcel = 2
+            Dim rwPrestamoASIM As DataRow()
+            If status = 1 Then
+                rwPrestamoASIM = nConsulta("select * from Prestamo a left join empleadosC b on a.fkiIdEmpleado=b.iIdEmpleadoC where a.iEstatus=1 ORDER BY iIdPrestamo")
+            Else
+                rwPrestamoASIM = nConsulta("select * from Prestamo a left join empleadosC b on a.fkiIdEmpleado=b.iIdEmpleadoC ORDER BY iIdPrestamo")
+            End If
+            
+            If rwPrestamoASIM Is Nothing = False Then
+                If rwPrestamoASIM.Length > 1 Then
+
+                    For Each prestado In rwPrestamoASIM
+
+                        hoja2.Range(filaExcel, 6, filaExcel, 10).Style.NumberFormat.NumberFormatId = 4
+
+                        Dim tipoprestamo As DataRow() = nConsulta("select * from TipoPrestamo where iIdTipoPrestamo =" & prestado.Item("fkiIdTipoPrestamo"))
+                        If tipoprestamo Is Nothing = False Then
+
+                            tipo = tipoprestamo(0).Item("TipoPrestamo")
+                            totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamo WHERE fkiIdPrestamo=" & prestado.Item("iIdPrestamo"))
+                            If prestado.Item("iEstatus") = 0 Then
+                                hoja2.Range(filaExcel, 1, filaExcel, 10).Style.Fill.BackgroundColor = XLColor.RedPigment
+
+                            End If
+                            hoja2.Cell("A" & filaExcel).Value = prestado.Item("iIdPrestamo") ' codigo
+                            hoja2.Cell("B" & filaExcel).Value = IIf(prestado.Item("iEstatus") = 1, "ACTIVO", "INACTIVO") ' Estatus
+                            hoja2.Cell("C" & filaExcel).Value = prestado.Item("fechaprestamo") ' alta
+                            hoja2.Cell("D" & filaExcel).Value = prestado.Item("cNombreLargo") ' Nombre
+                            hoja2.Cell("E" & filaExcel).Value = tipo 'tipo 'Tipo de prestamo
+                            hoja2.Cell("F" & filaExcel).Value = prestado.Item("montoTotal") 'Monto
+                            hoja2.Cell("G" & filaExcel).Value = prestado.Item("descuento")
+
+                            Dim dif As Double = prestado.Item("montoTotal") - prestado.Item("descuento")
+                            If dif <= 1 Then
+                                hoja2.Cell("H" & filaExcel).Value = prestado.Item("descuento")
+                            Else
+                                hoja2.Cell("H" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
+                            End If
+
+
+                            hoja2.Cell("I" & filaExcel).FormulaA1 = "=F" & filaExcel & "-H" & filaExcel 'FALTANTE
+                        End If
+
+
+                        filaExcel = filaExcel + 1
+                    Next
+                End If
+            End If
+
+            Dim rwUsuario As DataRow() = nConsulta("Select * from Usuarios where idUsuario=1")
+
+
+            dialogo.FileName = "Concentrado de Prestamos " & rwUsuario(0).Item("Nombre")
+            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            ''  dialogo.ShowDialog()
+
+            If dialogo.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                ' OK button pressed
+                libro.SaveAs(dialogo.FileName)
+                libro = Nothing
+                MessageBox.Show("Archivo generado correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+
+            Else
+                MessageBox.Show("No se guardo el archivo", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            End If
+
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End Try
+    End Sub
+
 End Class
 
