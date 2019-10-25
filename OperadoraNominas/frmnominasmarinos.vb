@@ -15858,6 +15858,684 @@ Public Class frmnominasmarinos
         End Try
 
     End Sub
+
+    Private Sub cmdCalculoSoloInfonavit_Click(sender As System.Object, e As System.EventArgs) Handles cmdCalculoSoloInfonavit.Click
+        Dim Sueldo As Double
+        Dim SueldoBase As Double
+        Dim ValorIncapacidad As Double
+        Dim TotalPercepciones As Double
+        Dim Incapacidad As Double
+        Dim isr As Double
+        Dim imss As Double
+        Dim infonavitvalor As Double
+        Dim infonavitanterior As Double
+        Dim ajusteinfonavit As Double
+        Dim pension As Double
+        Dim prestamo As Double
+        Dim fonacot As Double
+        Dim subsidiogenerado As Double
+        Dim subsidioaplicado As Double
+        Dim RetencionOperadora As Double
+        Dim InfonavitNormal As Double
+        Dim PrestamoPersonalAsimilados As Double
+        Dim PrestamoPersonalSA As Double
+        Dim AdeudoINfonavitAsimilados As Double
+        Dim DiferenciaInfonavitAsimilados As Double
+        Dim PensionAlimenticia As Double
+        Dim PensionAlimenticiaInsertar As Double
+
+        Dim Operadora As Double
+        Dim ComplementoAsimilados As Double
+
+        Dim SueldoBaseTMM As Double
+        Dim CostoSocialTotal As Double
+        Dim ComisionOperadora As Double
+        Dim ComisionAsimilados As Double
+        Dim subtotal As Double
+        Dim iva As Double
+
+
+
+        Dim sql As String
+        Dim sql2 As String
+        Dim sql3 As String
+        Dim sql4 As String
+        Dim sql5 As String
+        Dim ValorUMA As Double
+        Dim primavacacionesgravada As Double
+        Dim primavacacionesexenta As Double
+        Dim diastrabajados As Double
+        Dim Sueldobruto As Double
+        Dim TEFG As Double
+        Dim TEFE As Double
+        Dim TEO As Double
+        Dim DSO As Double
+        Dim VACAPRO As Double
+        Dim numbimestre As Integer
+        Dim NOCALCULAR As Boolean
+        Dim consecutivo1 As String
+        Dim plantaoNO As String
+        Try
+
+            pnlProgreso.Visible = True
+
+            Application.DoEvents()
+            pnlCatalogo.Enabled = False
+            pgbProgreso.Minimum = 0
+            pgbProgreso.Value = 0
+            pgbProgreso.Maximum = dtgDatos.Rows.Count
+            For x As Integer = 0 To dtgDatos.Rows.Count - 1
+
+                If cboTipoNomina.SelectedIndex = 0 Then
+                    sql = "delete from DetalleDescInfonavit"
+                    sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iSerie=" & cboserie.SelectedIndex
+                    'sql &= " and iSerie=" & cboserie.SelectedIndex
+                    'sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+
+
+
+                    '' borrar el seguro si solo tiene un registro
+                    'For x As Integer = 0 To dtgDatos.Rows.Count - 1
+                    '    Dim ValorInfo As Double
+                    '    ValorInfo = IIf(dtgDatos.Rows(x).Cells(14).Value = "", "0", dtgDatos.Rows(x).Cells(14).Value)
+                    '    If ValorInfo > 0 Then
+                    '        Dim numbimestre As Integer
+
+                    '        If Month(FechaInicioPeriodoGlobal) Mod 2 = 0 Then
+                    '            numbimestre = Month(FechaInicioPeriodoGlobal) / 2
+                    '        Else
+                    '            numbimestre = (Month(FechaInicioPeriodoGlobal) + 1) / 2
+                    '        End If
+
+                    '        sql = "select * from DetalleDescInfonavit inner join nomina on DetalleDescInfonavit.fkiIdEmpleado"
+                    '        sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue & "or fkiIdPeriodo = "
+                    '        sql &= " and fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value
+
+                    '    End If
+                    'Next
+
+                Else
+                    sql = "delete from DetalleDescInfonavit"
+                    sql &= " where fkiIdPeriodo=" & cboperiodo.SelectedValue
+                    sql &= " and iSerie=" & cboserie.SelectedIndex
+                    'sql &= " and iSerie=" & cboserie.SelectedIndex
+                    sql &= " and iTipoNomina=" & cboTipoNomina.SelectedIndex
+
+
+                End If
+
+
+                If nExecute(sql) = False Then
+                    MessageBox.Show("Ocurrio un error ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    'pnlProgreso.Visible = False
+                    Exit Sub
+                End If
+
+
+                If InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text) > 0 Then
+                    consecutivo1 = dtgDatos.Rows(x).Cells(5).Value.ToString.Substring(0, InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text) - 1)
+                    plantaoNO = dtgDatos.Rows(x).Cells(5).Value.ToString.Substring(InStr(1, dtgDatos.Rows(x).Cells(5).Value, "+", CompareMethod.Text))
+
+                Else
+                    consecutivo1 = IIf(dtgDatos.Rows(x).Cells(1).Value = "", "0", dtgDatos.Rows(x).Cells(1).Value.ToString.Replace(",", ""))
+                    plantaoNO = dtgDatos.Rows(x).Cells(5).Value
+                End If
+
+                'verificamos los sueldos
+                sql = "Select salariod,sbc,salariodTopado,sbcTopado from costosocial inner join puestos on costosocial.fkiIdPuesto=puestos.iIdPuesto "
+                sql &= " where cNombre = '" & dtgDatos.Rows(x).Cells(11).FormattedValue & "' and anio=" & aniocostosocial
+
+                Dim rwDatosSalario As DataRow() = nConsulta(sql)
+
+                If rwDatosSalario Is Nothing = False Then
+                    If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
+                        dtgDatos.Rows(x).Cells(16).Value = rwDatosSalario(0)("salariodTopado")
+                        dtgDatos.Rows(x).Cells(17).Value = rwDatosSalario(0)("sbcTopado")
+                    Else
+                        dtgDatos.Rows(x).Cells(16).Value = rwDatosSalario(0)("salariod")
+                        dtgDatos.Rows(x).Cells(17).Value = rwDatosSalario(0)("sbc")
+                    End If
+
+                Else
+                    MessageBox.Show("No se encontraron datos")
+                End If
+
+
+                diastrabajados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(18).Value = "", "0", dtgDatos.Rows(x).Cells(18).Value))
+                If diastrabajados = 0 Then
+                    'INFONAVIT
+                    '##### VERIFICAR SI ESTA YA CALCULADO EL INFONAVIT DEL BIMESTRE
+                    dtgDatos.Rows(x).Cells(38).Value = "0.00"
+
+
+                    '############# CALCULO POR DIAS INFONAVIT
+                    'dtgDatos.Rows(x).Cells(38).Value = Math.Round(infonavit(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Double.Parse(dtgDatos.Rows(x).Cells(18).Value), Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)), 2).ToString("###,##0.00")
+                    '############# CALCULO POR DIAS INFONAVIT
+
+                    'INFONAVIT BIMESTRE ANTERIOR
+                    'AJUSTE INFONAVIT
+                    'PENSION
+                    'PRESTAMO
+                    'FONACOT
+                    'SUBSIDIO GENERADO
+                    dtgDatos.Rows(x).Cells(44).Value = "0.00"
+                    'SUBSIDIO APLICADO
+                    dtgDatos.Rows(x).Cells(45).Value = "0.00"
+                    'NETO
+                    TotalPercepciones = Double.Parse(IIf(dtgDatos.Rows(x).Cells(33).Value = "", "0", dtgDatos.Rows(x).Cells(33).Value.ToString.Replace(",", "")))
+                    Incapacidad = Double.Parse(IIf(dtgDatos.Rows(x).Cells(35).Value = "", "0", dtgDatos.Rows(x).Cells(35).Value))
+                    isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
+                    imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
+                    infonavitvalor = Double.Parse(IIf(dtgDatos.Rows(x).Cells(38).Value = "", "0", dtgDatos.Rows(x).Cells(38).Value))
+                    infonavitanterior = Double.Parse(IIf(dtgDatos.Rows(x).Cells(39).Value = "", "0", dtgDatos.Rows(x).Cells(39).Value))
+                    ajusteinfonavit = Double.Parse(IIf(dtgDatos.Rows(x).Cells(40).Value = "", "0", dtgDatos.Rows(x).Cells(40).Value))
+                    pension = Double.Parse(IIf(dtgDatos.Rows(x).Cells(41).Value = "", "0", dtgDatos.Rows(x).Cells(41).Value))
+                    prestamo = Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value))
+                    fonacot = Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", "0", dtgDatos.Rows(x).Cells(43).Value))
+                    subsidiogenerado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(44).Value = "", "0", dtgDatos.Rows(x).Cells(44).Value))
+                    subsidioaplicado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(45).Value = "", "0", dtgDatos.Rows(x).Cells(45).Value))
+
+                    Operadora = 0
+                    dtgDatos.Rows(x).Cells(46).Value = Operadora
+
+                Else
+
+
+                    'Aguinaldo total
+                    'dtgDatos.Rows(x).Cells(29).Value = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(27).Value) + Double.Parse(dtgDatos.Rows(x).Cells(28).Value), 2)
+
+                    'Prima de vacaciones
+
+                    'Calculos prima
+
+                    'INFONAVIT
+                    '##### VERIFICAR SI ESTA YA CALCULADO EL INFONAVIT DEL BIMESTRE
+                    'Aqui verificamos si esta activo el calcular o no el infonavit
+
+
+                    If chkNoinfonavit.Checked = False Then
+                        If dtgDatos.Rows(x).Tag = "" Then
+                            'borramos el calculo previo del infonavit para tener siempre que generar el calculo por cualquier cambio que se requiera
+                            'este cambio va dentro de la funcion verificacalculoinfonavit
+
+                            Dim CalculoInfonavit As Integer = VerificarCalculoInfonavit(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
+
+                            Select Case CalculoInfonavit
+                                Case 0
+                                    'No es necesario calcular
+                                    dtgDatos.Rows(x).Cells(38).Value = "0.00"
+                                Case 1
+                                    'Ya esta Calculado
+                                    'Verificar cuanto le toca para el pago
+                                    If chkInfonavit0.Checked Then
+                                        'Ya esta Calculado
+                                        'Verificar cuanto le toca para el pago
+                                        Dim MontoInfonavit As Double = MontoInfonavitF(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
+
+                                        If MontoInfonavit > 0 Then
+
+                                            'Dim numbimestre As Integer
+
+                                            If Month(FechaInicioPeriodoGlobal) Mod 2 = 0 Then
+                                                numbimestre = Month(FechaInicioPeriodoGlobal) / 2
+                                            Else
+                                                numbimestre = (Month(FechaInicioPeriodoGlobal) + 1) / 2
+                                            End If
+                                            sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
+                                            Dim rwMontoInfonavit As DataRow() = nConsulta(sql)
+                                            If rwMontoInfonavit Is Nothing = False Then
+
+                                                If Double.Parse(rwMontoInfonavit(0)("monto").ToString) < MontoInfonavit Then
+                                                    'Diferencia
+                                                    Dim FaltanteInfonavit As Double = MontoInfonavit - Double.Parse(rwMontoInfonavit(0)("monto").ToString)
+
+                                                    TotalPercepciones = Double.Parse(IIf(dtgDatos.Rows(x).Cells(33).Value = "", "0", dtgDatos.Rows(x).Cells(33).Value.ToString.Replace(",", "")))
+                                                    Incapacidad = Double.Parse(IIf(dtgDatos.Rows(x).Cells(35).Value = "", "0", dtgDatos.Rows(x).Cells(35).Value))
+                                                    isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
+                                                    imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
+
+                                                    Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss
+
+
+                                                    If cboTipoNomina.SelectedIndex = 0 Then
+                                                        If SubtotalAntesInfonavit > (FaltanteInfonavit / 2) Then
+                                                            dtgDatos.Rows(x).Cells(38).Value = Math.Round((FaltanteInfonavit / 2), 2)
+
+                                                        Else
+                                                            dtgDatos.Rows(x).Cells(38).Value = Math.Round((SubtotalAntesInfonavit - 1), 2)
+                                                        End If
+                                                    Else
+                                                        If SubtotalAntesInfonavit > (FaltanteInfonavit) Then
+                                                            dtgDatos.Rows(x).Cells(38).Value = Math.Round((FaltanteInfonavit), 2)
+
+                                                        Else
+                                                            dtgDatos.Rows(x).Cells(38).Value = Math.Round((SubtotalAntesInfonavit - 1), 2)
+                                                        End If
+                                                    End If
+
+
+
+
+                                                Else
+                                                    dtgDatos.Rows(x).Cells(38).Value = "0.00"
+                                                End If
+
+
+                                            End If
+                                        Else
+                                            dtgDatos.Rows(x).Cells(38).Value = "0.00"
+
+                                        End If
+
+                                    Else
+                                        Dim MontoInfonavit As Double = MontoInfonavitF(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
+
+                                        If MontoInfonavit > 0 Then
+                                            'Dim numbimestre As Integer
+
+                                            If Month(FechaInicioPeriodoGlobal) Mod 2 = 0 Then
+                                                numbimestre = Month(FechaInicioPeriodoGlobal) / 2
+                                            Else
+                                                numbimestre = (Month(FechaInicioPeriodoGlobal) + 1) / 2
+                                            End If
+                                            sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
+                                            Dim rwMontoInfonavit As DataRow() = nConsulta(sql)
+                                            If rwMontoInfonavit Is Nothing = False Then
+
+                                                'Verificamos el monto del infonavit a calcular
+
+                                                InfonavitNormal = Math.Round(infonavit(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Double.Parse(dtgDatos.Rows(x).Cells(18).Value), Integer.Parse(dtgDatos.Rows(x).Cells(2).Value), Integer.Parse(dtgDatos.Rows(x).Cells(1).Value) - 1), 2).ToString("###,##0.00")
+
+                                                '########
+
+
+                                                If Double.Parse(rwMontoInfonavit(0)("monto").ToString) < MontoInfonavit Then
+                                                    'Diferencia
+                                                    Dim FaltanteInfonavit As Double = MontoInfonavit - Double.Parse(rwMontoInfonavit(0)("monto").ToString)
+
+                                                    TotalPercepciones = Double.Parse(IIf(dtgDatos.Rows(x).Cells(33).Value = "", "0", dtgDatos.Rows(x).Cells(33).Value.ToString.Replace(",", "")))
+                                                    Incapacidad = Double.Parse(IIf(dtgDatos.Rows(x).Cells(35).Value = "", "0", dtgDatos.Rows(x).Cells(35).Value))
+                                                    isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
+                                                    imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
+
+                                                    Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss
+
+
+                                                    'VErificamos el infonavit
+
+                                                    If FaltanteInfonavit > InfonavitNormal Then
+
+                                                        If SubtotalAntesInfonavit > InfonavitNormal Then
+                                                            dtgDatos.Rows(x).Cells(38).Value = Math.Round((InfonavitNormal), 2)
+
+                                                        Else
+                                                            dtgDatos.Rows(x).Cells(38).Value = Math.Round((SubtotalAntesInfonavit - 1), 2)
+                                                        End If
+                                                    Else
+                                                        If SubtotalAntesInfonavit > FaltanteInfonavit Then
+                                                            dtgDatos.Rows(x).Cells(38).Value = Math.Round((FaltanteInfonavit), 2)
+
+                                                        Else
+                                                            dtgDatos.Rows(x).Cells(38).Value = Math.Round((SubtotalAntesInfonavit - 1), 2)
+                                                        End If
+
+                                                    End If
+
+
+
+
+                                                    'If SubtotalAntesInfonavit > (FaltanteInfonavit / 2) Then
+                                                    '    dtgDatos.Rows(x).Cells(38).Value = Math.Round((FaltanteInfonavit / 2), 2)
+
+                                                    'Else
+                                                    '    dtgDatos.Rows(x).Cells(38).Value = Math.Round((SubtotalAntesInfonavit - 1), 2)
+                                                    'End If
+
+
+
+                                                Else
+                                                    dtgDatos.Rows(x).Cells(38).Value = "0.00"
+                                                End If
+
+
+                                            End If
+                                        Else
+                                            dtgDatos.Rows(x).Cells(38).Value = "0.00"
+
+                                        End If
+                                    End If
+
+
+                                Case 2
+                                    If chkInfonavit0.Checked Then
+                                        'No esta calculado
+                                        If CalcularInfonavit(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)) Then
+                                            'Verificar cuanto le toca para el pago
+                                            Dim MontoInfonavit As Double = MontoInfonavitF(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
+
+                                            If MontoInfonavit > 0 Then
+                                                'Dim numbimestre As Integer
+
+                                                If Month(FechaInicioPeriodoGlobal) Mod 2 = 0 Then
+                                                    numbimestre = Month(FechaInicioPeriodoGlobal) / 2
+                                                Else
+                                                    numbimestre = (Month(FechaInicioPeriodoGlobal) + 1) / 2
+                                                End If
+                                                sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
+                                                Dim rwMontoInfonavit As DataRow() = nConsulta(sql)
+                                                If rwMontoInfonavit Is Nothing = False Then
+
+                                                    If Double.Parse(rwMontoInfonavit(0)("monto").ToString) < MontoInfonavit Then
+                                                        'Diferencia
+                                                        Dim FaltanteInfonavit As Double = MontoInfonavit - Double.Parse(rwMontoInfonavit(0)("monto").ToString)
+
+                                                        TotalPercepciones = Double.Parse(IIf(dtgDatos.Rows(x).Cells(33).Value = "", "0", dtgDatos.Rows(x).Cells(33).Value.ToString.Replace(",", "")))
+                                                        Incapacidad = Double.Parse(IIf(dtgDatos.Rows(x).Cells(35).Value = "", "0", dtgDatos.Rows(x).Cells(35).Value))
+                                                        isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
+                                                        imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
+
+                                                        Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss
+
+                                                        If cboTipoNomina.SelectedIndex = 0 Then
+                                                            If SubtotalAntesInfonavit > (FaltanteInfonavit / 2) Then
+                                                                dtgDatos.Rows(x).Cells(38).Value = Math.Round((FaltanteInfonavit / 2), 2)
+
+                                                            Else
+                                                                dtgDatos.Rows(x).Cells(38).Value = Math.Round((SubtotalAntesInfonavit - 1), 2)
+                                                            End If
+                                                        Else
+                                                            If SubtotalAntesInfonavit > (FaltanteInfonavit) Then
+                                                                dtgDatos.Rows(x).Cells(38).Value = Math.Round((FaltanteInfonavit), 2)
+
+                                                            Else
+                                                                dtgDatos.Rows(x).Cells(38).Value = Math.Round((SubtotalAntesInfonavit - 1), 2)
+                                                            End If
+                                                        End If
+
+
+
+                                                    Else
+                                                        dtgDatos.Rows(x).Cells(38).Value = "0.00"
+                                                    End If
+
+
+                                                End If
+                                            Else
+                                                dtgDatos.Rows(x).Cells(38).Value = "0.00"
+
+                                            End If
+
+
+                                        End If
+                                    Else
+                                        'No esta calculado
+                                        If CalcularInfonavit(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)) Then
+                                            'Verificar cuanto le toca para el pago
+                                            Dim MontoInfonavit As Double = MontoInfonavitF(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
+
+                                            If MontoInfonavit > 0 Then
+
+
+                                                If Month(FechaInicioPeriodoGlobal) Mod 2 = 0 Then
+                                                    numbimestre = Month(FechaInicioPeriodoGlobal) / 2
+                                                Else
+                                                    numbimestre = (Month(FechaInicioPeriodoGlobal) + 1) / 2
+                                                End If
+
+                                                sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
+                                                Dim rwMontoInfonavit As DataRow() = nConsulta(sql)
+                                                If rwMontoInfonavit Is Nothing = False Then
+                                                    'Verificamos el monto del infonavit a calcular
+
+                                                    InfonavitNormal = Math.Round(infonavit(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Double.Parse(dtgDatos.Rows(x).Cells(18).Value), Integer.Parse(dtgDatos.Rows(x).Cells(2).Value), Integer.Parse(dtgDatos.Rows(x).Cells(1).Value) - 1), 2).ToString("###,##0.00")
+
+                                                    '########
+                                                    If Double.Parse(rwMontoInfonavit(0)("monto").ToString) < MontoInfonavit Then
+                                                        'Diferencia
+                                                        Dim FaltanteInfonavit As Double = MontoInfonavit - Double.Parse(rwMontoInfonavit(0)("monto").ToString)
+
+                                                        TotalPercepciones = Double.Parse(IIf(dtgDatos.Rows(x).Cells(33).Value = "", "0", dtgDatos.Rows(x).Cells(33).Value.ToString.Replace(",", "")))
+                                                        Incapacidad = Double.Parse(IIf(dtgDatos.Rows(x).Cells(35).Value = "", "0", dtgDatos.Rows(x).Cells(35).Value))
+                                                        isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
+                                                        imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
+
+                                                        Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss
+
+                                                        If FaltanteInfonavit > InfonavitNormal Then
+
+                                                            If SubtotalAntesInfonavit > InfonavitNormal Then
+                                                                dtgDatos.Rows(x).Cells(38).Value = Math.Round((InfonavitNormal), 2)
+
+                                                            Else
+                                                                dtgDatos.Rows(x).Cells(38).Value = Math.Round((SubtotalAntesInfonavit - 1), 2)
+                                                            End If
+                                                        Else
+                                                            If SubtotalAntesInfonavit > FaltanteInfonavit Then
+                                                                dtgDatos.Rows(x).Cells(38).Value = Math.Round((FaltanteInfonavit), 2)
+
+                                                            Else
+                                                                dtgDatos.Rows(x).Cells(38).Value = Math.Round((SubtotalAntesInfonavit - 1), 2)
+                                                            End If
+
+                                                        End If
+
+
+
+                                                    Else
+                                                        dtgDatos.Rows(x).Cells(38).Value = "0.00"
+                                                    End If
+
+
+                                                End If
+                                            Else
+                                                dtgDatos.Rows(x).Cells(38).Value = "0.00"
+
+                                            End If
+
+
+                                        End If
+                                    End If
+
+                            End Select
+                        Else
+
+                        End If
+                    End If
+
+
+
+                    'Guardamos el infonavit en el sistema para  tenerlo actualizado para el siguiente trabajador
+
+                    '########GUARDAR INFONAVIT
+
+                    'Dim numbimestre As Integer
+                    If Month(FechaInicioPeriodoGlobal) Mod 2 = 0 Then
+                        numbimestre = Month(FechaInicioPeriodoGlobal) / 2
+                    Else
+                        numbimestre = (Month(FechaInicioPeriodoGlobal) + 1) / 2
+                    End If
+
+
+                    If Double.Parse(IIf(dtgDatos.Rows(x).Cells(38).Value = "", "0", dtgDatos.Rows(x).Cells(38).Value)) Then
+
+                        Dim MontoInfonavit As Double = MontoInfonavitF(cboperiodo.SelectedValue, Integer.Parse(dtgDatos.Rows(x).Cells(2).Value))
+
+                        sql = "EXEC setDetalleDescInfonavitInsertar  0"
+                        'fk Calculo infonavit
+                        sql &= "," & IIf(MontoInfonavit > 0, IDCalculoInfonavit, 0)
+                        'Cantidad
+                        sql &= "," & dtgDatos.Rows(x).Cells(38).Value
+                        ' fk Empleado
+                        sql &= "," & dtgDatos.Rows(x).Cells(2).Value
+                        'Numbimestre
+                        sql &= "," & numbimestre
+                        'Anio
+                        sql &= "," & FechaInicioPeriodoGlobal.Year
+                        'fk Periodo
+                        sql &= "," & cboperiodo.SelectedValue
+                        'Serie
+                        sql &= "," & cboserie.SelectedIndex
+                        'Tipo Nomina
+                        sql &= "," & cboTipoNomina.SelectedIndex
+                        'Tipo Pagadora
+                        sql &= ",101"
+                        'iEstatu
+                        sql &= ",1"
+                        sql &= "," & consecutivo1
+
+                        If nExecute(sql) = False Then
+                            MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            'pnlProgreso.Visible = False
+                            Exit Sub
+                        End If
+                    End If
+
+
+                    '########GUARDAR SEGURO INFONAVIT
+
+
+
+
+
+                    '############# CALCULO POR DIAS INFONAVIT
+
+                    'dtgDatos.Rows(x).Cells(38).Value = Math.Round(infonavit(dtgDatos.Rows(x).Cells(13).Value, Double.Parse(dtgDatos.Rows(x).Cells(14).Value), Double.Parse(dtgDatos.Rows(x).Cells(17).Value), Date.Parse("01/01/1900"), cboperiodo.SelectedValue, Double.Parse(dtgDatos.Rows(x).Cells(18).Value), Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)), 2).ToString("###,##0.00")
+                    '############# CALCULO POR DIAS INFONAVIT
+
+
+                    'SUBSIDIO GENERADO
+
+                    TotalPercepciones = Double.Parse(IIf(dtgDatos.Rows(x).Cells(33).Value = "", "0", dtgDatos.Rows(x).Cells(33).Value.ToString.Replace(",", "")))
+                    Incapacidad = Double.Parse(IIf(dtgDatos.Rows(x).Cells(35).Value = "", "0", dtgDatos.Rows(x).Cells(35).Value))
+                    isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
+                    imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
+                    infonavitvalor = Double.Parse(IIf(dtgDatos.Rows(x).Cells(38).Value = "", "0", dtgDatos.Rows(x).Cells(38).Value))
+                    infonavitanterior = Double.Parse(IIf(dtgDatos.Rows(x).Cells(39).Value = "", "0", dtgDatos.Rows(x).Cells(39).Value))
+                    ajusteinfonavit = Double.Parse(IIf(dtgDatos.Rows(x).Cells(40).Value = "", "0", dtgDatos.Rows(x).Cells(40).Value))
+
+
+
+                    'CALCULAR FONACOT
+
+
+                    fonacot = Double.Parse(IIf(dtgDatos.Rows(x).Cells(43).Value = "", "0", dtgDatos.Rows(x).Cells(43).Value))
+                    subsidiogenerado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(44).Value = "", "0", dtgDatos.Rows(x).Cells(44).Value))
+                    subsidioaplicado = Double.Parse(IIf(dtgDatos.Rows(x).Cells(45).Value = "", "0", dtgDatos.Rows(x).Cells(45).Value))
+
+
+
+                    'INFONAVIT BIMESTRE ANTERIOR
+                    'AJUSTE INFONAVIT
+
+                    'PRESTAMO
+
+                    prestamo = Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value))
+
+                    'PENSION
+                    PensionAlimenticia = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - prestamo - fonacot + subsidioaplicado
+                    'Buscamos la Pension
+                    'If dtgDatos.Rows(x).Cells(2).Value = 94 Then
+                    '    MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(4).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    'End If
+
+
+                    pension = 0
+
+
+
+                    'NETO
+                    pension = dtgDatos.Rows(x).Cells(41).Value
+
+                    'pension = Double.Parse(IIf(dtgDatos.Rows(x).Cells(41).Value = "", "0", dtgDatos.Rows(x).Cells(41).Value))
+                    Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
+                    dtgDatos.Rows(x).Cells(46).Value = Operadora
+
+                End If
+
+
+                'Sueldo Base TMM
+                SueldoBaseTMM = (Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value))) ' / 2
+
+                'Prestamo Personal Asimilado
+
+
+
+
+
+
+                PrestamoPersonalAsimilados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(47).Value = "", "0", dtgDatos.Rows(x).Cells(47).Value))
+
+                'Adeudo_Infonavit_Asimilado
+                AdeudoINfonavitAsimilados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(48).Value = "", "0", dtgDatos.Rows(x).Cells(48).Value))
+                'Difencia infonavit Asimilado
+                DiferenciaInfonavitAsimilados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(49).Value = "", "0", dtgDatos.Rows(x).Cells(49).Value))
+                'Complemento Asimilado
+                ComplementoAsimilados = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot - PrestamoPersonalAsimilados - AdeudoINfonavitAsimilados - DiferenciaInfonavitAsimilados - Operadora, 2)
+                If ComplementoAsimilados < 0 And subsidioaplicado > 0 And (dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN") Then
+                    SueldoBaseTMM = (Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value))) - ComplementoAsimilados
+                    dtgDatos.Rows(x).Cells(15).Value = SueldoBaseTMM ' / 2
+
+                    ComplementoAsimilados = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot - PrestamoPersonalAsimilados - AdeudoINfonavitAsimilados - DiferenciaInfonavitAsimilados - Operadora, 2)
+                End If
+
+
+                dtgDatos.Rows(x).Cells(50).Value = ComplementoAsimilados
+                'Retenciones_Operadora
+                RetencionOperadora = Math.Round(Incapacidad + isr + imss + infonavitvalor + infonavitanterior + ajusteinfonavit + pension + prestamo + fonacot, 2)
+                dtgDatos.Rows(x).Cells(51).Value = RetencionOperadora
+
+                '%Comision
+                dtgDatos.Rows(x).Cells(52).Value = "2%"
+                'Comision Maecco
+                ComisionOperadora = Math.Round((Operadora + RetencionOperadora) * 0.02, 2)
+                dtgDatos.Rows(x).Cells(53).Value = ComisionOperadora
+
+                'Comision Complemento
+                ComisionAsimilados = Math.Round((ComplementoAsimilados + PrestamoPersonalAsimilados + AdeudoINfonavitAsimilados + DiferenciaInfonavitAsimilados) * 0.02, 2)
+                dtgDatos.Rows(x).Cells(54).Value = ComisionAsimilados
+
+
+                'Calcular el costo social
+
+                'Obtenemos los datos del empleado,id puesto
+                'de acuerdo a la edad y el status
+
+                '############################################################################
+                '#######################################################################
+                '###########################################################
+                '#############################################
+
+
+                'TOTAL COSTO SOCIAL
+                CostoSocialTotal = Math.Round(Double.Parse(dtgDatos.Rows(x).Cells(55).Value) + Double.Parse(dtgDatos.Rows(x).Cells(56).Value) + Double.Parse(dtgDatos.Rows(x).Cells(57).Value) + Double.Parse(dtgDatos.Rows(x).Cells(58).Value), 2)
+                dtgDatos.Rows(x).Cells(59).Value = CostoSocialTotal
+
+                'SUBTOTAL
+                subtotal = Math.Round(ComplementoAsimilados + PrestamoPersonalAsimilados + AdeudoINfonavitAsimilados + DiferenciaInfonavitAsimilados + Operadora + RetencionOperadora + ComisionOperadora + ComisionAsimilados + CostoSocialTotal, 2)
+                dtgDatos.Rows(x).Cells(60).Value = subtotal
+
+
+                'IVA
+                iva = Math.Round(subtotal * 0.16)
+                dtgDatos.Rows(x).Cells(61).Value = iva
+                'TOTAL DEPOSITO
+                dtgDatos.Rows(x).Cells(62).Value = subtotal + iva
+
+
+
+                pgbProgreso.Value += 1
+                Application.DoEvents()
+            Next
+            pnlProgreso.Visible = False
+            pnlCatalogo.Enabled = True
+            MessageBox.Show("Datos calculados ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End Try
+        
+    End Sub
 End Class
 
 
