@@ -16082,7 +16082,7 @@ Public Class frmnominasmarinos
                                             Else
                                                 numbimestre = (Month(FechaInicioPeriodoGlobal) + 1) / 2
                                             End If
-                                            sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
+                                            sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where iTipoPagadora=101 and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
                                             Dim rwMontoInfonavit As DataRow() = nConsulta(sql)
                                             If rwMontoInfonavit Is Nothing = False Then
 
@@ -16139,7 +16139,7 @@ Public Class frmnominasmarinos
                                             Else
                                                 numbimestre = (Month(FechaInicioPeriodoGlobal) + 1) / 2
                                             End If
-                                            sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
+                                            sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where iTipoPagadora=101 and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
                                             Dim rwMontoInfonavit As DataRow() = nConsulta(sql)
                                             If rwMontoInfonavit Is Nothing = False Then
 
@@ -16222,7 +16222,7 @@ Public Class frmnominasmarinos
                                                 Else
                                                     numbimestre = (Month(FechaInicioPeriodoGlobal) + 1) / 2
                                                 End If
-                                                sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
+                                                sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where iTipoPagadora=101 and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
                                                 Dim rwMontoInfonavit As DataRow() = nConsulta(sql)
                                                 If rwMontoInfonavit Is Nothing = False Then
 
@@ -16283,7 +16283,7 @@ Public Class frmnominasmarinos
                                                     numbimestre = (Month(FechaInicioPeriodoGlobal) + 1) / 2
                                                 End If
 
-                                                sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
+                                                sql = "select isnull(sum(Cantidad),0) as monto from DetalleDescInfonavit where  iTipoPagadora=101 and fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " and Numbimestre= " & numbimestre & " and Anio=" & FechaInicioPeriodoGlobal.Year
                                                 Dim rwMontoInfonavit As DataRow() = nConsulta(sql)
                                                 If rwMontoInfonavit Is Nothing = False Then
                                                     'Verificamos el monto del infonavit a calcular
