@@ -3579,7 +3579,9 @@ Public Class frmnominasmarinos
 
                             'Calculos prima
 
-                            primavacacionesgravada = (SueldoBase * 0.25 / 12 * (diastrabajados / 30)) - ((ValorUMA * 15 / 12) * (diastrabajados / 30))
+                            'primavacacionesgravada = (SueldoBase * 0.25 / 12 * (diastrabajados / 30)) - ((ValorUMA * 15 / 12) * (diastrabajados / 30))
+                            primavacacionesgravada = (VACAPRO * 0.25) - ((ValorUMA * 15 / 12) * (diastrabajados / 30))
+
                             primavacacionesexenta = ((ValorUMA * 15 / 12) * (diastrabajados / 30))
 
                             If primavacacionesgravada > 0 Then
