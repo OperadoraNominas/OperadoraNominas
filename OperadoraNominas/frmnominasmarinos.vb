@@ -4534,7 +4534,7 @@ Public Class frmnominasmarinos
             For x As Integer = 0 To dtgDatos.Rows.Count - 1
 
                 If chkSoloCostoSocial.Checked = True Then
-                    If dtgDatos.Rows(x).Cells(7).Tag = "1" Then
+                    If dtgDatos.Rows(x).Cells(7).Tag = "" Then
 
                         If dtgDatos.Rows(x).Cells(6).Tag = "1" Then
                             dtgDatos.Rows(x).Cells(55).Value = Math.Round(0, 2)
@@ -5097,7 +5097,7 @@ Public Class frmnominasmarinos
 
 
                 Else
-                    If dtgDatos.Rows(x).Cells(7).Tag = "1" Then
+                    If dtgDatos.Rows(x).Cells(7).Tag = "" Then
 
                         If dtgDatos.Rows(x).Cells(6).Tag = "1" Then
                             dtgDatos.Rows(x).Cells(55).Value = Math.Round(0, 2)
