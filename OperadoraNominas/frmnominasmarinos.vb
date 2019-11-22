@@ -691,27 +691,27 @@ Public Class frmnominasmarinos
 
                 'IMSS_CS
                 dtgDatos.Columns(55).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(55).ReadOnly = True
+                'dtgDatos.Columns(55).ReadOnly = True
                 dtgDatos.Columns(55).Width = 150
 
                 'RCV_CS
                 dtgDatos.Columns(56).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(56).ReadOnly = True
+                'dtgDatos.Columns(56).ReadOnly = True
                 dtgDatos.Columns(56).Width = 150
 
                 'Infonavit_CS
                 dtgDatos.Columns(57).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(57).ReadOnly = True
+                'dtgDatos.Columns(57).ReadOnly = True
                 dtgDatos.Columns(57).Width = 150
 
                 'ISN_CS
                 dtgDatos.Columns(58).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(58).ReadOnly = True
+                'dtgDatos.Columns(58).ReadOnly = True
                 dtgDatos.Columns(58).Width = 150
 
                 'Total Costo Social
                 dtgDatos.Columns(59).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                dtgDatos.Columns(59).ReadOnly = True
+                'dtgDatos.Columns(59).ReadOnly = True
                 dtgDatos.Columns(59).Width = 150
 
                 'Subtotal
@@ -9501,27 +9501,27 @@ Public Class frmnominasmarinos
 
                     'IMSS_CS
                     dtgDatos.Columns(55).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(55).ReadOnly = True
+                    'dtgDatos.Columns(55).ReadOnly = True
                     dtgDatos.Columns(55).Width = 150
 
                     'RCV_CS
                     dtgDatos.Columns(56).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(56).ReadOnly = True
+                    'dtgDatos.Columns(56).ReadOnly = True
                     dtgDatos.Columns(56).Width = 150
 
                     'Infonavit_CS
                     dtgDatos.Columns(57).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(57).ReadOnly = True
+                    'dtgDatos.Columns(57).ReadOnly = True
                     dtgDatos.Columns(57).Width = 150
 
                     'ISN_CS
                     dtgDatos.Columns(58).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(58).ReadOnly = True
+                    'dtgDatos.Columns(58).ReadOnly = True
                     dtgDatos.Columns(58).Width = 150
 
                     'Total Costo Social
                     dtgDatos.Columns(59).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                    dtgDatos.Columns(59).ReadOnly = True
+                    'dtgDatos.Columns(59).ReadOnly = True
                     dtgDatos.Columns(59).Width = 150
 
                     'Subtotal
