@@ -86,6 +86,8 @@ Partial Class frmnominasmarinos
         Me.EliminarDeLaBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CostoCeroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DesactivarCostoCeroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NoCalcularCostoSocialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.layoutTimbrado = New System.Windows.Forms.Button()
         Me.cmdInfonavit = New System.Windows.Forms.Button()
         Me.cmdReporteInfonavit = New System.Windows.Forms.Button()
@@ -95,8 +97,6 @@ Partial Class frmnominasmarinos
         Me.cmdImssNomina = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-        Me.NoCalcularCostoSocialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -597,7 +597,7 @@ Partial Class frmnominasmarinos
         '
         Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminarDeLaListaToolStripMenuItem, Me.AgregarTrabajadoresToolStripMenuItem, Me.EditarEmpleadoToolStripMenuItem, Me.NoCalcularInofnavitToolStripMenuItem, Me.ActicarCalculoInfonavitToolStripMenuItem, Me.NoCalcularPresAsiToolStripMenuItem, Me.ActivaCalculoPresAsiToolStripMenuItem, Me.NoCalcularPresSAToolStripMenuItem, Me.ActivarCaluloPresSAToolStripMenuItem, Me.SoloRegistroACalcularToolStripMenuItem, Me.DesactivarSoloRegistroACalcularToolStripMenuItem, Me.RegistroTotalDiasToolStripMenuItem, Me.DesactivarRegistroTotalDiasToolStripMenuItem, Me.EliminarDeLaBaseToolStripMenuItem, Me.CostoCeroToolStripMenuItem, Me.DesactivarCostoCeroToolStripMenuItem, Me.NoCalcularCostoSocialToolStripMenuItem, Me.DesactivarNoCalcularCostoSocialToolStripMenuItem})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(255, 422)
+        Me.cMenu.Size = New System.Drawing.Size(255, 400)
         '
         'EliminarDeLaListaToolStripMenuItem
         '
@@ -694,6 +694,18 @@ Partial Class frmnominasmarinos
         Me.DesactivarCostoCeroToolStripMenuItem.Name = "DesactivarCostoCeroToolStripMenuItem"
         Me.DesactivarCostoCeroToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
         Me.DesactivarCostoCeroToolStripMenuItem.Text = "Desactivar costo cero"
+        '
+        'NoCalcularCostoSocialToolStripMenuItem
+        '
+        Me.NoCalcularCostoSocialToolStripMenuItem.Name = "NoCalcularCostoSocialToolStripMenuItem"
+        Me.NoCalcularCostoSocialToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
+        Me.NoCalcularCostoSocialToolStripMenuItem.Text = "No calcular Costo Social"
+        '
+        'DesactivarNoCalcularCostoSocialToolStripMenuItem
+        '
+        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem.Name = "DesactivarNoCalcularCostoSocialToolStripMenuItem"
+        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
+        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem.Text = "Desactivar no calcular costo social"
         '
         'layoutTimbrado
         '
@@ -799,18 +811,6 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.TabIndex = 33
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
-        '
-        'NoCalcularCostoSocialToolStripMenuItem
-        '
-        Me.NoCalcularCostoSocialToolStripMenuItem.Name = "NoCalcularCostoSocialToolStripMenuItem"
-        Me.NoCalcularCostoSocialToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.NoCalcularCostoSocialToolStripMenuItem.Text = "No calcular Costo Social"
-        '
-        'DesactivarNoCalcularCostoSocialToolStripMenuItem
-        '
-        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem.Name = "DesactivarNoCalcularCostoSocialToolStripMenuItem"
-        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
-        Me.DesactivarNoCalcularCostoSocialToolStripMenuItem.Text = "Desactivar no calcular costo social"
         '
         'frmnominasmarinos
         '
