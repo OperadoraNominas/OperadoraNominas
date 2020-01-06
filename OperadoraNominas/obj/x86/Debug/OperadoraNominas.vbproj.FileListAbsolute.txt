@@ -71,5 +71,4 @@ C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x8
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmFonacot.resources
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Serie.resources
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.Cache
-D:\Escritorio\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache

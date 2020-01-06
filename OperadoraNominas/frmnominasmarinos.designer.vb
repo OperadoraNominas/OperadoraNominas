@@ -97,10 +97,9 @@ Partial Class frmnominasmarinos
         Me.cmdImssNomina = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-<<<<<<< HEAD
+
         Me.Button1 = New System.Windows.Forms.Button()
-=======
->>>>>>> refs/remotes/origin/master
+
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -818,7 +817,7 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
-<<<<<<< HEAD
+
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -829,8 +828,7 @@ Partial Class frmnominasmarinos
         Me.Button1.Text = "Infonavit x periodo"
         Me.Button1.UseVisualStyleBackColor = True
         '
-=======
->>>>>>> refs/remotes/origin/master
+
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -941,11 +939,11 @@ Partial Class frmnominasmarinos
     Friend WithEvents cmdBuscarOtraNom As System.Windows.Forms.Button
     Friend WithEvents cmdAcumuladoOperadora As System.Windows.Forms.Button
     Friend WithEvents cmdCalculoSoloInfonavit As System.Windows.Forms.Button
-<<<<<<< HEAD
+
     Friend WithEvents Button1 As System.Windows.Forms.Button
-=======
+
     Friend WithEvents NoCalcularCostoSocialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DesactivarNoCalcularCostoSocialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
->>>>>>> refs/remotes/origin/master
+
 
 End Class

@@ -696,11 +696,10 @@ Public Class frmnominasmarinos
 
                 'RCV_CS
                 dtgDatos.Columns(56).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-<<<<<<< HEAD
+
                 ' dtgDatos.Columns(56).ReadOnly = True
-=======
-                'dtgDatos.Columns(56).ReadOnly = True
->>>>>>> refs/remotes/origin/master
+
+
                 dtgDatos.Columns(56).Width = 150
 
                 'Infonavit_CS
@@ -17091,7 +17090,7 @@ Public Class frmnominasmarinos
     End Sub
 
 
-<<<<<<< HEAD
+
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Try
             Dim SQL, SQL1 As String
@@ -17194,7 +17193,7 @@ Public Class frmnominasmarinos
             MessageBox.Show(ex.Message.ToString())
         End Try
     End Sub
-=======
+
     Private Sub NoCalcularCostoSocialToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles NoCalcularCostoSocialToolStripMenuItem.Click
         Try
             Dim iFila As DataGridViewRow = Me.dtgDatos.CurrentRow()
@@ -17212,7 +17211,7 @@ Public Class frmnominasmarinos
         iFila.Cells(7).Tag = ""
         iFila.Cells(7).Style.BackColor = Color.White
     End Sub
->>>>>>> refs/remotes/origin/master
+
 End Class
 
 
