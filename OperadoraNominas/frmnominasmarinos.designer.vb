@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cmdCalculoSoloInfonavit = New System.Windows.Forms.Button()
         Me.cmdAcumuladoOperadora = New System.Windows.Forms.Button()
         Me.cmdBuscarOtraNom = New System.Windows.Forms.Button()
         Me.chkSoloCostoSocial = New System.Windows.Forms.CheckBox()
@@ -94,7 +95,7 @@ Partial Class frmnominasmarinos
         Me.cmdImssNomina = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-        Me.cmdCalculoSoloInfonavit = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -191,9 +192,10 @@ Partial Class frmnominasmarinos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.Button1)
         Me.pnlCatalogo.Controls.Add(Me.cmdCalculoSoloInfonavit)
         Me.pnlCatalogo.Controls.Add(Me.cmdAcumuladoOperadora)
         Me.pnlCatalogo.Controls.Add(Me.cmdBuscarOtraNom)
@@ -230,6 +232,16 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'cmdCalculoSoloInfonavit
+        '
+        Me.cmdCalculoSoloInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdCalculoSoloInfonavit.Location = New System.Drawing.Point(575, 68)
+        Me.cmdCalculoSoloInfonavit.Name = "cmdCalculoSoloInfonavit"
+        Me.cmdCalculoSoloInfonavit.Size = New System.Drawing.Size(146, 27)
+        Me.cmdCalculoSoloInfonavit.TabIndex = 34
+        Me.cmdCalculoSoloInfonavit.Text = "Calcular Infonavit Solo"
+        Me.cmdCalculoSoloInfonavit.UseVisualStyleBackColor = True
         '
         'cmdAcumuladoOperadora
         '
@@ -519,8 +531,8 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.AllowUserToDeleteRows = False
         Me.dtgDatos.AllowUserToOrderColumns = True
         Me.dtgDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 104)
         Me.dtgDatos.Name = "dtgDatos"
@@ -774,6 +786,7 @@ Partial Class frmnominasmarinos
         Me.cmdConcentradoFonacot.TabIndex = 34
         Me.cmdConcentradoFonacot.Text = "Concentrado Fonacot"
         Me.cmdConcentradoFonacot.UseVisualStyleBackColor = True
+        Me.cmdConcentradoFonacot.Visible = False
         '
         'chkNoinfonavit
         '
@@ -788,15 +801,15 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
-        'cmdCalculoSoloInfonavit
+        'Button1
         '
-        Me.cmdCalculoSoloInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdCalculoSoloInfonavit.Location = New System.Drawing.Point(575, 68)
-        Me.cmdCalculoSoloInfonavit.Name = "cmdCalculoSoloInfonavit"
-        Me.cmdCalculoSoloInfonavit.Size = New System.Drawing.Size(146, 27)
-        Me.cmdCalculoSoloInfonavit.TabIndex = 34
-        Me.cmdCalculoSoloInfonavit.Text = "Calcular Infonavit Solo"
-        Me.cmdCalculoSoloInfonavit.UseVisualStyleBackColor = True
+        Me.Button1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(727, 68)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(163, 27)
+        Me.Button1.TabIndex = 35
+        Me.Button1.Text = "Infonavit x periodo"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'frmnominasmarinos
         '
@@ -908,5 +921,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents cmdBuscarOtraNom As System.Windows.Forms.Button
     Friend WithEvents cmdAcumuladoOperadora As System.Windows.Forms.Button
     Friend WithEvents cmdCalculoSoloInfonavit As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 
 End Class
