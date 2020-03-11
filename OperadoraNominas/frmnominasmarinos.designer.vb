@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.cmdCalculoSoloInfonavit = New System.Windows.Forms.Button()
         Me.cmdAcumuladoOperadora = New System.Windows.Forms.Button()
         Me.cmdBuscarOtraNom = New System.Windows.Forms.Button()
@@ -97,9 +98,6 @@ Partial Class frmnominasmarinos
         Me.cmdImssNomina = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-
-        Me.Button1 = New System.Windows.Forms.Button()
-
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -236,6 +234,16 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(727, 68)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(163, 27)
+        Me.Button1.TabIndex = 35
+        Me.Button1.Text = "Infonavit x periodo"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'cmdCalculoSoloInfonavit
         '
@@ -817,18 +825,6 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
-
-        'Button1
-        '
-        Me.Button1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(727, 68)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(163, 27)
-        Me.Button1.TabIndex = 35
-        Me.Button1.Text = "Infonavit x periodo"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
