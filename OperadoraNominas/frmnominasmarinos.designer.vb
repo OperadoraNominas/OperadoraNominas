@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cmdsoloisr = New System.Windows.Forms.Button()
         Me.cmdCalculoSoloInfonavit = New System.Windows.Forms.Button()
         Me.cmdAcumuladoOperadora = New System.Windows.Forms.Button()
         Me.cmdBuscarOtraNom = New System.Windows.Forms.Button()
@@ -196,6 +197,7 @@ Partial Class frmnominasmarinos
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.cmdsoloisr)
         Me.pnlCatalogo.Controls.Add(Me.cmdCalculoSoloInfonavit)
         Me.pnlCatalogo.Controls.Add(Me.cmdAcumuladoOperadora)
         Me.pnlCatalogo.Controls.Add(Me.cmdBuscarOtraNom)
@@ -233,10 +235,20 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
         '
+        'cmdsoloisr
+        '
+        Me.cmdsoloisr.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdsoloisr.Location = New System.Drawing.Point(653, 68)
+        Me.cmdsoloisr.Name = "cmdsoloisr"
+        Me.cmdsoloisr.Size = New System.Drawing.Size(146, 27)
+        Me.cmdsoloisr.TabIndex = 35
+        Me.cmdsoloisr.Text = "CalcularISR Solo"
+        Me.cmdsoloisr.UseVisualStyleBackColor = True
+        '
         'cmdCalculoSoloInfonavit
         '
         Me.cmdCalculoSoloInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdCalculoSoloInfonavit.Location = New System.Drawing.Point(575, 68)
+        Me.cmdCalculoSoloInfonavit.Location = New System.Drawing.Point(497, 68)
         Me.cmdCalculoSoloInfonavit.Name = "cmdCalculoSoloInfonavit"
         Me.cmdCalculoSoloInfonavit.Size = New System.Drawing.Size(146, 27)
         Me.cmdCalculoSoloInfonavit.TabIndex = 34
@@ -924,5 +936,6 @@ Partial Class frmnominasmarinos
     Friend WithEvents cmdCalculoSoloInfonavit As System.Windows.Forms.Button
     Friend WithEvents NoCalcularCostoSocialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DesactivarNoCalcularCostoSocialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents cmdsoloisr As System.Windows.Forms.Button
 
 End Class
