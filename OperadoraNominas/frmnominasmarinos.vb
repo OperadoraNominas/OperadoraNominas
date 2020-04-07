@@ -11217,13 +11217,13 @@ Public Class frmnominasmarinos
                 hoja.Cell(filaExcel + total + 4, 21).FormulaA1 = "=" & U
                 hoja.Cell(filaExcel + total + 4, 22).FormulaA1 = "=" & V
                 hoja.Cell(filaExcel + total + 4, 23).FormulaA1 = "=" & W
-
-
+                hoja.Cell(filaExcel + total + 4, 24).FormulaA1 = "=" & X2
                 hoja.Cell(filaExcel + total + 4, 25).FormulaA1 = "=" & Y
                 hoja.Cell(filaExcel + total + 4, 26).FormulaA1 = "=" & Z
                 hoja.Cell(filaExcel + total + 4, 27).FormulaA1 = "=" & AA
                 hoja.Cell(filaExcel + total + 4, 28).FormulaA1 = "=" & AB
                 hoja.Cell(filaExcel + total + 4, 29).FormulaA1 = "=" & AC
+                hoja.Cell(filaExcel + total + 4, 30).FormulaA1 = "=" & AD
 
 
 
