@@ -4232,7 +4232,20 @@ Public Class frmnominasmarinos
 
 
                             'pension = Double.Parse(IIf(dtgDatos.Rows(x).Cells(41).Value = "", "0", dtgDatos.Rows(x).Cells(41).Value))
+
+
+
                             Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
+                            If (dtgDatos.Rows(x).Cells(11).FormattedValue = "MOTORISTA" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MARINERO") And dtgDatos.Rows(x).Cells(10).Value >= 55 Then
+                                Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss + subsidioaplicado, 2)
+                                If (((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))) - Operadora) < 0 Then
+                                    isr = isr + (Operadora - ((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))))
+                                    Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
+                                End If
+                            End If
+
+                            
+
                             dtgDatos.Rows(x).Cells(46).Value = Operadora
 
                         End If
@@ -18055,6 +18068,16 @@ Public Class frmnominasmarinos
 
                     'pension = Double.Parse(IIf(dtgDatos.Rows(x).Cells(41).Value = "", "0", dtgDatos.Rows(x).Cells(41).Value))
                     Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
+
+                    If (dtgDatos.Rows(x).Cells(11).FormattedValue = "MOTORISTA" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MARINERO") And dtgDatos.Rows(x).Cells(10).Value >= 55 Then
+                        Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss + subsidioaplicado, 2)
+                        If (((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))) - Operadora) < 0 Then
+                            isr = isr + (Operadora - ((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))))
+                            Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
+                        End If
+                    End If
+
+
                     dtgDatos.Rows(x).Cells(46).Value = Operadora
 
                 End If
