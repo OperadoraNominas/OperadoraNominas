@@ -178,6 +178,7 @@
                 SQL &= "'" & dtpFechaPrestamo.Value.ToShortDateString & "',"
                 SQL &= "'" & dtpInicioPago.Value.ToShortDateString & "',"
                 SQL &= cboEstatus.SelectedIndex & ", "
+                SQL &= gIdEmpleado & ", "
                 SQL &= cbotipoprestamo.SelectedIndex + 1
 
 

@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.cmdsoloisr = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.cmdCalculoSoloInfonavit = New System.Windows.Forms.Button()
         Me.cmdAcumuladoOperadora = New System.Windows.Forms.Button()
@@ -98,7 +99,7 @@ Partial Class frmnominasmarinos
         Me.cmdImssNomina = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-        Me.cmdsoloisr = New System.Windows.Forms.Button()
+        Me.chkPrestamoSA = New System.Windows.Forms.CheckBox()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -198,6 +199,7 @@ Partial Class frmnominasmarinos
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.chkPrestamoSA)
         Me.pnlCatalogo.Controls.Add(Me.cmdsoloisr)
         Me.pnlCatalogo.Controls.Add(Me.Button1)
         Me.pnlCatalogo.Controls.Add(Me.cmdCalculoSoloInfonavit)
@@ -237,12 +239,22 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
         '
+        'cmdsoloisr
+        '
+        Me.cmdsoloisr.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdsoloisr.Location = New System.Drawing.Point(520, 67)
+        Me.cmdsoloisr.Name = "cmdsoloisr"
+        Me.cmdsoloisr.Size = New System.Drawing.Size(163, 27)
+        Me.cmdsoloisr.TabIndex = 36
+        Me.cmdsoloisr.Text = "Calcular solo ISR"
+        Me.cmdsoloisr.UseVisualStyleBackColor = True
+        '
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(727, 68)
+        Me.Button1.Location = New System.Drawing.Point(847, 68)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(163, 27)
+        Me.Button1.Size = New System.Drawing.Size(156, 26)
         Me.Button1.TabIndex = 35
         Me.Button1.Text = "Infonavit x periodo"
         Me.Button1.UseVisualStyleBackColor = True
@@ -250,7 +262,7 @@ Partial Class frmnominasmarinos
         'cmdCalculoSoloInfonavit
         '
         Me.cmdCalculoSoloInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdCalculoSoloInfonavit.Location = New System.Drawing.Point(575, 68)
+        Me.cmdCalculoSoloInfonavit.Location = New System.Drawing.Point(692, 68)
         Me.cmdCalculoSoloInfonavit.Name = "cmdCalculoSoloInfonavit"
         Me.cmdCalculoSoloInfonavit.Size = New System.Drawing.Size(146, 27)
         Me.cmdCalculoSoloInfonavit.TabIndex = 34
@@ -260,7 +272,7 @@ Partial Class frmnominasmarinos
         'cmdAcumuladoOperadora
         '
         Me.cmdAcumuladoOperadora.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdAcumuladoOperadora.Location = New System.Drawing.Point(1129, 68)
+        Me.cmdAcumuladoOperadora.Location = New System.Drawing.Point(1191, 68)
         Me.cmdAcumuladoOperadora.Name = "cmdAcumuladoOperadora"
         Me.cmdAcumuladoOperadora.Size = New System.Drawing.Size(129, 26)
         Me.cmdAcumuladoOperadora.TabIndex = 33
@@ -270,9 +282,9 @@ Partial Class frmnominasmarinos
         'cmdBuscarOtraNom
         '
         Me.cmdBuscarOtraNom.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdBuscarOtraNom.Location = New System.Drawing.Point(943, 66)
+        Me.cmdBuscarOtraNom.Location = New System.Drawing.Point(1012, 68)
         Me.cmdBuscarOtraNom.Name = "cmdBuscarOtraNom"
-        Me.cmdBuscarOtraNom.Size = New System.Drawing.Size(180, 28)
+        Me.cmdBuscarOtraNom.Size = New System.Drawing.Size(173, 26)
         Me.cmdBuscarOtraNom.TabIndex = 32
         Me.cmdBuscarOtraNom.Text = "Buscar en otra nomina"
         Me.cmdBuscarOtraNom.UseVisualStyleBackColor = True
@@ -282,7 +294,7 @@ Partial Class frmnominasmarinos
         Me.chkSoloCostoSocial.AutoSize = True
         Me.chkSoloCostoSocial.BackColor = System.Drawing.Color.Transparent
         Me.chkSoloCostoSocial.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkSoloCostoSocial.Location = New System.Drawing.Point(223, 64)
+        Me.chkSoloCostoSocial.Location = New System.Drawing.Point(382, 69)
         Me.chkSoloCostoSocial.Name = "chkSoloCostoSocial"
         Me.chkSoloCostoSocial.Size = New System.Drawing.Size(128, 22)
         Me.chkSoloCostoSocial.TabIndex = 31
@@ -294,7 +306,7 @@ Partial Class frmnominasmarinos
         Me.chkNofonacot.AutoSize = True
         Me.chkNofonacot.BackColor = System.Drawing.Color.Transparent
         Me.chkNofonacot.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkNofonacot.Location = New System.Drawing.Point(128, 64)
+        Me.chkNofonacot.Location = New System.Drawing.Point(126, 69)
         Me.chkNofonacot.Name = "chkNofonacot"
         Me.chkNofonacot.Size = New System.Drawing.Size(95, 22)
         Me.chkNofonacot.TabIndex = 30
@@ -827,15 +839,17 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
         '
-        'cmdsoloisr
+        'chkPrestamoSA
         '
-        Me.cmdsoloisr.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdsoloisr.Location = New System.Drawing.Point(404, 67)
-        Me.cmdsoloisr.Name = "cmdsoloisr"
-        Me.cmdsoloisr.Size = New System.Drawing.Size(163, 27)
-        Me.cmdsoloisr.TabIndex = 36
-        Me.cmdsoloisr.Text = "Calcular solo ISR"
-        Me.cmdsoloisr.UseVisualStyleBackColor = True
+        Me.chkPrestamoSA.AutoSize = True
+        Me.chkPrestamoSA.BackColor = System.Drawing.Color.Transparent
+        Me.chkPrestamoSA.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkPrestamoSA.Location = New System.Drawing.Point(223, 70)
+        Me.chkPrestamoSA.Name = "chkPrestamoSA"
+        Me.chkPrestamoSA.Size = New System.Drawing.Size(123, 22)
+        Me.chkPrestamoSA.TabIndex = 37
+        Me.chkPrestamoSA.Text = "No CAL PRES SA"
+        Me.chkPrestamoSA.UseVisualStyleBackColor = False
         '
         'frmnominasmarinos
         '
@@ -953,6 +967,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents NoCalcularCostoSocialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DesactivarNoCalcularCostoSocialToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmdsoloisr As System.Windows.Forms.Button
+    Friend WithEvents chkPrestamoSA As System.Windows.Forms.CheckBox
 
 
 End Class
