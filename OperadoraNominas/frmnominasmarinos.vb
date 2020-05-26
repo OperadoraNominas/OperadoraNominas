@@ -2150,9 +2150,68 @@ Public Class frmnominasmarinos
                                     'pnlProgreso.Visible = False
                                     Exit Sub
                                 End If
+<<<<<<< HEAD
                                 ' Else
                                 'MessageBox.Show("Existe valor para prestamo asimilados, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End If
+=======
+                            Else
+                                sql = "select max([iIdPrestamo])as numprestamo from prestamo"
+
+                                Dim rwPrestamoAsiMax As DataRow() = nConsulta(sql)
+                                If rwPrestamoAsiMax Is Nothing = False Then
+                                    Dim numero As Integer = Integer.Parse(rwPrestamoAsiMax(0)("numprestamo")) + 1
+                                    'insertamos el nuevo prestamo
+                                    sql = "EXEC setPrestamoInsertar 0,"
+                                    sql &= "'" & dtgDatos.Rows(x).Cells(47).Value & "',"
+                                    sql &= "'" & dtgDatos.Rows(x).Cells(47).Value & "',"
+                                    sql &= "'" & Date.Now.ToShortDateString & "',"
+                                    sql &= "'" & Date.Now.ToShortDateString & "',1,"
+
+                                    sql &= dtgDatos.Rows(x).Cells(2).Value & ",1 "
+                                    If nExecute(sql) = False Then
+                                        MessageBox.Show("Error al querer insertar el prestamo asimilados", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                        Exit Sub
+                                    End If
+                                    sql = "SELECT * FROM prestamo WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
+
+                                    Dim rwPrestamoAsiEmpleado2 As DataRow() = nConsulta(sql)
+                                    If rwPrestamoAsiEmpleado2 Is Nothing = False Then
+                                        sql = "EXEC setPagoPrestamoInsertar  0"
+                                        'iIdPrestamo
+                                        sql &= "," & rwPrestamoAsiEmpleado2(0)("iIdPrestamo")
+                                        'fk Periodo
+                                        sql &= "," & cboperiodo.SelectedValue
+                                        ' fk Empleado
+                                        sql &= "," & dtgDatos.Rows(x).Cells(2).Value
+                                        'Monto
+                                        sql &= "," & dtgDatos.Rows(x).Cells(47).Value
+                                        'Serie
+                                        sql &= "," & cboserie.SelectedIndex
+                                        'Tipo Nomina
+                                        sql &= "," & cboTipoNomina.SelectedIndex
+                                        'Tipo Pagadora
+                                        sql &= ",501"
+                                        'Fecha Calculo
+                                        sql &= ",'" & Date.Now.ToShortDateString
+                                        'iEstatu
+                                        sql &= "',1"
+                                        'tipo consecutivo
+                                        sql &= "," & consecutivo1
+
+                                        If nExecute(sql) = False Then
+                                            MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                            'pnlProgreso.Visible = False
+                                            Exit Sub
+                                        End If
+                                    End If
+
+
+
+                                End If
+                                'MessageBox.Show("Existe valor para prestamo asimilados, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End If
+>>>>>>> origin/master
 
                         End If
 
@@ -2211,9 +2270,70 @@ Public Class frmnominasmarinos
 
                                 'End If
 
+<<<<<<< HEAD
                                 '  Else
                                 '   MessageBox.Show("Existe valor para prestamo sa, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End If
+=======
+                            Else
+
+                                sql = "select max([iIdPrestamoSA])as numprestamo from prestamoSA"
+
+                                Dim rwPrestamoAsiMax As DataRow() = nConsulta(sql)
+                                If rwPrestamoAsiMax Is Nothing = False Then
+                                    Dim numero As Integer = Integer.Parse(rwPrestamoAsiMax(0)("numprestamo")) + 1
+                                    'insertamos el nuevo prestamo
+                                    sql = "EXEC setPrestamoSAInsertar 0,"
+                                    sql &= "'" & dtgDatos.Rows(x).Cells(42).Value & "',"
+                                    sql &= "'" & dtgDatos.Rows(x).Cells(42).Value & "',"
+                                    sql &= "'" & Date.Now.ToShortDateString & "',"
+                                    sql &= "'" & Date.Now.ToShortDateString & "',1,"
+                                    sql &= dtgDatos.Rows(x).Cells(2).Value & ",1 "
+
+                                    If nExecute(sql) = False Then
+                                        MessageBox.Show("Error al querer insertar el prestamo SA", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                        Exit Sub
+                                    End If
+                                    sql = "SELECT * FROM prestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
+
+                                    Dim rwPrestamoSAEmpleado As DataRow() = nConsulta(sql)
+                                    If rwPrestamoSAEmpleado Is Nothing = False Then
+                                        sql = "EXEC setPagoPrestamoSAInsertar  0"
+                                        'iIdPrestamo
+                                        sql &= "," & rwPrestamoSAEmpleado(0)("iIdPrestamoSA")
+                                        'fk Periodo
+                                        sql &= "," & cboperiodo.SelectedValue
+                                        ' fk Empleado
+                                        sql &= "," & dtgDatos.Rows(x).Cells(2).Value
+                                        'Monto
+                                        sql &= "," & dtgDatos.Rows(x).Cells(42).Value
+                                        'Serie
+                                        sql &= "," & cboserie.SelectedIndex
+                                        'Tipo Nomina
+                                        sql &= "," & cboTipoNomina.SelectedIndex
+                                        'Tipo Pagadora
+                                        sql &= ",501"
+                                        'Fecha Calculo
+                                        sql &= ",'" & Date.Now.ToShortDateString
+                                        'iEstatu
+                                        sql &= "',1"
+                                        'tipo consecutivo
+                                        sql &= "," & consecutivo1
+
+                                        If nExecute(sql) = False Then
+                                            MessageBox.Show("Ocurrio un error insertar pago prestamo ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                            'pnlProgreso.Visible = False
+                                            Exit Sub
+                                        End If
+
+
+                                    End If
+
+                                End If
+
+                                'MessageBox.Show("Existe valor para prestamo sa, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End If
+>>>>>>> origin/master
 
 
 
@@ -2287,9 +2407,10 @@ Public Class frmnominasmarinos
                 If cboTipoNomina.SelectedIndex = 0 Then
 
                     MessageBox.Show("Datos guardados correctamente", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    NominaB()
+
                     Dim resultado As Integer = MessageBox.Show("¿Desea Calcular la nomina descanso?", "Pregunta", MessageBoxButtons.YesNo)
                     If resultado = DialogResult.Yes Then
+                        NominaB()
                         calcular()
                     End If
 
@@ -2391,9 +2512,16 @@ Public Class frmnominasmarinos
                 'FONACOT
                 dtgDatos.Rows(x).Cells(43).Value = "0.00"
                 'PRESTAMO SA
-                dtgDatos.Rows(x).Cells(42).Value = "0.00"
+                If chkPrestamoSA.Checked = False Then
+                    dtgDatos.Rows(x).Cells(42).Value = "0.00"
+                End If
+
                 'Prestamo Personal Asimilado
-                dtgDatos.Rows(x).Cells(47).Value = "0.00"
+                If chkPrestamosAsi.Checked = False Then
+                    dtgDatos.Rows(x).Cells(47).Value = "0.00"
+                End If
+
+
 
             End If
 
@@ -3293,7 +3421,7 @@ Public Class frmnominasmarinos
                         'If dtgDatos.Rows(x).Cells(2).Value = 94 Then
                         '    MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                         'End If
-                        If dtgDatos.Rows(x).Cells(3).Tag = "" Then
+                        If dtgDatos.Rows(x).Cells(3).Tag = "" And chkPrestamoSA.Checked = False Then
 
                             sql = "SELECT  * FROM PrestamoSA WHERE iidPrestamosa =("
                             sql &= "SELECT max(iidPrestamosa) FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1)"
@@ -4065,10 +4193,17 @@ Public Class frmnominasmarinos
                             'AJUSTE INFONAVIT
 
                             'PRESTAMO
+<<<<<<< HEAD
                             ' If dtgDatos.Rows(x).Cells(2).Value = 204 Then
                             'MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             'End If
                             If dtgDatos.Rows(x).Cells(3).Tag = "" Then
+=======
+                            If dtgDatos.Rows(x).Cells(2).Value = 204 Then
+                                MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            End If
+                            If dtgDatos.Rows(x).Cells(3).Tag = "" And chkPrestamoSA.Checked = False Then
+>>>>>>> origin/master
                                 sql = "SELECT  * FROM PrestamoSA WHERE iidPrestamosa =("
                                 sql &= "SELECT max(iidPrestamosa) FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1)"
 
@@ -4236,10 +4371,15 @@ Public Class frmnominasmarinos
 
 
                             Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
-                            If (dtgDatos.Rows(x).Cells(11).FormattedValue = "MOTORISTA" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MARINERO") And dtgDatos.Rows(x).Cells(10).Value >= 55 Then
+                            If (dtgDatos.Rows(x).Cells(11).FormattedValue = "COCINERO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MOTORISTA" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MARINERO") And dtgDatos.Rows(x).Cells(10).Value >= 55 Then
                                 Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss + subsidioaplicado, 2)
+                                'If dtgDatos.Rows(x).Cells(2).Value = "149" Then
+                                '    MessageBox.Show("aqui ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                'End If
                                 If (((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))) - Operadora) < 0 Then
                                     isr = isr + (Operadora - ((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))))
+                                    Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
+                                Else
                                     Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
                                 End If
                             End If
@@ -4260,7 +4400,7 @@ Public Class frmnominasmarinos
 
                     'Prestamo Personal Asimilado
 
-                    If dtgDatos.Rows(x).Cells(2).Tag = "" Then
+                    If dtgDatos.Rows(x).Cells(2).Tag = "" And chkPrestamosAsi.Checked = False Then
                         'sql = "SELECT * FROM prestamo WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1"
                         sql = "SELECT  * FROM prestamo WHERE iidPrestamo =("
                         sql &= "SELECT max(iidPrestamo) FROM Prestamo WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1)"
@@ -4358,7 +4498,7 @@ Public Class frmnominasmarinos
                     DiferenciaInfonavitAsimilados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(49).Value = "", "0", dtgDatos.Rows(x).Cells(49).Value))
                     'Complemento Asimilado
                     ComplementoAsimilados = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot - PrestamoPersonalAsimilados - AdeudoINfonavitAsimilados - DiferenciaInfonavitAsimilados - Operadora, 2)
-                    If ComplementoAsimilados < 0 And subsidioaplicado > 0 And (dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN") Then
+                    If ComplementoAsimilados < 0 And subsidioaplicado >= 0 And (dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN") Then
                         SueldoBaseTMM = (Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value))) - ComplementoAsimilados
                         dtgDatos.Rows(x).Cells(15).Value = SueldoBaseTMM ' / 2
 
@@ -10849,12 +10989,12 @@ Public Class frmnominasmarinos
                             fila.Item("Infonavit_bim_anterior") = ""
                             fila.Item("Ajuste_infonavit") = ""
                             fila.Item("Pension_Alimenticia") = ""
-                            fila.Item("Prestamo") = ""
+                            fila.Item("Prestamo") = Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("AnticipoSA")) / 2
                             fila.Item("Fonacot") = ""
                             fila.Item("Subsidio_Generado") = ""
                             fila.Item("Subsidio_Aplicado") = ""
                             fila.Item("Operadora") = ""
-                            fila.Item("Prestamo_Personal_A") = ""
+                            fila.Item("Prestamo_Personal_A") = Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("Anticipo")) / 2
                             fila.Item("Adeudo_Infonavit_A") = ""
                             fila.Item("Diferencia_Infonavit_A") = ""
                             fila.Item("Asimilados") = ""

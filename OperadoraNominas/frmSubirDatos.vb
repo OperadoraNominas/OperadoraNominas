@@ -321,7 +321,8 @@ Public Class frmSubirDatos
                     dsReporte.Tables("Tabla").Columns.Add("SalarioTMM")
                     dsReporte.Tables("Tabla").Columns.Add("CodigoPuesto")
                     dsReporte.Tables("Tabla").Columns.Add("CodigoBuque")
-
+                    dsReporte.Tables("Tabla").Columns.Add("Anticipo")
+                    dsReporte.Tables("Tabla").Columns.Add("AnticipoSA")
                     dsReporte.Tables("Tabla").Columns.Add("Fechainicio")
                     dsReporte.Tables("Tabla").Columns.Add("Fechafin")
                     Dim mensaje As String
@@ -354,6 +355,8 @@ Public Class frmSubirDatos
                                 fila.Item("Bono") = Trim(producto.SubItems(17).Text)
                                 fila.Item("Refrendo") = Trim(producto.SubItems(17).Text)
                                 fila.Item("SalarioTMM") = Trim(producto.SubItems(17).Text)
+                                fila.Item("Anticipo") = Trim(producto.SubItems(20).Text)
+                                fila.Item("AnticipoSA") = Trim(producto.SubItems(21).Text)
                                 fila.Item("CodigoPuesto") = Trim(producto.SubItems(4).Text)
                                 fila.Item("CodigoBuque") = Trim(producto.SubItems(10).Text)
                                 fila.Item("Fechainicio") = (Date.Parse(Trim(producto.SubItems(7).Text))).ToShortDateString
