@@ -16,7 +16,7 @@ Public Class frmnominasmarinos
     Dim TipoNomina As Boolean
     Dim IDCalculoInfonavit As Integer
     Dim FechaInicioPeriodoGlobal As Date
-    Dim tmp As String
+
 
 
 
@@ -2150,11 +2150,6 @@ Public Class frmnominasmarinos
                                     'pnlProgreso.Visible = False
                                     Exit Sub
                                 End If
-<<<<<<< HEAD
-                                ' Else
-                                'MessageBox.Show("Existe valor para prestamo asimilados, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            End If
-=======
                             Else
                                 sql = "select max([iIdPrestamo])as numprestamo from prestamo"
 
@@ -2211,7 +2206,6 @@ Public Class frmnominasmarinos
                                 End If
                                 'MessageBox.Show("Existe valor para prestamo asimilados, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 End If
->>>>>>> origin/master
 
                         End If
 
@@ -2270,11 +2264,6 @@ Public Class frmnominasmarinos
 
                                 'End If
 
-<<<<<<< HEAD
-                                '  Else
-                                '   MessageBox.Show("Existe valor para prestamo sa, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            End If
-=======
                             Else
 
                                 sql = "select max([iIdPrestamoSA])as numprestamo from prestamoSA"
@@ -2333,7 +2322,6 @@ Public Class frmnominasmarinos
 
                                 'MessageBox.Show("Existe valor para prestamo sa, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 End If
->>>>>>> origin/master
 
 
 
@@ -2930,7 +2918,7 @@ Public Class frmnominasmarinos
                 ElseIf chkCalSoloMarcados.Checked = False Then
                     'si calcular
                 End If
-                tmp = dtgDatos.Rows(x).Cells(2).Value
+
                 If NOCALCULAR Then
                     If dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN" Then
 
@@ -4193,17 +4181,10 @@ Public Class frmnominasmarinos
                             'AJUSTE INFONAVIT
 
                             'PRESTAMO
-<<<<<<< HEAD
-                            ' If dtgDatos.Rows(x).Cells(2).Value = 204 Then
-                            'MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                            'End If
-                            If dtgDatos.Rows(x).Cells(3).Tag = "" Then
-=======
                             If dtgDatos.Rows(x).Cells(2).Value = 204 Then
                                 MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             End If
                             If dtgDatos.Rows(x).Cells(3).Tag = "" And chkPrestamoSA.Checked = False Then
->>>>>>> origin/master
                                 sql = "SELECT  * FROM PrestamoSA WHERE iidPrestamosa =("
                                 sql &= "SELECT max(iidPrestamosa) FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1)"
 
@@ -6267,14 +6248,14 @@ Public Class frmnominasmarinos
                 'TOTAL DEPOSITO
                 dtgDatos.Rows(x).Cells(62).Value = subtotal + iva
 
-                tmp = dtgDatos.Rows(x).Cells(2).Value
+
             Next
 
             pnlProgreso.Visible = False
             pnlCatalogo.Enabled = True
             MessageBox.Show("Datos calculados ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
-            MessageBox.Show("Error en: " + tmp + ex.Message)
+            MessageBox.Show(ex.Message)
             pnlCatalogo.Enabled = True
 
         End Try
@@ -15702,127 +15683,127 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub cmdInfonavitNominaSerie_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim SQL As String
-        Dim filaExcel As Integer = 5
-        Dim contador As Integer
-        Dim dialogo As New SaveFileDialog()
+    'Private Sub cmdInfonavitNominaSerie_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdInfonavitNominaSerie.Click
+    '    Dim SQL As String
+    '    Dim filaExcel As Integer = 5
+    '    Dim contador As Integer
+    '    Dim dialogo As New SaveFileDialog()
 
-        Dim Forma As New frmEstatusPrestamo
+    '    Dim Forma As New frmEstatusPrestamo
 
-        If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
-            SQL = "select iBimestre,iAnio,Calculoinfonavit.fkiIdEmpleadoC,cNombreLargo,Calculoinfonavit.cTipoFactor,Calculoinfonavit.fFactor,Monto,retenido from (calculoinfonavit "
-            SQL &= " inner join empleadosC on calculoinfonavit.fkiIdEmpleadoC=empleadosC.iIdEmpleadoC)"
-            SQL &= " inner join (select fkiIdEmpleadoC, sum (cantidad) as retenido from (DetalleDescInfonavit "
-            SQL &= " inner join empleadosC on DetalleDescInfonavit.fkiIdEmpleadoC=empleadosC.iIdEmpleadoC)"
-            SQL &= " where(Numbimestre =" & Forma.gBimestre & " And anio =" & Forma.gAnio & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iSerie=" & cboserie.SelectedIndex & ")"
-            SQL &= " group by fkiIdEmpleadoC) as detalle on empleadosC.iIdEmpleadoC=detalle.fkiIdEmpleadoC"
-            SQL &= " where(iBimestre = " & Forma.gBimestre & " And iAnio = " & Forma.gAnio & ")"
-            SQL &= " order by cnombreLargo"
+    '    If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+    '        SQL = "select iBimestre,iAnio,Calculoinfonavit.fkiIdEmpleadoC,cNombreLargo,Calculoinfonavit.cTipoFactor,Calculoinfonavit.fFactor,Monto,retenido from (calculoinfonavit "
+    '        SQL &= " inner join empleadosC on calculoinfonavit.fkiIdEmpleadoC=empleadosC.iIdEmpleadoC)"
+    '        SQL &= " inner join (select fkiIdEmpleadoC, sum (cantidad) as retenido from (DetalleDescInfonavit "
+    '        SQL &= " inner join empleadosC on DetalleDescInfonavit.fkiIdEmpleadoC=empleadosC.iIdEmpleadoC)"
+    '        SQL &= " where(Numbimestre =" & Forma.gBimestre & " And anio =" & Forma.gAnio & " and fkiIdPeriodo=" & cboperiodo.SelectedValue & " and iSerie=" & cboserie.SelectedIndex & ")"
+    '        SQL &= " group by fkiIdEmpleadoC) as detalle on empleadosC.iIdEmpleadoC=detalle.fkiIdEmpleadoC"
+    '        SQL &= " where(iBimestre = " & Forma.gBimestre & " And iAnio = " & Forma.gAnio & ")"
+    '        SQL &= " order by cnombreLargo"
 
-            Dim rwFilas As DataRow() = nConsulta(SQL)
+    '        Dim rwFilas As DataRow() = nConsulta(SQL)
 
-            If rwFilas.Length > 0 Then
-                Dim libro As New ClosedXML.Excel.XLWorkbook
-                Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
-                'Dim hoja2 As IXLWorksheet = libro.Worksheets.Add("Resumen pago")
+    '        If rwFilas.Length > 0 Then
+    '            Dim libro As New ClosedXML.Excel.XLWorkbook
+    '            Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
+    '            'Dim hoja2 As IXLWorksheet = libro.Worksheets.Add("Resumen pago")
 
-                hoja.Column("B").Width = 15
-                hoja.Column("C").Width = 15
-                hoja.Column("D").Width = 40
-                hoja.Column("E").Width = 15
-                hoja.Column("F").Width = 15
-                hoja.Column("G").Width = 15
-                hoja.Column("H").Width = 15
-
-
-
-                hoja.Cell(1, 2).Value = "Concentrado Infonavit"
-                hoja.Range(1, 2, 1, 2).Style.Font.SetBold(True)
-                hoja.Cell(2, 2).Value = "Fecha:" & Date.Now.ToShortDateString & " " & Date.Now.ToShortTimeString
-                hoja.Cell(3, 2).Value = "PERIODO: " & cboperiodo.Text
-                hoja.Range(3, 2, 3, 2).Style.Font.SetBold(True)
-
-                'hoja.Cell(3, 2).Value = ":"
-                'hoja.Cell(3, 3).Value = ""
-
-                hoja.Range(4, 2, 4, 15).Style.Font.FontSize = 10
-                hoja.Range(4, 2, 4, 15).Style.Font.SetBold(True)
-                hoja.Range(4, 2, 4, 15).Style.Alignment.WrapText = True
-                hoja.Range(4, 2, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-                hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
-                'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
-                hoja.Range(4, 2, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-                hoja.Range(4, 2, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
-
-                hoja.Range(5, 7, 1000, 8).Style.NumberFormat.NumberFormatId = 4
-
-                'Format = ("$ #,###,##0.00")
-                'hoja.Cell(4, 1).Value = "Num"
-
-                hoja.Cell(4, 2).Value = "Año"
-                hoja.Cell(4, 3).Value = "Bimestre"
-                hoja.Cell(4, 4).Value = "Nombre"
-                hoja.Cell(4, 5).Value = "Tipo Factor"
-                hoja.Cell(4, 6).Value = "Factor"
-                hoja.Cell(4, 7).Value = "Monto Bimestre"
-                hoja.Cell(4, 8).Value = "Retenido"
+    '            hoja.Column("B").Width = 15
+    '            hoja.Column("C").Width = 15
+    '            hoja.Column("D").Width = 40
+    '            hoja.Column("E").Width = 15
+    '            hoja.Column("F").Width = 15
+    '            hoja.Column("G").Width = 15
+    '            hoja.Column("H").Width = 15
 
 
 
-                filaExcel = 5
-                contador = 1
+    '            hoja.Cell(1, 2).Value = "Concentrado Infonavit"
+    '            hoja.Range(1, 2, 1, 2).Style.Font.SetBold(True)
+    '            hoja.Cell(2, 2).Value = "Fecha:" & Date.Now.ToShortDateString & " " & Date.Now.ToShortTimeString
+    '            hoja.Cell(3, 2).Value = "PERIODO: " & cboperiodo.Text
+    '            hoja.Range(3, 2, 3, 2).Style.Font.SetBold(True)
 
-                For x As Integer = 0 To rwFilas.Length - 1
+    '            'hoja.Cell(3, 2).Value = ":"
+    '            'hoja.Cell(3, 3).Value = ""
+
+    '            hoja.Range(4, 2, 4, 15).Style.Font.FontSize = 10
+    '            hoja.Range(4, 2, 4, 15).Style.Font.SetBold(True)
+    '            hoja.Range(4, 2, 4, 15).Style.Alignment.WrapText = True
+    '            hoja.Range(4, 2, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+    '            hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+    '            'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
+    '            hoja.Range(4, 2, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+    '            hoja.Range(4, 2, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
+
+    '            hoja.Range(5, 7, 1000, 8).Style.NumberFormat.NumberFormatId = 4
+
+    '            'Format = ("$ #,###,##0.00")
+    '            'hoja.Cell(4, 1).Value = "Num"
+
+    '            hoja.Cell(4, 2).Value = "Año"
+    '            hoja.Cell(4, 3).Value = "Bimestre"
+    '            hoja.Cell(4, 4).Value = "Nombre"
+    '            hoja.Cell(4, 5).Value = "Tipo Factor"
+    '            hoja.Cell(4, 6).Value = "Factor"
+    '            hoja.Cell(4, 7).Value = "Monto Bimestre"
+    '            hoja.Cell(4, 8).Value = "Retenido"
 
 
+
+    '            filaExcel = 5
+    '            contador = 1
+
+    '            For x As Integer = 0 To rwFilas.Length - 1
 
 
 
 
-                    'Año
-                    hoja.Cell(filaExcel + x, 2).Value = rwFilas(x)("iAnio")
-                    'bimestre
-                    hoja.Cell(filaExcel + x, 3).Value = rwFilas(x)("iBimestre")
-                    'nombre
-                    hoja.Cell(filaExcel + x, 4).Value = rwFilas(x)("cNombreLargo")
-                    'Tipo Factor
-                    hoja.Cell(filaExcel + x, 5).Value = rwFilas(x)("cTipoFactor")
-                    'Factor
-                    hoja.Cell(filaExcel + x, 6).Value = rwFilas(x)("fFactor")
-                    'Monto bimestre
-                    hoja.Cell(filaExcel + x, 7).Value = rwFilas(x)("Monto")
-                    'Retenido
-                    hoja.Cell(filaExcel + x, 8).Value = rwFilas(x)("retenido")
 
 
-                Next
+    '                'Año
+    '                hoja.Cell(filaExcel + x, 2).Value = rwFilas(x)("iAnio")
+    '                'bimestre
+    '                hoja.Cell(filaExcel + x, 3).Value = rwFilas(x)("iBimestre")
+    '                'nombre
+    '                hoja.Cell(filaExcel + x, 4).Value = rwFilas(x)("cNombreLargo")
+    '                'Tipo Factor
+    '                hoja.Cell(filaExcel + x, 5).Value = rwFilas(x)("cTipoFactor")
+    '                'Factor
+    '                hoja.Cell(filaExcel + x, 6).Value = rwFilas(x)("fFactor")
+    '                'Monto bimestre
+    '                hoja.Cell(filaExcel + x, 7).Value = rwFilas(x)("Monto")
+    '                'Retenido
+    '                hoja.Cell(filaExcel + x, 8).Value = rwFilas(x)("retenido")
+
+
+    '            Next
 
 
 
 
-                '##### HOJA NUMERO 2 RESUMEN PAGO
+    '            '##### HOJA NUMERO 2 RESUMEN PAGO
 
 
-                dialogo.DefaultExt = "*.xlsx"
-                dialogo.FileName = "Resumen Infonavit Bimestre " & Forma.gBimestre & " Año " & Forma.gAnio
-                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-                dialogo.ShowDialog()
-                libro.SaveAs(dialogo.FileName)
-                'libro.SaveAs("c:\temp\control.xlsx")
-                'libro.SaveAs(dialogo.FileName)
-                'apExcel.Quit()
-                libro = Nothing
+    '            dialogo.DefaultExt = "*.xlsx"
+    '            dialogo.FileName = "Resumen Infonavit Bimestre " & Forma.gBimestre & " Año " & Forma.gAnio
+    '            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+    '            dialogo.ShowDialog()
+    '            libro.SaveAs(dialogo.FileName)
+    '            'libro.SaveAs("c:\temp\control.xlsx")
+    '            'libro.SaveAs(dialogo.FileName)
+    '            'apExcel.Quit()
+    '            libro = Nothing
 
-                MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '            MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            Else
-                MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            End If
+    '        Else
+    '            MessageBox.Show("No hay datos a mostrar", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+    '        End If
 
 
-        End If
-    End Sub
+    '    End If
+    'End Sub
 
     
     Private Sub btnAsimilados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsimilados.Click
@@ -16053,231 +16034,231 @@ Public Class frmnominasmarinos
     End Sub
 
    
-    Private Sub cmdImssNomina_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim filaExcel As Integer = 5
-        Dim contador As Integer
-        Dim dialogo As New SaveFileDialog()
-        Dim sql As String
+    'Private Sub cmdImssNomina_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdImssNomina.Click
+    '    Dim filaExcel As Integer = 5
+    '    Dim contador As Integer
+    '    Dim dialogo As New SaveFileDialog()
+    '    Dim sql As String
 
-        Try
-            Dim libro As New ClosedXML.Excel.XLWorkbook
-            Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
+    '    Try
+    '        Dim libro As New ClosedXML.Excel.XLWorkbook
+    '        Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
 
-            sql = "EXEC getNominaCargada "
-            sql &= cboperiodo.SelectedValue & " , "
-            sql &= cboserie.SelectedIndex & " , "
-            sql &= cboTipoNomina.SelectedIndex
+    '        sql = "EXEC getNominaCargada "
+    '        sql &= cboperiodo.SelectedValue & " , "
+    '        sql &= cboserie.SelectedIndex & " , "
+    '        sql &= cboTipoNomina.SelectedIndex
 
-            hoja.Column("B").Width = 15
-            hoja.Column("C").Width = 40
-            hoja.Column("D").Width = 10
-            hoja.Column("E").Width = 15
-            hoja.Column("F").Width = 15
-            hoja.Column("G").Width = 30
-            hoja.Column("H").Width = 15
-
-
-            hoja.Cell(1, 2).Value = "Concentrado IMSS activos en nomina"
-            hoja.Range(1, 2, 1, 2).Style.Font.SetBold(True)
-            hoja.Cell(2, 2).Value = "Fecha:" & Date.Now.ToShortDateString & " " & Date.Now.ToShortTimeString
-            hoja.Cell(3, 2).Value = "PERIODO: " & cboperiodo.Text
-            hoja.Range(3, 2, 3, 2).Style.Font.SetBold(True)
-
-            hoja.Range(4, 2, 4, 15).Style.Font.FontSize = 10
-            hoja.Range(4, 2, 4, 15).Style.Font.SetBold(True)
-            hoja.Range(4, 2, 4, 15).Style.Alignment.WrapText = True
-            hoja.Range(4, 2, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-            hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
-            'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
-            hoja.Range(4, 2, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-            hoja.Range(4, 2, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
-
-            hoja.Cell(4, 2).Value = "iIdEmpleado"
-            hoja.Cell(4, 3).Value = "Nombre"
-            hoja.Cell(4, 4).Value = "Clave"
-            hoja.Cell(4, 5).Value = "Fecha"
-            hoja.Cell(4, 6).Value = "Fecha Baja"
-            hoja.Cell(4, 7).Value = "Acuse"
-            hoja.Cell(4, 8).Value = "--"
-
-            Dim rwNominaGuardada As DataRow() = nConsulta(sql)
-            If rwNominaGuardada Is Nothing = False Then
-
-                For x As Integer = 0 To rwNominaGuardada.Count - 1
-
-                    'Trae los registros activos y mas recientes
-                    sql = "EXEC getImssActivos "
-                    sql &= rwNominaGuardada(x)("fkiIdEmpleadoC").ToString
-
-                    Dim rwActivos As DataRow() = nConsulta(sql)
-                    If rwActivos Is Nothing = False Then
-                        hoja.Cell(filaExcel + x, 2).Value = rwActivos(0)("fkiIdEmpleado")
-                        hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(4).Value
-                        hoja.Cell(filaExcel + x, 4).Value = rwActivos(0)("Clave")
-                        hoja.Cell(filaExcel + x, 5).Value = rwActivos(0)("fecha")
-                        hoja.Cell(filaExcel + x, 6).Value = rwActivos(0)("fechabajaimss")
-                        hoja.Cell(filaExcel + x, 7).Value = rwActivos(0)("acuse")
-                    End If
-                Next
-            End If
+    '        hoja.Column("B").Width = 15
+    '        hoja.Column("C").Width = 40
+    '        hoja.Column("D").Width = 10
+    '        hoja.Column("E").Width = 15
+    '        hoja.Column("F").Width = 15
+    '        hoja.Column("G").Width = 30
+    '        hoja.Column("H").Width = 15
 
 
+    '        hoja.Cell(1, 2).Value = "Concentrado IMSS activos en nomina"
+    '        hoja.Range(1, 2, 1, 2).Style.Font.SetBold(True)
+    '        hoja.Cell(2, 2).Value = "Fecha:" & Date.Now.ToShortDateString & " " & Date.Now.ToShortTimeString
+    '        hoja.Cell(3, 2).Value = "PERIODO: " & cboperiodo.Text
+    '        hoja.Range(3, 2, 3, 2).Style.Font.SetBold(True)
 
+    '        hoja.Range(4, 2, 4, 15).Style.Font.FontSize = 10
+    '        hoja.Range(4, 2, 4, 15).Style.Font.SetBold(True)
+    '        hoja.Range(4, 2, 4, 15).Style.Alignment.WrapText = True
+    '        hoja.Range(4, 2, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+    '        hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+    '        'hoja.Range(4, 1, 4, 18).Style.Fill.BackgroundColor = XLColor.BleuDeFrance
+    '        hoja.Range(4, 2, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+    '        hoja.Range(4, 2, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
 
-            dialogo.DefaultExt = "*.xlsx"
-            dialogo.FileName = "RESUMEN IMSS EN NOMINAS "
-            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-            dialogo.ShowDialog()
-            libro.SaveAs(dialogo.FileName)
-            'libro.SaveAs("c:\temp\control.xlsx")
-            'libro.SaveAs(dialogo.FileName)
-            'apExcel.Quit()
-            libro = Nothing
+    '        hoja.Cell(4, 2).Value = "iIdEmpleado"
+    '        hoja.Cell(4, 3).Value = "Nombre"
+    '        hoja.Cell(4, 4).Value = "Clave"
+    '        hoja.Cell(4, 5).Value = "Fecha"
+    '        hoja.Cell(4, 6).Value = "Fecha Baja"
+    '        hoja.Cell(4, 7).Value = "Acuse"
+    '        hoja.Cell(4, 8).Value = "--"
 
-            MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '        Dim rwNominaGuardada As DataRow() = nConsulta(sql)
+    '        If rwNominaGuardada Is Nothing = False Then
 
+    '            For x As Integer = 0 To rwNominaGuardada.Count - 1
 
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End Try
+    '                'Trae los registros activos y mas recientes
+    '                sql = "EXEC getImssActivos "
+    '                sql &= rwNominaGuardada(x)("fkiIdEmpleadoC").ToString
+
+    '                Dim rwActivos As DataRow() = nConsulta(sql)
+    '                If rwActivos Is Nothing = False Then
+    '                    hoja.Cell(filaExcel + x, 2).Value = rwActivos(0)("fkiIdEmpleado")
+    '                    hoja.Cell(filaExcel + x, 3).Value = dtgDatos.Rows(x).Cells(4).Value
+    '                    hoja.Cell(filaExcel + x, 4).Value = rwActivos(0)("Clave")
+    '                    hoja.Cell(filaExcel + x, 5).Value = rwActivos(0)("fecha")
+    '                    hoja.Cell(filaExcel + x, 6).Value = rwActivos(0)("fechabajaimss")
+    '                    hoja.Cell(filaExcel + x, 7).Value = rwActivos(0)("acuse")
+    '                End If
+    '            Next
+    '        End If
 
 
 
-    End Sub
+
+    '        dialogo.DefaultExt = "*.xlsx"
+    '        dialogo.FileName = "RESUMEN IMSS EN NOMINAS "
+    '        dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+    '        dialogo.ShowDialog()
+    '        libro.SaveAs(dialogo.FileName)
+    '        'libro.SaveAs("c:\temp\control.xlsx")
+    '        'libro.SaveAs(dialogo.FileName)
+    '        'apExcel.Quit()
+    '        libro = Nothing
+
+    '        MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+    '    Catch ex As Exception
+    '        MessageBox.Show(ex.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '    End Try
+
+
+
+    'End Sub
 
    
-    Private Sub cmdConcentradoFonacot_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim filaExcel As Integer = 5
-        Dim contador As Integer
-        Dim dialogo As New SaveFileDialog()
-        Dim sql As String
-        Dim serietmp, serie, mes, iejercicio, periodo As String
-        Dim Forma As New frmConcentradoFonacot
+    'Private Sub cmdConcentradoFonacot_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdConcentradoFonacot.Click
+    '    Dim filaExcel As Integer = 5
+    '    Dim contador As Integer
+    '    Dim dialogo As New SaveFileDialog()
+    '    Dim sql As String
+    '    Dim serietmp, serie, mes, iejercicio, periodo As String
+    '    Dim Forma As New frmConcentradoFonacot
 
-        If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+    '    If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
 
-            Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & Forma.cbobimestre.SelectedValue)
-            If rwPeriodo0 Is Nothing = False Then
+    '        Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & Forma.cbobimestre.SelectedValue)
+    '        If rwPeriodo0 Is Nothing = False Then
 
-                mes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
-                iejercicio = rwPeriodo0(0).Item("iEjercicio")
+    '            mes = MonthString(rwPeriodo0(0).Item("iMes")).ToUpper
+    '            iejercicio = rwPeriodo0(0).Item("iEjercicio")
 
-            End If
-            rwPeriodo0 = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' - ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio,iIdPeriodo  from periodos where iIdPeriodo=" & Forma.cbobimestre.SelectedValue)
-            If rwPeriodo0 Is Nothing = False Then
-                periodo = rwPeriodo0(0).Item("dFechainicio")
-            End If
+    '        End If
+    '        rwPeriodo0 = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' - ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio,iIdPeriodo  from periodos where iIdPeriodo=" & Forma.cbobimestre.SelectedValue)
+    '        If rwPeriodo0 Is Nothing = False Then
+    '            periodo = rwPeriodo0(0).Item("dFechainicio")
+    '        End If
 
-            Try
-                Dim libro As New ClosedXML.Excel.XLWorkbook
-                Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
-
-
-
-                hoja.Column("B").Width = 15
-                hoja.Column("C").Width = 15
-                hoja.Column("D").Width = 40
-                hoja.Column("E").Width = 15
-                hoja.Column("F").Width = 15
-                hoja.Column("G").Width = 15
-                hoja.Column("H").Width = 15
-
-
-                hoja.Cell(1, 2).Value = "Concentrado FONACOT mensual"
-                hoja.Range(1, 2, 1, 2).Style.Font.SetBold(True)
-                hoja.Cell(2, 2).Value = "Fecha:" & Date.Now.ToShortDateString & " " & Date.Now.ToShortTimeString
-                hoja.Cell(3, 2).Value = "PERIODO: " & periodo
-                hoja.Range(3, 2, 3, 2).Style.Font.SetBold(True)
-
-                hoja.Range(4, 2, 4, 15).Style.Font.FontSize = 10
-                hoja.Range(4, 2, 4, 15).Style.Font.SetBold(True)
-                hoja.Range(4, 2, 4, 15).Style.Alignment.WrapText = True
-                hoja.Range(4, 2, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
-                hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
-                hoja.Range(4, 6, 50, 6).Style.NumberFormat.NumberFormatId = 4
-                hoja.Range(4, 2, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
-                hoja.Range(4, 2, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
-
-                hoja.Cell(4, 2).Value = "iIdEmpleado"
-                hoja.Cell(4, 3).Value = "Codigo"
-                hoja.Cell(4, 4).Value = "Nombre"
-                hoja.Cell(4, 5).Value = "Nomina"
-                hoja.Cell(4, 6).Value = "Fonacot"
-                hoja.Cell(4, 7).Value = "Mes"
-                hoja.Cell(4, 8).Value = "--"
+    '        Try
+    '            Dim libro As New ClosedXML.Excel.XLWorkbook
+    '            Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
 
 
 
-
-                For y As Integer = 0 To cboserie.Items.Count
-
-                    sql = "EXEC getNominaCargada "
-                    sql &= Forma.cbobimestre.SelectedValue & " , "
-                    sql &= y & " , "
-                    sql &= cboTipoNomina.SelectedIndex
-
-                    Dim rwNominaGuardada As DataRow() = nConsulta(sql)
-                    If rwNominaGuardada Is Nothing = False Then
-                        'Trae los registros activos y mas recientes
-                        sql = "EXEC getFonacotMensual "
-                        sql &= Forma.cbobimestre.SelectedValue & " , "
-                        sql &= y & " , "
-                        sql &= cboTipoNomina.SelectedIndex
-
-                        serietmp = y
-                        Select Case serietmp
-                            Case 0 : serie = "A"
-                            Case 1 : serie = "B"
-                            Case 2 : serie = "C"
-                            Case 3 : serie = "D"
-                            Case 4 : serie = "E"
-
-                        End Select
-                        Dim rwActivos As DataRow() = nConsulta(sql)
-
-                        If rwActivos Is Nothing = False Then
-                            For x As Integer = 0 To rwActivos.Count - 1
+    '            hoja.Column("B").Width = 15
+    '            hoja.Column("C").Width = 15
+    '            hoja.Column("D").Width = 40
+    '            hoja.Column("E").Width = 15
+    '            hoja.Column("F").Width = 15
+    '            hoja.Column("G").Width = 15
+    '            hoja.Column("H").Width = 15
 
 
-                                hoja.Cell(filaExcel + x, 2).Value = rwActivos(x)("fkiIdEmpleadoC")
-                                hoja.Cell(filaExcel + x, 3).Value = rwActivos(x)("cCodigoEmpleado")
-                                hoja.Cell(filaExcel + x, 4).Value = rwActivos(x)("cNombreLargo")
-                                hoja.Cell(filaExcel + x, 5).Value = serie
-                                hoja.Cell(filaExcel + x, 6).Value = CDbl(rwActivos(x)("fFonacot")) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, rwActivos(x)("cCodigoEmpleado"), rwActivos(x)("iDiasTrabajados"), "fFonacot", "", serietmp, Forma.cbobimestre.SelectedValue))
-                                hoja.Cell(filaExcel + x, 7).Value = mes
-                            Next x
-                        End If
+    '            hoja.Cell(1, 2).Value = "Concentrado FONACOT mensual"
+    '            hoja.Range(1, 2, 1, 2).Style.Font.SetBold(True)
+    '            hoja.Cell(2, 2).Value = "Fecha:" & Date.Now.ToShortDateString & " " & Date.Now.ToShortTimeString
+    '            hoja.Cell(3, 2).Value = "PERIODO: " & periodo
+    '            hoja.Range(3, 2, 3, 2).Style.Font.SetBold(True)
 
+    '            hoja.Range(4, 2, 4, 15).Style.Font.FontSize = 10
+    '            hoja.Range(4, 2, 4, 15).Style.Font.SetBold(True)
+    '            hoja.Range(4, 2, 4, 15).Style.Alignment.WrapText = True
+    '            hoja.Range(4, 2, 4, 15).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center)
+    '            hoja.Range(4, 1, 4, 15).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center)
+    '            hoja.Range(4, 6, 50, 6).Style.NumberFormat.NumberFormatId = 4
+    '            hoja.Range(4, 2, 4, 15).Style.Fill.BackgroundColor = XLColor.FromHtml("#538DD5")
+    '            hoja.Range(4, 2, 4, 15).Style.Font.FontColor = XLColor.FromHtml("#FFFFFF")
 
-                    Else
-                        'y = cboserie.Items.Count
-                        Exit For
-                    End If
-                Next y
+    '            hoja.Cell(4, 2).Value = "iIdEmpleado"
+    '            hoja.Cell(4, 3).Value = "Codigo"
+    '            hoja.Cell(4, 4).Value = "Nombre"
+    '            hoja.Cell(4, 5).Value = "Nomina"
+    '            hoja.Cell(4, 6).Value = "Fonacot"
+    '            hoja.Cell(4, 7).Value = "Mes"
+    '            hoja.Cell(4, 8).Value = "--"
 
 
 
 
+    '            For y As Integer = 0 To cboserie.Items.Count
 
-                dialogo.DefaultExt = "*.xlsx"
-                dialogo.FileName = "RESUMEN FONACOT " & mes & " " & iejercicio
-                dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-                dialogo.ShowDialog()
-                libro.SaveAs(dialogo.FileName)
-                'libro.SaveAs("c:\temp\control.xlsx")
-                'libro.SaveAs(dialogo.FileName)
-                'apExcel.Quit()
-                libro = Nothing
+    '                sql = "EXEC getNominaCargada "
+    '                sql &= Forma.cbobimestre.SelectedValue & " , "
+    '                sql &= y & " , "
+    '                sql &= cboTipoNomina.SelectedIndex
 
-                MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '                Dim rwNominaGuardada As DataRow() = nConsulta(sql)
+    '                If rwNominaGuardada Is Nothing = False Then
+    '                    'Trae los registros activos y mas recientes
+    '                    sql = "EXEC getFonacotMensual "
+    '                    sql &= Forma.cbobimestre.SelectedValue & " , "
+    '                    sql &= y & " , "
+    '                    sql &= cboTipoNomina.SelectedIndex
+
+    '                    serietmp = y
+    '                    Select Case serietmp
+    '                        Case 0 : serie = "A"
+    '                        Case 1 : serie = "B"
+    '                        Case 2 : serie = "C"
+    '                        Case 3 : serie = "D"
+    '                        Case 4 : serie = "E"
+
+    '                    End Select
+    '                    Dim rwActivos As DataRow() = nConsulta(sql)
+
+    '                    If rwActivos Is Nothing = False Then
+    '                        For x As Integer = 0 To rwActivos.Count - 1
 
 
-            Catch ex As Exception
-                MessageBox.Show(ex.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End Try
-        End If
+    '                            hoja.Cell(filaExcel + x, 2).Value = rwActivos(x)("fkiIdEmpleadoC")
+    '                            hoja.Cell(filaExcel + x, 3).Value = rwActivos(x)("cCodigoEmpleado")
+    '                            hoja.Cell(filaExcel + x, 4).Value = rwActivos(x)("cNombreLargo")
+    '                            hoja.Cell(filaExcel + x, 5).Value = serie
+    '                            hoja.Cell(filaExcel + x, 6).Value = CDbl(rwActivos(x)("fFonacot")) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, rwActivos(x)("cCodigoEmpleado"), rwActivos(x)("iDiasTrabajados"), "fFonacot", "", serietmp, Forma.cbobimestre.SelectedValue))
+    '                            hoja.Cell(filaExcel + x, 7).Value = mes
+    '                        Next x
+    '                    End If
 
-    End Sub
+
+    '                Else
+    '                    'y = cboserie.Items.Count
+    '                    Exit For
+    '                End If
+    '            Next y
+
+
+
+
+
+    '            dialogo.DefaultExt = "*.xlsx"
+    '            dialogo.FileName = "RESUMEN FONACOT " & mes & " " & iejercicio
+    '            dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+    '            dialogo.ShowDialog()
+    '            libro.SaveAs(dialogo.FileName)
+    '            'libro.SaveAs("c:\temp\control.xlsx")
+    '            'libro.SaveAs(dialogo.FileName)
+    '            'apExcel.Quit()
+    '            libro = Nothing
+
+    '            MessageBox.Show("Archivo generado", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+    '        Catch ex As Exception
+    '            MessageBox.Show(ex.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '        End Try
+    '    End If
+
+    'End Sub
 
     
     Private Sub tsbbuscar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbbuscar.Click
@@ -18306,21 +18287,4 @@ Public Class frmnominasmarinos
 
     End Sub
 
-
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        Try
-            Dim Forma As New frmNominaFinal
-            Dim ids As String()
-            Dim sql As String
-            Dim cadenaempleados As String
-            If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
-
-
-            End If
-
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-        End Try
-
-    End Sub
 End Class
