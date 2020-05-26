@@ -145,6 +145,14 @@ Public Class frmPrincipal
                     Catch ex As Exception
 
                     End Try
+                Case "Subir Nomina"
+                    Try
+                        Dim Forma As New frmNominaFinal
+                        Forma.ShowDialog()
+
+                    Catch ex As Exception
+
+                    End Try
             End Select
 
         Catch ex As Exception

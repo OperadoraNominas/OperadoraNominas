@@ -391,7 +391,4 @@ Public Class frmSubirDatos
         End Try
     End Sub
 
-    Private Sub frmSubirDatos_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-
-    End Sub
 End Class

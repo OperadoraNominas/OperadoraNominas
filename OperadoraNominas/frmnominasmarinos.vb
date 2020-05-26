@@ -16,7 +16,7 @@ Public Class frmnominasmarinos
     Dim TipoNomina As Boolean
     Dim IDCalculoInfonavit As Integer
     Dim FechaInicioPeriodoGlobal As Date
-
+    Dim tmp As String
 
 
 
@@ -2150,8 +2150,8 @@ Public Class frmnominasmarinos
                                     'pnlProgreso.Visible = False
                                     Exit Sub
                                 End If
-                            Else
-                                MessageBox.Show("Existe valor para prestamo asimilados, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                ' Else
+                                'MessageBox.Show("Existe valor para prestamo asimilados, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End If
 
                         End If
@@ -2211,8 +2211,8 @@ Public Class frmnominasmarinos
 
                                 'End If
 
-                            Else
-                                MessageBox.Show("Existe valor para prestamo sa, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                '  Else
+                                '   MessageBox.Show("Existe valor para prestamo sa, pero no esta el prestamo dado de alta, favor de verificar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End If
 
 
@@ -2802,7 +2802,7 @@ Public Class frmnominasmarinos
                 ElseIf chkCalSoloMarcados.Checked = False Then
                     'si calcular
                 End If
-
+                tmp = dtgDatos.Rows(x).Cells(2).Value
                 If NOCALCULAR Then
                     If dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN" Then
 
@@ -4065,9 +4065,9 @@ Public Class frmnominasmarinos
                             'AJUSTE INFONAVIT
 
                             'PRESTAMO
-                            If dtgDatos.Rows(x).Cells(2).Value = 204 Then
-                                MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                            End If
+                            ' If dtgDatos.Rows(x).Cells(2).Value = 204 Then
+                            'MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            'End If
                             If dtgDatos.Rows(x).Cells(3).Tag = "" Then
                                 sql = "SELECT  * FROM PrestamoSA WHERE iidPrestamosa =("
                                 sql &= "SELECT max(iidPrestamosa) FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1)"
@@ -4244,7 +4244,7 @@ Public Class frmnominasmarinos
                                 End If
                             End If
 
-                            
+
 
                             dtgDatos.Rows(x).Cells(46).Value = Operadora
 
@@ -6127,14 +6127,14 @@ Public Class frmnominasmarinos
                 'TOTAL DEPOSITO
                 dtgDatos.Rows(x).Cells(62).Value = subtotal + iva
 
-
+                tmp = dtgDatos.Rows(x).Cells(2).Value
             Next
 
             pnlProgreso.Visible = False
             pnlCatalogo.Enabled = True
             MessageBox.Show("Datos calculados ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            MessageBox.Show("Error en: " + tmp + ex.Message)
             pnlCatalogo.Enabled = True
 
         End Try
@@ -15562,7 +15562,7 @@ Public Class frmnominasmarinos
         End Try
     End Sub
 
-    Private Sub cmdInfonavitNominaSerie_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdInfonavitNominaSerie.Click
+    Private Sub cmdInfonavitNominaSerie_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim SQL As String
         Dim filaExcel As Integer = 5
         Dim contador As Integer
@@ -15913,12 +15913,12 @@ Public Class frmnominasmarinos
     End Sub
 
    
-    Private Sub cmdImssNomina_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdImssNomina.Click
+    Private Sub cmdImssNomina_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim filaExcel As Integer = 5
         Dim contador As Integer
         Dim dialogo As New SaveFileDialog()
         Dim sql As String
-        
+
         Try
             Dim libro As New ClosedXML.Excel.XLWorkbook
             Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
@@ -15962,7 +15962,7 @@ Public Class frmnominasmarinos
 
             Dim rwNominaGuardada As DataRow() = nConsulta(sql)
             If rwNominaGuardada Is Nothing = False Then
-              
+
                 For x As Integer = 0 To rwNominaGuardada.Count - 1
 
                     'Trae los registros activos y mas recientes
@@ -16000,13 +16000,13 @@ Public Class frmnominasmarinos
         Catch ex As Exception
             MessageBox.Show(ex.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End Try
-        
+
 
 
     End Sub
 
    
-    Private Sub cmdConcentradoFonacot_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdConcentradoFonacot.Click
+    Private Sub cmdConcentradoFonacot_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim filaExcel As Integer = 5
         Dim contador As Integer
         Dim dialogo As New SaveFileDialog()
@@ -16032,7 +16032,7 @@ Public Class frmnominasmarinos
                 Dim libro As New ClosedXML.Excel.XLWorkbook
                 Dim hoja As IXLWorksheet = libro.Worksheets.Add("Nomina")
 
-               
+
 
                 hoja.Column("B").Width = 15
                 hoja.Column("C").Width = 15
@@ -16066,7 +16066,7 @@ Public Class frmnominasmarinos
                 hoja.Cell(4, 7).Value = "Mes"
                 hoja.Cell(4, 8).Value = "--"
 
-               
+
 
 
                 For y As Integer = 0 To cboserie.Items.Count
@@ -18166,4 +18166,21 @@ Public Class frmnominasmarinos
 
     End Sub
 
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        Try
+            Dim Forma As New frmNominaFinal
+            Dim ids As String()
+            Dim sql As String
+            Dim cadenaempleados As String
+            If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+
+
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End Try
+
+    End Sub
 End Class
