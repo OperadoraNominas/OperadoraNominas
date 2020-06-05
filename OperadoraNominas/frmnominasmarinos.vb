@@ -19,7 +19,6 @@ Public Class frmnominasmarinos
 
 
 
-
     Private Sub dvgCombo_SelectedIndexChanged(sender As Object, e As EventArgs)
         Try
             '
@@ -78,7 +77,7 @@ Public Class frmnominasmarinos
     Public Sub New()
         InitializeComponent()
     End Sub
-
+   
     Private Sub frmcontpaqnominas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             Dim sql As String
@@ -98,7 +97,7 @@ Public Class frmnominasmarinos
 
             campoordenamiento = "Nomina.Buque,cNombreLargo"
             TipoNomina = False
-
+            Me.KeyPreview = True
 
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -18287,4 +18286,21 @@ Public Class frmnominasmarinos
 
     End Sub
 
+   
+    'Private Sub frmnominasmarinos_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+    '    Try
+
+    '        If e.KeyData = Keys.Control + Keys.B Then
+
+    '            ' Aquí introducimos el código que queremos que se ejecute al pulsar la combinación de teclas
+    '            tsbbuscar_Click(sender, e)
+
+    '        End If
+
+    '    Catch ex As Exception
+
+
+
+    '    End Try
+    'End Sub
 End Class
