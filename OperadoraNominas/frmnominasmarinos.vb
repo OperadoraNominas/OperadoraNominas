@@ -4358,7 +4358,9 @@ Public Class frmnominasmarinos
                                 '    MessageBox.Show("aqui ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                                 'End If
                                 If (((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))) - Operadora) < 0 Then
+
                                     isr = isr + (Operadora - ((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))))
+                                    dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse(isr), 2)
                                     Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
                                 Else
                                     Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
