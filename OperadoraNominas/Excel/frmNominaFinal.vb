@@ -17,13 +17,22 @@ Public Class frmNominaFinal
     Private Sub frmNominaFinal_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         'MostrarEmpresasC()
         Dim moment As Date = Date.Now()
-
-
+        cargarperiodos()
 
     End Sub
 
 
+    Private Sub cargarperiodos()
+        'Verificar si se tienen permisos
+        Dim sql As String
+        Try
+            sql = "Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' - ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio,iIdPeriodo  from periodos where iEstatus=1 order by iEjercicio,iNumeroPeriodo"
+            nCargaCBO(cboperiodo, sql, "dFechainicio", "iIdPeriodo")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
 
+    End Sub
 
     Private Sub tsbNuevo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles tsbNuevo.Click
         tsbNuevo.Enabled = False
@@ -89,21 +98,21 @@ Public Class frmNominaFinal
                     Hoja = book.Worksheet(sheetIndex).Name
                     Dim sheet As IXLWorksheet = book.Worksheet(sheetIndex)
 
-                    Dim colIni As Integer = sheet.FirstColumnUsed().ColumnNumber()
+                    Dim colIni As Integer = sheet.FirstColumnUsed().ColumnNumber() - 1
                     Dim colFin As Integer = sheet.LastColumnUsed().ColumnNumber()
                     Dim Columna As String
-                    Dim numerocolumna As Integer = 1
+                    Dim numerocolumna As Integer = 0
 
 
-                    ' lsvLista.Columns.Add("#")
+                    lsvLista.Columns.Add("#")
                     For c As Integer = colIni To colFin
 
-                        lsvLista.Columns.Add("No_T")
+                        lsvLista.Columns.Add("CODIGO")
                         lsvLista.Columns.Add("NOMBRE")
-                        lsvLista.Columns.Add("STATUS")
+                        lsvLista.Columns.Add("ISTATUS")
                         lsvLista.Columns.Add("RFC")
                         lsvLista.Columns.Add("CURP")
-                        lsvLista.Columns.Add("IMSS")
+                        lsvLista.Columns.Add("NSS")
                         lsvLista.Columns.Add("FECHA_NAC")
                         lsvLista.Columns.Add("EDAD")
                         lsvLista.Columns.Add("PUESTO")
@@ -115,45 +124,43 @@ Public Class frmNominaFinal
                         lsvLista.Columns.Add("DIAS_TRABAJADOS")
                         lsvLista.Columns.Add("TIPO_INCAPACIDAD")
                         lsvLista.Columns.Add("NUMERO_DIAS")
-                        lsvLista.Columns.Add("SUELDO BASE")
-                        lsvLista.Columns.Add("TIEMPO EXTRA FIJO GRAVADO")
-                        lsvLista.Columns.Add("TIEMPO EXTRA FIJO EXENTO")
-                        lsvLista.Columns.Add("TIEMPO EXTRA OCASIONAL")
-                        lsvLista.Columns.Add("DESC. SEM OBLIGATORIO")
-                        lsvLista.Columns.Add("VACACIONES PROPORCIONALES")
-                        lsvLista.Columns.Add("AGUINALDO GRAVADO")
-                        lsvLista.Columns.Add("AGUINALDO EXENTO")
-                        lsvLista.Columns.Add("TOTAL AGUINALDO")
-                        lsvLista.Columns.Add("P. VAC GRAVADO")
-                        lsvLista.Columns.Add("P.VAC EXENTO")
-                        lsvLista.Columns.Add("TOTAL P .VAC")
-                        lsvLista.Columns.Add("P. ANTIGÜEDAD GRAVADO")
-                        lsvLista.Columns.Add("P.ANTIGÜEDAD EXENTO")
-                        lsvLista.Columns.Add("P. ANTIGÜEDAD")
-                        lsvLista.Columns.Add("TOTAL PERCEPCIONES")
-                        lsvLista.Columns.Add("TOTAL PERCEPCIONES P/ISR")
+                        lsvLista.Columns.Add("SUELDO_BASE")
+                        lsvLista.Columns.Add("TIEMPO_EXTRA_FIJO_GRAVADO")
+                        lsvLista.Columns.Add("TIEMPO_EXTRA_FIJO_EXENTO")
+                        lsvLista.Columns.Add("TIEMPO_EXTRA_OCASIONAL")
+                        lsvLista.Columns.Add("DESC_SEM_OBLIGATORIO")
+                        lsvLista.Columns.Add("VACACIONES_PROPORCIONALES")
+                        lsvLista.Columns.Add("AGUINALDO_GRAVADO")
+                        lsvLista.Columns.Add("AGUINALDO_EXENTO")
+                        lsvLista.Columns.Add("TOTAL_AGUINALDO")
+                        lsvLista.Columns.Add("P_VAC_GRAVADO")
+                        lsvLista.Columns.Add("P_VAC_EXENTO")
+                        lsvLista.Columns.Add("TOTAL_P_VAC")
+                        lsvLista.Columns.Add("TOTAL_PERCEPCIONES")
+                        lsvLista.Columns.Add("TOTAL_PERCEPCIONES_P_ISR")
                         lsvLista.Columns.Add("INCAPACIDAD")
                         lsvLista.Columns.Add("ISR")
                         lsvLista.Columns.Add("IMSS")
                         lsvLista.Columns.Add("INFONAVIT")
-                        lsvLista.Columns.Add("INFONAVIT BIMESTRE ATERIOR")
-                        lsvLista.Columns.Add("AJUSTE INFONAVIT")
-                        lsvLista.Columns.Add("PENSION ALIMENTICIA")
+                        lsvLista.Columns.Add("INFONAVIT_ANT")
+                        lsvLista.Columns.Add("INFONAVIT_BIM_ANT")
+                        lsvLista.Columns.Add("PENSION_ALIMENTICIA")
                         lsvLista.Columns.Add("SUBSIDIO")
                         lsvLista.Columns.Add("PRESTAMO")
                         lsvLista.Columns.Add("FONACOT")
-                        lsvLista.Columns.Add("NETO PAGAR")
-                        lsvLista.Columns.Add("IMSS")
-                        lsvLista.Columns.Add("RCV")
-                        lsvLista.Columns.Add("INFONAVIT")
-                        lsvLista.Columns.Add("3 % S/NÓM")
-                        lsvLista.Columns.Add("TOTAL")
-                        lsvLista.Columns.Add("COSTO SOCIAL REAL")
-                        lsvLista.Columns.Add("Prestamo Personal Asimilado")
+                        lsvLista.Columns.Add("NETO_PAGAR")
+                        lsvLista.Columns.Add("IMSS_CS")
+                        lsvLista.Columns.Add("RCV_CS")
+                        lsvLista.Columns.Add("INFONAVIT_CS")
+                        lsvLista.Columns.Add("ISNOM_CS")
+                        lsvLista.Columns.Add("TOTAL_CS")
+                        lsvLista.Columns.Add("COSTO_SOCIAL")
+                        lsvLista.Columns.Add("Prestamo_Personal_Asimilado")
                         lsvLista.Columns.Add("Adeudo_Infonavit_Asimilado")
-                        lsvLista.Columns.Add("Difencia infonavit Asimilado")
+                        lsvLista.Columns.Add("Difencia_infonavit_Asimilado")
+                        lsvLista.Columns.Add("ASIMILADOS")
 
-                        lsvLista.Columns.Add("ASIMILADOS ")
+
 
 
                         numerocolumna = numerocolumna + 1
@@ -204,7 +211,7 @@ Public Class frmNominaFinal
 
 
                             Catch ex As Exception
-
+                                MessageBox.Show("DENTRO DEL FOR " & f & "-" & c & ex.Message.ToString)
                             End Try
 
                         Next
@@ -242,7 +249,7 @@ Public Class frmNominaFinal
 
         Catch ex As Exception
             tsbCancelar_Click(sender, e)
-            tsbImportar.Enabled = False
+            'tsbImportar.Enabled = False
             MessageBox.Show(ex.Message.ToString)
 
 
@@ -368,18 +375,63 @@ Public Class frmNominaFinal
 
 
                     dsReporte.Tables.Add("Tabla")
-                    dsReporte.Tables("Tabla").Columns.Add("Id_empleado")
-                    dsReporte.Tables("Tabla").Columns.Add("CodigoEmpleado")
-                    dsReporte.Tables("Tabla").Columns.Add("dias")
-                    dsReporte.Tables("Tabla").Columns.Add("Salario")
-                    dsReporte.Tables("Tabla").Columns.Add("Bono")
-                    dsReporte.Tables("Tabla").Columns.Add("Refrendo")
-                    dsReporte.Tables("Tabla").Columns.Add("SalarioTMM")
-                    dsReporte.Tables("Tabla").Columns.Add("CodigoPuesto")
-                    dsReporte.Tables("Tabla").Columns.Add("CodigoBuque")
+                    'dsReporte.Tables("Tabla").Columns.Add("iIdNominaFinal")
+                    dsReporte.Tables("Tabla").Columns.Add("CODIGO")
+                    dsReporte.Tables("Tabla").Columns.Add("NOMBRE")
+                    dsReporte.Tables("Tabla").Columns.Add("ISTATUS")
+                    dsReporte.Tables("Tabla").Columns.Add("RFC")
+                    dsReporte.Tables("Tabla").Columns.Add("CURP")
+                    dsReporte.Tables("Tabla").Columns.Add("NSS")
+                    dsReporte.Tables("Tabla").Columns.Add("FECHA_NAC")
+                    dsReporte.Tables("Tabla").Columns.Add("EDAD")
+                    dsReporte.Tables("Tabla").Columns.Add("PUESTO")
+                    dsReporte.Tables("Tabla").Columns.Add("BUQUE")
+                    dsReporte.Tables("Tabla").Columns.Add("TIPO_INFONAVIT")
+                    dsReporte.Tables("Tabla").Columns.Add("VALOR_INFONAVIT")
+                    dsReporte.Tables("Tabla").Columns.Add("SALARIO_DIARIO")
+                    dsReporte.Tables("Tabla").Columns.Add("SDI")
+                    dsReporte.Tables("Tabla").Columns.Add("DIAS_TRABAJADOS")
+                    dsReporte.Tables("Tabla").Columns.Add("TIPO_INCAPACIDAD")
+                    dsReporte.Tables("Tabla").Columns.Add("NUMERO_DIAS")
+                    dsReporte.Tables("Tabla").Columns.Add("SUELDO_BASE")
+                    dsReporte.Tables("Tabla").Columns.Add("TIEMPO_EXTRA_FIJO_GRAVADO")
+                    dsReporte.Tables("Tabla").Columns.Add("TIEMPO_EXTRA_FIJO_EXENTO")
+                    dsReporte.Tables("Tabla").Columns.Add("TIEMPO_EXTRA_OCASIONAL")
+                    dsReporte.Tables("Tabla").Columns.Add("DESC_SEM_OBLIGATORIO")
+                    dsReporte.Tables("Tabla").Columns.Add("VACACIONES_PROPORCIONALES")
+                    dsReporte.Tables("Tabla").Columns.Add("AGUINALDO_GRAVADO")
+                    dsReporte.Tables("Tabla").Columns.Add("AGUINALDO_EXENTO")
+                    dsReporte.Tables("Tabla").Columns.Add("TOTAL_AGUINALDO")
+                    dsReporte.Tables("Tabla").Columns.Add("P_VAC_GRAVADO")
+                    dsReporte.Tables("Tabla").Columns.Add("P_VAC_EXENTO")
+                    dsReporte.Tables("Tabla").Columns.Add("TOTAL_P_VAC")
+                    dsReporte.Tables("Tabla").Columns.Add("TOTAL_PERCEPCIONES")
+                    dsReporte.Tables("Tabla").Columns.Add("TOTAL_PERCEPCIONES_P_ISR")
+                    dsReporte.Tables("Tabla").Columns.Add("INCAPACIDAD")
+                    dsReporte.Tables("Tabla").Columns.Add("ISR")
+                    dsReporte.Tables("Tabla").Columns.Add("IMSS")
+                    dsReporte.Tables("Tabla").Columns.Add("INFONAVIT")
+                    dsReporte.Tables("Tabla").Columns.Add("INFONAVIT_ANT")
+                    dsReporte.Tables("Tabla").Columns.Add("INFONAVIT_BIM_ANT")
+                    dsReporte.Tables("Tabla").Columns.Add("PENSION_ALIMENTICIA")
+                    dsReporte.Tables("Tabla").Columns.Add("SUBSIDIO")
+                    dsReporte.Tables("Tabla").Columns.Add("PRESTAMO")
+                    dsReporte.Tables("Tabla").Columns.Add("FONACOT")
+                    dsReporte.Tables("Tabla").Columns.Add("NETO_PAGAR")
+                    dsReporte.Tables("Tabla").Columns.Add("IMSS_CS")
+                    dsReporte.Tables("Tabla").Columns.Add("RCV_CS")
+                    dsReporte.Tables("Tabla").Columns.Add("INFONAVIT_CS")
+                    dsReporte.Tables("Tabla").Columns.Add("ISNOM_CS")
+                    dsReporte.Tables("Tabla").Columns.Add("TOTAL_CS")
+                    dsReporte.Tables("Tabla").Columns.Add("COSTO_SOCIAL")
+                    dsReporte.Tables("Tabla").Columns.Add("Prestamo_Personal_Asimilado")
+                    dsReporte.Tables("Tabla").Columns.Add("Adeudo_Infonavit_Asimilado")
+                    dsReporte.Tables("Tabla").Columns.Add("Difencia_infonavit_Asimilado")
+                    dsReporte.Tables("Tabla").Columns.Add("ASIMILADOS")
+                    dsReporte.Tables("Tabla").Columns.Add("iTipoNomina")
+                    dsReporte.Tables("Tabla").Columns.Add("iSerie")
+                    dsReporte.Tables("Tabla").Columns.Add("fKiIdPeriodo")
 
-                    dsReporte.Tables("Tabla").Columns.Add("Fechainicio")
-                    dsReporte.Tables("Tabla").Columns.Add("Fechafin")
                     Dim mensaje As String
 
                     pnlProgreso.Visible = True
@@ -395,27 +447,76 @@ Public Class frmNominaFinal
                     pgbProgreso.Maximum = lsvLista.CheckedItems.Count
 
                     For Each producto As ListViewItem In lsvLista.CheckedItems
-                        SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(1).Text).Substring(2, 4)
+                        SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(1).Text)
                         Dim rwFilas As DataRow() = nConsulta(SQL)
 
                         If rwFilas Is Nothing = False Then
                             If rwFilas.Length = 1 Then
                                 producto.BackColor = Color.Green
-                                Dim fila As DataRow = dsReporte.Tables("Tabla").NewRow
+              
+                                SQL = "EXEC setNominaInsertar 0"
+                                SQL &= ",'" & producto.SubItems(1).Text & "'"
+                                SQL &= ",'" & producto.SubItems(2).Text & "'"
+                                SQL &= ",'" & producto.SubItems(3).Text & "'"
+                                SQL &= ",'" & producto.SubItems(4).Text & "'"
+                                SQL &= ",'" & producto.SubItems(5).Text & "'"
+                                SQL &= ",'" & producto.SubItems(6).Text & "'"
+                                SQL &= ",'" & producto.SubItems(7).Text & "'"
+                                SQL &= ",'" & producto.SubItems(8).Text & "'"
+                                SQL &= ",'" & producto.SubItems(9).Text & "'"
+                                SQL &= ",'" & producto.SubItems(10).Text & "'"
+                                SQL &= ",'" & producto.SubItems(11).Text & "'"
+                                SQL &= ",'" & producto.SubItems(12).Text & "'"
+                                SQL &= "," & producto.SubItems(13).Text
+                                SQL &= "," & producto.SubItems(14).Text
+                                SQL &= ",'" & producto.SubItems(15).Text & "'"
+                                SQL &= ",'" & producto.SubItems(16).Text & "'"
+                                SQL &= "," & producto.SubItems(17).Text
+                                SQL &= "," & producto.SubItems(18).Text
+                                SQL &= "," & producto.SubItems(19).Text
+                                SQL &= "," & producto.SubItems(20).Text
+                                SQL &= "," & producto.SubItems(21).Text
+                                SQL &= "," & producto.SubItems(22).Text
+                                SQL &= "," & producto.SubItems(23).Text
+                                SQL &= "," & producto.SubItems(24).Text
+                                SQL &= "," & producto.SubItems(25).Text
+                                SQL &= "," & producto.SubItems(26).Text
+                                SQL &= "," & producto.SubItems(27).Text
+                                SQL &= "," & producto.SubItems(28).Text
+                                SQL &= "," & producto.SubItems(29).Text
+                                SQL &= "," & producto.SubItems(30).Text
+                                SQL &= "," & producto.SubItems(31).Text
+                                SQL &= "," & producto.SubItems(32).Text
+                                SQL &= "," & producto.SubItems(33).Text
+                                SQL &= "," & producto.SubItems(34).Text
+                                SQL &= "," & producto.SubItems(35).Text
+                                SQL &= "," & producto.SubItems(36).Text
+                                SQL &= "," & producto.SubItems(37).Text
+                                SQL &= "," & producto.SubItems(38).Text
+                                SQL &= "," & producto.SubItems(39).Text
+                                SQL &= "," & producto.SubItems(40).Text
+                                SQL &= "," & producto.SubItems(41).Text
+                                SQL &= "," & producto.SubItems(42).Text
+                                SQL &= "," & producto.SubItems(43).Text
+                                SQL &= "," & producto.SubItems(44).Text
+                                SQL &= "," & producto.SubItems(45).Text
+                                SQL &= "," & producto.SubItems(46).Text
+                                SQL &= "," & producto.SubItems(47).Text
+                                SQL &= "," & producto.SubItems(48).Text
+                                SQL &= "," & producto.SubItems(49).Text
+                                SQL &= "," & producto.SubItems(50).Text
+                                SQL &= "," & producto.SubItems(51).Text
+                                SQL &= "," & producto.SubItems(52).Text
+                                SQL &= "," & cboTipoNomina.SelectedIndex
+                                SQL &= "," & cboserie.SelectedIndex
+                                SQL &= "," & cboperiodo.SelectedValue
 
-                                fila.Item("Id_empleado") = rwFilas(0)("iIdEmpleadoC")
-                                fila.Item("CodigoEmpleado") = Trim(producto.SubItems(1).Text).Substring(2, 4)
-                                fila.Item("dias") = Trim(producto.SubItems(9).Text)
-                                fila.Item("Salario") = Trim(producto.SubItems(17).Text)
-                                fila.Item("Bono") = Trim(producto.SubItems(17).Text)
-                                fila.Item("Refrendo") = Trim(producto.SubItems(17).Text)
-                                fila.Item("SalarioTMM") = Trim(producto.SubItems(17).Text)
-                                fila.Item("CodigoPuesto") = Trim(producto.SubItems(4).Text)
-                                fila.Item("CodigoBuque") = Trim(producto.SubItems(10).Text)
-                                fila.Item("Fechainicio") = (Date.Parse(Trim(producto.SubItems(7).Text))).ToShortDateString
-                                fila.Item("Fechafin") = (Date.Parse(Trim(producto.SubItems(8).Text))).ToShortDateString
-                                dsReporte.Tables("Tabla").Rows.Add(fila)
-
+                            End If
+                            If nExecute(SQL) = False Then
+                                MessageBox.Show("Ocurrio un error " & producto.SubItems(2).Text, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                pnlProgreso.Visible = False
+                                Me.Close()
+                                Exit Sub
                             End If
 
                         End If
@@ -439,6 +540,7 @@ Public Class frmNominaFinal
                 Else
 
                     MessageBox.Show("Por favor seleccione al menos una registro para importar.", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    Me.Close()
                 End If
                 pnlCatalogo.Enabled = True
             End If

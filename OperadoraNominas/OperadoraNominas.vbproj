@@ -103,10 +103,10 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmNominaFinal.designer.vb">
+    <Compile Include="Excel\frmNominaFinal.designer.vb">
       <DependentUpon>frmNominaFinal.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmNominaFinal.vb">
+    <Compile Include="Excel\frmNominaFinal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmBuscar.Designer.vb">
@@ -305,7 +305,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmNominaFinal.resx">
+    <EmbeddedResource Include="Excel\frmNominaFinal.resx">
       <DependentUpon>frmNominaFinal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBuscar.resx">
@@ -454,9 +454,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Excel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

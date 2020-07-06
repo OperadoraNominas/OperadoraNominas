@@ -4180,9 +4180,9 @@ Public Class frmnominasmarinos
                             'AJUSTE INFONAVIT
 
                             'PRESTAMO
-                            If dtgDatos.Rows(x).Cells(2).Value = 204 Then
-                                MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                            End If
+                            'If dtgDatos.Rows(x).Cells(2).Value = 204 Then
+                            '    MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(3).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            'End If
                             If dtgDatos.Rows(x).Cells(3).Tag = "" And chkPrestamoSA.Checked = False Then
                                 sql = "SELECT  * FROM PrestamoSA WHERE iidPrestamosa =("
                                 sql &= "SELECT max(iidPrestamosa) FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & " and iEstatus=1)"
