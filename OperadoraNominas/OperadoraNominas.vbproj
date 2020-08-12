@@ -103,10 +103,10 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Excel\frmNominaFinal.designer.vb">
-      <DependentUpon>frmNominaFinal.vb</DependentUpon>
+    <Compile Include="Excel\frmNominaFinalE.Designer.vb">
+      <DependentUpon>frmNominaFinalE.vb</DependentUpon>
     </Compile>
-    <Compile Include="Excel\frmNominaFinal.vb">
+    <Compile Include="Excel\frmNominaFinalE.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmBuscar.Designer.vb">
@@ -305,8 +305,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Excel\frmNominaFinal.resx">
-      <DependentUpon>frmNominaFinal.vb</DependentUpon>
+    <EmbeddedResource Include="Excel\frmNominaFinalE.resx">
+      <DependentUpon>frmNominaFinalE.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBuscar.resx">
       <DependentUpon>frmBuscar.vb</DependentUpon>

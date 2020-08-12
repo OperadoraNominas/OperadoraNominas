@@ -95,7 +95,7 @@ Public Class frmnominasmarinos
 
             End If
 
-            campoordenamiento = "Nomina.Buque,cNombreLargo"
+            campoordenamiento = "Nomina.buque,cNombreLargo"
             TipoNomina = False
             Me.KeyPreview = True
 
@@ -16508,12 +16508,12 @@ Public Class frmnominasmarinos
 
     Private Sub cmdAcumuladoOperadora_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAcumuladoOperadora.Click
         Try
-            Dim SQL As String
+            Dim SQL, SQL2 As String
             Dim filaExcel As Integer = 0
             Dim filatmp As Integer = 0
             Dim dialogo As New SaveFileDialog()
             Dim periodo, iejercicio, iMes As String
-
+            Dim SUMsubsidioGenerado As String
             Dim ruta As String
 
             Dim rwPeriodo0 As DataRow() = nConsulta("Select * from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
@@ -16561,6 +16561,15 @@ Public Class frmnominasmarinos
                     hoja.Range(1, 5, filaExcel + x, 33).Style.NumberFormat.NumberFormatId = 4
                     hoja.Range(1, 1, filaExcel + x, 4).Style.NumberFormat.Format = "@"
 
+                    SQL2 = "select sum(fSubsidioGenerado) AS fSubsidioGenerado, sum(fSubsidioAplicado )as fSubsidioAplicado"
+                    SQL2 &= "from(Nomina)"
+                    SQL2 &= " where(fkiIdPeriodo = " & cboperiodo.SelectedValue & ")"
+                    SQL2 &= "and fkiIdEmpleadoC=(select iIdEmpleadoC from empleadosC where cCodigoEmpleado=" & rwFilas(x)("cCodigoEmpleado") & ")"
+
+                    Dim nominaA As DataRow() = nConsulta(SQL2)
+                    If nominaA.Count <> 0 Then
+                        SUMsubsidioGenerado = rwFilas(0)("fSubsidioGenerado")
+                    End If
 
                     hoja.Cell(filaExcel + x, 1).Value = rwFilas(x)("cCodigoEmpleado")
                     hoja.Cell(filaExcel + x, 2).Value = rwFilas(x)("cNombreLargo")
@@ -16602,7 +16611,7 @@ Public Class frmnominasmarinos
             End If
 
             dialogo.DefaultExt = "*.xlsx"
-            dialogo.FileName = "Reporte Acumulados " & Usuario.Nombre
+            dialogo.FileName = "REPORTE ACUMULADOS" & Usuario.Nombre.ToUpper & " - " & iMes.ToUpper & " " & iejercicio
             dialogo.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
             dialogo.ShowDialog()
             libro.SaveAs(dialogo.FileName)
