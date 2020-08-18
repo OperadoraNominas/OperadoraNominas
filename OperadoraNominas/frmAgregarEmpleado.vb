@@ -79,4 +79,11 @@
 
         End Try
     End Sub
+
+    Private Sub frmAgregarEmpleado_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        txtbuscar.TabIndex = 1
+        cmdBuscar.TabIndex = 2
+        lsvLista.TabIndex = 3
+        cmdagregar.TabIndex = 4
+    End Sub
 End Class

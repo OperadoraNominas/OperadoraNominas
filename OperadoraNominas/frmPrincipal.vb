@@ -145,6 +145,14 @@ Public Class frmPrincipal
                     Catch ex As Exception
 
                     End Try
+                Case "Subir Nomina"
+                    Try
+                        Dim Forma As New frmNominaFinalE
+                        Forma.ShowDialog()
+
+                    Catch ex As Exception
+                        ShowError(ex, Me.Text)
+                    End Try
             End Select
 
         Catch ex As Exception
@@ -480,10 +488,6 @@ Public Class frmPrincipal
 
 
   
-   
-    Private Sub lsvPanel_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lsvPanel.SelectedIndexChanged
-
-    End Sub
 
     Private Sub reporteprestamo(ByRef status As Integer)
         Try

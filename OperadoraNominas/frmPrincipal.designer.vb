@@ -29,7 +29,8 @@ Partial Class frmPrincipal
         Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Empleados"}, 9, System.Drawing.Color.Black, System.Drawing.Color.Empty, Nothing)
         Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Reporte trabajadores"}, 15, System.Drawing.Color.Black, System.Drawing.Color.Empty, Nothing)
         Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Prestamos"}, 13, System.Drawing.Color.Black, System.Drawing.Color.Empty, Nothing)
-        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Buscar Datos"}, 14, System.Drawing.Color.Empty, System.Drawing.Color.Black, Nothing)
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Buscar Datos"}, 14, System.Drawing.Color.Black, System.Drawing.Color.Transparent, Nothing)
+        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Subir Nomina"}, "binario.png", System.Drawing.Color.Black, System.Drawing.Color.Transparent, Nothing)
         Me.pnlBar = New System.Windows.Forms.Panel()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.chkCBB = New System.Windows.Forms.CheckBox()
@@ -145,7 +146,8 @@ Partial Class frmPrincipal
         ListViewItem3.ToolTipText = "Empleados"
         ListViewItem4.ToolTipText = "Reporte trabajadores"
         ListViewItem5.Tag = "Prestamos"
-        Me.lsvPanel.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6})
+        ListViewItem7.ToolTipText = "Subir Nomina"
+        Me.lsvPanel.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7})
         Me.lsvPanel.LargeImageList = Me.ImageList1
         Me.lsvPanel.Location = New System.Drawing.Point(0, 0)
         Me.lsvPanel.Name = "lsvPanel"
@@ -178,6 +180,7 @@ Partial Class frmPrincipal
         Me.ImageList1.Images.SetKeyName(17, "1474867386_advantage_cloud.png")
         Me.ImageList1.Images.SetKeyName(18, "1474867277_web.png")
         Me.ImageList1.Images.SetKeyName(19, "sobresalir (1).png")
+        Me.ImageList1.Images.SetKeyName(20, "binario.png")
         '
         'MenuInicio
         '
