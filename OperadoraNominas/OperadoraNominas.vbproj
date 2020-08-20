@@ -109,6 +109,7 @@
     <Compile Include="Excel\frmNominaFinalE.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Excel\getDescanso.vb" />
     <Compile Include="frmBuscar.Designer.vb">
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </Compile>
