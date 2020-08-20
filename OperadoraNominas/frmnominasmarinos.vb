@@ -10967,8 +10967,8 @@ Public Class frmnominasmarinos
                             fila.Item("Incapacidad") = ""
                             fila.Item("ISR") = ""
                             fila.Item("IMSS") = ""
-                            fila.Item("Infonavit") = ""
-                            fila.Item("Infonavit_bim_anterior") = ""
+                            fila.Item("Infonavit") = Forma.dsReporte.Tables(0).Rows(x)("InfonavitSA")
+                            fila.Item("Infonavit_bim_anterior") = Forma.dsReporte.Tables(0).Rows(x)("InfonavitBIASA")
                             fila.Item("Ajuste_infonavit") = ""
                             fila.Item("Pension_Alimenticia") = ""
                             fila.Item("Prestamo") = Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("AnticipoSA")) / 2
@@ -10977,8 +10977,8 @@ Public Class frmnominasmarinos
                             fila.Item("Subsidio_Aplicado") = ""
                             fila.Item("Operadora") = ""
                             fila.Item("Prestamo_Personal_A") = Double.Parse(Forma.dsReporte.Tables(0).Rows(x)("Anticipo")) / 2
-                            fila.Item("Adeudo_Infonavit_A") = ""
-                            fila.Item("Diferencia_Infonavit_A") = ""
+                            fila.Item("Adeudo_Infonavit_A") = Forma.dsReporte.Tables(0).Rows(x)("InfonavitASI")
+                            fila.Item("Diferencia_Infonavit_A") = Forma.dsReporte.Tables(0).Rows(x)("InfonavitBIAASI")
                             fila.Item("Asimilados") = ""
                             fila.Item("Retenciones_Operadora") = ""
                             fila.Item("%_Comisión") = ""
