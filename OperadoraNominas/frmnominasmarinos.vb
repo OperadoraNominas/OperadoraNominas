@@ -11523,8 +11523,8 @@ Public Class frmnominasmarinos
                         End If
 
                         hoja.Cell(filaExcel + x, 12).Value = (dtgDatos.Rows(x).Cells(15).Value) + getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "sueldoO", dtgDatos.Rows(x).Cells(12).Value, "", "", dtgDatos.Rows(x).Cells(11).Value) ' SUELDO ORDINARIO
-                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AK" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AK" & filatmp + x  ' infonavit + ajuste infonavit
-                        hoja.Cell(filaExcel + x, 14).FormulaA1 = "='OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x 'INFONAVIT BIM ANTERIOR
+                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x   ' INFONAVIT 
+                        hoja.Cell(filaExcel + x, 14).FormulaA1 = "='OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA ABORDO'!AK" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AK" & filatmp + x 'INFONAVIT BIM ANTERIOR + AJUSTE INFONAVIT
                         hoja.Cell(filaExcel + x, 15).FormulaA1 = "+'OPERADORA ABORDO'!AX" & filatmp + x & "+'OPERADORA DESCANSO'!AX" & filatmp + x 'INFONAVIT BIM ANTERIOR ASIM
                         hoja.Cell(filaExcel + x, 16).Value = "0.0"
                         hoja.Cell(filaExcel + x, 17).FormulaA1 = "='OPERADORA ABORDO'!AW" & filatmp + x & "+'OPERADORA DESCANSO'!AW" & filatmp + x   'DESC ASIMILADOS
@@ -11536,8 +11536,8 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 23).FormulaA1 = "=U" & filaExcel + x & "-V" & filaExcel + x  ' asimilados
                         hoja.Cell(filaExcel + x, 24).FormulaA1 = "='OPERADORA ABORDO'!AG" & filatmp + x & "+'OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA ABORDO'!AK" & filatmp + x & "+'OPERADORA ABORDO'!AL" & filatmp + x & "+'OPERADORA ABORDO'!AN" & filatmp + x & "+'OPERADORA ABORDO'!AO" & filatmp + x & "+'OPERADORA DESCANSO'!AG" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AK" & filatmp + x & "+'OPERADORA DESCANSO'!AL" & filatmp + x & "+'OPERADORA DESCANSO'!AN" & filatmp + x & "+'OPERADORA DESCANSO'!AO" & filatmp + x ' retenciones
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = ""
-                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=(V" & filaExcel + x & "+X" & filaExcel + x & ")*2%" 'Z
-                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=(O" & filaExcel + x & "+Q" & filaExcel + x & "+W" & filaExcel + x & ")*2%" 'AA
+                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=(V" & filaExcel + x & "+X" & filaExcel + x & ")*4%" 'Z
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=(O" & filaExcel + x & "+Q" & filaExcel + x & "+W" & filaExcel + x & ")*3.5%" 'AA
                         hoja.Cell(filaExcel + x, 28).FormulaA1 = "='OPERADORA ABORDO'!AV" & filatmp + x & "+'OPERADORA DESCANSO'!AV" & filatmp + x '
                         hoja.Cell(filaExcel + x, 29).FormulaA1 = "=V" & filaExcel + x & "+W" & filaExcel + x & "+X" & filaExcel + x & "+Z" & filaExcel + x & "+AA" & filaExcel + x & "+AB" & filaExcel + x & "+Q" & filaExcel + x & "+O" & filaExcel + x
                         hoja.Cell(filaExcel + x, 30).FormulaA1 = "=AC" & filaExcel + x & "*16%" 'IVA
@@ -11673,9 +11673,9 @@ Public Class frmnominasmarinos
                         End If
 
                         hoja.Cell(filaExcel + x, 12).Value = (dtgDatos.Rows(x).Cells(15).Value) + getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "sueldoO", dtgDatos.Rows(x).Cells(12).Value, "", "", dtgDatos.Rows(x).Cells(11).Value) ' SUELDO ORDINARIO
-                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AK" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AK" & filatmp + x  ' infonavit + ajuste infonavit
-                        hoja.Cell(filaExcel + x, 14).FormulaA1 = "='OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x 'INFONAVIT BIM ANTERIOR
-                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "+'OPERADORA ABORDO'!AY" & filatmp + x & "+'OPERADORA DESCANSO'!AY" & filatmp + x 'INFONAVIT BIM ANTERIOR ASIM
+                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x   ' INFONAVIT 
+                        hoja.Cell(filaExcel + x, 14).FormulaA1 = "='OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA ABORDO'!AK" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AK" & filatmp + x 'INFONAVIT BIM ANTERIOR + AJUSTE INFONAVIT
+                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "+'OPERADORA ABORDO'!AX" & filatmp + x & "+'OPERADORA DESCANSO'!AX" & filatmp + x 'INFONAVIT BIM ANTERIOR ASIM
                         hoja.Cell(filaExcel + x, 16).Value = "0.0"
                         hoja.Cell(filaExcel + x, 17).FormulaA1 = "='OPERADORA ABORDO'!AW" & filatmp + x & "+'OPERADORA DESCANSO'!AW" & filatmp + x   'DESC ASIMILADOS
                         hoja.Cell(filaExcel + x, 18).FormulaA1 = "='OPERADORA ABORDO'!AL" & filatmp + x & "+'OPERADORA DESCANSO'!AL" & filatmp + x 'PENSION ALIMENTICIA
@@ -11686,8 +11686,8 @@ Public Class frmnominasmarinos
                         hoja.Cell(filaExcel + x, 23).FormulaA1 = "=U" & filaExcel + x & "-V" & filaExcel + x  ' asimilados
                         hoja.Cell(filaExcel + x, 24).FormulaA1 = "='OPERADORA ABORDO'!AG" & filatmp + x & "+'OPERADORA ABORDO'!AI" & filatmp + x & "+'OPERADORA ABORDO'!AJ" & filatmp + x & "+'OPERADORA ABORDO'!AK" & filatmp + x & "+'OPERADORA ABORDO'!AL" & filatmp + x & "+'OPERADORA ABORDO'!AN" & filatmp + x & "+'OPERADORA ABORDO'!AO" & filatmp + x & "+'OPERADORA DESCANSO'!AG" & filatmp + x & "+'OPERADORA DESCANSO'!AI" & filatmp + x & "+'OPERADORA DESCANSO'!AJ" & filatmp + x & "+'OPERADORA DESCANSO'!AK" & filatmp + x & "+'OPERADORA DESCANSO'!AL" & filatmp + x & "+'OPERADORA DESCANSO'!AN" & filatmp + x & "+'OPERADORA DESCANSO'!AO" & filatmp + x ' retenciones
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = ""
-                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=(V" & filaExcel + x & "+X" & filaExcel + x & ")*2%" 'Z
-                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=(O" & filaExcel + x & "+Q" & filaExcel + x & "+W" & filaExcel + x & ")*2%" 'AA
+                        hoja.Cell(filaExcel + x, 26).FormulaA1 = "=(V" & filaExcel + x & "+X" & filaExcel + x & ")*4%" 'Z
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=(O" & filaExcel + x & "+Q" & filaExcel + x & "+W" & filaExcel + x & ")*3.5%" 'AA
                         hoja.Cell(filaExcel + x, 28).FormulaA1 = "='OPERADORA ABORDO'!AV" & filatmp + x & "+'OPERADORA DESCANSO'!AV" & filatmp + x '
                         hoja.Cell(filaExcel + x, 29).FormulaA1 = "=V" & filaExcel + x & "+W" & filaExcel + x & "+X" & filaExcel + x & "+Z" & filaExcel + x & "+AA" & filaExcel + x & "+AB" & filaExcel + x & "+Q" & filaExcel + x & "+O" & filaExcel + x
                         hoja.Cell(filaExcel + x, 30).FormulaA1 = "=AC" & filaExcel + x & "*16%" 'IVA
@@ -13154,29 +13154,29 @@ Public Class frmnominasmarinos
 
                         'Revisa si hay repetidos
 
-                        Dim rwPrestamoSa As DataRow() = nConsulta("SELECT * FROM PrestamoSA WHERE fkiIdEmpleado=" & dtgDatos.Rows(x).Cells(2).Value & "AND  iESTATUS=1")
+                        Dim rwPrestamoSa As DataRow() = nConsulta("SELECT * FROM PagoPrestamoSA WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & "AND fkiIdPeriodo=" & cboperiodo.SelectedValue & "AND iEstatus=1")
                         If rwPrestamoSa Is Nothing = False Then
 
-                            '> 1
+                            '**********
                             If rwPrestamoSa.Length > 1 Then
 
                                 For Each prestado In rwPrestamoSa
                                     hoja7.Range(filaExcel, 3, filaExcel, 7).Style.NumberFormat.NumberFormatId = 4
-                                    Dim tipoprestamo As DataRow() = nConsulta("select * from TipoPrestamo where iIdTipoPrestamo =" & prestado.Item("fkiIdTipoPrestamo"))
+                                    Dim prestamoSA As DataRow() = nConsulta("SELECT * FROM PrestamoSA WHERE iIdPrestamoSA=" & prestado.Item("fkiIdPrestamoSA"))
 
-                                    If tipoprestamo Is Nothing = False Then
-                                        tipo = tipoprestamo(0).Item("TipoPrestamo")
-                                        totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamoSA  WHERE fkiIdPrestamoSA=" & prestado.Item("iIdPrestamoSA"))
+                                    ' If tipoprestamo Is Nothing = False Then
+                                    ' tipo = tipoprestamo(0).Item("TipoPrestamo")
+                                    totalcobrado = nConsulta("SELECT sum(monto) as totalcobrado FROM PagoPrestamoSA WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " AND fkiIdPeriodo= " & cboperiodo.SelectedValue & " AND iEstatus=1")
 
 
-                                        hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
-                                        hoja7.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
-                                        hoja7.Cell("D" & filaExcel).Value = prestado.Item("montoTotal") 'Monto
-                                        hoja7.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
-                                        hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
-                                        hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
+                                    hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
+                                    hoja7.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
+                                    hoja7.Cell("D" & filaExcel).Value = prestamoSA(0).Item("montototal")
+                                    hoja7.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
+                                    hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("totalcobrado")
+                                    hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
 
-                                    End If
+                                    'End If
 
                                     filaExcel = filaExcel + 1
 
@@ -13184,11 +13184,11 @@ Public Class frmnominasmarinos
 
                             Else ' Mas de uno
                                 hoja7.Range(filaExcel, 3, filaExcel, 7).Style.NumberFormat.NumberFormatId = 4
-                                totalcobrado = nConsulta("SELECT SUM(monto) As TotalCobrado FROM PagoPrestamoSA  WHERE fkiIdPrestamoSA=" & rwPrestamoSa(0).Item("iIdPrestamoSA"))
+                                totalcobrado = nConsulta("SELECT sum(monto) as totalcobrado FROM PagoPrestamoSA WHERE fkiIdEmpleadoC=" & dtgDatos.Rows(x).Cells(2).Value & " AND fkiIdPeriodo= " & cboperiodo.SelectedValue & " AND iEstatus=1")
 
                                 hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
                                 hoja7.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
-                                hoja7.Cell("D" & filaExcel).Value = rwPrestamoSa(0).Item("montoTotal") 'Monto
+                                hoja7.Cell("D" & filaExcel).Value = 0 'rwPrestamoSa(0).Item("montoTotal") 'Monto
                                 hoja7.Cell("E" & filaExcel).FormulaA1 = "='OPERADORA ABORDO'!AN" & filatmp & "+'OPERADORA DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
                                 hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
                                 hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
