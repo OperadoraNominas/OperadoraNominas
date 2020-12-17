@@ -770,27 +770,27 @@ Public Class frmNominaFinalE
 
     '                    Else
 
-    '                        ''No es pilotin o subalterno
-    '                        hoja2.Cell(filaExcel + x, 8).Value = CDbl(dtgDatos.Rows(x).Cells(21).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "sueldoBruto", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) ' sueldo base
-    '                        If dtgDatos.Rows(x).Cells(22).Value <> "" And dtgDatos.Rows(x).Cells(23).Value <> "" Then
-    '                            hoja2.Cell(filaExcel + x, 9).Value = (CDbl(dtgDatos.Rows(x).Cells(22).Value) * 2) + (CDbl(dtgDatos.Rows(x).Cells(23).Value) * 2)  'Tiempo fijo extra
+    '                        ''No es pilotin o subalterno´'
+    '                        hoja2.Cell(filaExcel + x, 8).Value = CDbl(lsvLista.SelectedItems(x).SubItems(18).Text) + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(1).Text, lsvLista.SelectedItems(x).SubItems(15).Text, "sueldoBruto", "", "", "", lsvLista.SelectedItems(x).SubItems(9).Text)) ' sueldo base
+    '                        If lsvLista.SelectedItems(x).SubItems(22).Text <> "" And lsvLista.SelectedItems(x).SubItems(23).Text <> "" Then
+    '                            hoja2.Cell(filaExcel + x, 9).Value = (CDbl(lsvLista.SelectedItems(x).SubItems(22).Text) * 2) + (CDbl(lsvLista.SelectedItems(x).SubItems(23).Text) * 2)  'Tiempo fijo extra
     '                        Else
     '                            hoja2.Cell(filaExcel + x, 9).Value = "0"
     '                        End If
 
-    '                        hoja2.Cell(filaExcel + x, 10).Value = CDbl(dtgDatos.Rows(x).Cells(24).Value * 2) 'TIEMPO EXTRA OCASIONAL
-    '                        hoja2.Cell(filaExcel + x, 11).Value = CDbl(dtgDatos.Rows(x).Cells(25).Value * 2) ' DES SEM OBLIG
-    '                        hoja2.Cell(filaExcel + x, 12).Value = CDbl(dtgDatos.Rows(x).Cells(26).Value * 2) ' VACACIONES PROPOC"
-    '                        hoja2.Cell(filaExcel + x, 13).Value = CDbl(dtgDatos.Rows(x).Cells(29).Value * 2) ' TOTAL AGUINALDO
-    '                        hoja2.Cell(filaExcel + x, 14).Value = CDbl(dtgDatos.Rows(x).Cells(32).Value * 2) ' TOTAL P. VACACIONAL
-    '                        hoja2.Cell(filaExcel + x, 15).Value = CDbl(dtgDatos.Rows(x).Cells(33).Value * 2) ' TOAL PERCEPCIONES
+    '                        hoja2.Cell(filaExcel + x, 10).Value = CDbl(lsvLista.SelectedItems(x).SubItems(24).Text * 2) 'TIEMPO EXTRA OCASIONAL
+    '                        hoja2.Cell(filaExcel + x, 11).Value = CDbl(lsvLista.SelectedItems(x).SubItems(25).Text * 2) ' DES SEM OBLIG
+    '                        hoja2.Cell(filaExcel + x, 12).Value = CDbl(lsvLista.SelectedItems(x).SubItems(26).Text * 2) ' VACACIONES PROPOC"
+    '                        hoja2.Cell(filaExcel + x, 13).Value = CDbl(lsvLista.SelectedItems(x).SubItems(29).Text * 2) ' TOTAL AGUINALDO
+    '                        hoja2.Cell(filaExcel + x, 14).Value = CDbl(lsvLista.SelectedItems(x).SubItems(32).Text * 2) ' TOTAL P. VACACIONAL
+    '                        hoja2.Cell(filaExcel + x, 15).Value = CDbl(lsvLista.SelectedItems(x).SubItems(33).Text * 2) ' TOAL PERCEPCIONES
 
-    '                        Dim complementoAsim As Double = CDbl(dtgDatos.Rows(x).Cells(50).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "Asimilado", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) ' COMPLEMENTO ASIM
+    '                        Dim complementoAsim As Double = CDbl(lsvLista.SelectedItems(x).SubItems(50).Text) + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Text, lsvLista.SelectedItems(x).SubItems(18).Text, "Asimilado", "", "", "", lsvLista.SelectedItems(x).SubItems(11).Text)) ' COMPLEMENTO ASIM
     '                        hoja2.Cell(filaExcel + x, 16).Value = complementoAsim 'p
 
-    '                        hoja2.Cell(filaExcel + x, 17).Value = CDbl(dtgDatos.Rows(x).Cells(46).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "fOperadora", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) 'operadora
+    '                        hoja2.Cell(filaExcel + x, 17).Value = CDbl(lsvLista.SelectedItems(x).SubItems(46).Text) + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Text, lsvLista.SelectedItems(x).SubItems(18).Text, "fOperadora", "", "", "", lsvLista.SelectedItems(x).SubItems(11).Text)) 'operadora
 
-    '                        If dtgDatos.Rows(x).Cells(53).Value <> "" Then
+    '                        If lsvLista.SelectedItems(x).SubItems(53).Text <> "" Then
     '                            hoja2.Cell(filaExcel + x, 18).FormulaA1 = "=(Q" & filaExcel + x & "+SUM(v" & filaExcel + x & ":z" & filaExcel + x & "))*2%" 'COMISION OPERADORA
     '                        Else
     '                            hoja2.Cell(filaExcel + x, 18).Value = "0"
@@ -802,20 +802,20 @@ Public Class frmNominaFinalE
 
 
 
-    '                    hoja2.Cell(filaExcel + x, 20).Value = CDbl(dtgDatos.Rows(x).Cells(45).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "subsidio", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) 'Subsidio
-    '                    hoja2.Cell(filaExcel + x, 21).Value = dtgDatos.Rows(x).Cells(47).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "prestamoA", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) 'Descuento ASIM
-    '                    hoja2.Cell(filaExcel + x, 22).Value = dtgDatos.Rows(x).Cells(36).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "isr", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) 'ISR
+    '                    hoja2.Cell(filaExcel + x, 20).Value = CDbl(lsvLista.SelectedItems(x).SubItems(45).Text) + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "subsidio", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) 'Subsidio
+    '                    hoja2.Cell(filaExcel + x, 21).Value = lsvLista.SelectedItems(x).SubItems(47).deeadmv17 + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "prestamoA", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) 'Descuento ASIM
+    '                    hoja2.Cell(filaExcel + x, 22).Value = lsvLista.SelectedItems(x).SubItems(36).Value + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "isr", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) 'ISR
 
-    '                    hoja2.Cell(filaExcel + x, 23).Value = CDbl(dtgDatos.Rows(x).Cells(38).Value) + CDbl(dtgDatos.Rows(x).Cells(39).Value) + CDbl(dtgDatos.Rows(x).Cells(40).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "infonavit", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "infonavitbim", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) + +CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "infonavitajust", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) 'INFONAVIT
-    '                    hoja2.Cell(filaExcel + x, 24).Value = dtgDatos.Rows(x).Cells(41).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "pension", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) 'PENSION
-    '                    hoja2.Cell(filaExcel + x, 25).Value = dtgDatos.Rows(x).Cells(42).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "prestamo", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) 'PRESTAMO
-    '                    hoja2.Cell(filaExcel + x, 26).Value = dtgDatos.Rows(x).Cells(43).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "fonacot", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) 'FONACOT  
+    '                    hoja2.Cell(filaExcel + x, 23).Value = CDbl(lsvLista.SelectedItems(x).SubItems(38).Value) + CDbl(lsvLista.SelectedItems(x).SubItems(39).Value) + CDbl(lsvLista.SelectedItems(x).SubItems(40).Value) + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "infonavit", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "infonavitbim", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) + +CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "infonavitajust", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) 'INFONAVIT
+    '                    hoja2.Cell(filaExcel + x, 24).Value = lsvLista.SelectedItems(x).SubItems(41).Value + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "pension", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) 'PENSION
+    '                    hoja2.Cell(filaExcel + x, 25).Value = lsvLista.SelectedItems(x).SubItems(42).Value + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "prestamo", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) 'PRESTAMO
+    '                    hoja2.Cell(filaExcel + x, 26).Value = lsvLista.SelectedItems(x).SubItems(43).Value + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "fonacot", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) 'FONACOT  
     '                    hoja2.Cell(filaExcel + x, 27).FormulaA1 = "=+SUM(V" & filaExcel + x & ":Z" & filaExcel + x & ")"
 
-    '                    hoja2.Cell(filaExcel + x, 28).Value = dtgDatos.Rows(x).Cells(55).Value  'IMSS
-    '                    hoja2.Cell(filaExcel + x, 29).Value = dtgDatos.Rows(x).Cells(56).Value  ' SAR
-    '                    hoja2.Cell(filaExcel + x, 30).Value = dtgDatos.Rows(x).Cells(57).Value  'INFONAVIT
-    '                    hoja2.Cell(filaExcel + x, 31).Value = dtgDatos.Rows(x).Cells(58).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "INSCS", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) 'IMPTO S/NOMINA
+    '                    hoja2.Cell(filaExcel + x, 28).Value = lsvLista.SelectedItems(x).SubItems(55).Value  'IMSS
+    '                    hoja2.Cell(filaExcel + x, 29).Value = lsvLista.SelectedItems(x).SubItems(56).Value  ' SAR
+    '                    hoja2.Cell(filaExcel + x, 30).Value = lsvLista.SelectedItems(x).SubItems(57).Value  'INFONAVIT
+    '                    hoja2.Cell(filaExcel + x, 31).Value = lsvLista.SelectedItems(x).SubItems(58).Value + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "INSCS", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) 'IMPTO S/NOMINA
     '                    hoja2.Cell(filaExcel + x, 32).FormulaA1 = "=+AB" & filaExcel + x & "+AC" & filaExcel + x & "+AD" & filaExcel + x & "+AE" & filaExcel + x
     '                    hoja2.Cell(filaExcel + x, 33).FormulaA1 = "=O" & filaExcel + x & "+P" & filaExcel + x & "+R" & filaExcel + x & "+S" & filaExcel + x & "+T" & filaExcel + x & "+U" & filaExcel + x & "+AF" & filaExcel + x  ' SUBTOTAL
     '                    hoja2.Cell(filaExcel + x, 34).FormulaA1 = "=AG" & filaExcel + x & "*16%" 'IVA
@@ -823,10 +823,10 @@ Public Class frmNominaFinalE
     '                    hoja2.Cell(filaExcel + x, 36).FormulaA1 = "=AG" & filaExcel + x & "+AH" & filaExcel + x & "-AI" & filaExcel + x ' TOTAL
 
     '                    ' sumatoriaISR(nombrebuque, dtgDatos)
-    '                    Dim operadoraretencion As Double = CDbl(dtgDatos.Rows(x).Cells(46).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "fOperadora", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue))
-    '                    Dim retencion As Double = CDbl(dtgDatos.Rows(x).Cells(36).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "isr", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) + CDbl(dtgDatos.Rows(x).Cells(38).Value) + CDbl(dtgDatos.Rows(x).Cells(39).Value) + CDbl(dtgDatos.Rows(x).Cells(40).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "infonavit", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "infonavitbim", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) + +CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "infonavitajust", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) + dtgDatos.Rows(x).Cells(41).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "pension", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) + dtgDatos.Rows(x).Cells(42).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "prestamo", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue)) + dtgDatos.Rows(x).Cells(43).Value + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "fonacot", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue))
+    '                    Dim operadoraretencion As Double = CDbl(lsvLista.SelectedItems(x).SubItems(46).Value) + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "fOperadora", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue))
+    '                    Dim retencion As Double = CDbl(lsvLista.SelectedItems(x).SubItems(36).Value) + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "isr", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) + CDbl(lsvLista.SelectedItems(x).SubItems(38).Value) + CDbl(lsvLista.SelectedItems(x).SubItems(39).Value) + CDbl(lsvLista.SelectedItems(x).SubItems(40).Value) + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "infonavit", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "infonavitbim", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) + +CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "infonavitajust", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) + lsvLista.SelectedItems(x).SubItems(41).Value + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "pension", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) + lsvLista.SelectedItems(x).SubItems(42).Value + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "prestamo", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue)) + lsvLista.SelectedItems(x).SubItems(43).Value + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "fonacot", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue))
     '                    Dim comisionretencion As Double = CDbl(CDbl(CDbl(operadoraretencion) + CDbl(retencion)) * 0.02)
-    '                    Dim costosocialretencion As Double = CDbl(dtgDatos.Rows(x).Cells(55).Value) + CDbl(dtgDatos.Rows(x).Cells(56).Value) + CDbl(dtgDatos.Rows(x).Cells(57).Value) + CDbl(dtgDatos.Rows(x).Cells(58).Value) + CDbl(getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "INSCS", "", "", "", dtgDatos.Rows(x).Cells(11).FormattedValue))
+    '                    Dim costosocialretencion As Double = CDbl(lsvLista.SelectedItems(x).SubItems(55).Value) + CDbl(lsvLista.SelectedItems(x).SubItems(56).Value) + CDbl(lsvLista.SelectedItems(x).SubItems(57).Value) + CDbl(lsvLista.SelectedItems(x).SubItems(58).Value) + CDbl(getDescanso.GetNominaDescanso(cboTipoNomina.SelectedIndex, lsvLista.SelectedItems(x).SubItems(3).Value, lsvLista.SelectedItems(x).SubItems(18).Value, "INSCS", "", "", "", lsvLista.SelectedItems(x).SubItems(11).FormattedValue))
 
 
     '                    Select Case nombrebuque
@@ -2261,4 +2261,7 @@ Public Class frmNominaFinalE
             cboserie.Enabled = True
         End If
     End Sub
+
+  
+   
 End Class

@@ -24,6 +24,7 @@ Partial Class frmNominaFinalE
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNominaFinalE))
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.chkbTodasSeries = New System.Windows.Forms.CheckBox()
         Me.chkbTodo = New System.Windows.Forms.CheckBox()
         Me.pnlProgreso = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -45,7 +46,6 @@ Partial Class frmNominaFinalE
         Me.tsbReporte = New System.Windows.Forms.ToolStripButton()
         Me.tsbProcesar = New System.Windows.Forms.ToolStripButton()
         Me.lblRuta = New System.Windows.Forms.Label()
-        Me.chkbTodasSeries = New System.Windows.Forms.CheckBox()
         Me.pnlCatalogo.SuspendLayout()
         Me.pnlProgreso.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
@@ -72,6 +72,17 @@ Partial Class frmNominaFinalE
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1215, 473)
         Me.pnlCatalogo.TabIndex = 30
+        '
+        'chkbTodasSeries
+        '
+        Me.chkbTodasSeries.AutoSize = True
+        Me.chkbTodasSeries.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.chkbTodasSeries.Location = New System.Drawing.Point(538, 3)
+        Me.chkbTodasSeries.Name = "chkbTodasSeries"
+        Me.chkbTodasSeries.Size = New System.Drawing.Size(60, 17)
+        Me.chkbTodasSeries.TabIndex = 43
+        Me.chkbTodasSeries.Text = "TODAS"
+        Me.chkbTodasSeries.UseVisualStyleBackColor = True
         '
         'chkbTodo
         '
@@ -285,17 +296,6 @@ Partial Class frmNominaFinalE
         Me.lblRuta.Name = "lblRuta"
         Me.lblRuta.Size = New System.Drawing.Size(604, 39)
         Me.lblRuta.TabIndex = 34
-        '
-        'chkbTodasSeries
-        '
-        Me.chkbTodasSeries.AutoSize = True
-        Me.chkbTodasSeries.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.chkbTodasSeries.Location = New System.Drawing.Point(538, 3)
-        Me.chkbTodasSeries.Name = "chkbTodasSeries"
-        Me.chkbTodasSeries.Size = New System.Drawing.Size(60, 17)
-        Me.chkbTodasSeries.TabIndex = 43
-        Me.chkbTodasSeries.Text = "TODAS"
-        Me.chkbTodasSeries.UseVisualStyleBackColor = True
         '
         'frmNominaFinalE
         '

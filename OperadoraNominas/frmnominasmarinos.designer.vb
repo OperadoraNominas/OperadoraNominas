@@ -34,6 +34,7 @@ Partial Class frmnominasmarinos
         Me.tsbbuscar = New System.Windows.Forms.ToolStripButton()
         Me.tsbLayout = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.chkPrestamoSA = New System.Windows.Forms.CheckBox()
         Me.cmdsoloisr = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.cmdCalculoSoloInfonavit = New System.Windows.Forms.Button()
@@ -99,7 +100,6 @@ Partial Class frmnominasmarinos
         Me.cmdImssNomina = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
-        Me.chkPrestamoSA = New System.Windows.Forms.CheckBox()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         CType(Me.dtgDatos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -196,8 +196,8 @@ Partial Class frmnominasmarinos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlCatalogo.Controls.Add(Me.chkPrestamoSA)
         Me.pnlCatalogo.Controls.Add(Me.cmdsoloisr)
@@ -238,6 +238,18 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Name = "pnlCatalogo"
         Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
         Me.pnlCatalogo.TabIndex = 26
+        '
+        'chkPrestamoSA
+        '
+        Me.chkPrestamoSA.AutoSize = True
+        Me.chkPrestamoSA.BackColor = System.Drawing.Color.Transparent
+        Me.chkPrestamoSA.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkPrestamoSA.Location = New System.Drawing.Point(223, 70)
+        Me.chkPrestamoSA.Name = "chkPrestamoSA"
+        Me.chkPrestamoSA.Size = New System.Drawing.Size(123, 22)
+        Me.chkPrestamoSA.TabIndex = 37
+        Me.chkPrestamoSA.Text = "No CAL PRES SA"
+        Me.chkPrestamoSA.UseVisualStyleBackColor = False
         '
         'cmdsoloisr
         '
@@ -557,8 +569,8 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.AllowUserToDeleteRows = False
         Me.dtgDatos.AllowUserToOrderColumns = True
         Me.dtgDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 104)
         Me.dtgDatos.Name = "dtgDatos"
@@ -838,18 +850,6 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.TabIndex = 33
         Me.chkNoinfonavit.Text = "No calcular infonavit"
         Me.chkNoinfonavit.UseVisualStyleBackColor = False
-        '
-        'chkPrestamoSA
-        '
-        Me.chkPrestamoSA.AutoSize = True
-        Me.chkPrestamoSA.BackColor = System.Drawing.Color.Transparent
-        Me.chkPrestamoSA.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPrestamoSA.Location = New System.Drawing.Point(223, 70)
-        Me.chkPrestamoSA.Name = "chkPrestamoSA"
-        Me.chkPrestamoSA.Size = New System.Drawing.Size(123, 22)
-        Me.chkPrestamoSA.TabIndex = 37
-        Me.chkPrestamoSA.Text = "No CAL PRES SA"
-        Me.chkPrestamoSA.UseVisualStyleBackColor = False
         '
         'frmnominasmarinos
         '
