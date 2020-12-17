@@ -74,3 +74,7 @@ C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x8
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmFonacot.resources
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.Serie.resources
 C:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbproj.GenerateResource.Cache
+E:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
+E:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
+E:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
+E:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
