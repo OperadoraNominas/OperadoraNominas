@@ -151,7 +151,6 @@
                 SQL &= "Nombrebeneficiario='" & txtBeneficiario.Text & "', fkiIdBanco=" & cbobanco.SelectedValue & ","
                 SQL &= "Clabe='" & txtClabe.Text & "', Cuenta='" & txtCuenta.Text & "',"
                 SQL &= "iEstatus=" & cboEstatus.SelectedIndex
-                SQL &= " WHERE iIdPensionAlimenticia=" & idPension
 
 
             Else
@@ -183,4 +182,6 @@
         End Try
 
     End Sub
+
+  
 End Class

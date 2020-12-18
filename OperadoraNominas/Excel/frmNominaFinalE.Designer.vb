@@ -46,6 +46,7 @@ Partial Class frmNominaFinalE
         Me.tsbReporte = New System.Windows.Forms.ToolStripButton()
         Me.tsbProcesar = New System.Windows.Forms.ToolStripButton()
         Me.lblRuta = New System.Windows.Forms.Label()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo.SuspendLayout()
         Me.pnlProgreso.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
@@ -211,7 +212,7 @@ Partial Class frmNominaFinalE
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbEnviar, Me.tsbBuscar, Me.tsAcumulados, Me.tsbCancelar, Me.tsbReporte, Me.tsbProcesar})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbEnviar, Me.tsbBuscar, Me.tsAcumulados, Me.tsbCancelar, Me.ToolStripButton1, Me.tsbReporte, Me.tsbProcesar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1239, 54)
@@ -276,6 +277,7 @@ Partial Class frmNominaFinalE
         Me.tsbReporte.Size = New System.Drawing.Size(90, 51)
         Me.tsbReporte.Text = "Reporte Cont"
         Me.tsbReporte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbReporte.Visible = False
         '
         'tsbProcesar
         '
@@ -296,6 +298,16 @@ Partial Class frmNominaFinalE
         Me.lblRuta.Name = "lblRuta"
         Me.lblRuta.Size = New System.Drawing.Size(604, 39)
         Me.lblRuta.TabIndex = 34
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.AutoSize = False
+        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(90, 51)
+        Me.ToolStripButton1.Text = "Reporte Cont"
+        Me.ToolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'frmNominaFinalE
         '
@@ -341,4 +353,5 @@ Partial Class frmNominaFinalE
     Friend WithEvents tsbCancelar As System.Windows.Forms.ToolStripButton
     Friend WithEvents chkbTodo As System.Windows.Forms.CheckBox
     Friend WithEvents chkbTodasSeries As System.Windows.Forms.CheckBox
+    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
 End Class

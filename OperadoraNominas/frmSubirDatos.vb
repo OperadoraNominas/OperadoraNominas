@@ -42,6 +42,7 @@ Public Class frmSubirDatos
         lsvLista.Visible = False
         tsbImportar.Enabled = False
         Me.cmdCerrar.Enabled = False
+        tsbEmpleados.Enabled = False
         Me.Cursor = Cursors.WaitCursor
         Me.Enabled = False
         Application.DoEvents()
@@ -170,6 +171,8 @@ Public Class frmSubirDatos
                         tsbGuardar.Enabled = True
                         tsbCancelar.Enabled = True
                         tsbAgregar.Enabled = True
+                        tsbEmpleados.Enabled = True
+
                         lblRuta.Text = FormatNumber(lsvLista.Items.Count, 0) & " registros en el archivo."
                         Me.Enabled = True
                         Me.cmdCerrar.Enabled = True
@@ -232,7 +235,10 @@ Public Class frmSubirDatos
 
     Private Sub chkAll_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkAll.CheckedChanged
         For Each item As ListViewItem In lsvLista.Items
-            item.Checked = chkAll.Checked
+            If item.SubItems(1).Text <> "" Then
+                item.Checked = chkAll.Checked
+            End If
+
         Next
         chkAll.Text = IIf(chkAll.Checked, "Desmarcar todos", "Marcar todos")
     End Sub
@@ -404,4 +410,13 @@ Public Class frmSubirDatos
         End Try
     End Sub
 
+    Private Sub tsbEmpleados_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbEmpleados.Click
+        Try
+            Dim Forma As New frmEmpleados
+          
+            Forma.ShowDialog()
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

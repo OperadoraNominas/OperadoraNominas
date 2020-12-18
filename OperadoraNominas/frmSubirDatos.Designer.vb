@@ -38,6 +38,7 @@ Partial Class frmSubirDatos
         Me.lsvLista = New System.Windows.Forms.ListView()
         Me.lblRuta = New System.Windows.Forms.Label()
         Me.cmdCerrar = New System.Windows.Forms.Button()
+        Me.tsbEmpleados = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         Me.pnlProgreso.SuspendLayout()
@@ -47,7 +48,7 @@ Partial Class frmSubirDatos
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbImportar, Me.tsbGuardar, Me.tsbAgregar, Me.tsbCancelar, Me.tsbProcesar})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbImportar, Me.tsbGuardar, Me.tsbAgregar, Me.tsbCancelar, Me.tsbEmpleados, Me.tsbProcesar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(808, 54)
@@ -121,8 +122,8 @@ Partial Class frmSubirDatos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlCatalogo.Controls.Add(Me.pnlProgreso)
         Me.pnlCatalogo.Controls.Add(Me.chkAll)
@@ -175,8 +176,8 @@ Partial Class frmSubirDatos
         'lsvLista
         '
         Me.lsvLista.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lsvLista.CheckBoxes = True
         Me.lsvLista.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lsvLista.FullRowSelect = True
@@ -211,6 +212,17 @@ Partial Class frmSubirDatos
         Me.cmdCerrar.Text = "Cerrar"
         Me.cmdCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdCerrar.UseVisualStyleBackColor = True
+        '
+        'tsbEmpleados
+        '
+        Me.tsbEmpleados.AutoSize = False
+        Me.tsbEmpleados.Enabled = False
+        Me.tsbEmpleados.Image = CType(resources.GetObject("tsbEmpleados.Image"), System.Drawing.Image)
+        Me.tsbEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbEmpleados.Name = "tsbEmpleados"
+        Me.tsbEmpleados.Size = New System.Drawing.Size(90, 51)
+        Me.tsbEmpleados.Text = "Empleados"
+        Me.tsbEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'frmSubirDatos
         '
@@ -250,4 +262,5 @@ Partial Class frmSubirDatos
     Friend WithEvents lblRuta As System.Windows.Forms.Label
     Friend WithEvents cmdCerrar As System.Windows.Forms.Button
     Friend WithEvents tsbAgregar As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbEmpleados As System.Windows.Forms.ToolStripButton
 End Class
