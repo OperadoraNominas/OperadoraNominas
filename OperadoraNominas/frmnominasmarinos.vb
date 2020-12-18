@@ -2718,6 +2718,8 @@ Public Class frmnominasmarinos
         Dim consecutivo1 As String
         Dim plantaoNO As String
 
+        Dim PensionAntesVariable As Double
+
         Try
             'verificamos que tenga dias a calcular
             'For x As Integer = 0 To dtgDatos.Rows.Count - 1
@@ -3734,6 +3736,72 @@ Public Class frmnominasmarinos
                             'Aqui verificamos si esta activo el calcular o no el infonavit
 
 
+                            ' buscamos la pension
+                            PensionAntesVariable = 0
+                            sql = "select * from PensionAlimenticia where fkiIdEmpleadoC=" & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value) & " and iEstatus=1"
+                            Dim rwPensionAntes As DataRow() = nConsulta(sql)
+
+                            If rwPensionAntes Is Nothing = False Then
+
+                                TotalPercepciones = Double.Parse(IIf(dtgDatos.Rows(x).Cells(33).Value = "", "0", dtgDatos.Rows(x).Cells(33).Value.ToString.Replace(",", "")))
+                                Incapacidad = Double.Parse(IIf(dtgDatos.Rows(x).Cells(35).Value = "", "0", dtgDatos.Rows(x).Cells(35).Value))
+                                isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
+                                imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
+                                Dim SubtotalAntesPensioVariable As Double = TotalPercepciones - Incapacidad - isr - imss
+
+                                pension = 0
+                                For y As Integer = 0 To rwPensionAntes.Length - 1
+
+                                    If rwPensionAntes(y)("antesDescuento") = "1" Then
+
+                                        pension = pension + Math.Round(SubtotalAntesPensioVariable * (Double.Parse(rwPensionAntes(y)("fPorcentaje")) / 100), 2)
+
+
+                                        'dtgDatos.Rows(x).Cells(41).Value = PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100)
+
+                                        'Insertar la pension
+                                        'Insertamos los datos
+
+                                        sql = "EXEC [setDetallePensionAlimenticiaInsertar] 0"
+                                        'Id Empleado
+                                        sql &= "," & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
+                                        'id Pension
+                                        sql &= "," & Integer.Parse(rwPensionAntes(y)("iIdPensionAlimenticia"))
+                                        'id Periodo
+                                        sql &= ",'" & cboperiodo.SelectedValue
+                                        'serie
+                                        sql &= "'," & cboserie.SelectedIndex
+                                        'tipo
+                                        sql &= "," & cboTipoNomina.SelectedIndex
+                                        'Monto
+                                        sql &= "," & Math.Round(PensionAlimenticia * (Double.Parse(rwPensionAntes(y)("fPorcentaje")) / 100), 2)
+                                        'Estatus
+                                        sql &= ",1"
+                                        sql &= "," & consecutivo1
+
+
+
+
+
+
+                                        If nExecute(sql) = False Then
+                                            MessageBox.Show("Ocurrio un error ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
+
+                                        End If
+
+                                    End If
+
+
+
+
+                                Next
+                                dtgDatos.Rows(x).Cells(41).Value = pension
+                                PensionAntesVariable = pension
+                            End If
+
+
+
                             If chkNoinfonavit.Checked = False Then
                                 If dtgDatos.Rows(x).Tag = "" Then
                                     'borramos el calculo previo del infonavit para tener siempre que generar el calculo por cualquier cambio que se requiera
@@ -3775,7 +3843,7 @@ Public Class frmnominasmarinos
                                                             isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
                                                             imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
 
-                                                            Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss
+                                                            Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss - PensionAntesVariable
 
 
                                                             If cboTipoNomina.SelectedIndex = 0 Then
@@ -3839,7 +3907,7 @@ Public Class frmnominasmarinos
                                                             isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
                                                             imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
 
-                                                            Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss
+                                                            Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss - PensionAntesVariable
 
 
                                                             'VErificamos el infonavit
@@ -3915,7 +3983,7 @@ Public Class frmnominasmarinos
                                                                 isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
                                                                 imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
 
-                                                                Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss
+                                                                Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss - PensionAntesVariable
 
                                                                 If cboTipoNomina.SelectedIndex = 0 Then
                                                                     If SubtotalAntesInfonavit > (FaltanteInfonavit / 2) Then
@@ -3980,7 +4048,7 @@ Public Class frmnominasmarinos
                                                                 isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
                                                                 imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
 
-                                                                Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss
+                                                                Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss - PensionAntesVariable
 
                                                                 If FaltanteInfonavit > InfonavitNormal Then
 
@@ -4115,7 +4183,7 @@ Public Class frmnominasmarinos
                                             Dim FaltanteFonacot As Double
                                             FaltanteFonacot = Double.Parse(rwFonacotEmpleado(0)("ImporteMensual")) - Double.Parse(rwExistePagofonacot(0)("monto"))
                                             'ver si se puede descontar todo o solo una parte
-                                            fonacot = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit
+                                            fonacot = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - PensionAntesVariable
 
                                             If fonacot >= FaltanteFonacot Then
                                                 dtgDatos.Rows(x).Cells(43).Value = Math.Round(FaltanteFonacot, 2)
@@ -4203,7 +4271,7 @@ Public Class frmnominasmarinos
                                                     Dim FaltantePagoMes As Double
                                                     FaltantePagoMes = Double.Parse(rwPrestamoSAEmpleado(0)("descuento")) - Double.Parse(rwMontoPrestamoMensualSA(0)("monto"))
                                                     'ver si se puede descontar todo o solo una parte
-                                                    PrestamoPersonalSA = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - fonacot + subsidioaplicado, 2)
+                                                    PrestamoPersonalSA = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - fonacot + subsidioaplicado - PensionAntesVariable, 2)
 
                                                     If PrestamoPersonalSA >= FaltantePagoMes Then
                                                         dtgDatos.Rows(x).Cells(42).Value = Math.Round(FaltantePagoMes, 2)
@@ -4272,7 +4340,7 @@ Public Class frmnominasmarinos
                             prestamo = Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value))
 
                             'PENSION
-                            PensionAlimenticia = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - prestamo - fonacot + subsidioaplicado
+                            PensionAlimenticia = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - prestamo - fonacot + subsidioaplicado - PensionAntesVariable
                             'Buscamos la Pension
                             'If dtgDatos.Rows(x).Cells(2).Value = 94 Then
                             '    MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(4).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -4281,48 +4349,57 @@ Public Class frmnominasmarinos
                             sql = "select * from PensionAlimenticia where fkiIdEmpleadoC=" & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value) & " and iEstatus=1"
 
                             Dim rwPensionEmpleado As DataRow() = nConsulta(sql)
-                            pension = 0
+
+                            If PensionAntesVariable > 0 Then
+                                pension = PensionAntesVariable
+                            Else
+                                pension = 0
+                            End If
+
+
 
 
                             If rwPensionEmpleado Is Nothing = False Then
                                 For y As Integer = 0 To rwPensionEmpleado.Length - 1
 
-
-                                    pension = pension + Math.Round(PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100), 2)
-
-
-                                    'dtgDatos.Rows(x).Cells(41).Value = PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100)
-
-                                    'Insertar la pension
-                                    'Insertamos los datos
-
-                                    sql = "EXEC [setDetallePensionAlimenticiaInsertar] 0"
-                                    'Id Empleado
-                                    sql &= "," & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
-                                    'id Pension
-                                    sql &= "," & Integer.Parse(rwPensionEmpleado(y)("iIdPensionAlimenticia"))
-                                    'id Periodo
-                                    sql &= ",'" & cboperiodo.SelectedValue
-                                    'serie
-                                    sql &= "'," & cboserie.SelectedIndex
-                                    'tipo
-                                    sql &= "," & cboTipoNomina.SelectedIndex
-                                    'Monto
-                                    sql &= "," & Math.Round(PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100), 2)
-                                    'Estatus
-                                    sql &= ",1"
-                                    sql &= "," & consecutivo1
+                                    If rwPensionEmpleado(y)("AntesDescuento") = "0" Then
+                                        pension = pension + Math.Round(PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100), 2)
 
 
+                                        'dtgDatos.Rows(x).Cells(41).Value = PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100)
+
+                                        'Insertar la pension
+                                        'Insertamos los datos
+
+                                        sql = "EXEC [setDetallePensionAlimenticiaInsertar] 0"
+                                        'Id Empleado
+                                        sql &= "," & Integer.Parse(dtgDatos.Rows(x).Cells(2).Value)
+                                        'id Pension
+                                        sql &= "," & Integer.Parse(rwPensionEmpleado(y)("iIdPensionAlimenticia"))
+                                        'id Periodo
+                                        sql &= ",'" & cboperiodo.SelectedValue
+                                        'serie
+                                        sql &= "'," & cboserie.SelectedIndex
+                                        'tipo
+                                        sql &= "," & cboTipoNomina.SelectedIndex
+                                        'Monto
+                                        sql &= "," & Math.Round(PensionAlimenticia * (Double.Parse(rwPensionEmpleado(y)("fPorcentaje")) / 100), 2)
+                                        'Estatus
+                                        sql &= ",1"
+                                        sql &= "," & consecutivo1
 
 
 
 
-                                    If nExecute(sql) = False Then
-                                        MessageBox.Show("Ocurrio un error ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 
 
+                                        If nExecute(sql) = False Then
+                                            MessageBox.Show("Ocurrio un error ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
+
+                                        End If
                                     End If
+                                    
 
 
 
