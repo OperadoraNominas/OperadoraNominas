@@ -29,6 +29,7 @@ Partial Class frmSubirDatos
         Me.tsbGuardar = New System.Windows.Forms.ToolStripButton()
         Me.tsbAgregar = New System.Windows.Forms.ToolStripButton()
         Me.tsbCancelar = New System.Windows.Forms.ToolStripButton()
+        Me.tsbEmpleados = New System.Windows.Forms.ToolStripButton()
         Me.tsbProcesar = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
         Me.pnlProgreso = New System.Windows.Forms.Panel()
@@ -38,7 +39,6 @@ Partial Class frmSubirDatos
         Me.lsvLista = New System.Windows.Forms.ListView()
         Me.lblRuta = New System.Windows.Forms.Label()
         Me.cmdCerrar = New System.Windows.Forms.Button()
-        Me.tsbEmpleados = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1.SuspendLayout()
         Me.pnlCatalogo.SuspendLayout()
         Me.pnlProgreso.SuspendLayout()
@@ -107,6 +107,17 @@ Partial Class frmSubirDatos
         Me.tsbCancelar.Size = New System.Drawing.Size(90, 51)
         Me.tsbCancelar.Text = "Cancelar"
         Me.tsbCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'tsbEmpleados
+        '
+        Me.tsbEmpleados.AutoSize = False
+        Me.tsbEmpleados.Enabled = False
+        Me.tsbEmpleados.Image = CType(resources.GetObject("tsbEmpleados.Image"), System.Drawing.Image)
+        Me.tsbEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbEmpleados.Name = "tsbEmpleados"
+        Me.tsbEmpleados.Size = New System.Drawing.Size(90, 51)
+        Me.tsbEmpleados.Text = "Empleados"
+        Me.tsbEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'tsbProcesar
         '
@@ -212,17 +223,6 @@ Partial Class frmSubirDatos
         Me.cmdCerrar.Text = "Cerrar"
         Me.cmdCerrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.cmdCerrar.UseVisualStyleBackColor = True
-        '
-        'tsbEmpleados
-        '
-        Me.tsbEmpleados.AutoSize = False
-        Me.tsbEmpleados.Enabled = False
-        Me.tsbEmpleados.Image = CType(resources.GetObject("tsbEmpleados.Image"), System.Drawing.Image)
-        Me.tsbEmpleados.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbEmpleados.Name = "tsbEmpleados"
-        Me.tsbEmpleados.Size = New System.Drawing.Size(90, 51)
-        Me.tsbEmpleados.Text = "Empleados"
-        Me.tsbEmpleados.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'frmSubirDatos
         '

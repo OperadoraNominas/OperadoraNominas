@@ -78,3 +78,4 @@ E:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\bin\De
 E:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
 E:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
 E:\c\systemw\proyectos\OperadoraNominas\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
+D:\Escritorio\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache

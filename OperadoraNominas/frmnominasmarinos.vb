@@ -3603,7 +3603,7 @@ Public Class frmnominasmarinos
                         If diastrabajados = 0 Then
                             dtgDatos.Rows(x).Cells(21).Value = "0.00"
                             dtgDatos.Rows(x).Cells(22).Value = "0.00"
-                            dtgDatos.Rows(x).Cells(23).Value = "0.00"
+
                             dtgDatos.Rows(x).Cells(24).Value = "0.00"
                             dtgDatos.Rows(x).Cells(25).Value = "0.00"
                             dtgDatos.Rows(x).Cells(26).Value = "0.00"
