@@ -82,7 +82,7 @@ Public Class frmnominasmarinos
         Try
             Dim sql As String
             Dim frm As Form = Me
-            frm.Text = "Nominas " & Usuario.Nombre
+            frm.Text = "Nominas " & Servidor.Base.ToString.Substring(0, 9)
             cargarperiodos()
             Me.dtgDatos.ContextMenuStrip = Me.cMenu
             cboserie.SelectedIndex = 0
