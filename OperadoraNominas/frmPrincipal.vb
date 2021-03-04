@@ -30,7 +30,7 @@ Public Class frmPrincipal
     Private Sub frmPrincipal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         lblUsuario.Text = Usuario.Nombre
         clsConfiguracion.Actualizar()
-        lsvPanel.Items.Item(0).Text = "Nomina " & Usuario.Nombre
+        lsvPanel.Items.Item(0).Text = "Nomina " & Servidor.Base.ToString.Substring(0, 9)
     End Sub
 
     Private Sub CatálogoDeClientesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -71,84 +71,95 @@ Public Class frmPrincipal
                 Exit Sub
             End If
             Select Case lsvPanel.SelectedItems(0).Text
-                'Case "Facturación CBB"
-                'If chkCBB.Visible = False Then
-                '    frmFacturacionCBB = New frmFacturaCBB
-                '    AddHandler frmFacturacionCBB.SizeChanged, AddressOf frmPrincipal_SizeChanged
-                '    AddHandler frmFacturacionCBB.FormClosed, AddressOf frmPrincipal_FormClosed
-                '    chkCBB.Checked = True
-                '    frmFacturacionCBB.Show(Me)
-                '    chkCBB.Visible = True
-                '    AjustarBarra()
-                'Else
-                '    chkCBB.Checked = True
-                'End If
-                'Case "Facturación CFDI"
-                'If chkCFDI.Visible = False Then
-                '    frmFacturacionCFDI = New frmFacturar
-                '    AddHandler frmFacturacionCFDI.SizeChanged, AddressOf frmPrincipal_SizeChanged
-                '    AddHandler frmFacturacionCFDI.FormClosed, AddressOf frmPrincipal_FormClosed
-                '    chkCFDI.Checked = True
-                '    frmFacturacionCFDI.WindowState = FormWindowState.Normal
-                '    frmFacturacionCFDI.Show(Me)
-                '    chkCFDI.Visible = True
-                '    AjustarBarra()
-                'Else
-                '    chkCFDI.Checked = True
-                'End If
-
-                Case "Nomina " & Usuario.Nombre
+                
+                Case "Nomina " & Servidor.Base.ToString.Substring(0, 9)
                     Try
-                        Dim Forma As New frmnominasmarinos
-                        Forma.ShowDialog()
+                        If Usuario.Perfil = "1" Then
+                            Dim Forma As New frmnominasmarinos
+                            Forma.ShowDialog()
+                        Else
+                            MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                        
 
                     Catch ex As Exception
                     End Try
                 Case "Importar Excel"
                     Try
-                        Dim Forma As New frmExcel
-                        Forma.ShowDialog()
+                        If Usuario.Perfil = "1" Then
+                            Dim Forma As New frmExcel
+                            Forma.ShowDialog()
+                        Else
+                            MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                        
 
                     Catch ex As Exception
                     End Try
                 Case "Empleados"
                     Try
-                        Dim Forma As New frmEmpleados
-                        Forma.gIdTipoPuesto = 0
-                        Forma.ShowDialog()
+                        If Usuario.Perfil = "1" Then
+                            Dim Forma As New frmEmpleados
+                            Forma.gIdTipoPuesto = 0
+                            Forma.ShowDialog()
+                        Else
+                            MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                        
 
                     Catch ex As Exception
                     End Try
                 Case "Prestamos"
                     Try
-                        Dim dialogo As New SaveFileDialog()
 
-                        Dim Forma As New frmEstatusPres
+                        If Usuario.Perfil = "1" Then
+                            Dim dialogo As New SaveFileDialog()
 
-                        If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
-                            reporteprestamo(Forma.gEstatus)
+                            Dim Forma As New frmEstatusPres
+
+                            If Forma.ShowDialog = Windows.Forms.DialogResult.OK Then
+                                reporteprestamo(Forma.gEstatus)
+                            End If
+                        Else
+                            MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
                         End If
+                        
 
                     Catch ex As Exception
                     End Try
                 Case "Reporte trabajadores"
                     Try
-                        generarreporte()
+                        If Usuario.Perfil = "1" Then
+                            generarreporte()
+                        Else
+                            MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+
                     Catch ex As Exception
                     End Try
 
                 Case "Buscar Datos"
                     Try
-                        Dim Forma As New frmExcelO
-                        Forma.ShowDialog()
+                        If Usuario.Perfil = "1" Then
+                            Dim Forma As New frmExcelO
+                            Forma.ShowDialog()
+                        Else
+                            MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                       
 
                     Catch ex As Exception
 
                     End Try
                 Case "Subir Nomina"
                     Try
-                        Dim Forma As New frmNominaFinalE
-                        Forma.ShowDialog()
+                        If Usuario.Perfil = "1" Then
+                            Dim Forma As New frmNominaFinalE
+                            Forma.ShowDialog()
+                        Else
+                            MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                        
 
                     Catch ex As Exception
                         ShowError(ex, Me.Text)
@@ -475,13 +486,20 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub ClientesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClientesToolStripMenuItem.Click
-        Dim Forma As New frmEmpleados
+
         Try
-            Forma.gIdTipoPuesto = 0
-            Forma.ShowDialog()
 
+            If Usuario.Perfil = "1" Then
+                Dim Forma As New frmEmpleados
+                Forma.gIdTipoPuesto = 0
+                Forma.ShowDialog()
+
+            Else
+                MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+            
         Catch ex As Exception
-
+            MsgBox(ex.ToString)
         End Try
     End Sub
 
@@ -649,5 +667,8 @@ Public Class frmPrincipal
         End Try
     End Sub
 
+    Private Sub lsvPanel_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lsvPanel.SelectedIndexChanged
+
+    End Sub
 End Class
 
