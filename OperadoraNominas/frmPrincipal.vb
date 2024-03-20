@@ -164,6 +164,32 @@ Public Class frmPrincipal
                     Catch ex As Exception
                         ShowError(ex, Me.Text)
                     End Try
+                Case "Calcular Ajuste"
+                    Try
+                        If Usuario.Perfil = "1" Then
+                            Dim Forma As New frmPlaneacionAsi
+                            Forma.ShowDialog()
+                        Else
+                            MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+
+
+                    Catch ex As Exception
+                        ShowError(ex, Me.Text)
+                    End Try
+                Case "Nomina Admon"
+                    Try
+                        If Usuario.Perfil = "1" Then
+                            Dim Forma As New frmAdministrativos
+                            Forma.ShowDialog()
+                        Else
+                            MessageBox.Show("No tiene permisos para esta seccion, consulte al administrador", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+
+
+                    Catch ex As Exception
+                        ShowError(ex, Me.Text)
+                    End Try
             End Select
 
         Catch ex As Exception

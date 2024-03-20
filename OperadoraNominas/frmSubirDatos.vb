@@ -17,18 +17,23 @@ Public Class frmSubirDatos
     Private Sub tsbImportar_Click(sender As System.Object, e As System.EventArgs) Handles tsbImportar.Click
         Dim dialogo As New OpenFileDialog
         lblRuta.Text = ""
-        With dialogo
-            .Title = "Búsqueda de archivos de saldos."
-            .Filter = "Hoja de cálculo de excel (xlsx)|*.xlsx;"
-            .CheckFileExists = True
-            If .ShowDialog = Windows.Forms.DialogResult.OK Then
-                lblRuta.Text = .FileName
+        Try
+            With dialogo
+                .Title = "Búsqueda de archivos de saldos."
+                .Filter = "Hoja de cálculo de excel (xlsx)|*.xlsx;"
+                .CheckFileExists = True
+                If .ShowDialog = Windows.Forms.DialogResult.OK Then
+                    lblRuta.Text = .FileName
+                End If
+            End With
+            tsbProcesar.Enabled = lblRuta.Text.Length > 0
+            If tsbProcesar.Enabled Then
+                tsbProcesar_Click(sender, e)
             End If
-        End With
-        tsbProcesar.Enabled = lblRuta.Text.Length > 0
-        If tsbProcesar.Enabled Then
-            tsbProcesar_Click(sender, e)
-        End If
+        Catch ex As Exception
+            tsbImportar.Enabled = True
+        End Try
+       
     End Sub
 
     Private Sub tsbProcesar_Click(sender As System.Object, e As System.EventArgs) Handles tsbProcesar.Click
@@ -36,7 +41,7 @@ Public Class frmSubirDatos
         lsvLista.Columns.Clear()
         lsvLista.Clear()
 
-        pnlCatalogo.Enabled = False
+        ' pnlCatalogo.Enabled = False
         tsbGuardar.Enabled = False
         tsbCancelar.Enabled = False
         lsvLista.Visible = False
@@ -92,12 +97,12 @@ Public Class frmSubirDatos
 
                     lsvLista.Columns(1).Width = 90
 
-                    lsvLista.Columns(2).Width = 200
-                    lsvLista.Columns(3).Width = 100
-                    lsvLista.Columns(4).Width = 200
+                    lsvLista.Columns(2).Width = 150
+                    lsvLista.Columns(3).Width = 50
+                    lsvLista.Columns(4).Width = 50
                     lsvLista.Columns(5).Width = 50
-                    lsvLista.Columns(6).Width = 200
-                    lsvLista.Columns(7).Width = 150
+                    lsvLista.Columns(6).Width = 50
+                    lsvLista.Columns(7).Width = 100
                     lsvLista.Columns(7).TextAlign = 1
                     lsvLista.Columns(8).Width = 150
                     lsvLista.Columns(8).TextAlign = 1
@@ -140,6 +145,7 @@ Public Class frmSubirDatos
                                     '    End Select
                                     '    Valor = sValores(1).Trim()
                                     'End If
+                                  
                                     item.SubItems(item.SubItems.Count - 1).Text = Valor
                                 End If
 
@@ -192,7 +198,7 @@ Public Class frmSubirDatos
             End If
 
         Catch ex As Exception
-
+            tsbImportar.Enabled = True
         End Try
     End Sub
 
@@ -217,7 +223,7 @@ Public Class frmSubirDatos
 
 
     Private Sub tsbCancelar_Click(sender As System.Object, e As System.EventArgs) Handles tsbCancelar.Click
-        pnlCatalogo.Enabled = False
+        'pnlCatalogo.Enabled = False
         lsvLista.Items.Clear()
         chkAll.Checked = False
         lblRuta.Text = ""
@@ -233,15 +239,7 @@ Public Class frmSubirDatos
         Me.Close()
     End Sub
 
-    Private Sub chkAll_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkAll.CheckedChanged
-        For Each item As ListViewItem In lsvLista.Items
-            If item.SubItems(1).Text <> "" Then
-                item.Checked = chkAll.Checked
-            End If
-
-        Next
-        chkAll.Text = IIf(chkAll.Checked, "Desmarcar todos", "Marcar todos")
-    End Sub
+  
 
     Private Sub tsbGuardar_Click(sender As System.Object, e As System.EventArgs) Handles tsbGuardar.Click
         Dim SQL As String, nombresistema As String = ""
@@ -251,7 +249,7 @@ Public Class frmSubirDatos
 
 
                 pnlProgreso.Visible = True
-                pnlCatalogo.Enabled = False
+                'pnlCatalogo.Enabled = False
                 Application.DoEvents()
 
 
@@ -268,7 +266,13 @@ Public Class frmSubirDatos
                
 
                 For Each producto As ListViewItem In lsvLista.CheckedItems
-                    SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(1).Text).Substring(2, 4)
+                    If Len(producto.SubItems(1).Text) < 4 Then
+                        SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(1).Text)
+                    Else
+                        SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(1).Text).Substring(2, 4)
+                    End If
+
+
                     Dim rwFilas As DataRow() = nConsulta(SQL)
 
                     If rwFilas Is Nothing = False Then
@@ -306,6 +310,7 @@ Public Class frmSubirDatos
 
         Catch ex As Exception
             MessageBox.Show(ex.Message)
+            tsbImportar.Enabled = True
         End Try
     End Sub
 
@@ -350,7 +355,12 @@ Public Class frmSubirDatos
                     pgbProgreso.Maximum = lsvLista.CheckedItems.Count
 
                     For Each producto As ListViewItem In lsvLista.CheckedItems
-                        SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(1).Text).Substring(2, 4)
+                        If Len(producto.SubItems(1).Text) < 4 Then
+                            SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(1).Text)
+                        Else
+                            SQL = "select * from empleadosC where cCodigoEmpleado = " & Trim(producto.SubItems(1).Text).Substring(2, 4)
+                        End If
+
                         Dim rwFilas As DataRow() = nConsulta(SQL)
 
                         If rwFilas Is Nothing = False Then
@@ -358,8 +368,13 @@ Public Class frmSubirDatos
                                 producto.BackColor = Color.Green
                                 Dim fila As DataRow = dsReporte.Tables("Tabla").NewRow
 
+
                                 fila.Item("Id_empleado") = rwFilas(0)("iIdEmpleadoC")
-                                fila.Item("CodigoEmpleado") = Trim(producto.SubItems(1).Text).Substring(2, 4)
+                                If Len(producto.SubItems(1).Text) < 4 Then
+                                    fila.Item("CodigoEmpleado") = Trim(producto.SubItems(1).Text)
+                                Else
+                                    fila.Item("CodigoEmpleado") = Trim(producto.SubItems(1).Text).Substring(2, 4)
+                                End If
                                 fila.Item("dias") = Trim(producto.SubItems(9).Text)
                                 fila.Item("Salario") = Trim(producto.SubItems(17).Text)
                                 fila.Item("Bono") = Trim(producto.SubItems(17).Text)
@@ -389,10 +404,6 @@ Public Class frmSubirDatos
                     'Enviar correo
                     'Enviar_Mail(GenerarCorreoFlujo("Importación Flujo-Conceptos", "Área Facturación", "Se importo un flujo con los conceptos necesarios"), "g.gomez@mbcgroup.mx", "Importación")
 
-
-
-
-
                     'tsbCancelar_Click(sender, e)
                     pnlProgreso.Visible = False
                     Me.DialogResult = Windows.Forms.DialogResult.OK
@@ -407,6 +418,7 @@ Public Class frmSubirDatos
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message.ToString, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            tsbImportar.Enabled = True
         End Try
     End Sub
 
@@ -416,7 +428,74 @@ Public Class frmSubirDatos
           
             Forma.ShowDialog()
         Catch ex As Exception
-
+            tsbImportar.Enabled = True
         End Try
     End Sub
+    Private Sub chkAll_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkAll.CheckedChanged
+        For Each item As ListViewItem In lsvLista.Items
+            If item.SubItems(1).Text <> "" Then
+
+
+                item.Checked = chkAll.Checked
+               
+                'cambio
+
+            End If
+
+        Next
+        chkAll.Text = IIf(chkAll.Checked, "Desmarcar todos", "Marcar todos")
+    End Sub
+    
+  
+
+    Private Sub chkBeluga2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkBeluga2.CheckedChanged
+        For Each item As ListViewItem In lsvLista.Items
+            If item.SubItems(10).Text = "30" Then
+
+                item.Checked = True
+            Else
+                item.Checked = False
+            End If
+
+        Next
+    End Sub
+
+    Private Sub chkRedFish_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkRedFish.CheckedChanged
+        For Each item As ListViewItem In lsvLista.Items
+            If item.SubItems(10).Text = "25" Then
+
+                item.Checked = True
+            Else
+                item.Checked = False
+            End If
+
+        Next
+    End Sub
+
+    Private Sub chkMaersk_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkMaersk.CheckedChanged
+        For Each item As ListViewItem In lsvLista.Items
+            If item.SubItems(10).Text = "27" Then
+
+                item.Checked = True
+            Else
+                item.Checked = False
+            End If
+
+        Next
+    End Sub
+
+    Private Sub chkGoCanopus_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkGoCanopus.CheckedChanged
+        For Each item As ListViewItem In lsvLista.Items
+            If item.SubItems(10).Text = "31" Then
+
+                item.Checked = True
+            Else
+                item.Checked = False
+            End If
+
+        Next
+    End Sub
+
+
+    
 End Class

@@ -97,7 +97,7 @@ Partial Class frmnominasmarinos
         Me.cmdComision = New System.Windows.Forms.Button()
         Me.btnAsimilados = New System.Windows.Forms.Button()
         Me.cmdInfonavitNominaSerie = New System.Windows.Forms.Button()
-        Me.cmdImssNomina = New System.Windows.Forms.Button()
+        Me.cmdKioskoSove = New System.Windows.Forms.Button()
         Me.cmdConcentradoFonacot = New System.Windows.Forms.Button()
         Me.chkNoinfonavit = New System.Windows.Forms.CheckBox()
         Me.ToolStrip1.SuspendLayout()
@@ -196,8 +196,8 @@ Partial Class frmnominasmarinos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.pnlCatalogo.Controls.Add(Me.chkPrestamoSA)
         Me.pnlCatalogo.Controls.Add(Me.cmdsoloisr)
@@ -412,7 +412,7 @@ Partial Class frmnominasmarinos
         'cboserie
         '
         Me.cboserie.FormattingEnabled = True
-        Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I"})
+        Me.cboserie.Items.AddRange(New Object() {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"})
         Me.cboserie.Location = New System.Drawing.Point(319, 3)
         Me.cboserie.Name = "cboserie"
         Me.cboserie.Size = New System.Drawing.Size(59, 27)
@@ -569,8 +569,8 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.AllowUserToDeleteRows = False
         Me.dtgDatos.AllowUserToOrderColumns = True
         Me.dtgDatos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 104)
         Me.dtgDatos.Name = "dtgDatos"
@@ -694,6 +694,7 @@ Partial Class frmnominasmarinos
         'SoloRegistroACalcularToolStripMenuItem
         '
         Me.SoloRegistroACalcularToolStripMenuItem.Name = "SoloRegistroACalcularToolStripMenuItem"
+        Me.SoloRegistroACalcularToolStripMenuItem.ShowShortcutKeys = False
         Me.SoloRegistroACalcularToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
         Me.SoloRegistroACalcularToolStripMenuItem.Text = "Solo registro a calcular"
         '
@@ -814,17 +815,16 @@ Partial Class frmnominasmarinos
         Me.cmdInfonavitNominaSerie.Text = "Concentrado INfonavit x nomina"
         Me.cmdInfonavitNominaSerie.UseVisualStyleBackColor = True
         '
-        'cmdImssNomina
+        'cmdKioskoSove
         '
-        Me.cmdImssNomina.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.cmdImssNomina.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdImssNomina.Location = New System.Drawing.Point(864, 514)
-        Me.cmdImssNomina.Name = "cmdImssNomina"
-        Me.cmdImssNomina.Size = New System.Drawing.Size(131, 27)
-        Me.cmdImssNomina.TabIndex = 33
-        Me.cmdImssNomina.Text = "IMSS/Nomina"
-        Me.cmdImssNomina.UseVisualStyleBackColor = True
-        Me.cmdImssNomina.Visible = False
+        Me.cmdKioskoSove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cmdKioskoSove.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdKioskoSove.Location = New System.Drawing.Point(864, 514)
+        Me.cmdKioskoSove.Name = "cmdKioskoSove"
+        Me.cmdKioskoSove.Size = New System.Drawing.Size(131, 27)
+        Me.cmdKioskoSove.TabIndex = 33
+        Me.cmdKioskoSove.Text = "Subis Kiosko"
+        Me.cmdKioskoSove.UseVisualStyleBackColor = True
         '
         'cmdConcentradoFonacot
         '
@@ -856,7 +856,7 @@ Partial Class frmnominasmarinos
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(1357, 553)
         Me.Controls.Add(Me.cmdConcentradoFonacot)
-        Me.Controls.Add(Me.cmdImssNomina)
+        Me.Controls.Add(Me.cmdKioskoSove)
         Me.Controls.Add(Me.chkNoinfonavit)
         Me.Controls.Add(Me.btnAsimilados)
         Me.Controls.Add(Me.cmdInfonavitNominaSerie)
@@ -944,7 +944,7 @@ Partial Class frmnominasmarinos
     Friend WithEvents ActivaCalculoPresAsiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NoCalcularPresSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ActivarCaluloPresSAToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents cmdImssNomina As System.Windows.Forms.Button
+    Friend WithEvents cmdKioskoSove As System.Windows.Forms.Button
     Friend WithEvents cmdConcentradoFonacot As System.Windows.Forms.Button
     Friend WithEvents chkNoinfonavit As System.Windows.Forms.CheckBox
     Friend WithEvents tsbbuscar As System.Windows.Forms.ToolStripButton

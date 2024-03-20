@@ -220,7 +220,7 @@ Public Class frmNominaFinalE
         'Verificar si se tienen permisos
         Dim sql As String
         Try
-            sql = "Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' - ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio,iIdPeriodo  from periodos where iEstatus=1 and iEjercicio=2020 order by iEjercicio,iNumeroPeriodo"
+            sql = "Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' - ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio,iIdPeriodo  from periodos where iEstatus=1 and iEjercicio>=2020 order by iEjercicio,iNumeroPeriodo"
             nCargaCBO(cboperiodo, sql, "dFechainicio", "iIdPeriodo")
         Catch ex As Exception
             MessageBox.Show(ex.Message)

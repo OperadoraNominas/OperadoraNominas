@@ -108,43 +108,43 @@ Public Class frmImportarEmpleadosAlta
                     lsvLista.Columns(3).Width = 120
                     lsvLista.Columns(4).Width = 120
                     lsvLista.Columns(5).Width = 120
-                    lsvLista.Columns(6).Width = 120
-                    lsvLista.Columns(7).Width = 120
-                    lsvLista.Columns(8).Width = 120
-                    lsvLista.Columns(9).Width = 120
-                    lsvLista.Columns(10).Width = 120
-                    lsvLista.Columns(11).Width = 120
-                    lsvLista.Columns(12).Width = 120
-                    lsvLista.Columns(13).Width = 120
-                    lsvLista.Columns(14).Width = 120
-                    lsvLista.Columns(15).Width = 120
-                    lsvLista.Columns(16).Width = 120
-                    lsvLista.Columns(17).Width = 120
-                    lsvLista.Columns(18).Width = 120
-                    lsvLista.Columns(19).Width = 120
-                    lsvLista.Columns(20).Width = 120
-                    lsvLista.Columns(21).Width = 120
-                    lsvLista.Columns(22).Width = 120
-                    lsvLista.Columns(23).Width = 120
-                    lsvLista.Columns(24).Width = 120
-                    lsvLista.Columns(25).Width = 120
-                    lsvLista.Columns(26).Width = 120
-                    lsvLista.Columns(27).Width = 120
-                    lsvLista.Columns(28).Width = 120
-                    lsvLista.Columns(29).Width = 120
-                    lsvLista.Columns(30).Width = 120
-                    lsvLista.Columns(31).Width = 120
-                    lsvLista.Columns(32).Width = 120
-                    lsvLista.Columns(33).Width = 120
-                    lsvLista.Columns(34).Width = 120
-                    lsvLista.Columns(35).Width = 120
-                    lsvLista.Columns(36).Width = 120
-                    lsvLista.Columns(37).Width = 120
-                    lsvLista.Columns(38).Width = 120
-                    lsvLista.Columns(39).Width = 120
-                    lsvLista.Columns(40).Width = 120
-                    lsvLista.Columns(41).Width = 120
-                    lsvLista.Columns(42).Width = 120
+                    'lsvLista.Columns(6).Width = 120
+                    'lsvLista.Columns(7).Width = 120
+                    'lsvLista.Columns(8).Width = 120
+                    'lsvLista.Columns(9).Width = 120
+                    'lsvLista.Columns(10).Width = 120
+                    'lsvLista.Columns(11).Width = 120
+                    'lsvLista.Columns(12).Width = 120
+                    'lsvLista.Columns(13).Width = 120
+                    'lsvLista.Columns(14).Width = 120
+                    'lsvLista.Columns(15).Width = 120
+                    'lsvLista.Columns(16).Width = 120
+                    'lsvLista.Columns(17).Width = 120
+                    'lsvLista.Columns(18).Width = 120
+                    'lsvLista.Columns(19).Width = 120
+                    'lsvLista.Columns(20).Width = 120
+                    'lsvLista.Columns(21).Width = 120
+                    'lsvLista.Columns(22).Width = 120
+                    'lsvLista.Columns(23).Width = 120
+                    'lsvLista.Columns(24).Width = 120
+                    'lsvLista.Columns(25).Width = 120
+                    'lsvLista.Columns(26).Width = 120
+                    'lsvLista.Columns(27).Width = 120
+                    'lsvLista.Columns(28).Width = 120
+                    'lsvLista.Columns(29).Width = 120
+                    'lsvLista.Columns(30).Width = 120
+                    'lsvLista.Columns(31).Width = 120
+                    'lsvLista.Columns(32).Width = 120
+                    'lsvLista.Columns(33).Width = 120
+                    'lsvLista.Columns(34).Width = 120
+                    'lsvLista.Columns(35).Width = 120
+                    'lsvLista.Columns(36).Width = 120
+                    'lsvLista.Columns(37).Width = 120
+                    'lsvLista.Columns(38).Width = 120
+                    'lsvLista.Columns(39).Width = 120
+                    'lsvLista.Columns(40).Width = 120
+                    'lsvLista.Columns(41).Width = 120
+                    'lsvLista.Columns(42).Width = 120
 
 
 
@@ -684,8 +684,7 @@ Public Class frmImportarEmpleadosAlta
     End Sub
 
     Private Sub tsbVerificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbVerificar.Click
-        'Public Sub recorrerLista()
-
+        
 
         Dim contador As Integer = 0
 
@@ -695,44 +694,38 @@ Public Class frmImportarEmpleadosAlta
             Dim rwFilas As DataRow() = nConsulta(SQL)
             If rwFilas Is Nothing = False Then
                 For Each f In rwFilas
-                    ' If lsvLista.Items(filitas).SubItems(1).Text = f.Item("cCodigoEmpleado") Then
+
                     lsvLista.Items(filitas).BackColor = Color.GreenYellow
 
                     contador = contador + 1
-                    'End If
+
                 Next
             End If
 
         Next
         MsgBox(contador.ToString & " Datos repetidos")
 
-        'Dim filas, filas2 As Integer
-        'Dim contador As Integer = 0
 
-        'For filas = 0 To lsvLista.Items.Count - 1
-        '    For filas2 = 1 + filas To lsvLista.Items.Count - 1
-        '        ''MsgBox(lsvLista.Items.Item(filas).SubItems(1).Text)
+    End Sub
 
-        '        If lsvLista.Items(filas).SubItems(1).Text = lsvLista.Items(filas2).SubItems(1).Text Then
-        '            lsvLista.Items(filas2).BackColor = Color.GreenYellow
+    Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
+        Dim contador As Integer = 0
+        For filitas = 0 To lsvLista.Items.Count - 1
 
-        '            contador = contador + 1
-        '        End If
-
-        '        If filas2 = lsvLista.Items.Count Then
-        '            Exit For
-        '        End If
-
-        '    Next
-        '    If filas = lsvLista.Items.Count Then
-
-        '        Exit Sub
-
-        '    End If
-        'Next
-        'MsgBox(contador.ToString & " Datos repetidos")
+            SQL = "update empleadosC set iEstatus=0 where cCodigoEmpleado='" & lsvLista.Items(filitas).SubItems(1).Text & "'"
 
 
-        'End Sub
+            If nExecute(SQL) = False Then
+                Exit Sub
+            Else
+
+                lsvLista.Items(filitas).BackColor = Color.Red
+
+                contador = contador + 1
+
+            End If
+
+        Next
+        MsgBox(contador.ToString & " ELIMINADOS")
     End Sub
 End Class

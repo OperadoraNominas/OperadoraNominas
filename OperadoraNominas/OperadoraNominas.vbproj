@@ -31,6 +31,10 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -110,6 +114,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Excel\getDescanso.vb" />
+    <Compile Include="frmAdministrativos.Designer.vb">
+      <DependentUpon>frmAdministrativos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdministrativos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmBuscar.Designer.vb">
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </Compile>
@@ -200,10 +210,10 @@
     <Compile Include="frmnominasmarinos.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPensionAlimenticia.Designer.vb">
-      <DependentUpon>frmPensionAlimenticia.vb</DependentUpon>
+    <Compile Include="frmPlaneacionAsi.Designer.vb">
+      <DependentUpon>frmPlaneacionAsi.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPensionAlimenticia.vb">
+    <Compile Include="frmPlaneacionAsi.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPrincipal.designer.vb">
@@ -298,6 +308,12 @@
     <Compile Include="prestamo\frmFonacot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ruta.Designer.vb">
+      <DependentUpon>ruta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ruta.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Serie.Designer.vb">
       <DependentUpon>Serie.vb</DependentUpon>
     </Compile>
@@ -308,6 +324,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Excel\frmNominaFinalE.resx">
       <DependentUpon>frmNominaFinalE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdministrativos.resx">
+      <DependentUpon>frmAdministrativos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBuscar.resx">
       <DependentUpon>frmBuscar.vb</DependentUpon>
@@ -355,6 +374,9 @@
       <DependentUpon>frmnominasmarinos.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPlaneacionAsi.resx">
+      <DependentUpon>frmPlaneacionAsi.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
     </EmbeddedResource>
@@ -394,12 +416,18 @@
     <EmbeddedResource Include="prestamo\frmFonacot.resx">
       <DependentUpon>frmFonacot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ruta.resx">
+      <DependentUpon>ruta.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Serie.resx">
       <DependentUpon>Serie.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="bin\Debug\Archivos\timbradosa.xlsx" />
+    <None Include="bin\Debug\Archivos\timbradosa2.xlsx" />
+    <None Include="bin\Debug\Archivos\TMM.xlsx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

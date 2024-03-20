@@ -31,6 +31,8 @@ Partial Class frmPrincipal
         Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Prestamos"}, 13, System.Drawing.Color.Black, System.Drawing.Color.Empty, Nothing)
         Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Buscar Datos"}, 14, System.Drawing.Color.Black, System.Drawing.Color.Transparent, Nothing)
         Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Subir Nomina"}, "binario.png", System.Drawing.Color.Black, System.Drawing.Color.Transparent, Nothing)
+        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Calcular Ajuste"}, 1, System.Drawing.Color.Black, System.Drawing.Color.Transparent, Nothing)
+        Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Nomina Admon"}, 12, System.Drawing.Color.Black, System.Drawing.Color.Transparent, Nothing)
         Me.pnlBar = New System.Windows.Forms.Panel()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.chkCBB = New System.Windows.Forms.CheckBox()
@@ -59,7 +61,7 @@ Partial Class frmPrincipal
         Me.pnlBar.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlBar.Location = New System.Drawing.Point(0, 436)
         Me.pnlBar.Name = "pnlBar"
-        Me.pnlBar.Size = New System.Drawing.Size(724, 41)
+        Me.pnlBar.Size = New System.Drawing.Size(727, 41)
         Me.pnlBar.TabIndex = 5
         '
         'CheckBox1
@@ -147,12 +149,14 @@ Partial Class frmPrincipal
         ListViewItem4.ToolTipText = "Reporte trabajadores"
         ListViewItem5.Tag = "Prestamos"
         ListViewItem7.ToolTipText = "Subir Nomina"
-        Me.lsvPanel.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7})
+        ListViewItem8.ToolTipText = "Calcular Ajuste"
+        ListViewItem9.ToolTipText = "Nomina Admon"
+        Me.lsvPanel.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8, ListViewItem9})
         Me.lsvPanel.LargeImageList = Me.ImageList1
         Me.lsvPanel.Location = New System.Drawing.Point(0, 0)
         Me.lsvPanel.Name = "lsvPanel"
         Me.lsvPanel.ShowItemToolTips = True
-        Me.lsvPanel.Size = New System.Drawing.Size(724, 477)
+        Me.lsvPanel.Size = New System.Drawing.Size(727, 477)
         Me.lsvPanel.TabIndex = 3
         Me.lsvPanel.UseCompatibleStateImageBehavior = False
         '
@@ -229,7 +233,7 @@ Partial Class frmPrincipal
         'frmPrincipal
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(724, 477)
+        Me.ClientSize = New System.Drawing.Size(727, 477)
         Me.Controls.Add(Me.pnlBar)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.lsvPanel)

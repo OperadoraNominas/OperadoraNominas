@@ -32,6 +32,10 @@ Partial Class frmSubirDatos
         Me.tsbEmpleados = New System.Windows.Forms.ToolStripButton()
         Me.tsbProcesar = New System.Windows.Forms.ToolStripButton()
         Me.pnlCatalogo = New System.Windows.Forms.Panel()
+        Me.chkGoCanopus = New System.Windows.Forms.CheckBox()
+        Me.chkBeluga2 = New System.Windows.Forms.CheckBox()
+        Me.chkRedFish = New System.Windows.Forms.CheckBox()
+        Me.chkMaersk = New System.Windows.Forms.CheckBox()
         Me.pnlProgreso = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.pgbProgreso = New System.Windows.Forms.ProgressBar()
@@ -51,7 +55,7 @@ Partial Class frmSubirDatos
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbNuevo, Me.tsbImportar, Me.tsbGuardar, Me.tsbAgregar, Me.tsbCancelar, Me.tsbEmpleados, Me.tsbProcesar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(808, 54)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1131, 54)
         Me.ToolStrip1.TabIndex = 32
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -133,24 +137,68 @@ Partial Class frmSubirDatos
         'pnlCatalogo
         '
         Me.pnlCatalogo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlCatalogo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlCatalogo.Controls.Add(Me.chkGoCanopus)
+        Me.pnlCatalogo.Controls.Add(Me.chkBeluga2)
+        Me.pnlCatalogo.Controls.Add(Me.chkRedFish)
+        Me.pnlCatalogo.Controls.Add(Me.chkMaersk)
         Me.pnlCatalogo.Controls.Add(Me.pnlProgreso)
         Me.pnlCatalogo.Controls.Add(Me.chkAll)
         Me.pnlCatalogo.Controls.Add(Me.lsvLista)
         Me.pnlCatalogo.Enabled = False
         Me.pnlCatalogo.Location = New System.Drawing.Point(0, 60)
         Me.pnlCatalogo.Name = "pnlCatalogo"
-        Me.pnlCatalogo.Size = New System.Drawing.Size(808, 426)
+        Me.pnlCatalogo.Size = New System.Drawing.Size(1131, 549)
         Me.pnlCatalogo.TabIndex = 31
+        '
+        'chkGoCanopus
+        '
+        Me.chkGoCanopus.AutoSize = True
+        Me.chkGoCanopus.Location = New System.Drawing.Point(471, 3)
+        Me.chkGoCanopus.Name = "chkGoCanopus"
+        Me.chkGoCanopus.Size = New System.Drawing.Size(106, 23)
+        Me.chkGoCanopus.TabIndex = 39
+        Me.chkGoCanopus.Text = "Go Canopus"
+        Me.chkGoCanopus.UseVisualStyleBackColor = True
+        '
+        'chkBeluga2
+        '
+        Me.chkBeluga2.AutoSize = True
+        Me.chkBeluga2.Location = New System.Drawing.Point(358, 2)
+        Me.chkBeluga2.Name = "chkBeluga2"
+        Me.chkBeluga2.Size = New System.Drawing.Size(85, 23)
+        Me.chkBeluga2.TabIndex = 38
+        Me.chkBeluga2.Text = "Beluga 2"
+        Me.chkBeluga2.UseVisualStyleBackColor = True
+        '
+        'chkRedFish
+        '
+        Me.chkRedFish.AutoSize = True
+        Me.chkRedFish.Location = New System.Drawing.Point(241, 3)
+        Me.chkRedFish.Name = "chkRedFish"
+        Me.chkRedFish.Size = New System.Drawing.Size(83, 23)
+        Me.chkRedFish.TabIndex = 37
+        Me.chkRedFish.Text = "Red Fish"
+        Me.chkRedFish.UseVisualStyleBackColor = True
+        '
+        'chkMaersk
+        '
+        Me.chkMaersk.AutoSize = True
+        Me.chkMaersk.Location = New System.Drawing.Point(121, 2)
+        Me.chkMaersk.Name = "chkMaersk"
+        Me.chkMaersk.Size = New System.Drawing.Size(76, 23)
+        Me.chkMaersk.TabIndex = 36
+        Me.chkMaersk.Text = "Maersk"
+        Me.chkMaersk.UseVisualStyleBackColor = True
         '
         'pnlProgreso
         '
         Me.pnlProgreso.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlProgreso.Controls.Add(Me.Label2)
         Me.pnlProgreso.Controls.Add(Me.pgbProgreso)
-        Me.pnlProgreso.Location = New System.Drawing.Point(178, 169)
+        Me.pnlProgreso.Location = New System.Drawing.Point(339, 230)
         Me.pnlProgreso.Name = "pnlProgreso"
         Me.pnlProgreso.Size = New System.Drawing.Size(449, 84)
         Me.pnlProgreso.TabIndex = 32
@@ -187,8 +235,8 @@ Partial Class frmSubirDatos
         'lsvLista
         '
         Me.lsvLista.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lsvLista.CheckBoxes = True
         Me.lsvLista.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lsvLista.FullRowSelect = True
@@ -197,7 +245,7 @@ Partial Class frmSubirDatos
         Me.lsvLista.Location = New System.Drawing.Point(1, 31)
         Me.lsvLista.MultiSelect = False
         Me.lsvLista.Name = "lsvLista"
-        Me.lsvLista.Size = New System.Drawing.Size(800, 388)
+        Me.lsvLista.Size = New System.Drawing.Size(1123, 511)
         Me.lsvLista.TabIndex = 2
         Me.lsvLista.UseCompatibleStateImageBehavior = False
         Me.lsvLista.View = System.Windows.Forms.View.Details
@@ -206,7 +254,7 @@ Partial Class frmSubirDatos
         '
         Me.lblRuta.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblRuta.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRuta.Location = New System.Drawing.Point(7, 491)
+        Me.lblRuta.Location = New System.Drawing.Point(7, 614)
         Me.lblRuta.Name = "lblRuta"
         Me.lblRuta.Size = New System.Drawing.Size(604, 39)
         Me.lblRuta.TabIndex = 35
@@ -215,7 +263,7 @@ Partial Class frmSubirDatos
         '
         Me.cmdCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdCerrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdCerrar.Location = New System.Drawing.Point(697, 487)
+        Me.cmdCerrar.Location = New System.Drawing.Point(1020, 610)
         Me.cmdCerrar.Name = "cmdCerrar"
         Me.cmdCerrar.Padding = New System.Windows.Forms.Padding(0, 0, 10, 0)
         Me.cmdCerrar.Size = New System.Drawing.Size(104, 43)
@@ -227,7 +275,7 @@ Partial Class frmSubirDatos
         'frmSubirDatos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(808, 533)
+        Me.ClientSize = New System.Drawing.Size(1131, 656)
         Me.Controls.Add(Me.lblRuta)
         Me.Controls.Add(Me.cmdCerrar)
         Me.Controls.Add(Me.ToolStrip1)
@@ -263,4 +311,8 @@ Partial Class frmSubirDatos
     Friend WithEvents cmdCerrar As System.Windows.Forms.Button
     Friend WithEvents tsbAgregar As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbEmpleados As System.Windows.Forms.ToolStripButton
+    Friend WithEvents chkGoCanopus As System.Windows.Forms.CheckBox
+    Friend WithEvents chkBeluga2 As System.Windows.Forms.CheckBox
+    Friend WithEvents chkRedFish As System.Windows.Forms.CheckBox
+    Friend WithEvents chkMaersk As System.Windows.Forms.CheckBox
 End Class

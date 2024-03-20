@@ -1,8 +1,7 @@
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe.config
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.exe
-D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
-D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmNominaFinalE.resources
+D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAdministrativos.resources
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmBuscar.resources
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmConcentradoFonacot.resources
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAgregarEmpleado.resources
@@ -18,6 +17,7 @@ D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\Operador
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmIncapacidad.resources
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmJuridico.resources
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmnominasmarinos.resources
+D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPlaneacionAsi.resources
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmPrincipal.resources
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmSubirDatos.resources
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.frmAcceso.resources
@@ -35,3 +35,7 @@ D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\Operador
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.exe
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.xml
 D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.pdb
+D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.pdb
+D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\bin\Debug\OperadoraNominas.xml
+D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.ruta.resources
+D:\Desarrollo\Operadora\OperadoraNominas\OperadoraNominas\obj\x86\Debug\OperadoraNominas.vbprojResolveAssemblyReference.cache
