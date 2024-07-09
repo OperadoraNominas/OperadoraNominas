@@ -4451,9 +4451,10 @@ Public Class frmnominasmarinos
                             'pension = Double.Parse(IIf(dtgDatos.Rows(x).Cells(41).Value = "", "0", dtgDatos.Rows(x).Cells(41).Value))
 
 
-
-                            Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
-                            If (dtgDatos.Rows(x).Cells(11).FormattedValue = "COCINERO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MOTORISTA" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MARINERO") And dtgDatos.Rows(x).Cells(10).Value >= 55 Then
+                            '######### Actualizacion Mayo no se toma en cuenta el subsidio
+                            ' Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
+                            Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot, 2)
+                            If (dtgDatos.Rows(x).Cells(11).FormattedValue = "COCINERO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MOTORISTA" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MARINERO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "OPERARIO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "AYUDANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "QUÍMICO DE APOYO") And dtgDatos.Rows(x).Cells(10).Value >= 55 Then
                                 Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss + subsidioaplicado, 2)
                                 'If dtgDatos.Rows(x).Cells(2).Value = "149" Then
                                 '    MessageBox.Show("aqui ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -15201,7 +15202,8 @@ Public Class frmnominasmarinos
                             hoja4.Columns("B").Width = 20
                             hoja4.Cell(filaExcel, 1).Value = dtgD.Rows(x).Cells(6).Value ' RFC
                             hoja4.Cell(filaExcel, 2).Value = nombrecompleto 'Nombre
-                            hoja4.Cell(filaExcel, 3).Value = CDbl(dtgD.Rows(x).Cells(45).Value) ' SUBSIDIO IMPORTE
+                            '#Actualizacion Mayo isr y subsidio 
+                            hoja4.Cell(filaExcel, 3).Value = 0 'CDbl(dtgD.Rows(x).Cells(45).Value) ' SUBSIDIO IMPORTE
                             hoja4.Cell(filaExcel, 4).Value = CDbl(dtgD.Rows(x).Cells(44).Value) ' SUBSIDIO CUSADO
 
                             filaExcel = filaExcel + 1
