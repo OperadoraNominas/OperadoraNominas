@@ -17,7 +17,8 @@ Public Class frmnominasmarinos
     Dim TipoNomina As Boolean
     Dim IDCalculoInfonavit As Integer
     Dim FechaInicioPeriodoGlobal As Date
-
+    'PRIMER LINEA DESPUES DE 2 AÑOS
+    'SEGUIR
 
 
     Private Sub dvgCombo_SelectedIndexChanged(sender As Object, e As EventArgs)
