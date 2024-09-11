@@ -234,9 +234,9 @@ Partial Class frmnominasmarinos
         Me.pnlCatalogo.Controls.Add(Me.cmdverdatos)
         Me.pnlCatalogo.Controls.Add(Me.Label1)
         Me.pnlCatalogo.Controls.Add(Me.cboperiodo)
-        Me.pnlCatalogo.Location = New System.Drawing.Point(0, 51)
+        Me.pnlCatalogo.Location = New System.Drawing.Point(0, 57)
         Me.pnlCatalogo.Name = "pnlCatalogo"
-        Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 451)
+        Me.pnlCatalogo.Size = New System.Drawing.Size(1357, 552)
         Me.pnlCatalogo.TabIndex = 26
         '
         'chkPrestamoSA
@@ -574,7 +574,7 @@ Partial Class frmnominasmarinos
         Me.dtgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgDatos.Location = New System.Drawing.Point(1, 104)
         Me.dtgDatos.Name = "dtgDatos"
-        Me.dtgDatos.Size = New System.Drawing.Size(1349, 340)
+        Me.dtgDatos.Size = New System.Drawing.Size(1349, 441)
         Me.dtgDatos.TabIndex = 6
         '
         'cmdverdatos
@@ -609,7 +609,7 @@ Partial Class frmnominasmarinos
         Me.pnlProgreso.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pnlProgreso.Controls.Add(Me.Label2)
         Me.pnlProgreso.Controls.Add(Me.pgbProgreso)
-        Me.pnlProgreso.Location = New System.Drawing.Point(454, 234)
+        Me.pnlProgreso.Location = New System.Drawing.Point(454, 288)
         Me.pnlProgreso.Name = "pnlProgreso"
         Me.pnlProgreso.Size = New System.Drawing.Size(449, 84)
         Me.pnlProgreso.TabIndex = 27
@@ -750,7 +750,7 @@ Partial Class frmnominasmarinos
         '
         Me.layoutTimbrado.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.layoutTimbrado.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.layoutTimbrado.Location = New System.Drawing.Point(12, 514)
+        Me.layoutTimbrado.Location = New System.Drawing.Point(12, 621)
         Me.layoutTimbrado.Name = "layoutTimbrado"
         Me.layoutTimbrado.Size = New System.Drawing.Size(123, 27)
         Me.layoutTimbrado.TabIndex = 28
@@ -762,7 +762,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdInfonavit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdInfonavit.Location = New System.Drawing.Point(324, 514)
+        Me.cmdInfonavit.Location = New System.Drawing.Point(324, 621)
         Me.cmdInfonavit.Name = "cmdInfonavit"
         Me.cmdInfonavit.Size = New System.Drawing.Size(112, 27)
         Me.cmdInfonavit.TabIndex = 29
@@ -774,7 +774,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdReporteInfonavit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdReporteInfonavit.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdReporteInfonavit.Location = New System.Drawing.Point(442, 514)
+        Me.cmdReporteInfonavit.Location = New System.Drawing.Point(442, 621)
         Me.cmdReporteInfonavit.Name = "cmdReporteInfonavit"
         Me.cmdReporteInfonavit.Size = New System.Drawing.Size(99, 27)
         Me.cmdReporteInfonavit.TabIndex = 30
@@ -785,7 +785,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdComision.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdComision.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdComision.Location = New System.Drawing.Point(547, 514)
+        Me.cmdComision.Location = New System.Drawing.Point(547, 621)
         Me.cmdComision.Name = "cmdComision"
         Me.cmdComision.Size = New System.Drawing.Size(99, 27)
         Me.cmdComision.TabIndex = 31
@@ -796,7 +796,7 @@ Partial Class frmnominasmarinos
         '
         Me.btnAsimilados.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnAsimilados.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAsimilados.Location = New System.Drawing.Point(141, 514)
+        Me.btnAsimilados.Location = New System.Drawing.Point(141, 621)
         Me.btnAsimilados.Name = "btnAsimilados"
         Me.btnAsimilados.Size = New System.Drawing.Size(176, 27)
         Me.btnAsimilados.TabIndex = 32
@@ -808,7 +808,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdInfonavitNominaSerie.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdInfonavitNominaSerie.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(655, 514)
+        Me.cmdInfonavitNominaSerie.Location = New System.Drawing.Point(655, 621)
         Me.cmdInfonavitNominaSerie.Name = "cmdInfonavitNominaSerie"
         Me.cmdInfonavitNominaSerie.Size = New System.Drawing.Size(203, 27)
         Me.cmdInfonavitNominaSerie.TabIndex = 32
@@ -819,7 +819,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdKioskoSove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cmdKioskoSove.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdKioskoSove.Location = New System.Drawing.Point(864, 514)
+        Me.cmdKioskoSove.Location = New System.Drawing.Point(864, 621)
         Me.cmdKioskoSove.Name = "cmdKioskoSove"
         Me.cmdKioskoSove.Size = New System.Drawing.Size(131, 27)
         Me.cmdKioskoSove.TabIndex = 33
@@ -830,7 +830,7 @@ Partial Class frmnominasmarinos
         '
         Me.cmdConcentradoFonacot.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmdConcentradoFonacot.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdConcentradoFonacot.Location = New System.Drawing.Point(1001, 514)
+        Me.cmdConcentradoFonacot.Location = New System.Drawing.Point(1001, 621)
         Me.cmdConcentradoFonacot.Name = "cmdConcentradoFonacot"
         Me.cmdConcentradoFonacot.Size = New System.Drawing.Size(147, 28)
         Me.cmdConcentradoFonacot.TabIndex = 34
@@ -844,7 +844,7 @@ Partial Class frmnominasmarinos
         Me.chkNoinfonavit.AutoSize = True
         Me.chkNoinfonavit.BackColor = System.Drawing.Color.Transparent
         Me.chkNoinfonavit.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkNoinfonavit.Location = New System.Drawing.Point(1203, 519)
+        Me.chkNoinfonavit.Location = New System.Drawing.Point(1203, 626)
         Me.chkNoinfonavit.Name = "chkNoinfonavit"
         Me.chkNoinfonavit.Size = New System.Drawing.Size(154, 22)
         Me.chkNoinfonavit.TabIndex = 33
@@ -854,7 +854,7 @@ Partial Class frmnominasmarinos
         'frmnominasmarinos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(1357, 553)
+        Me.ClientSize = New System.Drawing.Size(1357, 660)
         Me.Controls.Add(Me.cmdConcentradoFonacot)
         Me.Controls.Add(Me.cmdKioskoSove)
         Me.Controls.Add(Me.chkNoinfonavit)
