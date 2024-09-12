@@ -14783,7 +14783,7 @@ Public Class frmnominasmarinos
         dialogo.DefaultExt = "*.xlsx"
         Dim fechita() As String = fechapagoletra.Split(",")
         If tipo = "sa" Then
-            dialogo.FileName = "Isla-Arca " & fechita(1).ToUpper() & " SERIE" & cboserie.SelectedItem & " " & IIf(cboTipoNomina.SelectedIndex = 0, "NA", "ND")
+            dialogo.FileName = "Isla-Arca " & fechita(1).ToUpper() & " SERIE " & cboserie.SelectedItem & " " & IIf(cboTipoNomina.SelectedIndex = 0, "NA", "ND")
         Else
             dialogo.FileName = "Asimilados " & fechita(1).ToUpper() & " " & IIf(cboTipoNomina.SelectedIndex = 0, "NA", "ND")
         End If
@@ -15260,8 +15260,8 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 24).Value = ""
 
                             '####################################### IKE ########################################
-                            If dtgD.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgD.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN" Then
-                                MsgBox("pilotin")
+                            If nombrecompleto = "FELIPE DOMINGUEZ DOMINGUEZ" Then
+                                MsgBox("Lol")
                             End If
 
                             Dim IKE_PENSION As Double = IIf(dtgD.Rows(x).Cells(49).Value > 0, (CDbl(dtgD.Rows(x).Cells(49).Value) * 2), 0)
@@ -15274,6 +15274,8 @@ Public Class frmnominasmarinos
                             If dtgD.Rows(x).Cells(10).Value > 55 Then
                                 PFB_CORTO_PLAZO = 0
                                 VSM = 0
+                                hoja2.Cell(filaExcel, 25).Value = 0 'PREVISION_PFB GRAVADO
+                                
                             Else
                                 'SA y ASIM tiene valores mayor a 0
                                 If CDbl(dtgD.Rows(x).Cells(46).Value) > 0 Or CDbl(dtgD.Rows(x).Cells(55).Value) > 0 Then
@@ -15282,29 +15284,41 @@ Public Class frmnominasmarinos
                                     If cboTipoNomina.SelectedIndex = 0 Then
 
                                         'Es pilotin o
-                                        If pilotin = False Then
-
-                                            PFB_CORTO_PLAZO = (sueldo_base * 2) - ((dtgDatos.Rows(x).Cells(46).Value + operadora_desncanso) + IKE_PENSION + IKE_INFONAVIT)
-
-                                        Else
+                                        If dtgD.Rows(x).Cells(11).FormattedValue = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgD.Rows(x).Cells(11).FormattedValue = "SUBALTERNO EN FORMACIÓN" Then
 
                                             PFB_CORTO_PLAZO = 0
-
-                                        End If
-
-
-
-                                        If PFB_CORTO_PLAZO < 0 Or rep <> 2 Then
-                                            VSM = 0
                                         Else
-                                            VSM = CDbl(dtgD.Rows(x).Cells(17).Value) / 172.89 / 1.0616
-                                        End If
 
+                                            PFB_CORTO_PLAZO = (sueldo_base * 2) - ((dtgDatos.Rows(x).Cells(46).Value + operadora_desncanso) + IKE_PENSION + IKE_INFONAVIT)
+                                            VSM = CDbl(dtgD.Rows(x).Cells(17).Value) / 172.89 / 1.0616
+
+                                            If PFB_CORTO_PLAZO < 0 Then
+                                                VSM = 0
+                                            Else
+                                                'Es repetido en esta nomina.
+                                                If rep > 1 Then
+                                                    VSM = 0
+
+                                                Else
+                                                    'Tiene CS (imss)
+                                                    If CDbl(dtgD.Rows(x).Cells(55).Value) > 0 Then
+                                                        VSM = CDbl(dtgD.Rows(x).Cells(17).Value) / 172.89 / 1.0616
+                                                    Else
+                                                        VSM = 0
+                                                    End If
+
+                                                End If
+
+                                            End If
+
+
+                                        End If
 
                                         hoja2.Cell(filaExcel, 25).Value = (CDbl(PFB_CORTO_PLAZO)) + ((VSM * 248.93 * 30.4 * 0.03) / 2) 'PREVISION_ PFB	
+                                        hoja2.Cell(filaExcel, 27).Value = ((VSM * 248.93 * 30.4 * 0.03) / 2)
                                     Else
                                         hoja2.Cell(filaExcel, 25).Value = 0 'PREVISION_PFB GRAVADO
-                                        hoja2.Cell(filaExcel, 26).Value = ""
+                                        hoja2.Cell(filaExcel, 26).Value = 0
                                         hoja2.Cell(filaExcel, 27).Value = 0 'APORT PATRONAL PLAN FELX LP GRAVADO
                                     End If
 
@@ -15312,7 +15326,7 @@ Public Class frmnominasmarinos
 
                                 Else
                                     hoja2.Cell(filaExcel, 25).Value = 0 'PREVISION_PFB GRAVADO
-                                    hoja2.Cell(filaExcel, 26).Value = ""
+                                    hoja2.Cell(filaExcel, 26).Value = 0
                                     hoja2.Cell(filaExcel, 27).Value = 0 'APORT PATRONAL PLAN FELX LP GRAVADO
 
                                 End If
