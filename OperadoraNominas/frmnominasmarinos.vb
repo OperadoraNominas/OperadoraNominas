@@ -15260,9 +15260,9 @@ Public Class frmnominasmarinos
                             hoja2.Cell(filaExcel, 24).Value = ""
 
                             '####################################### IKE ########################################
-                            If nombrecompleto = "FELIPE DOMINGUEZ DOMINGUEZ" Then
-                                MsgBox("Lol")
-                            End If
+                            'If nombrecompleto = "FELIPE DOMINGUEZ DOMINGUEZ" Then
+                            '    MsgBox("Lol")
+                            'End If
 
                             Dim IKE_PENSION As Double = IIf(dtgD.Rows(x).Cells(49).Value > 0, (CDbl(dtgD.Rows(x).Cells(49).Value) * 2), 0)
                             Dim IKE_INFONAVIT As Double = IIf(dtgD.Rows(x).Cells(48).Value > 0, (CDbl(dtgD.Rows(x).Cells(48).Value) * 2), 0)
