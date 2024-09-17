@@ -14324,7 +14324,7 @@ Public Class frmnominasmarinos
                     hoja2.Range(filaExcel, 1, filaExcel, 59).Style.Font.SetBold(False)
 
                     hoja2.Range(filaExcel, 1, filaExcel, 7).Style.NumberFormat.Format = "@"
-                    hoja2.Cell(filaExcel, 16).Style.NumberFormat.Format = "@"
+                    'hoja2.Cell(filaExcel, 16).Style.NumberFormat.Format = "@"
                     hoja2.Range(filaExcel, 1, filaExcel, 59).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.General)
                     'Datos
                     hoja2.Cell(filaExcel, 1).Value = dtgDatos.Rows(x).Cells(3).Value 'N° Trabajador
