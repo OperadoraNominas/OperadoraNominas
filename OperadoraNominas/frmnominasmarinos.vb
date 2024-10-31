@@ -1514,7 +1514,7 @@ Public Class frmnominasmarinos
         If (MesNacimiento <= MesActual) Then
             If (DiaNacimiento <= DiaActual) Then
                 If (DiaNacimiento = DiaActual And MesNacimiento = MesActual) Then
-                    'MsgBox("Feliz Cumpleaños!")
+                    MsgBox("Feliz Cumpleaños!")
                 End If
                 ' MsgBox("Ya cumplio")
                 Cumplidos = True
@@ -2781,6 +2781,10 @@ Public Class frmnominasmarinos
 
                 Dim rwDatosSalario As DataRow() = nConsulta(sql)
 
+                'If (dtgDatos.Rows(x).Cells(2).Value = 818) Then
+                '    MsgBox("casillas")
+                'End If
+
                 If rwDatosSalario Is Nothing = False Then
                     If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
                         dtgDatos.Rows(x).Cells(16).Value = rwDatosSalario(0)("salariodTopado")
@@ -3157,7 +3161,7 @@ Public Class frmnominasmarinos
                                                             Incapacidad = Double.Parse(IIf(dtgDatos.Rows(x).Cells(35).Value = "", "0", dtgDatos.Rows(x).Cells(35).Value))
                                                             isr = Double.Parse(IIf(dtgDatos.Rows(x).Cells(36).Value = "", "0", dtgDatos.Rows(x).Cells(36).Value))
                                                             imss = Double.Parse(IIf(dtgDatos.Rows(x).Cells(37).Value = "", "0", dtgDatos.Rows(x).Cells(37).Value))
-                                                            
+
                                                             Dim SubtotalAntesInfonavit As Double = TotalPercepciones - Incapacidad - isr - imss
 
                                                             If cboTipoNomina.SelectedIndex = 0 Then
@@ -3751,7 +3755,7 @@ Public Class frmnominasmarinos
                             dtgDatos.Rows(x).Cells(35).Value = Math.Round(ValorIncapacidad, 2).ToString("###,##0.00")
                             'ISR
                             '#####################ACTUALIZADO A MAYO 2024##########################################
-                            
+
                             'dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse((baseisrtotal(dtgDatos.Rows(x).Cells(11).FormattedValue, 30, dtgDatos.Rows(x).Cells(17).Value, ValorIncapacidad)) / 30 * dtgDatos.Rows(x).Cells(18).Value), 2).ToString("###,##0.00")
                             'dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(CDbl(dtgDatos.Rows(x).Cells(34).Value), 1, x, CInt(dtgDatos.Rows(x).Cells(18).Value))), 2).ToString("###,##0.00")
                             dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(CDbl(dtgDatos.Rows(x).Cells(34).Value), 1, x, CInt(dtgDatos.Rows(x).Cells(18).Value))), 2).ToString("###,##0.00")
@@ -4454,17 +4458,17 @@ Public Class frmnominasmarinos
 
 
                             'pension = Double.Parse(IIf(dtgDatos.Rows(x).Cells(41).Value = "", "0", dtgDatos.Rows(x).Cells(41).Value))
+                            'If dtgDatos.Rows(x).Cells(4).Value = "PRIEGO TEJERO ANGEL ERNESTO" Then
+                            '    MsgBox("Esta")
+                            'End If
 
-                           
                             '######### Actualizacion Mayo no se toma en cuenta el subsidio
                             ' Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
 
                             Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot, 2)
                             If (dtgDatos.Rows(x).Cells(11).FormattedValue = "COCINERO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MOTORISTA" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MARINERO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "OPERARIO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "AYUDANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "QUÍMICO DE APOYO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "QUÍMICO RESPONSABLE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "CAPITAN" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIAL MAQUINAS") And dtgDatos.Rows(x).Cells(10).Value >= 55 Then
                                 Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss + subsidioaplicado, 2)
-                                'If dtgDatos.Rows(x).Cells(2).Value = "981" Then
-                                '    MessageBox.Show("aqui ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                                'End If
+
                                 If (((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))) - Operadora) < 0 Then
 
                                     isr = isr + (Operadora - ((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))))
@@ -4479,7 +4483,7 @@ Public Class frmnominasmarinos
 
                             dtgDatos.Rows(x).Cells(46).Value = Operadora
 
-                            End If
+                        End If
 
 
 
@@ -7488,6 +7492,11 @@ Public Class frmnominasmarinos
             'si percibe al mes menos de 9081 se genera un propocional
             If Double.Parse(dtgDatos.Rows(fila).Cells(16).Value) * 30 < 9081 Then
                 subsidio = 0
+
+                'validamos dias
+                If DiasP > 30 Then
+                    DiasP = 30
+                End If
                 SQL = "select * from subsidio where ((" & monto & ">=subsidio.limiteinf and " & monto & "<=subsidio.limitesup)"
                 SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=" & 2
                 Dim rwSubsidio As DataRow() = nConsulta(SQL)
@@ -11483,6 +11492,10 @@ Public Class frmnominasmarinos
                             fila.Item("CURP") = rwDatosEmpleado(0)("cCURP").ToString
                             fila.Item("Num_IMSS") = rwDatosEmpleado(0)("cIMSS").ToString
 
+                            If rwDatosEmpleado(0)("cCodigoEmpleado").ToString() = "3972" Then
+                                MsgBox("casillas")
+                            End If
+
                             fila.Item("Fecha_Nac") = Date.Parse(rwDatosEmpleado(0)("dFechaNac").ToString).ToShortDateString()
                             'Dim tiempo As TimeSpan = Date.Now - Date.Parse(rwDatosEmpleados(x)("dFechaNac").ToString)
                             fila.Item("Edad") = CalcularEdad(Date.Parse(rwDatosEmpleado(0)("dFechaNac").ToString).Day, Date.Parse(rwDatosEmpleado(0)("dFechaNac").ToString).Month, Date.Parse(rwDatosEmpleado(0)("dFechaNac").ToString).Year)
@@ -12073,16 +12086,19 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel + x, 9).Value = "0.0" 'DIAS DESCANSO
                             hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L" & filaExcel + x 'ABORDO
                             hoja.Cell(filaExcel + x, 11).FormulaA1 = "0.0" ' DESCANSO
+                            hoja.Cell(filaExcel + x, 12).Value = (getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "sueldoO", dtgDatos.Rows(x).Cells(12).Value, "", "", dtgDatos.Rows(x).Cells(11).Value)) ' SUELDO ORDINARIO
+
                             pilotin = True
                         Else
                             hoja.Cell(filaExcel + x, 9).Value = dtgDatos.Rows(x).Cells(18).Value  ' DIAS DESCANSO
                             hoja.Cell(filaExcel + x, 10).FormulaA1 = "=L" & filaExcel + x & "/2" 'ABORDO 
                             hoja.Cell(filaExcel + x, 11).FormulaA1 = "=L" & filaExcel + x & "/2"  'DESCANSO
+                            hoja.Cell(filaExcel + x, 12).Value = (dtgDatos.Rows(x).Cells(15).Value) + getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "sueldoO", dtgDatos.Rows(x).Cells(12).Value, "", "", dtgDatos.Rows(x).Cells(11).Value) ' SUELDO ORDINARIO
+
                             pilotin = False
                         End If
 
-                        hoja.Cell(filaExcel + x, 12).Value = (dtgDatos.Rows(x).Cells(15).Value) + getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "sueldoO", dtgDatos.Rows(x).Cells(12).Value, "", "", dtgDatos.Rows(x).Cells(11).Value) ' SUELDO ORDINARIO
-                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='SOVER ABORDO'!AL" & filatmp + x & "+'SOVER DESCANSO'!AI" & filatmp + x & "-'SOVER ABORDO'!BF" & filatmp + x   ' INFONAVIT M
+                         hoja.Cell(filaExcel + x, 13).FormulaA1 = "='SOVER ABORDO'!AL" & filatmp + x & "+'SOVER DESCANSO'!AI" & filatmp + x & "-'SOVER ABORDO'!BF" & filatmp + x   ' INFONAVIT M
                         hoja.Cell(filaExcel + x, 14).FormulaA1 = "='SOVER ABORDO'!AM" & filatmp + x & "+'SOVER ABORDO'!AN" & filatmp + x & "+'SOVER DESCANSO'!AJ" & filatmp + x & "+'SOVER DESCANSO'!AK" & filatmp + x & "+'SOVER ABORDO'!BF" & filatmp + x   'INFONAVIT BIM ANTERIOR + AJUSTE INFONAVIT N
                         hoja.Cell(filaExcel + x, 15).FormulaA1 = "='SOVER ABORDO'!BG" & filatmp + x '& "+'SOVER DESCANSO'!AY" & filatmp + x 'PENSION PPP  --O
                         hoja.Cell(filaExcel + x, 16).Value = "0.0"
@@ -14424,7 +14440,7 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 52).Value = dtgDatos.Rows(x).Cells(57).Value 'infonavit
                     hoja2.Cell(filaExcel, 53).FormulaA1 = " =AG" & filaExcel & "*0.03+((AG" & filaExcel & "*0.03)*0.33)" 'dtgDatos.Rows(x).Cells(58).Value 'ISN
                     'hoja2.Cell(filaExcel, 53).FormulaA1 = "=" & objelement & "* 0.03+((" & objelement & "*0.03)*0.33)"
-                    hoja2.Cell(filaExcel, 54).FormulaR1C1 = "=IF(COUNTIF($B$9:$B" & filaExcel & ",$B" & filaExcel & ")>1,0,IF(H" & filaExcel & ">55,0,IF(I" & filaExcel & "= ""OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE "",0,IF(I" & filaExcel & "=""SUBALTERNO EN FORMACIÓN "",0,46.94))))" 'VALORES AGREGADOS
+                    hoja2.Cell(filaExcel, 54).FormulaR1C1 = "=IF(COUNTIF($B$9:$B" & filaExcel & ",$B" & filaExcel & ")>1,0,IF(H" & filaExcel & ">55,0,IF(I" & filaExcel & "= ""OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE"",0,IF(I" & filaExcel & "=""SUBALTERNO EN FORMACIÓN"",0,IF(AX" & filaExcel & "<=0,0,46.94)))))" 'VALORES AGREGADOS
                     hoja2.Cell(filaExcel, 55).FormulaA1 = "=SUM(AX" & filaExcel & ":BB" & filaExcel & ")"
                     hoja2.Cell(filaExcel, 56).FormulaA1 = "=BC" & filaExcel 'dtgDatos.Rows(x).Cells(59).Value
                     'FLEX IKE
@@ -14649,7 +14665,7 @@ Public Class frmnominasmarinos
                 hoja3.Cell(filaExcel + 4, 49).FormulaA1 = "=SUM(AW9:AW" & filaExcel & ")"
                 hoja3.Cell(filaExcel + 4, 50).FormulaA1 = "=SUM(AX9:AX" & filaExcel & ")"
 
-                limpiarCell(hoja3, 53) ', 1, dtgDatos.Rows.Count - 1)
+                'limpiarCell(hoja3, 53) ', 1, dtgDatos.Rows.Count - 1)
 
 
                 'Titulo
@@ -17290,6 +17306,9 @@ Public Class frmnominasmarinos
         Dim valor As String = 0
         Dim tiponom As String
         Dim sql As String
+        If puesto = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or puesto = "SUBALTERNO EN FORMACIÓN" Then
+            tiponom = 1
+        End If
 
         If tiponomina = 0 Then
             tiponom = 0
