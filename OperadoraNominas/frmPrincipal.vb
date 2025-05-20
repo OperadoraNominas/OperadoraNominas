@@ -484,7 +484,7 @@ Public Class frmPrincipal
 
     Private Sub lsvPanel_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles lsvPanel.SizeChanged
         Dim sRuta As String
-        sRuta = System.IO.Path.GetTempPath
+        sRuta = Path.GetTempPath
         Try
             Me.lsvPanel.BackgroundImage = Me.PictureBox1.Image.GetThumbnailImage(Me.lsvPanel.ClientSize.Width, Me.lsvPanel.ClientSize.Height, Nothing, Nothing)
             Me.BackgroundImage = Me.PictureBox1.Image.GetThumbnailImage(Me.lsvPanel.ClientSize.Width, Me.lsvPanel.ClientSize.Height, Nothing, Nothing)

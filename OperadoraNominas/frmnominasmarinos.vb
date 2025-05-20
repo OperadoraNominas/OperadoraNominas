@@ -3622,7 +3622,7 @@ Public Class frmnominasmarinos
 
 
 
-                        '########################Termina calculo pilotin.
+                        '######################## Termina calculo pilotin. #########################################3
                     Else
                         diastrabajados = Double.Parse(IIf(dtgDatos.Rows(x).Cells(18).Value = "", "0", dtgDatos.Rows(x).Cells(18).Value))
                         If diastrabajados = 0 Then
@@ -12000,8 +12000,8 @@ Public Class frmnominasmarinos
                 Dim libro As New ClosedXML.Excel.XLWorkbook
 
                 book.Worksheet(1).CopyTo(libro, "NOMINA TOTAL")
-                book.Worksheet(2).CopyTo(libro, "SOVER ABORDO")
-                book.Worksheet(3).CopyTo(libro, "SOVER DESCANSO")
+                book.Worksheet(2).CopyTo(libro, "SILVERPEAK ABORDO")
+                book.Worksheet(3).CopyTo(libro, "SILVERPEAK DESCANSO")
                 book.Worksheet(4).CopyTo(libro, "DETALLE")
                 book.Worksheets(5).CopyTo(libro, "FACT")
                 book.Worksheets(6).CopyTo(libro, "PENSION ALIMENTICIA")
@@ -12037,6 +12037,7 @@ Public Class frmnominasmarinos
                 Dim amarrados, arboleda, azteca, cedros, miramar, verde, cruz, montserrat, blanca, ciari, janitzio, luis, ignacio, gabriel, diego, jose, grande, creciente, colorada, subsea88, leon, nevado, redfish, maersk As Integer
                 Dim passavera, margot, beluga, canopus, gannet As Integer
                 Dim aurora, worldperidot As Integer
+                Dim alfa, gamma As Integer
                 Dim H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X2, Y, Z, AA, AB, AC, AD, AE, AF, AG As String
 
                 If cboTipoNomina.SelectedIndex = 1 Then
@@ -12098,16 +12099,27 @@ Public Class frmnominasmarinos
                             pilotin = False
                         End If
 
-                         hoja.Cell(filaExcel + x, 13).FormulaA1 = "='SOVER ABORDO'!AL" & filatmp + x & "+'SOVER DESCANSO'!AI" & filatmp + x & "-'SOVER ABORDO'!BF" & filatmp + x   ' INFONAVIT M
-                        hoja.Cell(filaExcel + x, 14).FormulaA1 = "='SOVER ABORDO'!AM" & filatmp + x & "+'SOVER ABORDO'!AN" & filatmp + x & "+'SOVER DESCANSO'!AJ" & filatmp + x & "+'SOVER DESCANSO'!AK" & filatmp + x & "+'SOVER ABORDO'!BF" & filatmp + x   'INFONAVIT BIM ANTERIOR + AJUSTE INFONAVIT N
-                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "='SOVER ABORDO'!BG" & filatmp + x '& "+'SOVER DESCANSO'!AY" & filatmp + x 'PENSION PPP  --O
+                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='SILVERPEAK ABORDO'!AL" & filatmp + x & "+'SILVERPEAK DESCANSO'!AI" & filatmp + x & "-'SILVERPEAK ABORDO'!BF" & filatmp + x   ' INFONAVIT M
+                        hoja.Cell(filaExcel + x, 14).FormulaA1 = "='SILVERPEAK ABORDO'!AM" & filatmp + x & "+'SILVERPEAK ABORDO'!AN" & filatmp + x & "+'SILVERPEAK DESCANSO'!AJ" & filatmp + x & "+'SILVERPEAK DESCANSO'!AK" & filatmp + x & "+'SILVERPEAK ABORDO'!BF" & filatmp + x   'INFONAVIT BIM ANTERIOR + AJUSTE INFONAVIT N
+                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "='SILVERPEAK ABORDO'!BG" & filatmp + x '& "+'SILVERPEAK DESCANSO'!AY" & filatmp + x 'PENSION PPP  --O
                         hoja.Cell(filaExcel + x, 16).Value = "0.0"
-                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "='SOVER ABORDO'!BE" & filatmp + x & "+'SOVER DESCANSO'!AW" & filatmp + x   'DESC ASIMILADOS
-                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "='SOVER ABORDO'!AO" & filatmp + x & "+'SOVER DESCANSO'!AL" & filatmp + x & "-O" & filaExcel + x 'PENSION ALIMENTICIA
-                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "='SOVER ABORDO'!AQ" & filatmp + x & "+'SOVER DESCANSO'!AN" & filatmp + x 'Prestamo
-                        hoja.Cell(filaExcel + x, 20).FormulaA1 = "='SOVER ABORDO'!AR" & filatmp + x & "+'SOVER DESCANSO'!AO" & filatmp + x 'Fonacot
+                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "='SILVERPEAK ABORDO'!BE" & filatmp + x & "+'SILVERPEAK DESCANSO'!AW" & filatmp + x   'DESC ASIMILADOS
+                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "='SILVERPEAK ABORDO'!AO" & filatmp + x & "+'SILVERPEAK DESCANSO'!AL" & filatmp + x & "-O" & filaExcel + x 'PENSION ALIMENTICIA
+                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "='SILVERPEAK ABORDO'!AQ" & filatmp + x & "+'SILVERPEAK DESCANSO'!AN" & filatmp + x 'Prestamo
+                        hoja.Cell(filaExcel + x, 20).FormulaA1 = "='SILVERPEAK ABORDO'!AR" & filatmp + x & "+'SILVERPEAK DESCANSO'!AO" & filatmp + x 'Fonacot
                         hoja.Cell(filaExcel + x, 21).FormulaA1 = "=L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x & "-P" & filaExcel + x & "-Q" & filaExcel + x & "-R" & filaExcel + x & "-S" & filaExcel + x & "-T" & filaExcel + x & "-O" & filaExcel + x ' sueldo ordinario real
-                        hoja.Cell(filaExcel + x, 22).FormulaA1 = "='SOVER ABORDO'!AV" & filatmp + x & "+'SOVER DESCANSO'!AP" & filatmp + x 'SOVER
+
+                        If dtgDatos.Rows(x).Cells(11).Value = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).Value = "SUBALTERNO EN FORMACIÓN" Then
+                            pilotin = True
+                            hoja.Cell(filaExcel + x, 22).FormulaA1 = "=IF(('SILVERPEAK ABORDO'!AV" & filatmp + x & "+'SILVERPEAK DESCANSO'!AP" & filatmp + x & ") < U" & filaExcel + x & " ,U" & filaExcel + x & ", 'SILVERPEAK ABORDO'!AV" & filatmp + x & "+'SILVERPEAK DESCANSO'!AP" & filatmp + x & ")" 'SILVERPEAK
+
+                        Else
+                            pilotin = False
+                            hoja.Cell(filaExcel + x, 22).FormulaA1 = " ='SILVERPEAK ABORDO'!AV" & filatmp + x & "+'SILVERPEAK DESCANSO'!AP" & filatmp + x 'SILVERPEAK
+
+                        End If
+
+                        hoja.Cell(filaExcel + x, 22).AddConditionalFormat().WhenLessThan(0).Fill.SetBackgroundColor(XLColor.Red)
 
                         If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
                             hoja.Cell(filaExcel + x, 23).Style.Fill.BackgroundColor = XLColor.LightBlue
@@ -12115,21 +12127,24 @@ Public Class frmnominasmarinos
                         Else
                             hoja.Cell(filaExcel + x, 23).FormulaA1 = "= U" & filaExcel + x & "-V" & filaExcel + x ' PFB CORTO PLAZO
                         End If
+
+                        hoja.Cell(filaExcel + x, 23).AddConditionalFormat().WhenLessThan(0).Fill.SetBackgroundColor(XLColor.Redwood)
+
                         'Excedente Negativo
                         If dtgDatos.Rows(x).Cells(50).Value < 0 Then
                             hoja.Cell(filaExcel + x, 23).Style.Fill.BackgroundColor = XLColor.AppleGreen
                         End If
 
-                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "=+'SOVER ABORDO'!AS" & filatmp + x & "+'SOVER ABORDO'!AT" & filatmp + x  ' 'FONDO PFB 3%
+                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "=+'SILVERPEAK ABORDO'!AS" & filatmp + x & "+'SILVERPEAK ABORDO'!AT" & filatmp + x  ' 'FONDO PFB 3%
 
-                        Dim retencionesSA As String = "='SOVER ABORDO'!AJ" & filatmp + x & "+'SOVER ABORDO'!AM" & filatmp + x & "+'SOVER ABORDO'!AN" & filatmp + x & "+'SOVER ABORDO'!AQ" & filatmp + x & "+'SOVER ABORDO'!AR" & filatmp + x
-                        retencionesSA &= "+'SOVER DESCANSO'!AG" & filatmp + x & "+'SOVER DESCANSO'!AJ" & filatmp + x & "+'SOVER DESCANSO'!AK" & filatmp + x & "+'SOVER DESCANSO'!AN" & filatmp + x & "+R" & filaExcel + x & "+M" & filaExcel + x
+                        Dim retencionesSA As String = "='SILVERPEAK ABORDO'!AJ" & filatmp + x & "+'SILVERPEAK ABORDO'!AM" & filatmp + x & "+'SILVERPEAK ABORDO'!AN" & filatmp + x & "+'SILVERPEAK ABORDO'!AQ" & filatmp + x & "+'SILVERPEAK ABORDO'!AR" & filatmp + x
+                        retencionesSA &= "+'SILVERPEAK DESCANSO'!AG" & filatmp + x & "+'SILVERPEAK DESCANSO'!AJ" & filatmp + x & "+'SILVERPEAK DESCANSO'!AK" & filatmp + x & "+'SILVERPEAK DESCANSO'!AN" & filatmp + x & "+'SILVERPEAK DESCANSO'!AO" & filatmp + x & "+R" & filaExcel + x & "+M" & filaExcel + x
 
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = retencionesSA ' retenciones
                         hoja.Cell(filaExcel + x, 26).FormulaA1 = ""
-                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=(V" & filaExcel + x & "+Y" & filaExcel + x & ")*4%" 'AA Comision Sover
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=(V" & filaExcel + x & "+Y" & filaExcel + x & ")*4%" 'AA Comision SILVERPEAK
                         hoja.Cell(filaExcel + x, 28).FormulaA1 = "=(X" & filaExcel + x & "+W" & filaExcel + x & "+N" & filaExcel + x & "+O" & filaExcel + x & ")*8%" 'AB comision excedente
-                        hoja.Cell(filaExcel + x, 29).FormulaA1 = "='SOVER ABORDO'!BD" & filatmp + x & "+'SOVER DESCANSO'!AV" & filatmp + x '
+                        hoja.Cell(filaExcel + x, 29).FormulaA1 = "='SILVERPEAK ABORDO'!BD" & filatmp + x & "+'SILVERPEAK DESCANSO'!AV" & filatmp + x '
                         hoja.Cell(filaExcel + x, 30).FormulaA1 = "=N" & filaExcel + x & "+O" & filaExcel + x & "+V" & filaExcel + x & "+W" & filaExcel + x & "+X" & filaExcel + x & "+Y" & filaExcel + x & "+AA" & filaExcel + x & "+AB" & filaExcel + x & "+AC" & filaExcel + x
                         hoja.Cell(filaExcel + x, 31).FormulaA1 = "=AD" & filaExcel + x & "*16%" 'IVA
                         hoja.Cell(filaExcel + x, 32).FormulaA1 = "=0" 'RETENCION
@@ -12197,6 +12212,10 @@ Public Class frmnominasmarinos
                                 aurora = contadorexcelbuquefinal
                             Case "WORLD PERIDOT", "WORLD", "PERIDOT"
                                 worldperidot = contadorexcelbuquefinal
+                            Case "TMM ALFA", "ALFA"
+                                alfa = contadorexcelbuquefinal
+                            Case "TMM GAMMA", "GAMMA"
+                                gamma = contadorexcelbuquefinal
                         End Select
 
                         hoja.Cell(filaExcel + x, 12).FormulaA1 = "=SUM(L" & contadorexcelbuqueinicial & ":L" & contadorexcelbuquefinal & ")"
@@ -12279,16 +12298,25 @@ Public Class frmnominasmarinos
                         End If
 
                         hoja.Cell(filaExcel + x, 12).Value = (dtgDatos.Rows(x).Cells(15).Value) + getsueldoordinario(cboTipoNomina.SelectedIndex, dtgDatos.Rows(x).Cells(3).Value, dtgDatos.Rows(x).Cells(18).Value, "sueldoO", dtgDatos.Rows(x).Cells(12).Value, "", "", dtgDatos.Rows(x).Cells(11).Value) ' SUELDO ORDINARIO
-                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='SOVER ABORDO'!AL" & filatmp + x & "+'SOVER DESCANSO'!AI" & filatmp + x & "-'SOVER ABORDO'!BF" & filatmp + x   ' INFONAVIT M
-                        hoja.Cell(filaExcel + x, 14).FormulaA1 = "='SOVER ABORDO'!AM" & filatmp + x & "+'SOVER ABORDO'!AN" & filatmp + x & "+'SOVER DESCANSO'!AJ" & filatmp + x & "+'SOVER DESCANSO'!AK" & filatmp + x & "+'SOVER ABORDO'!BF" & filatmp + x  'INFONAVIT BIM ANTERIOR + AJUSTE INFONAVIT N
-                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "='SOVER ABORDO'!BG" & filatmp + x '& "+'SOVER DESCANSO'!AY" & filatmp + x 'PENSION PPP  --O
+                        hoja.Cell(filaExcel + x, 13).FormulaA1 = "='SILVERPEAK ABORDO'!AL" & filatmp + x & "+'SILVERPEAK DESCANSO'!AI" & filatmp + x & "-'SILVERPEAK ABORDO'!BF" & filatmp + x   ' INFONAVIT M
+                        hoja.Cell(filaExcel + x, 14).FormulaA1 = "='SILVERPEAK ABORDO'!AM" & filatmp + x & "+'SILVERPEAK ABORDO'!AN" & filatmp + x & "+'SILVERPEAK DESCANSO'!AJ" & filatmp + x & "+'SILVERPEAK DESCANSO'!AK" & filatmp + x & "+'SILVERPEAK ABORDO'!BF" & filatmp + x  'INFONAVIT BIM ANTERIOR + AJUSTE INFONAVIT N
+                        hoja.Cell(filaExcel + x, 15).FormulaA1 = "='SILVERPEAK ABORDO'!BG" & filatmp + x '& "+'SILVERPEAK DESCANSO'!AY" & filatmp + x 'PENSION PPP  --O
                         hoja.Cell(filaExcel + x, 16).Value = "0.0"
-                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "='SOVER ABORDO'!BE" & filatmp + x & "+'SOVER DESCANSO'!AW" & filatmp + x   'DESC ASIMILADOS
-                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "='SOVER ABORDO'!AO" & filatmp + x & "+'SOVER DESCANSO'!AL" & filatmp + x & "-O" & filaExcel + x 'PENSION ALIMENTICIA
-                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "='SOVER ABORDO'!AQ" & filatmp + x & "+'SOVER DESCANSO'!AN" & filatmp + x 'Prestamo
-                        hoja.Cell(filaExcel + x, 20).FormulaA1 = "='SOVER ABORDO'!AR" & filatmp + x & "+'SOVER DESCANSO'!AO" & filatmp + x 'Fonacot
+                        hoja.Cell(filaExcel + x, 17).FormulaA1 = "='SILVERPEAK ABORDO'!BE" & filatmp + x & "+'SILVERPEAK DESCANSO'!AW" & filatmp + x   'DESC ASIMILADOS
+                        hoja.Cell(filaExcel + x, 18).FormulaA1 = "='SILVERPEAK ABORDO'!AO" & filatmp + x & "+'SILVERPEAK DESCANSO'!AL" & filatmp + x & "-O" & filaExcel + x 'PENSION ALIMENTICIA
+                        hoja.Cell(filaExcel + x, 19).FormulaA1 = "='SILVERPEAK ABORDO'!AQ" & filatmp + x & "+'SILVERPEAK DESCANSO'!AN" & filatmp + x 'Prestamo
+                        hoja.Cell(filaExcel + x, 20).FormulaA1 = "='SILVERPEAK ABORDO'!AR" & filatmp + x & "+'SILVERPEAK DESCANSO'!AO" & filatmp + x 'Fonacot
                         hoja.Cell(filaExcel + x, 21).FormulaA1 = "=L" & filaExcel + x & "-M" & filaExcel + x & "-N" & filaExcel + x & "-P" & filaExcel + x & "-Q" & filaExcel + x & "-R" & filaExcel + x & "-S" & filaExcel + x & "-T" & filaExcel + x & "-O" & filaExcel + x ' sueldo ordinario real
-                        hoja.Cell(filaExcel + x, 22).FormulaA1 = "='SOVER ABORDO'!AV" & filatmp + x & "+'SOVER DESCANSO'!AP" & filatmp + x 'SOVER
+
+                        If dtgDatos.Rows(x).Cells(11).Value = "OFICIALES EN PRACTICAS: PILOTIN / ASPIRANTE" Or dtgDatos.Rows(x).Cells(11).Value = "SUBALTERNO EN FORMACIÓN" Then
+                            pilotin = True
+                            hoja.Cell(filaExcel + x, 22).FormulaA1 = "=IF(('SILVERPEAK ABORDO'!AV" & filatmp + x & "+'SILVERPEAK DESCANSO'!AP" & filatmp + x & ") < U" & filaExcel + x & " ,U" & filaExcel + x & ", 'SILVERPEAK ABORDO'!AV" & filatmp + x & "+'SILVERPEAK DESCANSO'!AP" & filatmp + x & ")" 'SILVERPEAK
+
+                        Else
+                            pilotin = False
+                            hoja.Cell(filaExcel + x, 22).FormulaA1 = " ='SILVERPEAK ABORDO'!AV" & filatmp + x & "+'SILVERPEAK DESCANSO'!AP" & filatmp + x 'SILVERPEAK
+
+                        End If
                         If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
                             hoja.Cell(filaExcel + x, 23).Style.Fill.BackgroundColor = XLColor.LightBlue
                             hoja.Cell(filaExcel + x, 23).FormulaA1 = "=IF((U" & filaExcel + x & "-V" & filaExcel + x & ")<0,0, U" & filaExcel + x & "-V" & filaExcel + x & ")" ' PFB CORTO PLAZO
@@ -12300,16 +12328,16 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel + x, 23).Style.Fill.BackgroundColor = XLColor.AppleGreen
                         End If
 
-                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "=+'SOVER ABORDO'!AS" & filatmp + x & "+'SOVER ABORDO'!AT" & filatmp + x  ' 'FONDO PFB 3%
+                        hoja.Cell(filaExcel + x, 24).FormulaA1 = "=+'SILVERPEAK ABORDO'!AS" & filatmp + x & "+'SILVERPEAK ABORDO'!AT" & filatmp + x  ' 'FONDO PFB 3%
 
-                        Dim retencionesSA As String = "='SOVER ABORDO'!AJ" & filatmp + x & "+'SOVER ABORDO'!AM" & filatmp + x & "+'SOVER ABORDO'!AN" & filatmp + x & "+'SOVER ABORDO'!AQ" & filatmp + x & "+'SOVER ABORDO'!AR" & filatmp + x
-                        retencionesSA &= "+'SOVER DESCANSO'!AG" & filatmp + x & "+'SOVER DESCANSO'!AJ" & filatmp + x & "+'SOVER DESCANSO'!AK" & filatmp + x & "+'SOVER DESCANSO'!AN" & filatmp + x & "+R" & filaExcel + x & "+M" & filaExcel + x
+                        Dim retencionesSA As String = "='SILVERPEAK ABORDO'!AJ" & filatmp + x & "+'SILVERPEAK ABORDO'!AM" & filatmp + x & "+'SILVERPEAK ABORDO'!AN" & filatmp + x & "+'SILVERPEAK ABORDO'!AQ" & filatmp + x & "+'SILVERPEAK ABORDO'!AR" & filatmp + x
+                        retencionesSA &= "+'SILVERPEAK DESCANSO'!AG" & filatmp + x & "+'SILVERPEAK DESCANSO'!AJ" & filatmp + x & "+'SILVERPEAK DESCANSO'!AK" & filatmp + x & "+'SILVERPEAK DESCANSO'!AN" & filatmp + x & "+'SILVERPEAK DESCANSO'!AO" & filatmp + x & "+R" & filaExcel + x & "+M" & filaExcel + x
 
                         hoja.Cell(filaExcel + x, 25).FormulaA1 = retencionesSA ' retenciones
                         hoja.Cell(filaExcel + x, 26).FormulaA1 = ""
-                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=(V" & filaExcel + x & "+Y" & filaExcel + x & ")*4%" 'AA Comision Sover
+                        hoja.Cell(filaExcel + x, 27).FormulaA1 = "=(V" & filaExcel + x & "+Y" & filaExcel + x & ")*4%" 'AA Comision SILVERPEAK
                         hoja.Cell(filaExcel + x, 28).FormulaA1 = "=(X" & filaExcel + x & "+W" & filaExcel + x & "+N" & filaExcel + x & "+O" & filaExcel + x & ")*8%" 'AB comision excedente
-                        hoja.Cell(filaExcel + x, 29).FormulaA1 = "='SOVER ABORDO'!BD" & filatmp + x & "+'SOVER DESCANSO'!AV" & filatmp + x '
+                        hoja.Cell(filaExcel + x, 29).FormulaA1 = "='SILVERPEAK ABORDO'!BD" & filatmp + x & "+'SILVERPEAK DESCANSO'!AV" & filatmp + x '
                         hoja.Cell(filaExcel + x, 30).FormulaA1 = "=N" & filaExcel + x & "+O" & filaExcel + x & "+V" & filaExcel + x & "+W" & filaExcel + x & "+X" & filaExcel + x & "+Y" & filaExcel + x & "+AA" & filaExcel + x & "+AB" & filaExcel + x & "+AC" & filaExcel + x
                         hoja.Cell(filaExcel + x, 31).FormulaA1 = "=AD" & filaExcel + x & "*16%" 'IVA
                         hoja.Cell(filaExcel + x, 32).FormulaA1 = "=0" 'RETENCION
@@ -12407,6 +12435,10 @@ Public Class frmnominasmarinos
                         aurora = contadorexcelbuquefinal
                     Case "WORLD PERIDOT", "WORLD", "PERIDOT"
                         worldperidot = contadorexcelbuquefinal
+                    Case "TMM ALFA", "ALFA"
+                        alfa = contadorexcelbuquefinal
+                    Case "TMM GAMMA", "GAMMA"
+                        gamma = contadorexcelbuquefinal
                 End Select
 
 
@@ -12773,7 +12805,7 @@ Public Class frmnominasmarinos
                 'hoja.Cell("AB" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
                 '<<<<FACT>>>>
-                hoja5.Cell("B5").Value = "AGENCIA GROESSINGER SAPI DE CV" 'rwUsuario(0).Item("Nombre").ToUpper
+                hoja5.Cell("B5").Value = "ASESORÍA Y CONSULTORÍA MACHT" 'rwUsuario(0).Item("Nombre").ToUpper
 
                 hoja5.Cell("C6").FormulaA1 = IIf(arboleda > 0, "='NOMINA TOTAL'!E" & sep + 3, "0.0") 'Arboleda
                 hoja5.Cell("C7").FormulaA1 = IIf(azteca > 0, "='NOMINA TOTAL'!I" & sep + 3, "0.0") 'Azteca
@@ -13464,8 +13496,8 @@ Public Class frmnominasmarinos
                 hoja.Range("AB" & sep + 6, "AD" & sep + 6).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Cell("AB" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
-                'AURORA PEARL
-                hoja.Cell("AG" & sep).Value = "AURORA PEARL"
+                'AURORA PEARL/AHORA TMM ALFA
+                hoja.Cell("AG" & sep).Value = "TMM ALFA"
                 hoja.Cell("AG" & sep + 1).Value = "TMM SA"
                 hoja.Cell("AG" & sep + 3).Value = "DEPOSITO "
                 hoja.Cell("AG" & sep + 4).Value = "IVA"
@@ -13476,14 +13508,14 @@ Public Class frmnominasmarinos
                 hoja.Cell("AG" & sep + 8).Value = "IVA"
                 hoja.Cell("AG" & sep + 9).Value = "TOTAL DEPOSITO "
 
-                If aurora > 0 Then
+                If alfa > 0 Then
 
-                    hoja.Cell("AI" & sep + 3).FormulaA1 = "=V" & aurora + 1 & " + Y" & aurora + 1 & " + AA" & aurora + 1 & "+AC" & aurora + 1
+                    hoja.Cell("AI" & sep + 3).FormulaA1 = "=V" & alfa + 1 & " + Y" & alfa + 1 & " + AA" & alfa + 1 & "+AC" & alfa + 1
                     hoja.Cell("AI" & sep + 4).FormulaA1 = "=AI" & sep + 3 & "*16%"
                     hoja.Cell("AI" & sep + 5).FormulaA1 = 0 ' "=AD" & sep + 3 & " *6%"
                     hoja.Cell("AI" & sep + 6).FormulaA1 = "=AI" & sep + 3 & "+AI" & sep + 4 & "-AI" & sep + 5
 
-                    hoja.Cell("AI" & sep + 7).FormulaA1 = "=N" & aurora + 1 & "+O" & aurora + 1 & "+W" & aurora + 1 & "+AB" & aurora + 1 + 1 & "+x" & aurora + 1
+                    hoja.Cell("AI" & sep + 7).FormulaA1 = "=N" & alfa + 1 & "+O" & alfa + 1 & "+W" & alfa + 1 & "+AB" & alfa + 1 & "+x" & alfa + 1
                     hoja.Cell("AI" & sep + 8).FormulaA1 = "=AI" & sep + 7 & "*16%"
                     hoja.Cell("AI" & sep + 9).FormulaA1 = "=AI" & sep + 7 & "+AI" & sep + 8
 
@@ -13520,7 +13552,7 @@ Public Class frmnominasmarinos
                 hoja5.Cell("C23").FormulaA1 = IIf(diego > 0, "='NOMINA TOTAL'!V" & sep + 3, "0.00") 'Diego
                 hoja5.Cell("D24").FormulaA1 = IIf(colorada > 0, "='NOMINA TOTAL'!D" & sep + 3, "0.000") 'Colorada
                 hoja5.Cell("D28").FormulaA1 = IIf(redfish > 0, "='NOMINA TOTAL'!AD" & sep + 3, "0.000") 'RED FISH
-                hoja5.Cell("D33").FormulaA1 = IIf(aurora > 0, "='NOMINA TOTAL'!AI" & sep + 3, "0.000") 'AURORA PEARL
+                hoja5.Cell("D33").FormulaA1 = IIf(alfa > 0, "='NOMINA TOTAL'!AI" & sep + 3, "0.000") 'AURORA PEARL
 
                 hoja5.Cell("C54").FormulaA1 = IIf(luis > 0, "='NOMINA TOTAL'!H" & sep + 7, "0.00") 'Luis
                 hoja5.Cell("C55").FormulaA1 = IIf(ignacio > 0, "='NOMINA TOTAL'!L" & sep + 7, "0.00")
@@ -13528,7 +13560,7 @@ Public Class frmnominasmarinos
                 hoja5.Cell("C57").FormulaA1 = IIf(diego > 0, "='NOMINA TOTAL'!V" & sep + 7, "0.00")
                 hoja5.Cell("D58").FormulaA1 = IIf(colorada > 0, "='NOMINA TOTAL'!D" & sep + 7, "0.000") 'Colorada
                 hoja5.Cell("D62").FormulaA1 = IIf(redfish > 0, "='NOMINA TOTAL'!AD" & sep + 7, "0.000") 'RED FISH
-                hoja5.Cell("D67").FormulaA1 = IIf(aurora > 0, "='NOMINA TOTAL'!AI" & sep + 7, "0.000") 'AURORA PEARL
+                hoja5.Cell("D67").FormulaA1 = IIf(alfa > 0, "='NOMINA TOTAL'!AI" & sep + 7, "0.000") 'AURORA PEARL
 
 
 
@@ -13856,8 +13888,8 @@ Public Class frmnominasmarinos
                 hoja.Range("AB" & sep + 6, "AD" & sep + 6).Style.Fill.BackgroundColor = XLColor.YellowProcess
                 hoja.Cell("AB" & sep).Style.Fill.BackgroundColor = XLColor.PowderBlue
 
-                'WORLD PERIDOT
-                hoja.Cell("AG" & sep).Value = "WORLD PERIDOT"
+                'WORLD PERIDOT/TMM GAMMA
+                hoja.Cell("AG" & sep).Value = "TMM GAMMA"
                 hoja.Cell("AG" & sep + 1).Value = "TMM SA"
                 hoja.Cell("AG" & sep + 3).Value = "DEPOSITO "
                 hoja.Cell("AG" & sep + 4).Value = "IVA"
@@ -13868,14 +13900,14 @@ Public Class frmnominasmarinos
                 hoja.Cell("AG" & sep + 8).Value = "IVA"
                 hoja.Cell("AG" & sep + 9).Value = "TOTAL DEPOSITO "
 
-                If worldperidot > 0 Then
+                If gamma > 0 Then
 
-                    hoja.Cell("AI" & sep + 3).FormulaA1 = "=V" & worldperidot + 1 & " + Y" & worldperidot + 1 & " + AA" & worldperidot + 1 & "+AC" & worldperidot + 1
+                    hoja.Cell("AI" & sep + 3).FormulaA1 = "=V" & gamma + 1 & " + Y" & gamma + 1 & " + AA" & gamma + 1 & "+AC" & gamma + 1
                     hoja.Cell("AI" & sep + 4).FormulaA1 = "=AI" & sep + 3 & "*16%"
                     hoja.Cell("AI" & sep + 5).FormulaA1 = 0
                     hoja.Cell("AI" & sep + 6).FormulaA1 = "=AI" & sep + 3 & "+AI" & sep + 4 & "-AI" & sep + 5
 
-                    hoja.Cell("AI" & sep + 7).FormulaA1 = "=N" & worldperidot + 1 & "+O" & worldperidot + 1 & "+W" & worldperidot + 1 & "+AB" & worldperidot + 1 & "+x" & worldperidot + 1
+                    hoja.Cell("AI" & sep + 7).FormulaA1 = "=N" & gamma + 1 & "+O" & gamma + 1 & "+W" & gamma + 1 & "+AB" & gamma + 1 & "+x" & gamma + 1
                     hoja.Cell("AI" & sep + 8).FormulaA1 = "=AI" & sep + 7 & "*16%"
                     hoja.Cell("AI" & sep + 9).FormulaA1 = "=AI" & sep + 7 & "+AI" & sep + 8
 
@@ -13910,7 +13942,7 @@ Public Class frmnominasmarinos
                 hoja5.Cell("D27").FormulaA1 = IIf(subsea88 > 0, "='NOMINA TOTAL'!D" & sep + 3, "0.00") 'Subsea88
                 hoja5.Cell("D29").FormulaA1 = IIf(maersk > 0, "='NOMINA TOTAL'!Z" & sep + 3, "0.00") 'MAERSK 1
                 hoja5.Cell("D30").FormulaA1 = IIf(beluga > 0, "='NOMINA TOTAL'!AD" & sep + 3, "0.00") 'BELUGA 2
-                hoja5.Cell("D34").FormulaA1 = IIf(worldperidot > 0, "='NOMINA TOTAL'!AI" & sep + 3, "0.00") 'WORLD PERIDOT
+                hoja5.Cell("D34").FormulaA1 = IIf(gamma > 0, "='NOMINA TOTAL'!AI" & sep + 3, "0.00") 'WORLD PERIDOT
 
                 hoja5.Cell("C44").FormulaA1 = IIf(jose > 0, "='NOMINA TOTAL'!H" & sep + 7, "0.00")
                 hoja5.Cell("C43").FormulaA1 = IIf(grande > 0, "='NOMINA TOTAL'!K" & sep + 7, "0.00")
@@ -13919,7 +13951,7 @@ Public Class frmnominasmarinos
                 hoja5.Cell("D61").FormulaA1 = IIf(subsea88 > 0, "='NOMINA TOTAL'!D" & sep + 7, "0.00") 'Subsea88
                 hoja5.Cell("D63").FormulaA1 = IIf(maersk > 0, "='NOMINA TOTAL'!Z" & sep + 7, "0.00") 'MAERSK 1
                 hoja5.Cell("D64").FormulaA1 = IIf(beluga > 0, "='NOMINA TOTAL'!AD" & sep + 7, "0.00") 'BELUGA2
-                hoja5.Cell("D68").FormulaA1 = IIf(worldperidot > 0, "='NOMINA TOTAL'!AI" & sep + 7, "0.00") 'WORLD PERIDOT
+                hoja5.Cell("D68").FormulaA1 = IIf(gamma > 0, "='NOMINA TOTAL'!AI" & sep + 7, "0.00") 'WORLD PERIDOT
 
                 '<<<<<<<<<<<<<<<Detalle>>>>>>>>>>>>>>>>>>
 
@@ -13965,7 +13997,7 @@ Public Class frmnominasmarinos
                     hoja4.Cell(filaExcel, 5).Value = banco
                     hoja4.Cell(filaExcel, 6).Value = clabe
                     hoja4.Cell(filaExcel, 7).Value = cuenta
-                    hoja4.Cell(filaExcel, 8).FormulaA1 = "='SOVER ABORDO'!AV" & filatmp & "+'SOVER DESCANSO'!AP" & filatmp
+                    hoja4.Cell(filaExcel, 8).FormulaA1 = "='SILVERPEAK ABORDO'!AV" & filatmp & "+'SILVERPEAK DESCANSO'!AP" & filatmp
 
                     ''   
                     If inicio = x Then
@@ -14098,8 +14130,8 @@ Public Class frmnominasmarinos
                                 hoja6.Cell("F" & filaExcel).Value = rwPension(0).Item("Cuenta")
                                 hoja6.Cell("G" & filaExcel).Value = rwPension(0).Item("Clabe")
                                 hoja6.Cell("H" & filaExcel).FormulaA1 = porcentaje & "%"
-                                hoja6.Cell("I" & filaExcel).FormulaA1 = "='SOVER ABORDO'!AO" & filatmp & "-'SOVER ABORDO'!BG" & filatmp ' MONTO ABORDO
-                                hoja6.Cell("J" & filaExcel).FormulaA1 = "='SOVER DESCANSO'!AL" & filatmp ' MONTO DESCANSO
+                                hoja6.Cell("I" & filaExcel).FormulaA1 = "='SILVERPEAK ABORDO'!AO" & filatmp & "-'SILVERPEAK ABORDO'!BG" & filatmp ' MONTO ABORDO
+                                hoja6.Cell("J" & filaExcel).FormulaA1 = "='SILVERPEAK DESCANSO'!AL" & filatmp ' MONTO DESCANSO
                                 hoja6.Cell("K" & filaExcel).FormulaA1 = "=I" & filaExcel & "+J" & filaExcel 'SUMA
 
                                 'IKE
@@ -14114,7 +14146,7 @@ Public Class frmnominasmarinos
                                 hoja6.Cell("H" & filaExcel + totalPensionados).FormulaA1 = porcentaje
                                 hoja6.Cell("I" & filaExcel + totalPensionados).FormulaA1 = "=+K" & filaExcel + totalPensionados & "/2" ' MONTO ABORDO
                                 hoja6.Cell("J" & filaExcel + totalPensionados).FormulaA1 = "=+K" & filaExcel + totalPensionados & "/2" ' MONTO DESCANSO
-                                hoja6.Cell("K" & filaExcel + totalPensionados).FormulaA1 = "=+'SOVER ABORDO'!BG" & filatmp 'SUMA
+                                hoja6.Cell("K" & filaExcel + totalPensionados).FormulaA1 = "=+'SILVERPEAK ABORDO'!BG" & filatmp 'SUMA
 
                                 filaExcel = filaExcel + 1
                             End If
@@ -14176,7 +14208,7 @@ Public Class frmnominasmarinos
                                     hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
                                     hoja7.Cell("C" & filaExcel).Value = tipprestamos(0).Item("TipoPrestamo")
                                     hoja7.Cell("D" & filaExcel).Value = prestamoSA(0).Item("montopres")
-                                    hoja7.Cell("E" & filaExcel).FormulaA1 = "='SOVER ABORDO'!AQ" & filatmp & "+'SOVER DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
+                                    hoja7.Cell("E" & filaExcel).FormulaA1 = "='SILVERPEAK ABORDO'!AQ" & filatmp & "+'SILVERPEAK DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
                                     hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("totalcobrado")
                                     hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
 
@@ -14196,7 +14228,7 @@ Public Class frmnominasmarinos
                                 hoja7.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
                                 hoja7.Cell("C" & filaExcel).Value = tipprestamos(0).Item("TipoPrestamo") 'Tipo de prestamo
                                 hoja7.Cell("D" & filaExcel).Value = prestamoSA(0).Item("montopres")
-                                hoja7.Cell("E" & filaExcel).FormulaA1 = "='SOVER ABORDO'!AQ" & filatmp & "+'SOVER DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
+                                hoja7.Cell("E" & filaExcel).FormulaA1 = "='SILVERPEAK ABORDO'!AQ" & filatmp & "+'SILVERPEAK DESCANSO'!AN" & filatmp  ' prestado.Item("descuento")
                                 hoja7.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
                                 hoja7.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
 
@@ -14273,7 +14305,7 @@ Public Class frmnominasmarinos
                                 hoja8.Cell("B" & filaExcel).Value = dtgDatos.Rows(x).Cells(4).Value ' Nombre
                                 hoja8.Cell("C" & filaExcel).Value = "-" 'tipo 'Tipo de prestamo
                                 hoja8.Cell("D" & filaExcel).Value = rwPrestamoSa(0).Item("montoTotal") 'Monto
-                                hoja8.Cell("E" & filaExcel).FormulaA1 = "='SOVER ABORDO'!BG" & filatmp & "+'SOVER DESCANSO'!AW" & filatmp  ' prestado.Item("descuento")
+                                hoja8.Cell("E" & filaExcel).FormulaA1 = "='SILVERPEAK ABORDO'!BG" & filatmp & "+'SILVERPEAK DESCANSO'!AW" & filatmp  ' prestado.Item("descuento")
                                 hoja8.Cell("F" & filaExcel).Value = totalcobrado(0).Item("TotalCobrado")
                                 hoja8.Cell("G" & filaExcel).FormulaA1 = "=D" & filaExcel & "-F" & filaExcel 'FALTANTE
 
@@ -14292,7 +14324,7 @@ Public Class frmnominasmarinos
                 hoja8.Cell(filaExcel + 2, 7).FormulaA1 = "=SUM(G2:G" & filaExcel & ")"
 
 
-                '<<<<<<<<<<<<<<<<<Sover Abordo>>>>>>>>>>>>>>>>>>>>>>>>
+                '<<<<<<<<<<<<<<<<<Silverpeak Abordo>>>>>>>>>>>>>>>>>>>>>>>>
                 Dim sueldo_basePPP As Double
                 Dim infonavitPPP As Double
                 Dim infonavit_bin_antPPP As Double
@@ -14309,8 +14341,8 @@ Public Class frmnominasmarinos
                 'Validamos en que nomina esta
                 Dim rwPeriodo As DataRow() = nConsulta("Select (CONVERT(nvarchar(12),dFechaInicio,103) + ' al ' + CONVERT(nvarchar(12),dFechaFin,103)) as dFechaInicio from periodos where iIdPeriodo=" & cboperiodo.SelectedValue)
                 If rwPeriodo Is Nothing = False Then
-                    hoja2.Cell("B2").Value = "TRANSPORTES SOVER SA DE CV"
-                    hoja3.Cell("B2").Value = "TRANSPORTES SOVER SA DE CV"
+                    hoja2.Cell("B2").Value = "SILVERPEAK LOGISTICS GDLOAX"
+                    hoja3.Cell("B2").Value = "SILVERPEAK LOGISTICS GDLOAX"
                     hoja2.Cell(4, 2).Value = "Periodo Mensual del " & rwPeriodo(0).Item("dFechaInicio")
                     hoja3.Cell(4, 2).Value = "Periodo Mensual del " & rwPeriodo(0).Item("dFechaInicio")
 
@@ -14389,8 +14421,8 @@ Public Class frmnominasmarinos
 
                     PFB_CortoPlazo = (sueldo_basePPP - (infonavitPPP + infonavit_bin_antPPP + Ajuste_infonavitPPP + pension_alimenticiaPPP + prestamoPPP + fonacotPPP + prestamo_personal_asimPPP + adeudo_infonavit_asimPPP + diferencia_infonavit_asimPPP)) * 2 'CDbl(dtgDatos.Rows(x).Cells(50).Value) * 2
 
-                    Dim validacionPFB_CortoPlazo As String = "(" & PFB_CortoPlazo & "-( " & OPeradoraPPP & "+ 'SOVER DESCANSO'!AP" & filaExcel & ")" & ")"
-                    Dim PFB As String = "=IF(BB" & filaExcel & ">1,IF(H" & filaExcel & ">=55,0,(O" & filaExcel & "*248.93*30.4*0.03)/2),0)"
+                    Dim validacionPFB_CortoPlazo As String = "(" & PFB_CortoPlazo & "-( " & OPeradoraPPP & "+ 'SILVERPEAK DESCANSO'!AP" & filaExcel & ")" & ")"
+                    Dim PFB As String = "=IF(BB" & filaExcel & ">1,IF(H" & filaExcel & ">=55,0,(O" & filaExcel & "*278.80*30.4*0.03)/2),0)"
 
                     If dtgDatos.Rows(x).Cells(10).Value >= 55 Then
                         PFB = 0
@@ -14445,8 +14477,8 @@ Public Class frmnominasmarinos
                     hoja2.Cell(filaExcel, 56).FormulaA1 = "=BC" & filaExcel 'dtgDatos.Rows(x).Cells(59).Value
                     'FLEX IKE
                     hoja2.Cell(filaExcel, 57).Value = dtgDatos.Rows(x).Cells(47).Value
-                    hoja2.Cell(filaExcel, 58).FormulaA1 = "=" & dtgDatos.Rows(x).Cells(48).Value & "+'SOVER DESCANSO'!AX" & filaExcel  ' ADEUDO INFONAVIT IKE
-                    hoja2.Cell(filaExcel, 59).FormulaA1 = "=" & dtgDatos.Rows(x).Cells(49).Value & "+'SOVER DESCANSO'!AY" & filaExcel ' PENSION IKE
+                    hoja2.Cell(filaExcel, 58).FormulaA1 = "=" & dtgDatos.Rows(x).Cells(48).Value & "+'SILVERPEAK DESCANSO'!AX" & filaExcel  ' ADEUDO INFONAVIT IKE
+                    hoja2.Cell(filaExcel, 59).FormulaA1 = "=" & dtgDatos.Rows(x).Cells(49).Value & "+'SILVERPEAK DESCANSO'!AY" & filaExcel ' PENSION IKE
 
                     filaExcel = filaExcel + 1
 
