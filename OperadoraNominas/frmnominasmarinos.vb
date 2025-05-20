@@ -15219,7 +15219,7 @@ Public Class frmnominasmarinos
                             hoja.Cell(filaExcel, 8).Value = cuenta ' Cuenta Bancaria
                             hoja.Cell(filaExcel, 9).Value = dtgD.Rows(x).Cells(17).Value 'SBC //O 17 SALARIO_COTIZACION
                             hoja.Cell(filaExcel, 10).Value = dtgD.Rows(x).Cells(16).Value 'SDI
-                            hoja.Cell(filaExcel, 11).Value = "A1133617106" 'Reg. Patronal 
+                            hoja.Cell(filaExcel, 11).Value = "A1136212103" 'Reg. Patronal 
                             hoja.Cell(filaExcel, 12).Value = "CAM" 'Ent. Federativa  
                             hoja.Cell(filaExcel, 13).Value = cCP
                             hoja.Cell(filaExcel, 14).Value = dtgD.Rows(x).Cells(18).Value 'Días Pagados
