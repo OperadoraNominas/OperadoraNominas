@@ -664,7 +664,7 @@ Public Class frmnominasmarinos
                 'dtgDatos.Columns(49).ReadOnly = True
                 dtgDatos.Columns(48).Width = 150
 
-                'Difencia infonavit Asimilado
+                'Difencia infonavit Asimilado/pension alimenticiA EXCEDENETE
                 dtgDatos.Columns(49).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 'dtgDatos.Columns(50).ReadOnly = True
                 dtgDatos.Columns(49).Width = 150
@@ -4373,8 +4373,14 @@ Public Class frmnominasmarinos
 
                             prestamo = Double.Parse(IIf(dtgDatos.Rows(x).Cells(42).Value = "", "0", dtgDatos.Rows(x).Cells(42).Value))
 
+                            'PENSION ################################
+
                             'PENSION
-                            PensionAlimenticia = TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - prestamo - fonacot + subsidioaplicado - PensionAntesVariable
+                            PensionAlimenticia = TotalPercepciones - Incapacidad
+                            PensionAlimenticia -= isr - imss
+                            ' PensionAlimenticia -= infonavitvalor - infonavitanterior - ajusteinfonavit
+                            PensionAlimenticia -= prestamo - fonacot + subsidioaplicado - PensionAntesVariable
+
                             'Buscamos la Pension
                             'If dtgDatos.Rows(x).Cells(2).Value = 94 Then
                             '    MessageBox.Show("EL EMPLEADO ES " & dtgDatos.Rows(x).Cells(4).Value, Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -4389,8 +4395,6 @@ Public Class frmnominasmarinos
                             Else
                                 pension = 0
                             End If
-
-
 
 
                             If rwPensionEmpleado Is Nothing = False Then
@@ -4423,10 +4427,6 @@ Public Class frmnominasmarinos
                                         sql &= "," & consecutivo1
 
 
-
-
-
-
                                         If nExecute(sql) = False Then
                                             MessageBox.Show("Ocurrio un error ", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 
@@ -4434,21 +4434,15 @@ Public Class frmnominasmarinos
                                         End If
                                     End If
 
-
-
-
                                 Next
 
-
                                 dtgDatos.Rows(x).Cells(41).Value = pension
-
 
 
                             Else
                                 pension = 0
                                 dtgDatos.Rows(x).Cells(41).Value = "0"
                             End If
-
 
 
 
@@ -4607,7 +4601,7 @@ Public Class frmnominasmarinos
 
 
                     Dim pensionAsi As Double = 0
-                    PensionAlimenticia = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot - PrestamoPersonalAsimilados - AdeudoINfonavitAsimilados - Operadora, 2)
+                    PensionAlimenticia = Math.Round(SueldoBaseTMM - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot - PrestamoPersonalAsimilados - Operadora, 2)
 
                     If rwPensionEmpleado2 Is Nothing = False Then
                         For y As Integer = 0 To rwPensionEmpleado2.Length - 1
