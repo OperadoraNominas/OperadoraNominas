@@ -97,10 +97,10 @@ Public Class frmSubirDatos
 
                     lsvLista.Columns(1).Width = 90
 
-                    lsvLista.Columns(2).Width = 150
+                    lsvLista.Columns(2).Width = 180
                     lsvLista.Columns(3).Width = 50
                     lsvLista.Columns(4).Width = 50
-                    lsvLista.Columns(5).Width = 50
+                    lsvLista.Columns(5).Width = 150
                     lsvLista.Columns(6).Width = 50
                     lsvLista.Columns(7).Width = 100
                     lsvLista.Columns(7).TextAlign = 1

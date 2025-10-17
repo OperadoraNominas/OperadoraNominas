@@ -3682,9 +3682,9 @@ Public Class frmnominasmarinos
                             dtgDatos.Rows(x).Cells(46).Value = Operadora
 
                         Else
-                            If (dtgDatos.Rows(x).Cells(2).Value = "275") Then
-                                MsgBox("este es")
-                            End If
+                            ' If (dtgDatos.Rows(x).Cells(2).Value = "275") Then
+                            'MsgBox("este es")
+                            'End If
 
                             Sueldo = Double.Parse(dtgDatos.Rows(x).Cells(17).Value) * diastrabajados
                                 dtgDatos.Rows(x).Cells(21).Value = Math.Round(Sueldo * (26.19568006 / 100), 2).ToString("###,##0.00")
@@ -3757,15 +3757,18 @@ Public Class frmnominasmarinos
                                 End If
                                 'INCAPACIDAD
                                 dtgDatos.Rows(x).Cells(35).Value = Math.Round(ValorIncapacidad, 2).ToString("###,##0.00")
-                                'ISR
-                                '#####################ACTUALIZADO A MAYO 2024##########################################
+                            'ISR
+                            '#####################ACTUALIZADO A MAYO 2024##########################################
+                            'If dtgDatos.Rows(x).Cells(11).Value = "QUÍMICO RESPONSABLE" Or dtgDatos.Rows(x).Cells(11).Value = "QUÍMICO DE APOYO" Or dtgDatos.Rows(x).Cells(11).Value = "OPERARIO" Or dtgDatos.Rows(x).Cells(11).Value = "AYUDANTE" Then
+                            '    MessageBox.Show("Puesto con SUB", Me.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            'End If
 
-                                'dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse((baseisrtotal(dtgDatos.Rows(x).Cells(11).FormattedValue, 30, dtgDatos.Rows(x).Cells(17).Value, ValorIncapacidad)) / 30 * dtgDatos.Rows(x).Cells(18).Value), 2).ToString("###,##0.00")
-                                'dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(CDbl(dtgDatos.Rows(x).Cells(34).Value), 1, x, CInt(dtgDatos.Rows(x).Cells(18).Value))), 2).ToString("###,##0.00")
-                                dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(CDbl(dtgDatos.Rows(x).Cells(34).Value), 1, x, CInt(dtgDatos.Rows(x).Cells(18).Value))), 2).ToString("###,##0.00")
+                            'dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse((baseisrtotal(dtgDatos.Rows(x).Cells(11).FormattedValue, 30, dtgDatos.Rows(x).Cells(17).Value, ValorIncapacidad)) / 30 * dtgDatos.Rows(x).Cells(18).Value), 2).ToString("###,##0.00")
+                            'dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(CDbl(dtgDatos.Rows(x).Cells(34).Value), 1, x, CInt(dtgDatos.Rows(x).Cells(18).Value))), 2).ToString("###,##0.00")
+                            dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(CDbl(dtgDatos.Rows(x).Cells(34).Value), 1, x, CInt(dtgDatos.Rows(x).Cells(18).Value))), 2).ToString("###,##0.00")
 
-                                'IMSS
-                                dtgDatos.Rows(x).Cells(37).Value = "0.00"
+                            'IMSS
+                            dtgDatos.Rows(x).Cells(37).Value = "0.00"
                                 'INFONAVIT
                                 '##### VERIFICAR SI ESTA YA CALCULADO EL INFONAVIT DEL BIMESTRE
                                 'Aqui verificamos si esta activo el calcular o no el infonavit
@@ -7488,7 +7491,7 @@ Public Class frmnominasmarinos
                 MessageBox.Show("No existe la tabla de ISR con el año: " & aniocostosocial)
             End If
             'si percibe al mes menos de 9081 se genera un propocional
-            If Double.Parse(dtgDatos.Rows(fila).Cells(16).Value) * 30 < 9081 Then
+            If Double.Parse(dtgDatos.Rows(fila).Cells(16).Value) * 30 < 10171 Then
                 subsidio = 0
 
                 'validamos dias
@@ -7496,7 +7499,7 @@ Public Class frmnominasmarinos
                     DiasP = 30
                 End If
                 SQL = "select * from subsidio where ((" & monto & ">=subsidio.limiteinf and " & monto & "<=subsidio.limitesup)"
-                SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=" & 2
+                SQL &= " or (" & monto & ">=subsidio.limiteinf and subsidio.limitesup=0)) and fkiIdTipoPeriodo2=" & 3
                 Dim rwSubsidio As DataRow() = nConsulta(SQL)
                 If rwSubsidio Is Nothing = False Then
                     subsidio = Double.Parse(rwSubsidio(0)("credito").ToString)
