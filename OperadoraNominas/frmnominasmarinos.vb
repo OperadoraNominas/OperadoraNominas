@@ -3767,8 +3767,8 @@ Public Class frmnominasmarinos
                             'dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(CDbl(dtgDatos.Rows(x).Cells(34).Value), 1, x, CInt(dtgDatos.Rows(x).Cells(18).Value))), 2).ToString("###,##0.00")
                             dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse(isrmontodadoNsubsidio(CDbl(dtgDatos.Rows(x).Cells(34).Value), 1, x, CInt(dtgDatos.Rows(x).Cells(18).Value))), 2).ToString("###,##0.00")
 
-                            'IMSS
-                            dtgDatos.Rows(x).Cells(37).Value = "0.00"
+                                'IMSS
+                                dtgDatos.Rows(x).Cells(37).Value = "0.00"
                                 'INFONAVIT
                                 '##### VERIFICAR SI ESTA YA CALCULADO EL INFONAVIT DEL BIMESTRE
                                 'Aqui verificamos si esta activo el calcular o no el infonavit
@@ -4467,22 +4467,22 @@ Public Class frmnominasmarinos
                                 ' Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot + subsidioaplicado, 2)
 
                                 Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot, 2)
-                                If (dtgDatos.Rows(x).Cells(11).FormattedValue = "COCINERO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MOTORISTA" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MARINERO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "OPERARIO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "AYUDANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "QUÍMICO DE APOYO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "QUÍMICO RESPONSABLE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "CAPITAN" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIAL MAQUINAS") And dtgDatos.Rows(x).Cells(10).Value >= 55 Then
-                                    Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss + subsidioaplicado, 2)
+                            If (dtgDatos.Rows(x).Cells(11).FormattedValue = "COCINERO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MOTORISTA" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "MARINERO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "OPERARIO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "AYUDANTE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "QUÍMICO DE APOYO" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "QUÍMICO RESPONSABLE" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "CAPITAN" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "OFICIAL MAQUINAS" Or dtgDatos.Rows(x).Cells(11).FormattedValue = "PRIMER OFICIAL CUBIERTA") And dtgDatos.Rows(x).Cells(10).Value >= 55 Then
+                                Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss + subsidioaplicado, 2)
 
-                                    If (((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))) - Operadora) < 0 Then
+                                If (((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))) - Operadora) < 0 Then
 
-                                        isr = isr + (Operadora - ((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))))
-                                        dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse(isr), 2)
-                                        Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot, 2)
-                                    Else
-                                        Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot, 2)
-                                    End If
+                                    isr = isr + (Operadora - ((Double.Parse(IIf(dtgDatos.Rows(x).Cells(15).Value = "", "0", dtgDatos.Rows(x).Cells(15).Value)))))
+                                    dtgDatos.Rows(x).Cells(36).Value = Math.Round(Double.Parse(isr), 2)
+                                    Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot, 2)
+                                Else
+                                    Operadora = Math.Round(TotalPercepciones - Incapacidad - isr - imss - infonavitvalor - infonavitanterior - ajusteinfonavit - pension - prestamo - fonacot, 2)
                                 End If
+                            End If
 
 
 
-                                dtgDatos.Rows(x).Cells(46).Value = Operadora
+                            dtgDatos.Rows(x).Cells(46).Value = Operadora
 
                             End If
 
@@ -7474,6 +7474,9 @@ Public Class frmnominasmarinos
 
 
             'calculos
+            If monto = 23877.13 Then
+                MsgBox("topado")
+            End If
 
             'Calculamos isr
 
@@ -7490,7 +7493,7 @@ Public Class frmnominasmarinos
             Else
                 MessageBox.Show("No existe la tabla de ISR con el año: " & aniocostosocial)
             End If
-            'si percibe al mes menos de 9081 se genera un propocional
+            'si percibe al mes menos de 10171 se genera un propocional
             If Double.Parse(dtgDatos.Rows(fila).Cells(16).Value) * 30 < 10171 Then
                 subsidio = 0
 
@@ -7511,8 +7514,8 @@ Public Class frmnominasmarinos
 
             Else
                 If cboTipoNomina.SelectedIndex = 0 Then
-                    isr = isr - 390 'xdxdxdxd
-                    subsidio = 0
+                    isr = isr '- 475 'xdxdxdxd
+                    subsidio = subsidio
                 Else
                     isr = isr
                     subsidio = 0
