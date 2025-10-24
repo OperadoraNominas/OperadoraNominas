@@ -7474,9 +7474,9 @@ Public Class frmnominasmarinos
 
 
             'calculos
-            If monto = 23877.13 Then
-                MsgBox("topado")
-            End If
+            'If monto = 23877.13 Then
+            '    MsgBox("topado")
+            'End If
 
             'Calculamos isr
 
